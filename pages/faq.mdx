@@ -1,0 +1,15 @@
+# FAQ
+
+## Why is Opaque not yet 1.0?
+
+This library is built on top of `opaque-ke`(https://github.com/facebook/opaque-ke) which implements the [OPAQUE protocol](https://cfrg.github.io/draft-irtf-cfrg-opaque/draft-irtf-cfrg-opaque.html). Since the protocol is not af finshed RFC yet, we are waiting for the final version before we release a 1.0 version of this library.
+
+**Note**: According to authors of the RFC it's unlikely that the protocol will change.
+
+In addition `opaque-ke` has been audited and is used in production for the WhatsApp end-to-end backups.
+
+## Why is it not built on top of WebCrypto?
+
+By the time this library was built the WebCrypto API didn't support desired algorithms like Argon2. In addition to that `opaque-ke` was already audited and used in production for the WhatsApp end-to-end backups.
+
+There is an implementation built on top of WebCrypto available [here](https://github.com/cloudflare/opaque-ts) by a team at Cloudflare. However it implements an older version of the protocol and seems to be abandoned.
