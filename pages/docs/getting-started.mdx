@@ -1,5 +1,104 @@
 # Getting started
 
+**WARNING**: This is a work in progress and not ready for production use.
+
+## Installation
+
 ```sh
 npm install @serenity-kit/opaque
 ```
+
+## Usage
+
+```ts
+// server
+import * as opaque from "@serenity-kit/opaque";
+```
+
+### Server Setup
+
+The server setup is a one-time operation. It is used to generate the server's long-term private key.
+
+Recommended:
+
+```bash
+npx opaque-create-server-setup
+```
+
+The result is a 171 long string. Only store it in a secure location and make sure you have it available in your application e.g. via an environment variable.
+
+```ts
+const serverSetup = process.env.OPAQUE_SERVER_SETUP;
+```
+
+For development purposes, you can also generate a server setup on the fly:
+
+```ts
+const serverSetup = opaque.serverSetup();
+```
+
+Keep in mind that changing the serverSetup will invalidate all existing password files.
+
+### Registration Flow
+
+```ts
+import * as opaque from "@serenity-kit/opaque";
+
+// client
+const { clientRegistration, registrationRequest } =
+  opaque.clientRegistrationStart(password);
+
+// server
+const registrationResponse = opaque.serverRegistrationStart({
+  serverSetup,
+  clientIdentifier,
+  registrationRequest,
+});
+
+// client
+const { registrationUpload } = opaque.clientRegistrationFinish({
+  clientIdentifier,
+  clientRegistration,
+  registrationResponse,
+  password,
+});
+
+// server
+const passwordFile = opaque.serverRegistrationFinish(registrationUpload);
+```
+
+### Login Flow
+
+```ts
+// client
+const { clientLogin, credentialRequest } = opaque.clientLoginStart(password);
+
+// server
+const { serverLogin, credentialResponse } = opaque.serverLoginStart({
+  serverSetup,
+  clientIdentifier,
+  passwordFile,
+  credentialRequest,
+});
+
+// client
+const loginResult = opaque.clientLoginFinish({
+  clientLogin,
+  credentialResponse,
+  clientIdentifier,
+  password,
+});
+
+// server
+const sessionKey = opaque.serverLoginFinish({
+  serverSetup,
+  credentialFinalization,
+  serverLogin,
+});
+```
+
+## Advanced usage
+
+The default implementation uses [ristretto255](https://ristretto.group/) for the OPRF and the group mode.
+
+If you would like to use the [P-256](https://docs.rs/p256/latest/p256/) curve instead, you can use the [@serenity-kit/opaque-p256](https://www.npmjs.com/package/@serenity-kit/opaque) package. The API is identical.

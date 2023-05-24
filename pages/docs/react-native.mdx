@@ -1,0 +1,68 @@
+# React Native
+
+We also published a React Native version of this library that you can find at [https://github.com/Serenity-kit/react-native-opaque](https://github.com/Serenity-kit/react-native-opaque).
+
+## Features
+
+- Supports Expo using `expo-dev-client`
+- Supports React Native Web (except using the Metro bundler due the use of Web Assembly)
+
+## Installation
+
+```bash
+npm install react-native-opaque
+```
+
+The API is identical except that in case you using react-native-web you need to verify that the package finished loading before using it.
+
+```ts
+import * as opaque from "react-native-opaque";
+
+opaque.ready.then(() => {
+  const { clientRegistration, registrationRequest } =
+    opaque.clientRegistrationStart("hunter2");
+  // ...
+});
+```
+
+The most convenient way to use this is to have loading page that waits for the `ready` Promise to resolve before rendering the actual app.
+
+For example:
+
+```tsx
+export default function LoadingApp() {
+  const [opaqueModuleStatus, setOpaqueModuleStatus] = React.useState<
+    "loading" | "failed" | "loaded"
+  >("loading");
+
+  React.useEffect(() => {
+    async function waitForOpaque() {
+      try {
+        await opaque.ready;
+        setOpaqueModuleStatus("loaded");
+      } catch (e) {
+        console.warn(e);
+        setOpaqueModuleStatus("failed");
+      }
+    }
+
+    waitForOpaque();
+  }, []);
+
+  if (opaqueModuleStatus === "loading") return null;
+  if (opaqueModuleStatus === "failed")
+    return <Text>Failed to load resources. Please reload the app.</Text>;
+
+  return <App />;
+}
+```
+
+Note: The `ready` Promise resolves right away on the native side.
+
+## Expo support
+
+TODO tutorial
+
+## Advanced usage
+
+TODO p256 support
