@@ -36,7 +36,7 @@ const serverSetup = process.env.OPAQUE_SERVER_SETUP;
 For development purposes, you can also generate a server setup on the fly:
 
 ```ts
-const serverSetup = opaque.serverSetup();
+const serverSetup = opaque.createServerSetup();
 ```
 
 Keep in mind that changing the serverSetup will invalidate all existing password files.
@@ -44,27 +44,30 @@ Keep in mind that changing the serverSetup will invalidate all existing password
 ### Registration Flow
 
 ```ts
-import * as opaque from "@serenity-kit/opaque";
-
 // client
 const { clientRegistration, registrationRequest } =
   opaque.clientRegistrationStart(password);
+```
 
+```ts
 // server
 const registrationResponse = opaque.serverRegistrationStart({
   serverSetup,
-  clientIdentifier,
+  credentialIdentifier,
   registrationRequest,
 });
+```
 
+```ts
 // client
 const { registrationUpload } = opaque.clientRegistrationFinish({
-  clientIdentifier,
   clientRegistration,
   registrationResponse,
   password,
 });
+```
 
+```ts
 // server
 const passwordFile = opaque.serverRegistrationFinish(registrationUpload);
 ```
@@ -74,23 +77,32 @@ const passwordFile = opaque.serverRegistrationFinish(registrationUpload);
 ```ts
 // client
 const { clientLogin, credentialRequest } = opaque.clientLoginStart(password);
+```
 
+```ts
 // server
 const { serverLogin, credentialResponse } = opaque.serverLoginStart({
   serverSetup,
-  clientIdentifier,
+  credentialIdentifier,
   passwordFile,
   credentialRequest,
 });
+```
 
+```ts
 // client
 const loginResult = opaque.clientLoginFinish({
   clientLogin,
   credentialResponse,
-  clientIdentifier,
   password,
 });
+if (!loginResult) {
+  throw new Error("Login failed");
+}
+const { credentialFinalization, sessionKey } = loginResult;
+```
 
+```ts
 // server
 const sessionKey = opaque.serverLoginFinish({
   serverSetup,
