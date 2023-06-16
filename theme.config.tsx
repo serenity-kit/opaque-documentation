@@ -12,6 +12,7 @@ const config: DocsThemeConfig = {
   footer: {
     text: "Opaque",
   },
+  primaryHue: 232,
 };
 
 export default config;
