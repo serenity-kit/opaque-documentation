@@ -2,49 +2,18 @@
 @tailwind components;
 @tailwind utilities;
 
-.nx-text-slate-900 {
-  color: red;
-}
-
 :root {
-  --shiki-color-text: #414141 !important; /* foreground: klammern, strichpunkt, beistriche */
-  --shiki-color-background: transparent !important;
-  --shiki-token-constant: #1976d2 !important; /* classes, constants */
-  --shiki-token-string: #22863a !important; /* strings */
-  --shiki-token-comment: #aaa !important; /* comments */
-  --shiki-token-keyword: #c8d32f !important; /* keywords: const, export, input etc */
-  --shiki-token-parameter: #ff9800 !important; /* ??? => doesn't appear as parameter */
-  --shiki-token-function: #6f42c1 !important; /* function: functionName, e.g. opaque.serverLoginFinish -> serverLoginFinish */
-  --shiki-token-string-expression: #22863a !important; /* strings */
-  --shiki-token-punctuation: #212121 !important; /* ??? */
-  --shiki-token-link: #22863a !important; /* ??? */
-
-  --se-gray-100: #fdfdfd; /* #FDFDFD */
-  --se-gray-200: #ededf0; /* #EDEDF0 */
-  --se-gray-300: #dcdde5; /* #DCDDE5 */
-  --se-gray-400: #cbcbd3; /* #CBCBD3 */
-  --se-gray-500: #b4b4bd; /* #B4B4BD */
-  --se-gray-600: #8a8b96; /* #8A8B96 */
-  --se-gray-700: #666771; /* #666771 */
-  --se-gray-800: #4f5057; /* #4F5057 */
-  --se-gray-900: #1f1f21; /* #1F1F21 */
-
-  --se-primary-100: #eceeff; /* #ECEEFF */
-  --se-primary-200: #cdd3fc; /* #CDD3FC */
-  --se-primary-300: #9daafd; /* #9DAAFD */
-  --se-primary-400: #7083fa; /* #7083FA */
-  --se-primary-500: #435bf8; /* #435BF8 */
-  --se-primary-600: #2b44e4; /* #2B44E4 */
-  --se-primary-700: #172fc8; /* #172FC8 */
-  --se-primary-800: #0a1e9b; /* #0A1E9B */
-  --se-primary-900: #000f70; /* #000F70 */
-
-  --se-primary-500-hsl: 232deg 93% 62%;
-  --se-primary-500: hsla(var(--se-gray-500) / 1);
-}
-
-.nx-text-slate-900 {
-  color: var(--se-gray-300);
+  --shiki-color-text: #414141;
+  --shiki-color-background: transparent;
+  --shiki-token-constant: #1976d2;
+  --shiki-token-string: #22863a;
+  --shiki-token-comment: #aaa;
+  --shiki-token-keyword: #c8d32f;
+  --shiki-token-parameter: #ff9800;
+  --shiki-token-function: #6f42c1;
+  --shiki-token-string-expression: #22863a;
+  --shiki-token-punctuation: #212121;
+  --shiki-token-link: #22863a;
 }
 
 .dark {
@@ -84,32 +53,4 @@
     --shiki-token-function: color(display-p3 0.410511 0.267378 0.729566);
     --shiki-token-punctuation: color(display-p3 0.12945 0.12945 0.12945);
   }
-}
-
-/* ----------- override land ------------ */
-
-/* 
-    either we override the specific classes 
-    (works if we want to keep the result if it matches (700, 0.5 is really primary-700 with 0.5opacity) 
-*/
-
-.nx-bg-primary-700\/5 {
-  /* serenity 500, 0.5 opacity (see Design) */
-  /* background-color: hsl(var(--nextra-primary-hue)93% 62%/.05) !important;  */
-}
-
-/* 
-    or we increase the specificity
-*/
-.nextra-code-block pre {
-  /* serenity 500, 5 opacity (see Design) */
-  /* here the opacity is not dependent on a custom-property, so we could just use tailwind @apply in @components or globally */
-  background-color: hsla(var(--se-primary-500-hsl) / 0.05);
-}
-
-/* no visible difference  */
-
-.nx-bg-primary-700\/5 {
-  /* serenity 700, 0.5 opacity */
-  /* background-color: hsl(var(--nextra-primary-hue)79% 44%/.05) !important;  */
 }
