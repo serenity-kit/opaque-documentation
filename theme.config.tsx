@@ -1,4 +1,5 @@
 import { DocsThemeConfig } from "nextra-theme-docs";
+import { Pre } from "./components/Pre";
 
 const config: DocsThemeConfig = {
   logo: <span>Opaque</span>,
@@ -11,6 +12,11 @@ const config: DocsThemeConfig = {
   docsRepositoryBase: "https://github.com/serenity-kit/opaque-documentation",
   footer: {
     text: "Opaque",
+  },
+  primaryHue: 232,
+  components: {
+    // https://mdxjs.com/table-of-components/
+    pre: Pre,
   },
 };
 
