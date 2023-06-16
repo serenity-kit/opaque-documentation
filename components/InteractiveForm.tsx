@@ -10,5 +10,5 @@ const serverSetup = opaque.serverSetup();
 export const InteractiveForm = () => {
   console.log(serverSetup);
 
-  return <div className={"mb-4"}>blub</div>;
+  return <div className="text-3xl font-bold underline mb-4">blub</div>;
 };
