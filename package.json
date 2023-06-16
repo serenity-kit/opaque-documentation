@@ -18,6 +18,7 @@
   },
   "dependencies": {
     "@serenity-kit/opaque": "^0.2.0",
+    "clsx": "^1.2.1",
     "next": "^13.0.6",
     "nextra": "latest",
     "nextra-theme-docs": "latest",
