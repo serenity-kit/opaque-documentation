@@ -1,10 +1,16 @@
 # Opaque
 
+Secure password based client-server authentication without the server ever obtaining knowledge of the password.
+
+A JavaScript implementation of the [OPAQUE protocol](https://datatracker.ietf.org/doc/draft-irtf-cfrg-opaque/) based on [opaque-ke](https://github.com/facebook/opaque-ke).
+
+## Benefits
+
+- Never accidentally log passwords
+- Security against pre-computation attacks upon server compromise
+- Foundation for encrypted backups and end-to-end encryption apps
+
 **WARNING**: This is a work in progress and not ready for production use.
-
-## What is Opaque?
-
-TODO
 
 ## Interactive Demo
 
@@ -13,7 +19,40 @@ import { InteractiveForm } from "../components/InteractiveForm";
 
 <InteractiveForm />
 
-## Features
+## Who is using Opaque?
+
+- [Serenity](https://github.com/serenity-kit/serenity) as authentication mechanism for the account
+
+## Who is using the OPAQUE protocol?
+
+- [WhatsApp](https://iacr.org/submit/files/slides/2023/rwc/rwc2023/IT_2/slides.pdf) for their end-to-end encrypted backups
+
+## Security
+
+- [Security Analysis of OPAQUE](https://eprint.iacr.org/2018/163.pdf)
+- [Security Audit of opaque-ke](https://research.nccgroup.com/2021/12/13/public-report-whatsapp-opaque-ke-cryptographic-implementation-review/)
+
+## Benefits compared to password hashing
+
+- The server never learns the password and therefor never can log it (accidentally)
+
+## Tradeoffs compared to password hashing
+
+- Requires JavaScript to run on the client
+- One extra roundtrip for registration and login
+
+## Benefits compared to Passkeys
+
+- No need for users to rely on an external authority for key storage. Usually Apple, Google or Microsoft.
+- No device/browser/OS lock-in. On Linux for example there is no Passkey support.
+- No support for a stable `export_key` on the client. This makes Passkeys unsuitable for encrypted backups or as a foundation for end-to-end encryption apps. Might be possible in the future with the [PRF Extension](https://w3c.github.io/webauthn/#prf-extension)
+
+## Tradeoffs compared to Passkeys
+
+- You still need to remember and store a password. Passwordless authentication is preferable.
+- Passkeys have even stronger security guarantees against server compromise since only a public key is stored.
+
+Note: You can also deploy Passkeys and have Opaque as a fallback for users without Passkeys. Best of both worlds.
 
 ## Relevant building blocks and inspirations
 
