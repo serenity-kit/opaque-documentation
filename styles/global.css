@@ -3,42 +3,42 @@
 @tailwind utilities;
 
 :root {
-  --se-terracotta: #EF5245;
-  --se-coral: #FD7064;
-  --se-raspberry: #F4216D;
-  --se-rose: #FF91C9;
-  --se-honey: #FFB921;
-  --se-orange: #FF7D2E;
-  --se-emerald: #47c07a;
-  --se-arctic: #4abac1;
-  --se-sky: #1E8EDE;
-  --se-serenity: #435BF8; /* primary 500 */
-  --se-lavender: #515DCE;
-  --se-purple: #9E36CF;
-  --se-slate: #4F5D78;
+  --se-terracotta: theme("colors.palette.terracotta");
+  --se-coral: theme("colors.palette.coral");
+  --se-raspberry: theme("colors.palette.raspberry");
+  --se-rose: theme("colors.palette.rose");
+  --se-honey: theme("colors.palette.honey");
+  --se-orange: theme("colors.palette.orange");
+  --se-emerald: theme("colors.palette.emerald");
+  --se-arctic: theme("colors.palette.arctic");
+  --se-sky: theme("colors.palette.sky");
+  --se-serenity: theme("colors.palette.serenity"); /* primary 500 */
+  --se-lavender: theme("colors.palette.lavender");
+  --se-purple: theme("colors.palette.purple");
+  --se-slate: theme("colors.palette.slate");
 
-  --gray-100: #FDFDFD;
-  --gray-120: #FAFAFC;
-  --gray-150: #F5F5F7;
-  --gray-200: #EDEDF0;
-  --gray-300: #DCDDE5;
-  --gray-400: #CBCBD3;
-  --gray-500: #B4B4BD;
-  --gray-600: #8A8B96;
-  --gray-700: #666771;
-  --gray-800: #4F5057;
-  --gray-900: #1F1F21;
+  --gray-100: theme("colors.gray.100");
+  --gray-120: theme("colors.gray.120");
+  --gray-150: theme("colors.gray.150");
+  --gray-200: theme("colors.gray.200");
+  --gray-300: theme("colors.gray.300");
+  --gray-400: theme("colors.gray.400");
+  --gray-500: theme("colors.gray.500");
+  --gray-600: theme("colors.gray.600");
+  --gray-700: theme("colors.gray.700");
+  --gray-800: theme("colors.gray.800");
+  --gray-900: theme("colors.gray.900");
 
-  --primary-100: #edefff;
-  --primary-150: #DDE1FE;
-  --primary-200: #CDD3FC;
-  --primary-300: #9DAAFD;
-  --primary-400: #7083fa;
-  --primary-500: #425af7;
-  --primary-600: #2B44E4;
-  --primary-700: #172FC8;
-  --primary-800: #0A1E9B;
-  --primary-900: #000F70;
+  --primary-100: theme("colors.primary.100");
+  --primary-150: theme("colors.primary.150");
+  --primary-200: theme("colors.primary.200");
+  --primary-300: theme("colors.primary.300");
+  --primary-400: theme("colors.primary.400");
+  --primary-500: theme("colors.primary.500");
+  --primary-600: theme("colors.primary.600");
+  --primary-700: theme("colors.primary.700");
+  --primary-800: theme("colors.primary.800");
+  --primary-900: theme("colors.primary.900");
 
   --shiki-color-text: var(--gray-800);
   --shiki-color-background: transparent;
