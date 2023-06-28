@@ -77,7 +77,12 @@
   ---------------- to customize the theme more ----------------
 */
 
-/* general */
+
+/* ---------------- general ---------------- */
+::selection {
+  @apply bg-primary-150/60;
+}
+
 .nx-text-primary-600 {
   color: var(--primary-500);
 }
