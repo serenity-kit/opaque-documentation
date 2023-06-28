@@ -25,6 +25,7 @@ const config: DocsThemeConfig = {
     // https://mdxjs.com/table-of-components/
     pre: Pre,
     code: Code,
+    p: (props) => <p className="mt-5 leading-6 first:mt-0" {...props} />,
   },
 };
 
