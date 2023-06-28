@@ -1,8 +1,14 @@
 import { DocsThemeConfig } from "nextra-theme-docs";
 import { Pre } from "./components/Pre";
+import { Logo } from "./components/Logo";
 
 const config: DocsThemeConfig = {
-  logo: <span>Opaque</span>,
+  logo: (
+    // wrapper needed so it looks vertically centered in header
+    <div style={{ marginBottom: -9 }}>
+      <Logo />
+    </div>
+  ),
   project: {
     link: "https://github.com/serenity-kit/opaque",
   },
