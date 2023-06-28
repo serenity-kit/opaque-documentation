@@ -1,8 +1,15 @@
 import { DocsThemeConfig } from "nextra-theme-docs";
 import { Pre } from "./components/Pre";
+import { Logo } from "./components/Logo";
+import { Code } from "./components/Code";
 
 const config: DocsThemeConfig = {
-  logo: <span>Opaque</span>,
+  logo: (
+    // wrapper needed so it looks vertically centered in header
+    <div style={{ marginBottom: -9 }}>
+      <Logo />
+    </div>
+  ),
   project: {
     link: "https://github.com/serenity-kit/opaque",
   },
@@ -17,6 +24,8 @@ const config: DocsThemeConfig = {
   components: {
     // https://mdxjs.com/table-of-components/
     pre: Pre,
+    code: Code,
+    p: (props) => <p className="mt-5 leading-6 first:mt-0" {...props} />,
   },
 };
 

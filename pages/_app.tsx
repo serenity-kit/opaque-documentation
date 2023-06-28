@@ -8,8 +8,18 @@ const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 
 export default function App({ Component, pageProps }) {
   return (
-    <main className={`${inter.variable} font-sans`}>
-      <Component {...pageProps} />
-    </main>
+    <>
+      {/* additionally defines the font in <head> as elements like the theme-switch render outside of <main>
+          and therefore wouldn't have the right font
+      */}
+      <style jsx global>{`
+        html {
+          font-family: ${inter.style.fontFamily};
+        }
+      `}</style>
+      <main className={`${inter.variable} font-sans`}>
+        <Component {...pageProps} />
+      </main>
+    </>
   );
 }

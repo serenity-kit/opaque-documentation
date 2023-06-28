@@ -1,6 +1,6 @@
 import cn from "clsx";
 import type { ComponentProps, ReactElement } from "react";
-import { useCallback, useRef } from "react";
+import { useRef } from "react";
 
 export const Pre = ({
   children,
@@ -13,19 +13,10 @@ export const Pre = ({
   hasCopyCode?: boolean;
 }): ReactElement => {
   const preRef = useRef<HTMLPreElement | null>(null);
-
-  const toggleWordWrap = useCallback(() => {
-    const htmlDataset = document.documentElement.dataset;
-    const hasWordWrap = "nextraWordWrap" in htmlDataset;
-    if (hasWordWrap) {
-      delete htmlDataset.nextraWordWrap;
-    } else {
-      htmlDataset.nextraWordWrap = "";
-    }
-  }, []);
+  const subpixel = false;
 
   return (
-    <div className="nextra-code-block nx-relative nx-mt-6 first:nx-mt-0">
+    <div className={`nextra-code-block nx-relative nx-mt-5 first:nx-mt-0`}>
       {filename && (
         <div className="nx-absolute nx-top-0 nx-z-[1] nx-w-full nx-truncate nx-rounded-t-xl nx-bg-primary-700/5 nx-py-2 nx-px-4 nx-text-xs nx-text-gray-700 dark:nx-bg-primary-300/10 dark:nx-text-gray-200">
           {filename}
@@ -33,9 +24,12 @@ export const Pre = ({
       )}
       <pre
         className={cn(
-          "nx-bg-primary-700/5 nx-mb-4 nx-overflow-x-auto nx-rounded-xl nx-font-medium nx-subpixel-antialiased dark:nx-bg-primary-300/10 nx-text-[.9em]",
-          "contrast-more:nx-border contrast-more:nx-border-primary-900/20 contrast-more:nx-contrast-150 contrast-more:dark:nx-border-primary-100/40",
+          "nx-mb-4 nx-overflow-x-auto nx-font-medium ",
           filename ? "nx-pt-12 nx-pb-4" : "nx-py-4",
+          `rounded bg-gray-120 dark:bg-gray-800/60 border-[0.5px] border-gray-150 dark:border-gray-800/80 ${
+            subpixel && "nx-subpixel-antialiased"
+          }`,
+          "contrast-more:nx-border contrast-more:nx-border-primary-900/20 contrast-more:nx-contrast-150 contrast-more:dark:nx-border-primary-100/40",
           className
         )}
         ref={preRef}

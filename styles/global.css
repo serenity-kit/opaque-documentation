@@ -3,54 +3,193 @@
 @tailwind utilities;
 
 :root {
-  --shiki-color-text: #414141;
+  --se-terracotta: theme("colors.palette.terracotta");
+  --se-coral: theme("colors.palette.coral");
+  --se-raspberry: theme("colors.palette.raspberry");
+  --se-rose: theme("colors.palette.rose");
+  --se-honey: theme("colors.palette.honey");
+  --se-orange: theme("colors.palette.orange");
+  --se-emerald: theme("colors.palette.emerald");
+  --se-arctic: theme("colors.palette.arctic");
+  --se-sky: theme("colors.palette.sky");
+  --se-serenity: theme("colors.palette.serenity"); /* primary 500 */
+  --se-lavender: theme("colors.palette.lavender");
+  --se-purple: theme("colors.palette.purple");
+  --se-slate: theme("colors.palette.slate");
+
+  --gray-100: theme("colors.gray.100");
+  --gray-120: theme("colors.gray.120");
+  --gray-150: theme("colors.gray.150");
+  --gray-200: theme("colors.gray.200");
+  --gray-300: theme("colors.gray.300");
+  --gray-400: theme("colors.gray.400");
+  --gray-500: theme("colors.gray.500");
+  --gray-600: theme("colors.gray.600");
+  --gray-700: theme("colors.gray.700");
+  --gray-800: theme("colors.gray.800");
+  --gray-900: theme("colors.gray.900");
+
+  --primary-100: theme("colors.primary.100");
+  --primary-150: theme("colors.primary.150");
+  --primary-200: theme("colors.primary.200");
+  --primary-300: theme("colors.primary.300");
+  --primary-400: theme("colors.primary.400");
+  --primary-500: theme("colors.primary.500");
+  --primary-600: theme("colors.primary.600");
+  --primary-700: theme("colors.primary.700");
+  --primary-800: theme("colors.primary.800");
+  --primary-900: theme("colors.primary.900");
+
+  --shiki-color-text: var(--gray-800);
   --shiki-color-background: transparent;
-  --shiki-token-constant: #1976d2;
-  --shiki-token-string: #22863a;
-  --shiki-token-comment: #aaa;
-  --shiki-token-keyword: #c8d32f;
-  --shiki-token-parameter: #ff9800;
-  --shiki-token-function: #6f42c1;
-  --shiki-token-string-expression: #22863a;
-  --shiki-token-punctuation: #212121;
-  --shiki-token-link: #22863a;
+
+  --shiki-token-constant: var(--primary-700);
+  --shiki-token-string: var(--se-arctic);
+  --shiki-token-function: hsl(184deg 72% 38%); /* arctic variant */
+  --shiki-token-keyword: var(--se-purple);
+
+  --shiki-token-comment: var(--gray-500);
+  --shiki-token-parameter: var(--se-coral);
+  --shiki-token-string-expression: var(--shiki-token-string);
+  --shiki-token-punctuation: var(--gray-800);
+  --shiki-token-link: var(--shiki-token-string);
 }
 
 .dark {
-  --shiki-color-text: #d1d1d1;
-  --shiki-token-constant: #79b8ff;
-  --shiki-token-string: #ffab70;
-  --shiki-token-comment: #6b737c;
-  --shiki-token-keyword: #f97583;
-  --shiki-token-parameter: #ff9800;
-  --shiki-token-function: #b392f0;
-  --shiki-token-string-expression: #4bb74a;
-  --shiki-token-punctuation: #bbbbbb;
-  --shiki-token-link: #ffab70;
+  --shiki-color-text: var(--gray-150);
+  --shiki-color-background: transparent;
+
+  --shiki-token-constant: hsl(232deg 98% 79%); /* primary variant */
+  --shiki-token-string: hsl(184deg 49% 74%); /* light arctic variant */
+  --shiki-token-function: hsl(184deg 54% 57%); /* arctic variant */
+  --shiki-token-keyword: hsl(281deg 67% 64%); /* purple variant */
+
+  --shiki-token-comment: var(--gray-500);
+  --shiki-token-parameter: var(--se-coral);
+  --shiki-token-string-expression: var(--shiki-token-string);
+  --shiki-token-punctuation: var(--gray-500);
+  --shiki-token-link: var(--shiki-token-string);
 }
 
-@supports (color: lab(0% 0 0)) {
-  :root {
-    --shiki-color-text: lab(27.5348% 0 0);
-    --shiki-token-constant: lab(48.3994% 0.649333 -55.5719);
-    --shiki-token-string: lab(49.1367% -42.0409 31.8582);
-    --shiki-token-comment: lab(69.608% -0.0000298023 0);
-    --shiki-token-keyword: lab(81.69 -17.6 72.31);
-    --shiki-token-parameter: lab(72.7377% 33.9074 77.3632);
-    --shiki-token-function: lab(39.0339% 41.1896 -60.5821);
-    --shiki-token-punctuation: lab(12.7448% 0 0);
+
+/* 
+  ------------------------- OVERRIDES -------------------------
+  ---------------- to customize the theme more ----------------
+*/
+
+
+/* ---------------- general ---------------- */
+::selection {
+  @apply bg-primary-150/60;
+}
+
+.nx-text-primary-600 {
+  color: var(--primary-500);
+}
+
+
+/* ---------------- content ---------------- */
+.nextra-content h1 {
+  @apply text-h1 mt-8;
+}
+
+.nextra-content h2 {
+  @apply text-h2;
+}
+
+.nextra-content h3 {
+  @apply text-h3;
+}
+
+
+/* ---------------- ui ---------------- */
+/* sidebar */
+.nextra-sidebar-container li.active a {
+  color: var(--primary-500);
+  background-color: var(--primary-100);
+}
+
+/* page-navigation (link under article) */
+.nextra-content main > :last-child a {
+  color: var(--gray-600);
+}
+
+.nextra-content main > :last-child a:hover {
+  color: var(--gray-900);
+}
+
+/* theme selector  */
+[role="listbox"] li {
+  color: var(--gray-700);
+}
+
+[role="listbox"] li:has(> span) {
+  color: var(--gray-900);
+}
+
+[role="listbox"] li:hover {
+  color: var(--gray-900);
+  background-color: #66677110; /* gray-700 */
+}
+
+
+/* ---- dark ---- */
+
+:is(html[class~=dark] *::selection)  {
+  @apply bg-primary-400/30;
+}
+
+:is(html[class~=dark] body) {
+  background-color: var(--gray-900);
+}
+
+:is(html[class~=dark] .dark\:nx-bg-dark) {
+  background-color: var(--gray-900);
+}
+
+/* nav-bar */
+@supports (-webkit-backdrop-filter:blur(1px)) or ((-webkit-backdrop-filter: blur(1px)) or (backdrop-filter: blur(1px))) {
+  :is(html[class~=dark] .nextra-nav-container-blur) {
+    /* important needed as nextra uses it -.- */
+    background-color: #1F1F2180 !important; /* gray-900 */
   }
 }
 
-@supports (color: color(display-p3 0 0 0)) {
-  :root {
-    --shiki-color-text: color(display-p3 0.254903 0.254903 0.254903);
-    --shiki-token-constant: color(display-p3 0.222026 0.455961 0.797051);
-    --shiki-token-string: color(display-p3 0.261609 0.517894 0.262929);
-    --shiki-token-comment: color(display-p3 0.666644 0.666644 0.666644);
-    --shiki-token-keyword: color(display-p3 0.792 0.826 0.319);
-    --shiki-token-parameter: color(display-p3 0.944308 0.615493 0.221148);
-    --shiki-token-function: color(display-p3 0.410511 0.267378 0.729566);
-    --shiki-token-punctuation: color(display-p3 0.12945 0.12945 0.12945);
-  }
+/* shadow which blends out scrolling elements */
+:is(html[class~=dark] .nextra-scrollbar [class*=nx-shadow]) {
+  --tw-shadow: 0 -12px 16px var(--gray-900);
+}
+
+/* general */
+:is(html[class~=dark] .nx-text-primary-600) {
+  color: var(--primary-400);
+}
+
+/* sidebar */
+:is(html[class~=dark] .nextra-sidebar-container li.active a) {
+  color: var(--gray-100);
+  background-color: hsl(var(--nextra-primary-hue)100% 71%/0.75); /* primary 400 */
+}
+
+/* page-navigation (link under article) */
+:is(html[class~=dark] .nextra-content main > :last-child a) {
+  color: var(--gray-600);
+}
+
+:is(html[class~=dark] .nextra-content main > :last-child a:hover) {
+  color: var(--gray-100);
+}
+
+/* theme selector */
+:is(html[class~=dark] [role="listbox"] li) {
+  color: var(--gray-500);
+}
+
+:is(html[class~=dark] [role="listbox"] li:has(> span)) {
+  color: var(--gray-100);
+}
+
+:is(html[class~=dark] [role="listbox"] li:hover) {
+  color: var(--gray-100);
+  background-color: #8A8B9620; /* gray-600 */
 }
