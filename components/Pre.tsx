@@ -24,12 +24,12 @@ export const Pre = ({
       )}
       <pre
         className={cn(
-          "nx-bg-primary-700/5 nx-mb-4 nx-overflow-x-auto nx-font-medium ",
-          "contrast-more:nx-border contrast-more:nx-border-primary-900/20 contrast-more:nx-contrast-150 contrast-more:dark:nx-border-primary-100/40",
+          "nx-mb-4 nx-overflow-x-auto nx-font-medium ",
           filename ? "nx-pt-12 nx-pb-4" : "nx-py-4",
-          `rounded bg-primary-100/30 dark:bg-gray-800/60 border-[0.5px] border-gray-200 dark:border-gray-800/80 ${
+          `rounded bg-gray-120 dark:bg-gray-800/60 border-[0.5px] border-gray-150 dark:border-gray-800/80 ${
             subpixel && "nx-subpixel-antialiased"
           }`,
+          "contrast-more:nx-border contrast-more:nx-border-primary-900/20 contrast-more:nx-contrast-150 contrast-more:dark:nx-border-primary-100/40",
           className
         )}
         ref={preRef}
