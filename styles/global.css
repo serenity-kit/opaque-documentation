@@ -135,6 +135,10 @@
 
 /* ---- dark ---- */
 
+:is(html[class~=dark] *::selection)  {
+  @apply bg-primary-400/30;
+}
+
 :is(html[class~=dark] body) {
   background-color: var(--gray-900);
 }
