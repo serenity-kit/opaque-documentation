@@ -56,6 +56,11 @@ module.exports = {
     extend: {
       fontFamily: {
         sans: 'var(--font-inter)'
+      },
+      fontSize: {
+        h1: ["2rem", "2.375rem"],
+        h2: ["1.5rem", "1.75rem"],
+        h3: ["1.125rem", "1.375rem"],
       }
     },
   },

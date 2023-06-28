@@ -87,6 +87,22 @@
   color: var(--primary-500);
 }
 
+
+/* ---------------- content ---------------- */
+.nextra-content h1 {
+  @apply text-h1 mt-8;
+}
+
+.nextra-content h2 {
+  @apply text-h2;
+}
+
+.nextra-content h3 {
+  @apply text-h3;
+}
+
+
+/* ---------------- ui ---------------- */
 /* sidebar */
 .nextra-sidebar-container li.active a {
   color: var(--primary-500);
@@ -117,7 +133,7 @@
 }
 
 
-/* ---------------- dark ---------------- */
+/* ---- dark ---- */
 
 :is(html[class~=dark] body) {
   background-color: var(--gray-900);
