@@ -1,6 +1,7 @@
 import { DocsThemeConfig } from "nextra-theme-docs";
 import { Pre } from "./components/Pre";
 import { Logo } from "./components/Logo";
+import { Code } from "./components/Code";
 
 const config: DocsThemeConfig = {
   logo: (
@@ -23,6 +24,7 @@ const config: DocsThemeConfig = {
   components: {
     // https://mdxjs.com/table-of-components/
     pre: Pre,
+    code: Code,
   },
 };
 
