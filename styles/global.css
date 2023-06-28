@@ -45,7 +45,7 @@
 
   --shiki-token-constant: var(--primary-700);
   --shiki-token-string: var(--se-arctic);
-  --shiki-token-function: #478BDD; /* color between arctic and primary-500 */
+  --shiki-token-function: hsl(184deg 72% 38%); /* arctic variant */
   --shiki-token-keyword: var(--se-purple);
 
   --shiki-token-comment: var(--gray-500);
