@@ -79,7 +79,7 @@ const { clientLoginState, startLoginRequest } = opaque.client.startLogin({
 const { serverLoginState, loginResponse } = opaque.server.startLogin({
   serverSetup,
   userIdentifier,
-  passwordFile,
+  registrationRecord,
   startLoginRequest,
 });
 ```
@@ -99,7 +99,7 @@ const { finishLoginRequest, sessionKey } = loginResult;
 
 ```ts
 // server
-const sessionKey = opaque.serverLoginFinish({
+const { sessionKey } = opaque.server.finishLogin({
   finishLoginRequest,
   serverLoginState,
 });
