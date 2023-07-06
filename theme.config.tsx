@@ -4,6 +4,12 @@ import { Logo } from "./components/Logo";
 import { Code } from "./components/Code";
 
 const config: DocsThemeConfig = {
+  head: (
+    <>
+      <link rel="icon" href="/favicon.svg" type="image/svg+xml"></link>
+      <link rel="icon" href="/favicon.png" type="image/png"></link>
+    </>
+  ),
   logo: (
     // wrapper needed so it looks vertically centered in header
     <div style={{ marginBottom: -9 }}>
