@@ -45,8 +45,9 @@
 
   --shiki-token-constant: var(--primary-700);
   --shiki-token-string: var(--se-arctic);
-  --shiki-token-function: hsl(184deg 72% 38%); /* arctic variant */
-  --shiki-token-keyword: var(--se-purple);
+  --shiki-token-string: hsl(184deg 72% 38%); /* arctic variant */
+  --shiki-token-function: hsl(184 72% 34%); /* arctic variant */
+  --shiki-token-keyword: hsl(281 68% 49%); /* purple variant */
 
   --shiki-token-comment: var(--gray-500);
   --shiki-token-parameter: var(--se-coral);
@@ -59,10 +60,10 @@
   --shiki-color-text: var(--gray-150);
   --shiki-color-background: transparent;
 
-  --shiki-token-constant: hsl(232deg 98% 79%); /* primary variant */
+  --shiki-token-constant: hsl(232deg 100% 81%); /* primary variant */
   --shiki-token-string: hsl(184deg 49% 74%); /* light arctic variant */
   --shiki-token-function: hsl(184deg 54% 57%); /* arctic variant */
-  --shiki-token-keyword: hsl(281deg 67% 64%); /* purple variant */
+  --shiki-token-keyword: hsl(284deg 100% 71%); /* purple variant */
 
   --shiki-token-comment: var(--gray-500);
   --shiki-token-parameter: var(--se-coral);
