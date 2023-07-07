@@ -1,26 +1,13 @@
 # Bundler configuration
 
-## Webpack 5
+## NCC
 
-In your webpack.config.js file you need to activate `asyncWebAssembly`:
+In case you are NCC you need to define the opaque package as external. Otherwise the bundler will mangle with the internal function names binding to WebAssembly and the module becomes unusable.
 
-```js
-module.exports = {
-  ...otherConfig,
-  experiments: {
-    asyncWebAssembly: true,
-  },
-};
+### Example Script
+
+```sh
+ncc build ./src/index.ts -o build --external @serenity-kit/opaque
 ```
 
-## Vite
-
-TODO
-
-## Next with Webpack
-
-TODO
-
-## Next with TurboPack
-
-TODO
+Make sure that the folder that gets deployed includes a `node_modules/@serenity-kit/opaque` directory containin the actual module.

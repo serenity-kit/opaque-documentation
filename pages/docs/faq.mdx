@@ -7,33 +7,3 @@ This library is built on top of `opaque-ke`(https://github.com/facebook/opaque-k
 **Note**: According to authors of the RFC it's unlikely that the protocol will change.
 
 In addition `opaque-ke` has been audited and is used in production for the WhatsApp end-to-end backups.
-
-## Why is it not built on top of WebCrypto?
-
-By the time this library was built the WebCrypto API didn't support desired algorithms like Argon2. In addition to that `opaque-ke` was already audited and used in production for the WhatsApp end-to-end backups.
-
-There is an implementation built on top of WebCrypto available [here](https://github.com/cloudflare/opaque-ts) by a team at Cloudflare. However it implements an older version of the protocol and seems to be abandoned.
-
-## Why have only one package for both client and server?
-
-While this lead to a rather odd namespacing of `client` and `server`, we wanted to make sure that people don't run into unexpected errors when accidentally installing a client and server package that are incompatible with each other.
-
-While not exactly the same we have seen people struggling with errors resulting from `react` and `react-dom` not being aligned.
-
-## Why inline the WASM code?
-
-After building out the initial version of the library we ran into troubles using WebAssembly with various bundler setups. [Metro](https://github.com/facebook/metro) for example doesn't support WebAssembly at all.
-
-To provide a good developer experience we decided to inline the WASM code. This way we can provide a single package that works out of the box with any bundler.
-
-The downside is that the package size is a bit bigger, but this was an acceptable trade-off.
-
-TODO: recover how large the size increase is.
-
-## Why is there a P256 version?
-
-The OPAQUE protocol specification describes two setups and some teams prefer the P256 version. We decided to support both versions to make sure that this library can be used in as many projects as possible and in case there are any issues with one of the versions people can switch to the other one.
-
-We also thought about adding ristretto255 and P256 to the same package and optionally allow developers to configure the P256 version. However we decided against it, because it increase the package size by roughly 10%.
-
-Keep in mind this requires a password reset (registration) for all users.

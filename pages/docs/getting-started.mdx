@@ -15,6 +15,15 @@ npm install @serenity-kit/opaque
 import * as opaque from "@serenity-kit/opaque";
 ```
 
+Opaque loads inlined WebAssembly and therefor won't be ready right on module initialization. Before running any function you need to check that the `opaque.ready` promise is resolved e.g.
+
+```tsx
+await opaque.ready;
+const serverSetup = opaque.server.createSetup();
+```
+
+**Note**: This is mostly relevant for test environments where you use the functions right away.
+
 ### Server Setup
 
 The server setup is a one-time operation. It is used to generate the server's long-term private key.
