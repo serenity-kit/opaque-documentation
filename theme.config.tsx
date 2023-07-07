@@ -4,10 +4,16 @@ import { Logo } from "./components/Logo";
 import { Code } from "./components/Code";
 
 const config: DocsThemeConfig = {
+  head: (
+    <>
+      <link rel="icon" href="/favicon.svg" type="image/svg+xml"></link>
+      <link rel="icon" href="/favicon.png" type="image/png"></link>
+    </>
+  ),
   logo: (
     // wrapper needed so it looks vertically centered in header
     <div style={{ marginBottom: -9 }}>
-      <Logo />
+      <Logo hoverEffect />
     </div>
   ),
   project: {
@@ -25,7 +31,7 @@ const config: DocsThemeConfig = {
     // https://mdxjs.com/table-of-components/
     pre: Pre,
     code: Code,
-    p: (props) => <p className="mt-5 leading-6 first:mt-0" {...props} />,
+    p: (props) => <p className="nx-mt-5 first:nx-mt-0 leading-6" {...props} />,
   },
 };
 

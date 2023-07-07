@@ -45,8 +45,9 @@
 
   --shiki-token-constant: var(--primary-700);
   --shiki-token-string: var(--se-arctic);
-  --shiki-token-function: hsl(184deg 72% 38%); /* arctic variant */
-  --shiki-token-keyword: var(--se-purple);
+  --shiki-token-string: hsl(184deg 72% 38%); /* arctic variant */
+  --shiki-token-function: hsl(184 72% 34%); /* arctic variant */
+  --shiki-token-keyword: hsl(281 68% 49%); /* purple variant */
 
   --shiki-token-comment: var(--gray-500);
   --shiki-token-parameter: var(--se-coral);
@@ -59,10 +60,10 @@
   --shiki-color-text: var(--gray-150);
   --shiki-color-background: transparent;
 
-  --shiki-token-constant: hsl(232deg 98% 79%); /* primary variant */
+  --shiki-token-constant: hsl(232deg 100% 81%); /* primary variant */
   --shiki-token-string: hsl(184deg 49% 74%); /* light arctic variant */
   --shiki-token-function: hsl(184deg 54% 57%); /* arctic variant */
-  --shiki-token-keyword: hsl(281deg 67% 64%); /* purple variant */
+  --shiki-token-keyword: hsl(284deg 100% 71%); /* purple variant */
 
   --shiki-token-comment: var(--gray-500);
   --shiki-token-parameter: var(--se-coral);
@@ -70,6 +71,80 @@
   --shiki-token-punctuation: var(--gray-500);
   --shiki-token-link: var(--shiki-token-string);
 }
+
+
+/* ---------------- logo ---------------- */
+
+/* custom class to ensure the right type for the logo-background */
+.type-alpha {
+  mask-type: alpha;
+}
+
+.svg-wrapper {
+  position: absolute;
+  height: 100%;
+  width: auto;
+}
+
+.svg-wrapper svg {
+  height: 100%;
+  width: auto;
+}
+
+.mask {
+  --transition-time: 0.9s;
+  --easing-function: cubic-bezier(0.51, 0.62, 0.92, 0.53);
+  
+  -webkit-mask-image: -webkit-linear-gradient(30deg,black 25%,rgba(0,0,0,.2)50%,black 75%);
+  mask-image: -webkit-linear-gradient(30deg,black 25%,rgba(0,0,0,.2)50%,black 75%);
+  mask-image: -moz-linear-gradient(30deg,black 25%,rgba(0,0,0,.2)50%,black 75%);
+  mask-image: -o-linear-gradient(30deg,black 25%,rgba(0,0,0,.2)50%,black 75%);
+  mask-image: linear-gradient(60deg,black 25%,rgba(0,0,0,.2)50%,black 75%);
+  -webkit-mask-size: 400%;
+  mask-size: 400%;
+  -webkit-mask-position: 100%;
+  mask-position: 100%;
+
+  /* needed so the mask-transition also shows on page load  */
+  -webkit-animation: mask-reveal 1.5s infinite linear;
+  -webkit-animation-iteration-count: 1;
+  animation: mask-reveal 1.5s linear;
+  animation-iteration-count: 1;
+}
+
+.mask:hover {
+  -webkit-mask-position: 0%;
+  mask-position: 0%;
+  -webkit-transition: mask-position var(--transition-time) var(--easing-function),-webkit-mask-position var(--transition-time) var(--easing-function);
+  -moz-transition: mask-position var(--transition-time) var(--easing-function),-webkit-mask-position var(--transition-time) var(--easing-function);
+  -o-transition: mask-position var(--transition-time) var(--easing-function),-webkit-mask-position var(--transition-time) var(--easing-function);
+  transition: mask-position var(--transition-time) var(--easing-function),-webkit-mask-position var(--transition-time) var(--easing-function);
+}
+
+@-webkit-keyframes mask-reveal {
+  from {
+    -webkit-mask-position: 100%;
+    mask-position: 100%;
+  }
+  to {
+    -webkit-mask-position: 0%;
+    mask-position: 0%;
+  }
+}
+
+@keyframes mask-reveal {
+  from {  
+    -webkit-mask-position: 100%;
+    mask-position: 100%; 
+  }
+  to {  
+    -webkit-mask-position: 0%;
+    mask-position: 0%; 
+  }
+}
+
+
+
 
 
 /* 
@@ -103,6 +178,13 @@
 
 
 /* ---------------- ui ---------------- */
+
+/* nav */
+/* remove unfitting nextra-hover from logo */
+nav > a:first-child:hover {
+  opacity: 1;
+}
+
 /* sidebar */
 .nextra-sidebar-container li.active a {
   color: var(--primary-500);
