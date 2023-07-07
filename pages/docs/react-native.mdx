@@ -5,7 +5,7 @@ We also published a React Native version of this library that you can find at [h
 ## Features
 
 - Supports Expo using `expo-dev-client`
-- Supports React Native Web (except using the Metro bundler due the use of Web Assembly)
+- Supports React Native Web
 
 ## Installation
 
@@ -13,55 +13,80 @@ We also published a React Native version of this library that you can find at [h
 npm install react-native-opaque
 ```
 
-The API is identical except that in case you using react-native-web you need to verify that the package finished loading before using it.
+The API is identical to the web version, except that you need to import from `react-native-opaque` instead of `@serenity-kit/opaque`.
 
-```ts
-import * as opaque from "react-native-opaque";
+One difference is that the `ready` Promise is already resolved when the `react-native-opaque` module is imported.
 
-opaque.ready.then(() => {
-  const { clientRegistration, registrationRequest } =
-    opaque.clientRegistrationStart("hunter2");
-  // ...
-});
-```
-
-The most convenient way to use this is to have loading page that waits for the `ready` Promise to resolve before rendering the actual app.
-
-For example:
-
-```tsx
-export default function LoadingApp() {
-  const [opaqueModuleStatus, setOpaqueModuleStatus] = React.useState<
-    "loading" | "failed" | "loaded"
-  >("loading");
-
-  React.useEffect(() => {
-    async function waitForOpaque() {
-      try {
-        await opaque.ready;
-        setOpaqueModuleStatus("loaded");
-      } catch (e) {
-        console.warn(e);
-        setOpaqueModuleStatus("failed");
-      }
-    }
-
-    waitForOpaque();
-  }, []);
-
-  if (opaqueModuleStatus === "loading") return null;
-  if (opaqueModuleStatus === "failed")
-    return <Text>Failed to load resources. Please reload the app.</Text>;
-
-  return <App />;
-}
-```
-
-Note: The `ready` Promise resolves right away on the native side.
+If you are using `react-native-web` you still need to wait for `ready` to resolve before you can use any function from `react-native-opaque`.
 
 ## Expo support
 
-TODO tutorial
+1. Setup an Expo project
+2. Setup EAS:
+
+```sh
+eas build:configure
+```
+
+3. Add a simulator build to eas.json
+
+```json
+{
+  "build": {
+    "development-simulator": {
+      "developmentClient": true,
+      "distribution": "internal",
+      "ios": {
+        "simulator": true
+      }
+    }
+  }
+}
+```
+
+4. Add expo-dev-client to package.json
+
+```sh
+npx expo install expo-dev-client
+```
+
+Add this to the top of App.js
+
+```js
+import "expo-dev-client";
+```
+
+Replace in package.json:
+
+```json
+"start": "expo start",
+"android": "expo start --android",
+"ios": "expo start --ios",
+"web": "expo start --web"
+```
+
+with:
+
+```json
+"start": "expo start --dev-client",
+"android": "expo start --android --dev-client",
+"ios": "expo start --ios --dev-client",
+"web": "expo start --web --dev-client"
+```
+
+5. Commit your changes
+
+6. Add react-native-opaque
+
+```sh
+npx expo install react-native-opaque
+```
+
+7. Run a build
+
+```sh
+eas build --profile development-simulator --platform ios
+```
 
 ## Advanced usage
 

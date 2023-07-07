@@ -1,0 +1,64 @@
+## Architecture Decisions
+
+## Why is it not built on top of WebCrypto?
+
+By the time this library was built the WebCrypto API didn't support desired algorithms like Argon2. In addition to that `opaque-ke` was already audited and used in production for the WhatsApp end-to-end backups.
+
+There is an implementation built on top of WebCrypto available [here](https://github.com/cloudflare/opaque-ts) by a team at Cloudflare. However it implements an older version of the protocol and seems to be abandoned.
+
+## Why have only one package for both client and server?
+
+While this lead to a rather odd namespacing of `client` and `server`, we wanted to make sure that people don't run into unexpected errors when accidentally installing a client and server package that are incompatible with each other.
+
+While not exactly the same we have seen people struggling with errors resulting from `react` and `react-dom` not being aligned.
+
+## Why inline the WASM code?
+
+After building out the initial version of the library we ran into troubles using WebAssembly with various bundler setups. [Metro](https://github.com/facebook/metro) for example doesn't support WebAssembly at all.
+
+To provide a good developer experience we decided to inline the WASM code. This way we can provide a single package that works out of the box with any bundler.
+
+The downside is that the package size is a bit bigger, but this was an acceptable trade-off.
+
+TODO: recover how large the size increase is.
+
+## Why is there a P256 version?
+
+The OPAQUE protocol specification describes two setups and some teams prefer the P256 version. We decided to support both versions to make sure that this library can be used in as many projects as possible and in case there are any issues with one of the versions people can switch to the other one.
+
+We also thought about adding ristretto255 and P256 to the same package and optionally allow developers to configure the P256 version. However we decided against it, because it increase the package size by roughly 10%.
+
+Keep in mind this requires a password reset (registration) for all users.
+
+## Why do you use the standard allocator instead of wee_alloc or lol_alloc
+
+The simple answer: For this package we value stabiliy over speed or code size.
+
+- wee_alloc unfortionatly is unmaintained and some dependencies are already considered to be outdated
+- lol_alloc looks very promising, but is very young project. In the future we might switch to it.
+
+We did some benchmarks and these are the results from our research:
+
+In general, wee_alloc and lol_alloc both take about 1KB or less while dlmalloc takes about 10KB.
+
+There is no measurable runtime performance difference.
+
+Wasm output sizes:
+
++-----------+-----------+-----------+----------+
+| | wee_alloc | lol_alloc | dlmalloc |
++-----------+-----------+-----------+----------+
+| ristretto | 287 KB | 286 KB | 295 KB |
+| p256 | 323 KB | 322 KB | 332 KB |
++-----------+-----------+-----------+----------+
+
+Average time to run the full flow in-memory demo (complete registration+login):
+
++-----------+-----------+-----------+----------+
+| | wee_alloc | lol_alloc | dlmalloc |
++-----------+-----------+-----------+----------+
+| ristretto | 97 ms | 98 ms | 98 ms |
+| p256 | 111 ms | 112 ms | 112 ms |
++-----------+-----------+-----------+----------+
+
+Timings from a windows machine, Windows 10, MS Edge Version 114.0.1823.43 (Official build) (64-bit), AMD Ryzen 5 3600 6-Core 3.60 GHz.

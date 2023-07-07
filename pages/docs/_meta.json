@@ -3,5 +3,7 @@
   "guides": "Guides",
   "react-native": "React Native",
   "bundler-configuration": "Bundler configuration",
-  "faq": "FAQ"
+  "faq": "FAQ",
+  "architecture-decisions": "Architecture Decisions",
+  "resources": "Resources"
 }
