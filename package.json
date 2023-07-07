@@ -17,19 +17,19 @@
     "url": "https://github.com/shuding/opaque-documentation/issues"
   },
   "dependencies": {
-    "@serenity-kit/opaque": "^0.2.0",
+    "@serenity-kit/opaque": "^0.7.0",
     "clsx": "^1.2.1",
-    "next": "^13.4.6",
-    "nextra": "^2.7.1",
-    "nextra-theme-docs": "^2.7.1",
+    "next": "^13.4.9",
+    "nextra": "^2.8.0",
+    "nextra-theme-docs": "^2.8.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },
   "devDependencies": {
-    "@types/node": "18.11.10",
+    "@types/node": "20.4.0",
     "autoprefixer": "^10.4.14",
-    "postcss": "^8.4.24",
+    "postcss": "^8.4.25",
     "tailwindcss": "^3.3.2",
-    "typescript": "^4.9.5"
+    "typescript": "^5.1.6"
   }
 }
