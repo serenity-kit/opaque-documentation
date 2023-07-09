@@ -1,4 +1,4 @@
-## Architecture Decisions
+# Architecture Decisions
 
 ## Why is it not built on top of WebCrypto?
 
@@ -45,20 +45,16 @@ There is no measurable runtime performance difference.
 
 Wasm output sizes:
 
-+-----------+-----------+-----------+----------+
-| | wee_alloc | lol_alloc | dlmalloc |
-+-----------+-----------+-----------+----------+
-| ristretto | 287 KB | 286 KB | 295 KB |
-| p256 | 323 KB | 322 KB | 332 KB |
-+-----------+-----------+-----------+----------+
+|           | wee_alloc | lol_alloc | dlmalloc |
+| --------- | --------- | --------- | -------- |
+| ristretto | 287 KB    | 286 KB    | 295 KB   |
+| p256      | 323 KB    | 322 KB    | 332 KB   |
 
 Average time to run the full flow in-memory demo (complete registration+login):
 
-+-----------+-----------+-----------+----------+
-| | wee_alloc | lol_alloc | dlmalloc |
-+-----------+-----------+-----------+----------+
-| ristretto | 97 ms | 98 ms | 98 ms |
-| p256 | 111 ms | 112 ms | 112 ms |
-+-----------+-----------+-----------+----------+
+|           | wee_alloc | lol_alloc | dlmalloc |
+| --------- | --------- | --------- | -------- |
+| ristretto | 97 ms     | 98 ms     | 98 ms    |
+| p256      | 111 ms    | 112 ms    | 112 ms   |
 
 Timings from a windows machine, Windows 10, MS Edge Version 114.0.1823.43 (Official build) (64-bit), AMD Ryzen 5 3600 6-Core 3.60 GHz.
