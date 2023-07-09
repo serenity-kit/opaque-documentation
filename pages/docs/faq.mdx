@@ -7,3 +7,22 @@ This library is built on top of `opaque-ke`(https://github.com/facebook/opaque-k
 **Note**: According to authors of the RFC it's unlikely that the protocol will change.
 
 In addition `opaque-ke` has been audited and is used in production for the WhatsApp end-to-end backups.
+
+## How does it compare to [opaque-wasm](https://github.com/marucjmar/opaque-wasm)?
+
+opaque-wasm was there first and allowed us (Serenity team) to explore the OPAQUE protocol as a authentication mechanism. However it didn't fulfill our needs. That's why we set out to build this package.
+
+|                          | @serenity-kit/opaque and react-native-opaque      | opaque-wasm                                |
+| ------------------------ | ------------------------------------------------- | ------------------------------------------ |
+| Environments             | Bundler, Node, React Native                       | Bundler, Node (requires custom build)      |
+| Typescript types         | Yes                                               | No                                         |
+| API style                | functional                                        | class based                                |
+| WebAssembly loading      | inlined WASM as base64                            | WASM imports require bundler configuration |
+| Server setup             | CLI and API                                       | API only                                   |
+| Documentation            | Examples, guides, specification (in progress)     | Examples                                   |
+| Tests                    | E2E tests, Unit tests                             | Unit tests                                 |
+| OPRF & group mode        | ristretto255 (default), P256 via separate package | P256 (default)                             |
+| Custom identifiers       | client & server                                   | Not supported                              |
+| Server static public key | available                                         | not available                              |
+
+In our case it led to a simplification of our setup as you can see in this [PR](https://github.com/serenity-kit/Serenity/pull/757/files). Keep in mind this was an early version of `@serenity-kit/opaque` and the API changed after some initial feedback.
