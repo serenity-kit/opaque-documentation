@@ -17,5 +17,5 @@ export const InteractiveForm = () => {
   }, []);
 
   console.log(serverSetup);
-  return <div className="underline">blub</div>;
+  return <div className="underline"></div>;
 };
