@@ -22,7 +22,7 @@ While a simple `sodium.crypto_secretbox_easy` could do the trick here we are int
 const locker = createLocker({
   // can be a string or a Uint8Array
   data: JSON.stringify({ notes: ["What a great day"] }),
-  // must be JSON serializable, but can be left empty as well
+  // must be JSON serializable, but can be set to null as well
   publicAdditionalData: {
     reminder: { text: "Review notes", due: "2025-08-22" },
   },
