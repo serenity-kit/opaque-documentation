@@ -2,13 +2,10 @@
 
 The main idea behind it is to be able to to encrypt any kind of data locally and then upload it to the server for it to be retrieved later.
 
-While a simple `sodium.crypto_secretbox_easy` could do the trick here we are introducing a version that offers a couple of extra features and properties:
+While a simple `sodium.crypto_secretbox_easy` could do the trick here we are introducing a version that offers two extra features and properties:
 
 - allow to create a recovery token that can be used to recover the data in case the user loses the password
-- allow to add meta data to the encrypted data, that can be seen by the server
-- make sure the meta data for the server is encrypted when sending or receiving it from the server
-- the server should be able to verify the authenticity of the data send by the client
-- clients should be able to verify the authenticity of the data received from the server
+- the server should be able to verify the authenticity of the data send by the client based on the session_key
 
 ## Default Workflows
 
@@ -22,10 +19,6 @@ While a simple `sodium.crypto_secretbox_easy` could do the trick here we are int
 const locker = createLocker({
   // can be a string or a Uint8Array
   data: JSON.stringify({ notes: ["What a great day"] }),
-  // must be JSON serializable, but can be set to null as well
-  publicAdditionalData: {
-    reminder: { text: "Review notes", due: "2025-08-22" },
-  },
   exportKey,
   sessionKey,
 });
@@ -36,7 +29,7 @@ const locker = createLocker({
 // server
 
 // 1. validate the locker and decrypt the publicAdditionalData
-const { publicAdditionalData } = validateLockerAndDecryptPublicAdditionalData({
+const isValid = isValidLocker({
   locker,
   sessionKey,
 });
@@ -44,9 +37,6 @@ const { publicAdditionalData } = validateLockerAndDecryptPublicAdditionalData({
 const storyEntry = {
   ciphertext: locker.ciphertext,
   nonce: locker.nonce,
-  publicAdditionalData: JSON.stringify(publicAdditionalData),
-  reminderText: publicAdditionalData?.reminder?.text,
-  reminderDue: publicAdditionalData?.reminder?.due,
   userId: "abc", // so we can identify who the locker belongs to
 };
 ```
@@ -60,37 +50,24 @@ const storyEntry = {
 
 ```ts
 // server
-// 1. create locker for this specific session
-const locker = createLockerForClient({
+// 1. get the ciphertext and nonce from the DB
+const locker = {
   ciphertext: storyEntry.ciphertext,
   nonce: storyEntry.nonce,
-  publicAdditionalData: JSON.parse(storyEntry.publicAdditionalData),
-  sessionKey, // can be a different sessionKey of a new session
-});
+};
 // 2. send the locker to the client
 ```
 
 ```ts
 // client
 // 1. decrypt the locker
-const { data, publicAdditionalData } = decryptLocker({
+const data = decryptLocker({
   locker,
-  sessionKey,
   exportKey,
 });
 ```
 
 ## Example
-
-## Authorization
-
-To identify the user a session entry is stored in the DB. It contains the following fields:
-
-- authorizationToken
-- sessionKey
-- userId
-
-The `authorizationToken` is created based on the sessionKey using our session util `createAuthorizationToken`. It is sent with every request to the server and is used to identify the user.
 
 ### Endpoints
 
@@ -105,23 +82,5 @@ In the DB we store the following fields:
 - nonce
 - publicAdditionalData
 - userId
-
-## Decisions
-
-### Encrypting the publicAdditionalData between the client and server
-
-While relying on TLS is often good enough, we care about having the `publicAdditionalData` encrypted during transport. This way for example a logger logging HTTP requests on the server side can not accidentally log this data.
-
-This imposes a bit more complexity into the API. Specifcially we need to encrypt the `publicAdditionalData` with the `sessionKey` before sending it to the server and decrypt it on the server.
-
-### Why is it called publicAdditionalData if it's not public?
-
-While it's not public per se we choose this name to conveigh that it's not end-to-end encrypted data. It's data that is encrypted with the `sessionKey` and can be seen by the server. And since service databases can leak it's best to consider this data public.
-
-### Why can't I use the sessionKey as authorizationToken?
-
-The `sessionKey` is used to encrypt the `publicAdditionalData`. If it would be sent unencrypted with the HTTPS headers a logger observing the traffic could decrypt the `publicAdditionalData`.
-
-By using a key derivation function (KDF) we can create a token that is based on the `sessionKey` but can not be used to decrypt the `publicAdditionalData` and the `sessionKey` can't be recovered from the `authorizationToken`.
 
 ## Formal Proofs
