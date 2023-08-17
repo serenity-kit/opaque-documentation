@@ -276,7 +276,9 @@ nav > a:first-child:hover {
 }
 
 
+/* ============== */
 /* ---- dark ---- */
+/* ============== */
 
 :is(html[class~=dark] *::selection)  {
   @apply bg-primary-400/30;
@@ -310,8 +312,8 @@ nav > a:first-child:hover {
 
 /* sidebar */
 :is(html[class~=dark] .nextra-sidebar-container li.active a) {
-  color: var(--gray-100);
-  background-color: hsl(var(--nextra-primary-hue)100% 71%/0.75); /* primary 400 */
+  color: var(--primary-400);
+  background-color: hsl(var(--nextra-primary-hue)100% 75%/0.20); /* primary dark 400 */
 }
 
 /* page-navigation (link under article) */
