@@ -3,6 +3,31 @@
 @tailwind utilities;
 
 :root {
+
+  /* --- colors --- */
+  --primary-100: theme("colors.primary.100");
+  --primary-150: theme("colors.primary.150");
+  --primary-200: theme("colors.primary.200");
+  --primary-300: theme("colors.primary.300");
+  --primary-400: theme("colors.primary.400");
+  --primary-500: theme("colors.primary.500");
+  --primary-600: theme("colors.primary.600");
+  --primary-700: theme("colors.primary.700");
+  --primary-800: theme("colors.primary.800");
+  --primary-900: theme("colors.primary.900");
+
+  --gray-100: theme("colors.gray.100");
+  --gray-120: theme("colors.gray.120");
+  --gray-150: theme("colors.gray.150");
+  --gray-200: theme("colors.gray.200");
+  --gray-300: theme("colors.gray.300");
+  --gray-400: theme("colors.gray.400");
+  --gray-500: theme("colors.gray.500");
+  --gray-600: theme("colors.gray.600");
+  --gray-700: theme("colors.gray.700");
+  --gray-800: theme("colors.gray.800");
+  --gray-900: theme("colors.gray.900");
+
   --se-terracotta: theme("colors.palette.terracotta");
   --se-coral: theme("colors.palette.coral");
   --se-raspberry: theme("colors.palette.raspberry");
@@ -17,29 +42,22 @@
   --se-purple: theme("colors.palette.purple");
   --se-slate: theme("colors.palette.slate");
 
-  --gray-100: theme("colors.gray.100");
-  --gray-120: theme("colors.gray.120");
-  --gray-150: theme("colors.gray.150");
-  --gray-200: theme("colors.gray.200");
-  --gray-300: theme("colors.gray.300");
-  --gray-400: theme("colors.gray.400");
-  --gray-500: theme("colors.gray.500");
-  --gray-600: theme("colors.gray.600");
-  --gray-700: theme("colors.gray.700");
-  --gray-800: theme("colors.gray.800");
-  --gray-900: theme("colors.gray.900");
 
-  --primary-100: theme("colors.primary.100");
-  --primary-150: theme("colors.primary.150");
-  --primary-200: theme("colors.primary.200");
-  --primary-300: theme("colors.primary.300");
-  --primary-400: theme("colors.primary.400");
-  --primary-500: theme("colors.primary.500");
-  --primary-600: theme("colors.primary.600");
-  --primary-700: theme("colors.primary.700");
-  --primary-800: theme("colors.primary.800");
-  --primary-900: theme("colors.primary.900");
+  /* --- theme --- */
+  --surface-primary: theme("colors.white");
+  --surface-secondary: theme("colors.gray.100");
+  --surface-tertiary: theme("colors.gray.200");
 
+  --surface-border: theme("colors.gray.200");
+  --surface-border-button: theme("colors.gray.300");
+
+  --text-title: theme("colors.black");
+  --text-primary: theme("colors.gray.900");
+  --text-secondary: theme("colors.gray.800");
+  --text-tertiary: theme("colors.gray.600");
+
+
+  /* --- code --- */
   --shiki-color-text: var(--gray-800);
   --shiki-color-background: transparent;
 
@@ -57,6 +75,25 @@
 }
 
 .dark {
+  --primary-400: theme("colors.primary.dark.400");
+  --primary-500: theme("colors.primary.dark.500");
+
+
+  /* --- theme --- */
+  --surface-primary: theme("colors.surface.primary");
+  --surface-secondary: theme("colors.surface.secondary");
+  --surface-tertiary: theme("colors.surface.tertiary");
+
+  --surface-border: theme("colors.surface.border");
+  --surface-border-button: theme("colors.gray.700");
+
+  --text-title: theme("colors.white");
+  --text-primary: theme("colors.gray.200");
+  --text-secondary: theme("colors.gray.200");
+  --text-tertiary: theme("colors.gray.500");
+
+
+  /* --- code --- */
   --shiki-color-text: var(--gray-150);
   --shiki-color-background: transparent;
 
