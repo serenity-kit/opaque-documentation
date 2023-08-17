@@ -207,6 +207,11 @@
   text-underline-offset: 0.2rem;
 }
 
+#netidee_svg__netidee_logo {
+  width: 6rem;
+  height: auto;
+}
+
 
 /* 
   ------------------------- OVERRIDES -------------------------
@@ -405,3 +410,12 @@ nav > a:first-child:hover {
   border-color: var(--surface-border);
 }
 
+
+/* --- footer --- */
+:is(html[class~=dark] #netidee_svg__netidee_logo .netidee_svg__st15) {
+  fill: var(--gray-300);
+}
+
+:is(html[class~=dark] #netidee_svg__netidee_logo .netidee_svg__st16) {
+  fill: var(--gray-200);
+}

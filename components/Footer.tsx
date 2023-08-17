@@ -1,6 +1,6 @@
 import cn from "clsx";
 import type { ReactElement } from "react";
-import Image from "next/image";
+import NetideeLogo from "../public/netidee.svg";
 
 export function Footer({ menu }: { menu?: boolean }): ReactElement {
   return (
@@ -15,13 +15,7 @@ export function Footer({ menu }: { menu?: boolean }): ReactElement {
           <div className="flex-1 justify-between text-sm">
             <div className="w-52">
               <a href="https://www.netidee.at/" target="_blank">
-                <Image
-                  className="mt-2 rounded-md bg-white p-2"
-                  src="/netidee.jpg"
-                  alt="Netidee logo"
-                  width={100}
-                  height={30}
-                />
+                <NetideeLogo />
               </a>
               <p className="mt-3 text-sm">
                 This project was supported by the{" "}
