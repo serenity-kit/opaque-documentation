@@ -181,7 +181,31 @@
 }
 
 
+/* ---------------- general ---------------- */
 
+/* footer */
+.footer-wrapper {
+  display: grid;
+  grid-template-columns: 2.5fr 2fr auto;
+
+  width: 100%;
+  max-width: 48rem;
+
+  margin: 0 auto;
+  color: var(--text-tertiary);
+}
+
+.footer-links {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.footer-links a {
+  color: var(--text-primary);
+  text-decoration: underline;
+  text-underline-offset: 0.2rem;
+}
 
 
 /* 
