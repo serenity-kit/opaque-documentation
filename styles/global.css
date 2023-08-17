@@ -357,3 +357,8 @@ nav > a:first-child:hover {
   color: var(--gray-100);
   background-color: #8A8B9620; /* gray-600 */
 }
+
+/* to override shadow color which is composed here */
+:is(html[class~=dark] .dark\:nx-shadow-\[0_-12px_16px_\#111\]) {
+  --tw-shadow: 0 -12px 16px var(--gray-900);
+}
