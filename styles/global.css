@@ -195,22 +195,46 @@
   @apply bg-primary-150/60;
 }
 
+.nx-text-gray-500 {
+  color: #777880; /* custom color according to design */
+}
+
+.nx-text-gray-600 {
+  color: var(--gray-800);
+}
+
+.nx-text-gray-700 {
+  color: var(--gray-700);
+}
+
 .nx-text-primary-600 {
   color: var(--primary-500);
 }
 
+.nx-text-slate-900 {
+  color: var(--gray-900);
+}
+
 
 /* ---------------- content ---------------- */
+.nextra-content {
+  color: var(--gray-800);
+}
+
 .nextra-content h1 {
   @apply text-h1 mt-8;
+  color: var(--text-title);
 }
 
 .nextra-content h2 {
-  @apply text-h2;
+  @apply text-h2 pb-3;
+  color: var(--text-title);
 }
 
 .nextra-content h3 {
   @apply text-h3;
+  color: var(--text-title);
+}
 }
 
 
