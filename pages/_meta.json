@@ -18,5 +18,12 @@
       "breadcrumb": false,
       "typesetting": "article"
     }
+  },
+  "imprint": {
+    "type": "page",
+    "theme": {
+      "typesetting": "article"
+    },
+    "display": "hidden"
   }
 }
