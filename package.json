@@ -14,7 +14,7 @@
   "author": "Nik Graf <nik@nikgraf.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/shuding/opaque-documentation/issues"
+    "url": "https://github.com/serenity-kit/opaque-documentation/issues"
   },
   "dependencies": {
     "@serenity-kit/opaque": "^0.7.0",
