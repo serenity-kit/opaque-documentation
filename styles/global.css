@@ -251,17 +251,17 @@
 }
 
 .nextra-content h1 {
-  @apply text-h1 mt-8;
+  @apply text-h1 mt-8 max-w-3xl;
   color: var(--text-title);
 }
 
 .nextra-content h2 {
-  @apply text-h2 pb-3;
+  @apply text-h2 pb-3 max-w-3xl;
   color: var(--text-title);
 }
 
 .nextra-content h3 {
-  @apply text-h3;
+  @apply text-h3 max-w-3xl;
   color: var(--text-title);
 }
 
@@ -282,6 +282,7 @@
 nav > a:first-child:hover {
   opacity: 1;
 }
+
 
 /* sidebar */
 .nextra-sidebar-container li.active a {
