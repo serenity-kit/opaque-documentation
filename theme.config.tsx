@@ -36,7 +36,9 @@ const config: DocsThemeConfig = {
     // https://mdxjs.com/table-of-components/
     pre: Pre,
     code: Code,
-    p: (props) => <p className="nx-mt-5 first:nx-mt-0 leading-6" {...props} />,
+    p: (props) => (
+      <p className="max-w-3xl nx-mt-5 first:nx-mt-0 leading-6" {...props} />
+    ),
     table: Table,
     th: Th,
     tr: Tr,

@@ -17,9 +17,9 @@ export default function App({ Component, pageProps }) {
           font-family: ${inter.style.fontFamily};
         }
       `}</style>
-      <main className={`${inter.variable} font-inter`}>
+      <div className={`${inter.variable} font-inter`}>
         <Component {...pageProps} />
-      </main>
+      </div>
     </>
   );
 }
