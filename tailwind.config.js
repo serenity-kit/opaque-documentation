@@ -73,7 +73,14 @@ module.exports = {
         h2: ["1.5rem", "1.75rem"],
         h3: ["1.125rem", "1.375rem"],
         sm: ["0.8125rem", "130%"], // 13px
-      }
+        display1: ["3.875rem", "150%"],
+        display2: ["3rem", "150%"],
+        display3: ["2.5rem", "150%"],
+        display4: ["1rem", "150%"]
+      },
+      fontWeight: {
+        dodrantbold: 650,
+      },
     },
   },
   plugins: [],
