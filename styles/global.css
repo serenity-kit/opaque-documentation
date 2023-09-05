@@ -250,17 +250,17 @@
   color: var(--gray-800);
 }
 
-.nextra-content h1 {
+.nextra-content h1:not(.op-custom) {
   @apply text-h1 mt-8 max-w-3xl;
   color: var(--text-title);
 }
 
-.nextra-content h2 {
+.nextra-content h2:not(.op-custom) {
   @apply text-h2 pb-3 max-w-3xl;
   color: var(--text-title);
 }
 
-.nextra-content h3 {
+.nextra-content h3:not(.op-custom) {
   @apply text-h3 max-w-3xl;
   color: var(--text-title);
 }
