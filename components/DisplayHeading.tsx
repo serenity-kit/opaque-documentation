@@ -26,7 +26,7 @@ export const DisplayHeading = ({
         // against the css in styled context when used anywhere else
         // => therefore we rather add a class "op-custom" to problematic elements, so they are not overruled
         "text-black dark:text-white op-custom",
-        props.className
+        className
       )}
       {...props}
     >
