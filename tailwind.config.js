@@ -84,6 +84,9 @@ module.exports = {
       fontWeight: {
         dodrantbold: 650,
       },
+      maxWidth: {
+        xxs: "16rem",
+      },
       screens: {
         xs: "400px"
       }
