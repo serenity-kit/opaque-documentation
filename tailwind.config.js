@@ -76,7 +76,10 @@ module.exports = {
         display1: ["3.875rem", "150%"],
         display2: ["3rem", "150%"],
         display3: ["2.5rem", "150%"],
-        display4: ["1rem", "150%"]
+        display4: ["1rem", "150%"],
+        mobile1: ["2.5rem", "150%"],
+        mobile2: ["2rem", "150%"],
+        mobile3: ["1.5rem", "150%"],
       },
       fontWeight: {
         dodrantbold: 650,

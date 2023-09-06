@@ -12,9 +12,9 @@ export const DisplayHeading = ({
   ...props
 }: DisplayProps) => {
   const styles = {
-    h1: "text-display1 font-dodrantbold tracking-[-0.02em]",
-    h2: "text-display2 font-dodrantbold tracking-[-0.015em]",
-    h3: "text-display3 font-dodrantbold tracking-[-0.01em]",
+    h1: "text-mobile1 md:text-display1 font-dodrantbold tracking-[-0.02em]",
+    h2: "text-mobile2 md:text-display2 font-dodrantbold tracking-[-0.015em]",
+    h3: "text-mobile3 md:text-display3 font-dodrantbold tracking-[-0.01em]",
     h4: "text-display4 font-semibold",
   };
 
