@@ -81,6 +81,9 @@ module.exports = {
       fontWeight: {
         dodrantbold: 650,
       },
+      screens: {
+        xs: "400px"
+      }
     },
   },
   plugins: [],
