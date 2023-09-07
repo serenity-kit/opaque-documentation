@@ -11,7 +11,7 @@ export const BlockWrapper = ({
   return (
     <div
       className={cn(
-        "h-[50rem] max-w-[67.5rem] mx-auto bg-gray-150 flex items-center",
+        "h-[50rem] max-w-[67.5rem] mx-auto flex items-center",
         className
       )}
       {...props}
