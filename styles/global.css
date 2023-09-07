@@ -57,6 +57,11 @@
   --text-tertiary: theme("colors.gray.600");
 
 
+  /* --- focus --- */
+  --op-ring-offset-color: theme("colors.primary.300");
+  --op-ring-color: theme("colors.primary.400");
+
+
   /* --- code --- */
   --shiki-color-text: var(--gray-800);
   --shiki-color-background: transparent;
@@ -91,6 +96,11 @@
   --text-primary: theme("colors.gray.200");
   --text-secondary: theme("colors.gray.200");
   --text-tertiary: theme("colors.gray.500");
+
+
+  /* --- focus --- */
+  --op-ring-offset-color: theme("colors.primary.dark.500");
+  --op-ring-color: theme("colors.primary.dark.400");
 
 
   /* --- code --- */
@@ -244,6 +254,15 @@
   color: var(--gray-900);
 }
 
+button:focus-visible {
+  box-shadow: none;
+}
+
+a:focus-visible {
+  --tw-ring-color: var(--op-ring-color);
+  --tw-ring-offset-color: var(--op-ring-offset-color);
+}
+
 
 /* ---------------- content ---------------- */
 .nextra-content {
@@ -388,6 +407,12 @@ div:has(> .nextra-sidebar-container) {
 /* general */
 :is(html[class~=dark] .nx-text-primary-600) {
   color: var(--primary-400);
+}
+
+/* focus */
+:is(html[class~=dark] a:focus-visible) {
+  --tw-ring-color: var(--op-ring-color);
+  --tw-ring-offset-color: var(--op-ring-offset-color);
 }
 
 /* sidebar */
