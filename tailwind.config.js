@@ -89,6 +89,9 @@ module.exports = {
       },
       screens: {
         xs: "400px"
+      },
+      borderWidth: {
+        "3": "3px",
       }
     },
   },
