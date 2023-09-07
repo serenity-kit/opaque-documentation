@@ -191,7 +191,12 @@
 }
 
 
-/* ---------------- general ---------------- */
+/* ---------------- blocks & elements ---------------- */
+
+/* cta-area */
+.cta-gradient {
+  background: linear-gradient(96deg, #AECBE3 2.84%, #B8C0D7 46.22%, #D1A3B0 62.41%, #F09057 80.98%, #FD8933 99.76%);
+}
 
 /* footer */
 .footer-wrapper {
