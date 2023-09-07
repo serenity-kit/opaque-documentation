@@ -28,5 +28,12 @@
       "typesetting": "article"
     },
     "display": "hidden"
+  },
+  "landing": {
+    "type": "page",
+    "display": "hidden",
+    "theme": {
+      "layout": "full"
+    }
   }
 }
