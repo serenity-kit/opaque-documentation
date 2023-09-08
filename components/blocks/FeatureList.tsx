@@ -8,16 +8,16 @@ export type Feature = {
   text: string;
 };
 
-export type FeatureListProps = ReactElement & {
+export type FeatureListProps = {
   header: string;
   features: Array<Feature>;
 };
 
-export const FeatureList = ({
+export const FeatureList: React.FC<FeatureListProps> = ({
   header,
   features,
   ...props
-}: FeatureListProps) => {
+}) => {
   return (
     <BlockWrapper {...props}>
       <DisplayHeading tag="h3" className="max-w-md md:max-w-xl pb-14 md:pb-24">
@@ -39,7 +39,9 @@ export const FeatureList = ({
               </div>
               <DisplayHeading tag="h4">{feature.header}</DisplayHeading>
               {/* either this or text-text-tertiary and do the theming in .css */}
-              <p className="text-text-tertiary dark:text-dark-text-tertiary">{feature.text}</p>
+              <p className="text-text-tertiary dark:text-dark-text-tertiary">
+                {feature.text}
+              </p>
             </div>
           );
         })}

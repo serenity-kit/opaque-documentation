@@ -8,24 +8,26 @@ export type ComparisonData = {
 };
 
 // TODO data needs to be 2 (or max 3?)
-export type ComparisonProps = ReactElement & {
+export type ComparisonProps = {
   header: string;
   text: string;
   comparisonData: Array<ComparisonData>;
 };
 
-export const Comparison = ({
+export const Comparison: React.FC<ComparisonProps> = ({
   header,
   text,
   comparisonData,
   ...props
-}: ComparisonProps) => {
+}) => {
   return (
     <BlockWrapper className="text-center" {...props}>
       <DisplayHeading tag="h3" className="mb-4">
         {header}
       </DisplayHeading>
-      <p className="text-text-tertiary dark:text-dark-text-tertiary mb-10">{text}</p>
+      <p className="text-text-tertiary dark:text-dark-text-tertiary mb-10">
+        {text}
+      </p>
       <div className="flex gap-4 overflow-x-scroll">
         {comparisonData.map((data, i) => {
           return (
@@ -40,7 +42,7 @@ export const Comparison = ({
               </div>
               {data.points.map((point, i) => {
                 return (
-                  <p className="py-1 px-5 text-left" key={data.point + `${i}`}>
+                  <p className="py-1 px-5 text-left" key={point + `${i}`}>
                     {point}
                   </p>
                 );

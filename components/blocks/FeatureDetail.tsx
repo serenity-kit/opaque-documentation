@@ -9,7 +9,7 @@ export type Link = {
   external?: boolean;
 };
 
-export type FeatureDetailProps = ReactElement & {
+export type FeatureDetailProps = {
   header: string;
   text: string;
   imageSrc: string;
@@ -17,14 +17,14 @@ export type FeatureDetailProps = ReactElement & {
   imagePosition?: "left" | "right";
 };
 
-export const FeatureDetail = ({
+export const FeatureDetail: React.FC<FeatureDetailProps> = ({
   header,
   text,
   link,
   imageSrc,
   imagePosition = "right",
   ...props
-}: FeatureDetailProps) => {
+}) => {
   return (
     <BlockWrapper {...props}>
       <div
@@ -38,7 +38,9 @@ export const FeatureDetail = ({
       >
         <div className="flex flex-col gap-2 w-full max-w-xxs">
           <DisplayHeading tag="h3">{header}</DisplayHeading>
-          <p className="text-text-tertiary dark:text-dark-text-tertiary">{text}</p>
+          <p className="text-text-tertiary dark:text-dark-text-tertiary">
+            {text}
+          </p>
           {link ? (
             <a
               className="text-primary-500 dark:text-dark-primary-400 inline-flex items-center"

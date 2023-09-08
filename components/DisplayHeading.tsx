@@ -5,12 +5,12 @@ export type DisplayProps = ComponentProps<"h1"> & {
   tag: `h${1 | 2 | 3 | 4}`;
 };
 
-export const DisplayHeading = ({
+export const DisplayHeading: React.FC<DisplayProps> = ({
   tag: Tag,
   children,
   className,
   ...props
-}: DisplayProps) => {
+}) => {
   const styles = {
     h1: "text-mobile1 md:text-display1 font-dodrantbold tracking-[-0.02em]",
     h2: "text-mobile2 md:text-display2 font-dodrantbold tracking-[-0.015em]",

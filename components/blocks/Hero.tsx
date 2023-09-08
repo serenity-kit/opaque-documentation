@@ -9,7 +9,7 @@ export type ButtonType = {
   iconName?: string;
 };
 
-export type HeroProps = ReactElement & {
+export type HeroProps = {
   header: string;
   text: string;
   imageSrc: string;
@@ -17,20 +17,22 @@ export type HeroProps = ReactElement & {
   secondaryButton?: ButtonType;
 };
 
-export const Hero = ({
+export const Hero: React.FC<HeroProps> = ({
   header,
   text,
   cta,
   secondaryButton,
   imageSrc,
   ...props
-}: HeroProps) => {
+}) => {
   return (
     <BlockWrapper {...props}>
       <div className="flex justify-between flex-col sm:flex-row sm:items-center gap-12">
         <div className="flex flex-col gap-6 sm:max-lg:max-w-[50%] lg:max-w-[33rem]">
           <DisplayHeading tag="h1">{header}</DisplayHeading>
-          <p className="text-text-secondary dark:text-dark-text-secondary">{text}</p>
+          <p className="text-text-secondary dark:text-dark-text-secondary">
+            {text}
+          </p>
           <div className="flex gap-2">
             <Button
               onClick={cta.onClick}

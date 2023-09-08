@@ -1,13 +1,13 @@
-import { ReactElement } from "react";
+import { ComponentProps } from "react";
 import cn from "clsx";
 
-export type BlockWrapperProps = ReactElement & {};
+export type BlockWrapperProps = ComponentProps<"div">;
 
-export const BlockWrapper = ({
+export const BlockWrapper: React.FC<BlockWrapperProps> = ({
   className,
   children,
   ...props
-}: BlockWrapperProps) => {
+}) => {
   return (
     <div
       className={cn(
