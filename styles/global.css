@@ -80,8 +80,8 @@
 }
 
 .dark {
-  --primary-400: theme("colors.primary.dark.400");
-  --primary-500: theme("colors.primary.dark.500");
+  --primary-400: theme("colors.dark.primary.400");
+  --primary-500: theme("colors.dark.primary.500");
 
 
   /* --- theme --- */
@@ -99,8 +99,8 @@
 
 
   /* --- focus --- */
-  --op-ring-offset-color: theme("colors.primary.dark.500");
-  --op-ring-color: theme("colors.primary.dark.400");
+  --op-ring-offset-color: theme("colors.dark.primary.500");
+  --op-ring-color: theme("colors.dark.primary.400");
 
 
   /* --- code --- */

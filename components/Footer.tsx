@@ -4,7 +4,7 @@ import NetideeLogo from "../public/netidee.svg";
 
 export function Footer({ menu }: { menu?: boolean }): ReactElement {
   return (
-    <footer className="bg-gray-100 nx-pb-[env(safe-area-inset-bottom)] dark:bg-surface-primary print:nx-bg-transparent border-t border-gray-200 dark:border-surface-border">
+    <footer className="bg-surface-primary dark:bg-dark-surface-primary border-t border-surface-border dark:border-dark-surface-border nx-pb-[env(safe-area-inset-bottom)] print:nx-bg-transparent">
       <div
         className={cn(
           "nx-mx-auto nx-flex nx-max-w-[90rem] nx-justify-center nx-py-12 nx-text-gray-600 dark:nx-text-gray-400 md:nx-justify-start",

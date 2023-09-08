@@ -14,8 +14,8 @@ export const Example = ({ header, text, imageSrc, ...props }: ExampleProps) => {
       <DisplayHeading tag="h3" className="mb-4">
         {header}
       </DisplayHeading>
-      <p className="text-gray-800 dark:text-gray-200 mb-10">{text}</p>
-      <div className="w-full h-[25rem] md:h-[31.5rem]  bg-gray-300">
+      <p className="text-text-tertiary dark:text-dark-text-tertiary mb-10">{text}</p>
+      <div className="w-full h-[25rem] md:h-[31.5rem] bg-gray-300">
         <img src={imageSrc} />
       </div>
     </BlockWrapper>

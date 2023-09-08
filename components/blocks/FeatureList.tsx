@@ -39,7 +39,7 @@ export const FeatureList = ({
               </div>
               <DisplayHeading tag="h4">{feature.header}</DisplayHeading>
               {/* either this or text-text-tertiary and do the theming in .css */}
-              <p className="text-gray-600 dark:text-gray-500">{feature.text}</p>
+              <p className="text-text-tertiary dark:text-dark-text-tertiary">{feature.text}</p>
             </div>
           );
         })}

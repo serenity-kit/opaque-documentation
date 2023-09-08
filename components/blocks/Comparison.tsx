@@ -25,15 +25,15 @@ export const Comparison = ({
       <DisplayHeading tag="h3" className="mb-4">
         {header}
       </DisplayHeading>
-      <p className="text-gray-800 dark:text-gray-200 mb-10">{text}</p>
+      <p className="text-text-tertiary dark:text-dark-text-tertiary mb-10">{text}</p>
       <div className="flex gap-4 overflow-x-scroll">
         {comparisonData.map((data, i) => {
           return (
             <div
-              className="w-full min-w-[15rem] pb-12 border border-gray-200 dark:border-surface-border rounded-2xl overflow-hidden"
+              className="w-full min-w-[15rem] pb-12 border border-surface-border dark:border-dark-surface-border rounded-2xl overflow-hidden"
               key={data.title + `${i}`}
             >
-              <div className="flex items-center h-10 mb-3 px-5 bg-gray-100 dark:bg-surface-secondary border-b border-gray-200 dark:border-surface-border">
+              <div className="flex items-center h-10 mb-3 px-5 bg-surface-secondary dark:bg-dark-surface-secondary border-b border-surface-border dark:border-dark-surface-border">
                 <DisplayHeading tag="h3" className="text-lg md:text-lg">
                   {data.title}
                 </DisplayHeading>

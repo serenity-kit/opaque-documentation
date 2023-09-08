@@ -38,10 +38,10 @@ export const FeatureDetail = ({
       >
         <div className="flex flex-col gap-2 w-full max-w-xxs">
           <DisplayHeading tag="h3">{header}</DisplayHeading>
-          <p className="text-gray-600 dark:text-gray-500">{text}</p>
+          <p className="text-text-tertiary dark:text-dark-text-tertiary">{text}</p>
           {link ? (
             <a
-              className="text-primary-500 dark:text-primary-dark-400 inline-flex items-center"
+              className="text-primary-500 dark:text-dark-primary-400 inline-flex items-center"
               href={link.href}
             >
               {link.text}

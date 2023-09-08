@@ -30,7 +30,7 @@ export const Hero = ({
       <div className="flex justify-between flex-col sm:flex-row sm:items-center gap-12">
         <div className="flex flex-col gap-6 sm:max-lg:max-w-[50%] lg:max-w-[33rem]">
           <DisplayHeading tag="h1">{header}</DisplayHeading>
-          <p className="text-gray-800 dark:text-gray-200">{text}</p>
+          <p className="text-text-secondary dark:text-dark-text-secondary">{text}</p>
           <div className="flex gap-2">
             <Button
               onClick={cta.onClick}

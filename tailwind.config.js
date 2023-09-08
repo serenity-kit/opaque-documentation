@@ -36,22 +36,18 @@ module.exports = {
         700: "#172FC8",
         800: "#0A1E9B",
         900: "#000F70",
-        dark: {
-          400: "#8091FF",
-          500: "#6576E1",
-        }
       },
       surface: {
-        primary: "#1F1F21",
-        secondary: "#2B2B2D",
-        tertiary: "#353538",
-        border: "#44454B",
+        primary: "#FFFFFF",
+        secondary: "#FDFDFD",
+        tertiary: "#EDEDF0",
+        border: "#EDEDF0",
       },
       text: {
-        title: "",
-        primary: "",
-        secondary: "",
-        tertiary: ""
+        title: "#000000",
+        primary: "#1F1F21",
+        secondary: "#4F5057",
+        tertiary: "#8A8B96"
       },
       palette: {
         terracotta: "#EF5245",

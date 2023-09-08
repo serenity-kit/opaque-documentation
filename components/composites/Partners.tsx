@@ -16,7 +16,7 @@ export const Partners = ({ header, imageData, ...props }: PartnersProps) => {
 
   return (
     <div className="flex flex-col gap-8 py-12" {...props}>
-      <p className="text-center text-gray-600 dark:text-gray-500 text-sm uppercase">
+      <p className="text-center text-text-tertiary dark:text-dark-text-tertiary text-sm uppercase">
         {header}
       </p>
       <div

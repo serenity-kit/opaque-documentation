@@ -26,7 +26,7 @@ export const Pre = ({
         className={cn(
           "nx-mb-4 nx-overflow-x-auto nx-font-medium ",
           filename ? "nx-pt-12 nx-pb-4" : "nx-py-4",
-          `rounded bg-gray-120 dark:bg-surface-secondary border-[0.5px] border-gray-200 dark:border-surface-border ${
+          `rounded bg-surface-secondary dark:bg-dark-surface-secondary border-[0.5px] border-surface-border dark:border-dark-surface-border ${
             subpixel && "nx-subpixel-antialiased"
           }`,
           "contrast-more:nx-border contrast-more:nx-border-primary-900/20 contrast-more:nx-contrast-150 contrast-more:dark:nx-border-primary-100/40",
