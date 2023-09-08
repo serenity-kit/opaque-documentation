@@ -45,7 +45,13 @@ module.exports = {
         primary: "#1F1F21",
         secondary: "#2B2B2D",
         tertiary: "#353538",
-        border: "#44454B"
+        border: "#44454B",
+      },
+      text: {
+        title: "",
+        primary: "",
+        secondary: "",
+        tertiary: ""
       },
       palette: {
         terracotta: "#EF5245",
@@ -63,6 +69,24 @@ module.exports = {
         slate: "#4F5D78",
       },
       white: "#FFFFFF",
+      dark: {
+        primary: {
+          400: "#8091FF",
+          500: "#6576E1",
+        },
+        surface: {
+          primary: "#1F1F21",
+          secondary: "#2B2B2D",
+          tertiary: "#353538",
+          border: "#44454B",
+        },
+        text: {
+          title: "#FFFFFF",
+          primary: "#EDEDF0",
+          secondary: "#EDEDF0",
+          tertiary: "#B4B4BD"
+        },
+      }
     },
     extend: {
       fontFamily: {
