@@ -16,7 +16,7 @@ export const CTAArea = ({ header, text, cta, ...props }: CTAAreaProps) => {
       {...props}
     >
       <div className="flex flex-col items-center gap-4">
-        <DisplayHeading tag="h3">{header}</DisplayHeading>
+        <DisplayHeading tag="h3" className="text-white">{header}</DisplayHeading>
         <p className="max-w-[70%] text-white">{text}</p>
         <Button
           onClick={cta.onClick}

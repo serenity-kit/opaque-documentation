@@ -30,7 +30,7 @@ export const Comparison = ({
         {comparisonData.map((data, i) => {
           return (
             <div
-              className="w-full min-w-[15rem] pb-12 border border-surface-border rounded-2xl overflow-hidden"
+              className="w-full min-w-[15rem] pb-12 border border-gray-200 dark:border-surface-border rounded-2xl overflow-hidden"
               key={data.title + `${i}`}
             >
               <div className="flex items-center h-10 mb-3 px-5 bg-gray-100 dark:bg-surface-secondary border-b border-gray-200 dark:border-surface-border">
