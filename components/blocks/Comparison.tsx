@@ -7,11 +7,12 @@ export type ComparisonData = {
   points: Array<string>;
 };
 
-// TODO data needs to be 2 (or max 3?)
 export type ComparisonProps = {
   header: string;
   text: string;
-  comparisonData: Array<ComparisonData>;
+  comparisonData:
+    | [ComparisonData, ComparisonData]
+    | [ComparisonData, ComparisonData, ComparisonData];
 };
 
 export const Comparison: React.FC<ComparisonProps> = ({

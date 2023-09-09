@@ -1,4 +1,3 @@
-import { ReactElement } from "react";
 import { BlockWrapper } from "./BlockWrapper";
 import { DisplayHeading } from "../DisplayHeading";
 
@@ -10,7 +9,10 @@ export type Feature = {
 
 export type FeatureListProps = {
   header: string;
-  features: Array<Feature>;
+  features:
+    | [Feature, Feature]
+    | [Feature, Feature, Feature]
+    | [Feature, Feature, Feature, Feature];
 };
 
 export const FeatureList: React.FC<FeatureListProps> = ({
