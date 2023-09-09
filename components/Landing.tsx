@@ -7,7 +7,7 @@ import { Partners } from "./composites/Partners";
 import { CTAArea } from "./composites/CTAArea";
 import { BlockWrapper } from "./blocks/BlockWrapper";
 
-export default () => {
+export const Landing = () => {
   return (
     <>
       <Hero
