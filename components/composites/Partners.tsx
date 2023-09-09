@@ -1,4 +1,3 @@
-import { ReactElement } from "react";
 import cn from "clsx";
 
 export type ImageData = {
@@ -6,12 +5,16 @@ export type ImageData = {
   alt: string;
 };
 
-export type PartnersProps = ReactElement & {
+export type PartnersProps = {
   header: string;
   imageData: Array<ImageData>;
 };
 
-export const Partners = ({ header, imageData, ...props }: PartnersProps) => {
+export const Partners: React.FC<PartnersProps> = ({
+  header,
+  imageData,
+  ...props
+}: PartnersProps) => {
   const imageCount = imageData.length;
 
   return (

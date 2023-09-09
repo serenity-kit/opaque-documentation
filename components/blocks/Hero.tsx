@@ -1,4 +1,3 @@
-import { ReactElement } from "react";
 import { BlockWrapper } from "./BlockWrapper";
 import { DisplayHeading } from "../DisplayHeading";
 import { Button } from "../Button";
