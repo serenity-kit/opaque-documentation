@@ -1,16 +1,17 @@
 import { BlockWrapper } from "./BlockWrapper";
 import { DisplayHeading } from "../DisplayHeading";
+import { ImageData } from "../../types/types";
 
 export type ExampleProps = {
   header: string;
   text: string;
-  imageSrc: string;
+  image: ImageData;
 };
 
 export const Example: React.FC<ExampleProps> = ({
   header,
   text,
-  imageSrc,
+  image,
   ...props
 }) => {
   return (
@@ -22,7 +23,7 @@ export const Example: React.FC<ExampleProps> = ({
         {text}
       </p>
       <div className="w-full h-[25rem] md:h-[31.5rem] bg-gray-300">
-        <img src={imageSrc} />
+        <img src={image.src} alt={image.alt} />
       </div>
     </BlockWrapper>
   );

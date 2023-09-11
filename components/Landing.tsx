@@ -21,13 +21,13 @@ export const Landing = () => {
           text: "github",
           onClick: () => window.alert("clicked the secondary"),
         }}
-        imageSrc=""
+        image={{ src: "", alt: "" }}
       />
 
       <Example
         header="Try it out yourself"
         text="How does it work, what do users get, central statement, Interactive Guide"
-        imageSrc=""
+        image={{ src: "", alt: "" }}
       />
 
       <FeatureList
@@ -55,13 +55,13 @@ export const Landing = () => {
         header="Benefit two"
         text="No need for users to rely on an external authority for key storage. Usually Apple, Google or Microsoft."
         link={{ text: "blub", href: "https://google.com", external: true }}
-        imageSrc=""
+        image={{ src: "", alt: "" }}
       />
 
       <FeatureDetail
         header="Benefit one"
         text="No need for users to rely on an external authority for key storage. Usually Apple, Google or Microsoft."
-        imageSrc=""
+        image={{ src: "", alt: "" }}
         imagePosition="left"
       />
 
@@ -77,7 +77,7 @@ export const Landing = () => {
       <BlockWrapper>
         <Partners
           header="Powering world class products"
-          imageData={[
+          images={[
             { src: "/netidee.svg", alt: "fancy logo 1" },
             { src: "/netidee.svg", alt: "fancy logo 2" },
             { src: "/netidee.svg", alt: "fancy logo 2" },

@@ -1,12 +1,12 @@
 import { BlockWrapper } from "./BlockWrapper";
 import { DisplayHeading } from "../DisplayHeading";
 import { Button } from "../Button";
-import { ButtonData } from "../../types/types";
+import { ButtonData, ImageData } from "../../types/types";
 
 export type HeroProps = {
   header: string;
   text: string;
-  imageSrc: string;
+  image: ImageData;
   cta: ButtonData;
   secondaryButton?: ButtonData;
 };
@@ -16,7 +16,7 @@ export const Hero: React.FC<HeroProps> = ({
   text,
   cta,
   secondaryButton,
-  imageSrc,
+  image,
   ...props
 }) => {
   return (
@@ -48,7 +48,7 @@ export const Hero: React.FC<HeroProps> = ({
         </div>
         {/* TODO remove height */}
         <div className="w-full sm:w-[25rem] h-[34.5rem] bg-gray-300 lg:shrink-0">
-          <img src={imageSrc} />
+          <img src={image.src} alt={image.alt} />
         </div>
       </div>
     </BlockWrapper>

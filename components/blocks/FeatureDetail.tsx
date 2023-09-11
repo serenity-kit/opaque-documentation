@@ -1,12 +1,12 @@
 import { BlockWrapper } from "./BlockWrapper";
 import { DisplayHeading } from "../DisplayHeading";
-import { LinkData } from "../../types/types";
+import { ImageData, LinkData } from "../../types/types";
 import cn from "clsx";
 
 export type FeatureDetailProps = {
   header: string;
   text: string;
-  imageSrc: string;
+  image: ImageData;
   link?: LinkData;
   imagePosition?: "left" | "right";
 };
@@ -15,7 +15,7 @@ export const FeatureDetail: React.FC<FeatureDetailProps> = ({
   header,
   text,
   link,
-  imageSrc,
+  image,
   imagePosition = "right",
   ...props
 }) => {
@@ -70,7 +70,7 @@ export const FeatureDetail: React.FC<FeatureDetailProps> = ({
         </div>
         {/* TODO remove fixed height maybe and let picture define that */}
         <div className="w-full max-w-[41rem] h-[30rem] bg-gray-300">
-          <img src={imageSrc} />
+          <img src={image.src} alt={image.alt} />
         </div>
       </div>
     </BlockWrapper>
