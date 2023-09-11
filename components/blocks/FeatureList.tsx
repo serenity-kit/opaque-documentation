@@ -1,6 +1,7 @@
 import { BlockWrapper } from "./BlockWrapper";
 import { DisplayHeading } from "../DisplayHeading";
 import { P } from "../P";
+import cn from "clsx";
 
 export type Feature = {
   iconName: string;
@@ -26,8 +27,13 @@ export const FeatureList: React.FC<FeatureListProps> = ({
       <DisplayHeading tag="h3" className="max-w-md md:max-w-xl pb-14 md:pb-24">
         {header}
       </DisplayHeading>
-      {/* TODO use either 3 or 4 cols depending on the number of items */}
-      <div className="grid grid-cols-1 xs:grid-cols-2 md:grid-cols-3 gap-6">
+      <div
+        className={cn(
+          "grid grid-cols-1 xs:grid-cols-2",
+          features.length < 4 ? "md:grid-cols-3" : "md:grid-cols-4",
+          "gap-6"
+        )}
+      >
         {features.map((feature, i) => {
           return (
             <div key={feature.header + `_${i}`} className="flex flex-col gap-2">
