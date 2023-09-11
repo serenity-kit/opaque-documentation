@@ -112,6 +112,9 @@ module.exports = {
       },
       borderWidth: {
         "3": "3px",
+      },
+      gridTemplateColumns: {
+        footer: "2.5fr 2fr auto"
       }
     },
   },

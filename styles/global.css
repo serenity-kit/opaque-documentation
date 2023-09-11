@@ -198,35 +198,6 @@
   background: linear-gradient(96deg, #AECBE3 2.84%, #B8C0D7 46.22%, #D1A3B0 62.41%, #F09057 80.98%, #FD8933 99.76%);
 }
 
-/* footer */
-.footer-wrapper {
-  display: grid;
-  grid-template-columns: 2.5fr 2fr auto;
-
-  width: 100%;
-  max-width: 48rem;
-
-  margin: 0 auto;
-  color: var(--text-tertiary);
-}
-
-.footer-links {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-}
-
-.footer-links a {
-  color: var(--text-primary);
-  text-decoration: underline;
-  text-underline-offset: 0.2rem;
-}
-
-#netidee_svg__netidee_logo {
-  width: 6rem;
-  height: auto;
-}
-
 
 /* 
   ------------------------- OVERRIDES -------------------------
