@@ -1,18 +1,13 @@
 import { BlockWrapper } from "./BlockWrapper";
 import { DisplayHeading } from "../DisplayHeading";
+import { LinkData } from "../../types/types";
 import cn from "clsx";
-
-export type Link = {
-  text: string;
-  href: string;
-  external?: boolean;
-};
 
 export type FeatureDetailProps = {
   header: string;
   text: string;
   imageSrc: string;
-  link?: Link;
+  link?: LinkData;
   imagePosition?: "left" | "right";
 };
 

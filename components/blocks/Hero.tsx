@@ -1,19 +1,14 @@
 import { BlockWrapper } from "./BlockWrapper";
 import { DisplayHeading } from "../DisplayHeading";
 import { Button } from "../Button";
-
-export type ButtonType = {
-  text: string;
-  onClick: () => void;
-  iconName?: string;
-};
+import { ButtonData } from "../../types/types";
 
 export type HeroProps = {
   header: string;
   text: string;
   imageSrc: string;
-  cta: ButtonType;
-  secondaryButton?: ButtonType;
+  cta: ButtonData;
+  secondaryButton?: ButtonData;
 };
 
 export const Hero: React.FC<HeroProps> = ({

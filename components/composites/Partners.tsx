@@ -1,9 +1,5 @@
+import { ImageData } from "../../types/types";
 import cn from "clsx";
-
-export type ImageData = {
-  src: string;
-  alt: string;
-};
 
 export type PartnersProps = {
   header: string;

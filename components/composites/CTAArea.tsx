@@ -1,11 +1,11 @@
-import { ButtonType } from "../blocks/Hero";
+import { ButtonData } from "../../types/types";
 import { DisplayHeading } from "../DisplayHeading";
 import { Button } from "../Button";
 
 export type CTAAreaProps = {
   header: string;
   text: string;
-  cta: ButtonType;
+  cta: ButtonData;
 };
 
 export const CTAArea: React.FC<CTAAreaProps> = ({
