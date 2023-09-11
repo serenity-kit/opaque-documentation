@@ -1,5 +1,6 @@
 import { BlockWrapper } from "./BlockWrapper";
 import { DisplayHeading } from "../DisplayHeading";
+import { P } from "../P";
 
 export type Feature = {
   iconName: string;
@@ -40,10 +41,7 @@ export const FeatureList: React.FC<FeatureListProps> = ({
                 </svg>
               </div>
               <DisplayHeading tag="h4">{feature.header}</DisplayHeading>
-              {/* either this or text-text-tertiary and do the theming in .css */}
-              <p className="text-text-tertiary dark:text-dark-text-tertiary">
-                {feature.text}
-              </p>
+              <P variant="tertiary">{feature.text}</P>
             </div>
           );
         })}

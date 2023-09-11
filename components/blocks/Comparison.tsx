@@ -1,5 +1,6 @@
 import { BlockWrapper } from "./BlockWrapper";
 import { DisplayHeading } from "../DisplayHeading";
+import { P } from "../P";
 
 export type ComparisonData = {
   title: string;
@@ -25,9 +26,9 @@ export const Comparison: React.FC<ComparisonProps> = ({
       <DisplayHeading tag="h3" className="mb-4">
         {header}
       </DisplayHeading>
-      <p className="text-text-tertiary dark:text-dark-text-tertiary mb-10">
+      <P className="mb-10" variant="tertiary">
         {text}
-      </p>
+      </P>
       <div className="flex gap-4 overflow-x-scroll">
         {comparisonData.map((data, i) => {
           return (

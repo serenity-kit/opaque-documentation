@@ -1,5 +1,6 @@
 import { BlockWrapper } from "./BlockWrapper";
 import { DisplayHeading } from "../DisplayHeading";
+import { P } from "../P";
 import { ImageData, LinkData } from "../../types/types";
 import cn from "clsx";
 
@@ -32,9 +33,7 @@ export const FeatureDetail: React.FC<FeatureDetailProps> = ({
       >
         <div className="flex flex-col gap-2 w-full max-w-xxs">
           <DisplayHeading tag="h3">{header}</DisplayHeading>
-          <p className="text-text-tertiary dark:text-dark-text-tertiary">
-            {text}
-          </p>
+          <P variant="tertiary">{text}</P>
           {link ? (
             <a
               className="text-primary-500 dark:text-dark-primary-400 inline-flex items-center"

@@ -6,7 +6,12 @@ export type ButtonProps = ComponentProps<"button"> & {
   iconName?: string;
 };
 
-export const Button = ({ children, iconName, variant, ...props }) => {
+export const Button = ({
+  children,
+  iconName,
+  variant,
+  ...props
+}: ButtonProps) => {
   const styles = {
     button: "h-12 min-w-[5rem] max-w-fit px-6 border-3 rounded",
     primary:

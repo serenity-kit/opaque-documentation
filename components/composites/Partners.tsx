@@ -1,4 +1,5 @@
 import { ImageData } from "../../types/types";
+import { P } from "../P";
 import cn from "clsx";
 
 export type PartnersProps = {
@@ -11,13 +12,11 @@ export const Partners: React.FC<PartnersProps> = ({
   images,
   ...props
 }: PartnersProps) => {
-  const imageCount = images.length;
-
   return (
     <div className="flex flex-col gap-8 py-12" {...props}>
-      <p className="text-center text-text-tertiary dark:text-dark-text-tertiary text-sm uppercase">
+      <P className="text-center uppercase" variant="tertiary" size="sm">
         {header}
-      </p>
+      </P>
       <div
         className={cn(
           "flex flex-wrap",

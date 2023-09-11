@@ -1,6 +1,7 @@
 import { BlockWrapper } from "./BlockWrapper";
 import { DisplayHeading } from "../DisplayHeading";
 import { Button } from "../Button";
+import { P } from "../P";
 import { ButtonData, ImageData } from "../../types/types";
 
 export type HeroProps = {
@@ -24,9 +25,7 @@ export const Hero: React.FC<HeroProps> = ({
       <div className="flex justify-between flex-col sm:flex-row sm:items-center gap-12">
         <div className="flex flex-col gap-6 sm:max-lg:max-w-[50%] lg:max-w-[33rem]">
           <DisplayHeading tag="h1">{header}</DisplayHeading>
-          <p className="text-text-secondary dark:text-dark-text-secondary">
-            {text}
-          </p>
+          <P>{text}</P>
           <div className="flex gap-2">
             <Button
               onClick={cta.onClick}
