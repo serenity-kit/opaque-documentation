@@ -289,15 +289,6 @@ a:focus-visible {
   color: var(--text-title);
 }
 
-/* table */
-.op-table th:first-child {
-  @apply rounded-l-lg;
-}
-
-.op-table th:last-child {
-  @apply rounded-r-lg;
-}
-
 
 /* ---------------- ui ---------------- */
 
