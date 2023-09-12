@@ -3,9 +3,6 @@ import { useActor } from "@xstate/react";
 import { useState } from "react";
 import { assign, createMachine } from "xstate";
 
-// TODO
-// setup login
-
 const formMachine = createMachine(
   {
     /** @xstate-layout N4IgpgJg5mDOIC5QDMD2AnAtgYgOIHkB9AFSIGViBRABUIGEAZASUoDljCKBBAJQ58q4mFHl2JN8rANoAGALqJQAB1SwAlgBc1qAHaKQAD0QAWAEwAaEAE9Ep4wHYAdKdMBOUwEYPMgBzGZHj6u9gC+IZZoWHhEpJxUtGSUPABqSfQCYpSEAkIiYhKs2ZRk1JKJsgpIICrqWrr6RghmljYIbk4yAKzGAGw+9qZ+MgDMPh5hERg4BCTk8fTMbBwAYkyswgASRbnEouKSFfo1mtp6VY3N1ojDvY4+PgE9N0OdAxMgkZiOajonAIYAG2w3D4hGoPHwdGKZEOVWOdTOoEanUGzhkxlG-VGHhunRaiG8xkcnR6rh6PWM3lcnRGJPen0cMB0YHQfw0YB4YCgalgGlZCIAImy-thYcpVCd6udENSnMNOmN0fYzGSZPZ8QhvD1HGqRl5XIFXEbXD56VNHABjAFqMA6DRkDR-dAaTnc3n807YAy8tlgRx-ZDs9AACm8MhkAEpsAyrTa7Q6nS6uTy+WzTmLqhKEQ0CaZ7DJHMNhkbOsWKeSPD0NV5hoXAj0PKYSfmSYMzVhHLAWQA3Fl0dBgX2ulMe3Sc2AqHRdr0+9n+wMs0PhyPR81d9C99D9wfs4futNjuCTrsZ+GnHOa0muRzUhUycml+zdYbV0wFkl9G7DewGkYUsLhCAOioBAcD6J8RxZue0oIAAtFWVxwdqy4oah4ahIBDI-P8AKQbU0FItcpLOJ0BrPD0viuPexgamMhYuK4NxqmGFbtl8TIskOyb7oKwp4ZKiKGIg9iVs4VE3MEfQDO4tEePRbhMSJ4asZh5qxra9qOs6e6ptmcJQVKhGal0cn2D0ryNpSwweDJiFeHJJqkTZlbKjijFsZ2PZ9gOXFurppzjseYD8XpRluXJMjUveox9Ix6p2TZzg3IEIzBL0rydB56l2ss2GwAAFjpo6CWehlCZqPhvo4IneMqpjDOGDgWHZpjasYlXGJSPR5p0HhPhhYRAA */
@@ -29,12 +26,15 @@ const formMachine = createMachine(
 
     on: {
       GO_TO_STEP_CLIENT_START_REGISTRATION: {
+        actions: ["deactivateAutoplay"],
         target: ".clientStartRegistration",
       },
       GO_TO_STEP_SERVER_CREATE_REGISTRATION_RESPONSE: {
+        actions: ["deactivateAutoplay"],
         target: ".serverCreateRegistrationResponse",
       },
       GO_TO_STEP_CLIENT_FINISH_REGISTRATION: {
+        actions: ["deactivateAutoplay"],
         target: ".clientFinishRegistration",
       },
       RESET_REGISTRATION: {
@@ -61,6 +61,7 @@ const formMachine = createMachine(
 
         on: {
           START_REGISTRATION: {
+            actions: ["activateAutoplay"],
             target: "generateRegistrationData",
           },
         },
@@ -155,7 +156,6 @@ const formMachine = createMachine(
       // registration states
       clientStartRegistration: {
         after: {
-          // after 1 second, transition to serverCreateRegistrationResponse
           1000: {
             target: "serverCreateRegistrationResponse",
             guard: "autoplayIsActive",
@@ -164,7 +164,6 @@ const formMachine = createMachine(
       },
       serverCreateRegistrationResponse: {
         after: {
-          // after 1 second, transition to clientFinishRegistration
           1000: {
             target: "clientFinishRegistration",
             guard: "autoplayIsActive",
@@ -174,6 +173,7 @@ const formMachine = createMachine(
       clientFinishRegistration: {
         on: {
           START_LOGIN: {
+            actions: ["activateAutoplay"],
             target: "clientStartLogin",
           },
         },
@@ -212,6 +212,14 @@ const formMachine = createMachine(
     guards: {
       autoplayIsActive: ({ context }) => context.autoplay,
     },
+    actions: {
+      deactivateAutoplay: assign(() => {
+        return { autoplay: false };
+      }),
+      activateAutoplay: assign(() => {
+        return { autoplay: true };
+      }),
+    },
   }
 );
 
@@ -219,6 +227,8 @@ export const InteractiveForm = () => {
   const [state, send] = useActor(formMachine);
   const [username, setUsername] = useState("jane@example.com");
   const [password, setPassword] = useState("123456");
+
+  console.log("autoplay:", state.context.autoplay);
 
   return (
     <div>
