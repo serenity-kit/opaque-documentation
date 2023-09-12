@@ -18,12 +18,14 @@
   },
   "dependencies": {
     "@serenity-kit/opaque": "^0.7.0",
+    "@xstate/react": "4.0.0-beta.8",
     "clsx": "^2.0.0",
     "next": "^13.4.18",
     "nextra": "^2.11.0",
     "nextra-theme-docs": "^2.11.0",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "xstate": "5.0.0-beta.27"
   },
   "devDependencies": {
     "@svgr/webpack": "^8.1.0",
