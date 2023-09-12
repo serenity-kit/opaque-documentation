@@ -4,115 +4,150 @@ import { useState } from "react";
 import { assign, createMachine } from "xstate";
 
 // TODO
-// jump between steps
 // setup login
 
-const formMachine = createMachine({
-  /** @xstate-layout N4IgpgJg5mDOIC5QDMD2AnAtgOgJYDtcAXXAQwBsBiAZQBUBBAJVoH0AFRgeQGEBRa6gG0ADAF1EoAA6pYxXKnwSQAD0QAmYcOwBOACwBWAMwBGYWu3H9aw9oA0IAJ6JTu7PoBs29+4AcAdjUXI20AXxD7NCxsAGNyXDB8ImoiUnQiRjAoXFgidFISBUplHPywbFJkIjB0AApTTQBKSkicWPjE5NT0zOzc-Pl8EXEkEGlZAsUR1QR3YT9sWf1dWb9tQ2ELeycEU3dsOeETC0O5zx8wiIwcWGqAN2rudDBSjKycvImM2Gl8G6KSqrlSrVOqaYRNFrYG7oe7oR7PKqvXofAZfH43IZKMZyBRKaamQzzNSBEzLdz6YyGHy6LbOYR7A5HAmnbTnC4gfCoCBwJQtLEyHGTUDTAC07lpCDF7MhBDkFH54wGeMQujUEp8xmwhmJFkMulZFN0JmlVxicQSSRSaSR736uJG2ImyoQVO0+xMagMxm0a1V2n06s12vMnr0akWFhNUWhsPhLx6ts+cHRYAVgudAR8Wtm3jUFI1fj1ga1OtDqojxijrXNiQAYrLYAALG19J0OgVt4XOSzzbR+cnGdw2MyBYvB7Rl8PCfSRsIhIA */
-  id: "form",
+const formMachine = createMachine(
+  {
+    /** @xstate-layout N4IgpgJg5mDOIC5QDMD2AnAtgYgOIHkB9AFSIGViBRABUIGEAZASUoDljCKBBAJQ58q4mFHl2JN8rANoAGALqJQAB1SwAlgBc1qAHaKQAD0QAWAEwAaEAE9Ep4wHYAdKdMBOUwEYPMgBzGZHj6u9gC+IZZoWHhEpJxUtGSUPABqSfQCYpSEAkIiYhKs2ZRk1JKJsgpIICrqWrr6RghmljYIbk4yAKzGAGw+9qZ+MgDMPh5hERg4BCTk8fTMbBwAYkyswgASRbnEouKSFfo1mtp6VY3N1ojDvY4+PgE9N0OdAxMgkZiOajonAIYAG2w3D4hGoPHwdGKZEOVWOdTOoEanUGzhkxlG-VGHhunRaiG8xkcnR6rh6PWM3lcnRGJPen0cMB0YHQfw0YB4YCgalgGlZCIAImy-thYcpVCd6udENSnMNOmN0fYzGSZPZ8QhvD1HGqRl5XIFXEbXD56VNHABjAFqMA6DRkDR-dAaTnc3n807YAy8tlgRx-ZDs9AACm8MhkAEpsAyrTa7Q6nS6uTy+WzTmLqhKEQ0CaZ7DJHMNhkbOsWKeSPD0NV5hoXAj0PKYSfmSYMzVhHLAWQA3Fl0dBgX2ulMe3Sc2AqHRdr0+9n+wMs0PhyPR81d9C99D9wfs4futNjuCTrsZ+GnHOa0muRzUhUycml+zdYbV0wFkl9G7DewGkYUsLhCAOioBAcD6J8RxZue0oIAAtFWVxwdqy4oah4ahIBDI-P8AKQbU0FItcpLOJ0BrPD0viuPexgamMhYuK4NxqmGFbtl8TIskOyb7oKwp4ZKiKGIg9iVs4VE3MEfQDO4tEePRbhMSJ4asZh5qxra9qOs6e6ptmcJQVKhGal0cn2D0ryNpSwweDJiFeHJJqkTZlbKjijFsZ2PZ9gOXFurppzjseYD8XpRluXJMjUveox9Ix6p2TZzg3IEIzBL0rydB56l2ss2GwAAFjpo6CWehlCZqPhvo4IneMqpjDOGDgWHZpjasYlXGJSPR5p0HhPhhYRAA */
+    id: "form",
 
-  context: {
-    opaqueServerSetup: null,
-    // registrationSteps
-    clientStartRegistrationData: null,
-    serverCreateRegistrationResponseData: null,
-    clientFinishRegistrationData: null,
-  },
+    context: {
+      autoplay: false,
+      opaqueServerSetup: null,
+      // registrationSteps
+      clientStartRegistrationData: null,
+      serverCreateRegistrationResponseData: null,
+      clientFinishRegistrationData: null,
+      username: null,
+      password: null,
+    },
 
-  states: {
-    initial: {
-      entry: assign(() => {
-        return {
-          opaqueServerSetup: opaque.server.createSetup(), // TODO replace with static one
-        };
-      }),
+    on: {
+      GO_TO_STEP_CLIENT_START_REGISTRATION: {
+        target: ".clientStartRegistration",
+      },
+      GO_TO_STEP_SERVER_CREATE_REGISTRATION_RESPONSE: {
+        target: ".serverCreateRegistrationResponse",
+      },
+      GO_TO_STEP_CLIENT_FINISH_REGISTRATION: {
+        target: ".clientFinishRegistration",
+      },
+      RESET_REGISTRATION: {
+        target: ".initial",
+        actions: assign(() => {
+          return {
+            clientStartRegistrationData: null,
+            serverCreateRegistrationResponseData: null,
+            clientFinishRegistrationData: null,
+            username: null,
+            password: null,
+          };
+        }),
+      },
+    },
 
-      on: {
-        START_PROCESS: {
+    states: {
+      initial: {
+        entry: assign(() => {
+          return {
+            opaqueServerSetup: opaque.server.createSetup(), // TODO replace with static one
+          };
+        }),
+
+        on: {
+          START_REGISTRATION: {
+            target: "generateRegistrationData",
+          },
+        },
+      },
+
+      generateRegistrationData: {
+        entry: assign(({ context, event }) => {
+          const password =
+            event.password || context.clientStartRegistrationData.password; // in case you go back to step one
+          const username =
+            event.username || context.clientStartRegistrationData.username; // in case you go back to step one
+          const { clientRegistrationState, registrationRequest } =
+            opaque.client.startRegistration({ password });
+
+          const { registrationResponse } =
+            opaque.server.createRegistrationResponse({
+              registrationRequest,
+              userIdentifier: username,
+              serverSetup: context.opaqueServerSetup,
+            });
+
+          const { exportKey, registrationRecord } =
+            opaque.client.finishRegistration({
+              clientRegistrationState,
+              password,
+              registrationResponse,
+            });
+
+          return {
+            clientStartRegistrationData: {
+              clientRegistrationState,
+              registrationRequest,
+              username,
+              password,
+            },
+            serverCreateRegistrationResponseData: {
+              registrationResponse,
+            },
+            clientFinishRegistrationData: {
+              exportKey,
+              registrationRecord,
+            },
+          };
+        }),
+        always: {
           target: "clientStartRegistration",
         },
       },
-    },
-    clientStartRegistration: {
-      entry: assign(({ context, event }) => {
-        const { clientRegistrationState, registrationRequest } =
-          opaque.client.startRegistration({ password: event.password });
 
-        return {
-          clientStartRegistrationData: {
-            clientRegistrationState,
-            registrationRequest,
-            username: event.username,
-            password: event.password,
+      clientStartRegistration: {
+        after: {
+          // after 1 second, transition to serverCreateRegistrationResponse
+          1000: {
+            target: "serverCreateRegistrationResponse",
+            guard: "autoplayIsActive",
           },
-        };
-      }),
-      after: {
-        // after 1 second, transition to serverCreateRegistrationResponse
-        1000: { target: "serverCreateRegistrationResponse" },
+        },
       },
-    },
-    serverCreateRegistrationResponse: {
-      entry: assign(({ context }) => {
-        const { registrationResponse } =
-          opaque.server.createRegistrationResponse({
-            registrationRequest:
-              context.clientStartRegistrationData.registrationRequest,
-            userIdentifier: context.clientStartRegistrationData.username,
-            serverSetup: context.opaqueServerSetup,
-          });
 
-        return {
-          serverCreateRegistrationResponseData: {
-            registrationResponse,
+      serverCreateRegistrationResponse: {
+        after: {
+          // after 1 second, transition to clientFinishRegistration
+          1000: {
+            target: "clientFinishRegistration",
+            guard: "autoplayIsActive",
           },
-        };
-      }),
-
-      after: {
-        // after 1 second, transition to clientFinishRegistration
-        1000: { target: "clientFinishRegistration" },
+        },
       },
-    },
-    clientFinishRegistration: {
-      entry: assign(({ context }) => {
-        const { exportKey, registrationRecord } =
-          opaque.client.finishRegistration({
-            clientRegistrationState:
-              context.clientStartRegistrationData.clientRegistrationState,
-            password: context.clientStartRegistrationData.password,
-            registrationResponse:
-              context.serverCreateRegistrationResponseData.registrationResponse,
-          });
 
-        return {
-          clientFinishRegistrationData: {
-            exportKey,
-            registrationRecord,
-          },
-        };
-      }),
+      clientFinishRegistration: {},
     },
+
+    initial: "initial",
   },
-
-  initial: "initial",
-});
+  {
+    guards: {
+      autoplayIsActive: ({ context }) => context.autoplay,
+    },
+  }
+);
 
 export const InteractiveForm = () => {
   const [state, send] = useActor(formMachine);
   const [username, setUsername] = useState("jane@example.com");
   const [password, setPassword] = useState("123456");
 
-  if (state.matches("clientFinishRegistration")) {
-    console.log(JSON.stringify(state.context));
-  }
-
   return (
     <div>
       <form
         onSubmit={(event) => {
           event.preventDefault();
-          send({ type: "START_PROCESS", username, password });
+          send({ type: "START_REGISTRATION", username, password });
         }}
       >
         <input
@@ -122,6 +157,7 @@ export const InteractiveForm = () => {
           onChange={(event) => {
             setUsername(event.target.value);
           }}
+          disabled={!state.matches("initial")}
         />
         <input
           type="password"
@@ -130,9 +166,24 @@ export const InteractiveForm = () => {
           onChange={(event) => {
             setPassword(event.target.value);
           }}
+          disabled={!state.matches("initial")}
         />
-        <button type="submit">Register</button>
+        <button type="submit" disabled={!state.matches("initial")}>
+          Register
+        </button>
       </form>
+
+      <button
+        type="button"
+        disabled={state.matches("initial")}
+        onClick={() => {
+          setUsername("");
+          setPassword("");
+          send({ type: "RESET_REGISTRATION" });
+        }}
+      >
+        Reset
+      </button>
 
       <div>
         <h2>Terminal</h2>
@@ -173,6 +224,34 @@ export const InteractiveForm = () => {
           )}
         </div>
       </div>
+
+      <button
+        type="button"
+        disabled={state.matches("initial")}
+        onClick={() => {
+          send({ type: "GO_TO_STEP_CLIENT_START_REGISTRATION" });
+        }}
+      >
+        Go to step 1
+      </button>
+      <button
+        type="button"
+        disabled={state.matches("initial")}
+        onClick={() => {
+          send({ type: "GO_TO_STEP_SERVER_CREATE_REGISTRATION_RESPONSE" });
+        }}
+      >
+        Go to step 2
+      </button>
+      <button
+        type="button"
+        disabled={state.matches("initial")}
+        onClick={() => {
+          send({ type: "GO_TO_STEP_CLIENT_FINISH_REGISTRATION" });
+        }}
+      >
+        Go to step 3
+      </button>
 
       <div>Current step: {state.value.toString()}</div>
     </div>
