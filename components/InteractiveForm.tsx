@@ -12,14 +12,19 @@ const formMachine = createMachine(
     id: "form",
 
     context: {
-      autoplay: false,
+      autoplay: true,
       opaqueServerSetup: null,
+      username: null,
+      password: null,
       // registrationSteps
       clientStartRegistrationData: null,
       serverCreateRegistrationResponseData: null,
       clientFinishRegistrationData: null,
-      username: null,
-      password: null,
+      // loginSteps
+      clientStartLoginData: null,
+      serverStartLoginData: null,
+      clientFinishLoginData: null,
+      serverFinishLoginData: null,
     },
 
     on: {
@@ -60,13 +65,14 @@ const formMachine = createMachine(
           },
         },
       },
-
       generateRegistrationData: {
         entry: assign(({ context, event }) => {
           const password =
             event.password || context.clientStartRegistrationData.password; // in case you go back to step one
           const username =
             event.username || context.clientStartRegistrationData.username; // in case you go back to step one
+
+          // registration
           const { clientRegistrationState, registrationRequest } =
             opaque.client.startRegistration({ password });
 
@@ -84,6 +90,32 @@ const formMachine = createMachine(
               registrationResponse,
             });
 
+          // login
+          const { clientLoginState, startLoginRequest } =
+            opaque.client.startLogin({ password });
+
+          const { loginResponse, serverLoginState } = opaque.server.startLogin({
+            registrationRecord,
+            startLoginRequest,
+            serverSetup: context.opaqueServerSetup,
+            userIdentifier: username,
+          });
+
+          const {
+            finishLoginRequest,
+            serverStaticPublicKey,
+            sessionKey: sessionKeyClient,
+          } = opaque.client.finishLogin({
+            clientLoginState,
+            loginResponse,
+            password,
+          });
+
+          const { sessionKey: sessionKeyServer } = opaque.server.finishLogin({
+            finishLoginRequest,
+            serverLoginState,
+          });
+
           return {
             clientStartRegistrationData: {
               clientRegistrationState,
@@ -98,13 +130,29 @@ const formMachine = createMachine(
               exportKey,
               registrationRecord,
             },
+            clientStartLoginData: {
+              clientLoginState,
+              startLoginRequest,
+            },
+            serverStartLoginData: {
+              loginResponse,
+              serverLoginState,
+            },
+            clientFinishLoginData: {
+              finishLoginRequest,
+              serverStaticPublicKey,
+              sessionKey: sessionKeyClient,
+            },
+            serverFinishLoginData: {
+              sessionKey: sessionKeyServer,
+            },
           };
         }),
         always: {
           target: "clientStartRegistration",
         },
       },
-
+      // registration states
       clientStartRegistration: {
         after: {
           // after 1 second, transition to serverCreateRegistrationResponse
@@ -114,7 +162,6 @@ const formMachine = createMachine(
           },
         },
       },
-
       serverCreateRegistrationResponse: {
         after: {
           // after 1 second, transition to clientFinishRegistration
@@ -124,8 +171,39 @@ const formMachine = createMachine(
           },
         },
       },
-
-      clientFinishRegistration: {},
+      clientFinishRegistration: {
+        on: {
+          START_LOGIN: {
+            target: "clientStartLogin",
+          },
+        },
+      },
+      // login states
+      clientStartLogin: {
+        after: {
+          1000: {
+            target: "serverStartLogin",
+            guard: "autoplayIsActive",
+          },
+        },
+      },
+      serverStartLogin: {
+        after: {
+          1000: {
+            target: "clientFinishLogin",
+            guard: "autoplayIsActive",
+          },
+        },
+      },
+      clientFinishLogin: {
+        after: {
+          1000: {
+            target: "serverFinishLogin",
+            guard: "autoplayIsActive",
+          },
+        },
+      },
+      serverFinishLogin: {},
     },
 
     initial: "initial",
@@ -222,6 +300,52 @@ export const InteractiveForm = () => {
               <div>Sending back …</div>
             </div>
           )}
+
+          {/* login */}
+          {state.matches("clientStartLogin") && (
+            <div>
+              <div>Something happens</div>
+              <div>
+                startLoginRequest:
+                {state.context.clientStartLoginData.startLoginRequest}
+              </div>
+              <div>Sending back …</div>
+            </div>
+          )}
+          {state.matches("serverStartLogin") && (
+            <div>
+              <div>Something happens</div>
+              <div>
+                loginResponse:
+                {state.context.serverStartLoginData.loginResponse}
+              </div>
+              <div>Sending back …</div>
+            </div>
+          )}
+          {state.matches("clientFinishLogin") && (
+            <div>
+              <div>Something happens</div>
+              <div>
+                finishLoginRequest:
+                {state.context.clientFinishLoginData.finishLoginRequest}
+              </div>
+              <div>
+                sessionKey:
+                {state.context.clientFinishLoginData.sessionKey}
+              </div>
+              <div>Sending back …</div>
+            </div>
+          )}
+          {state.matches("serverFinishLogin") && (
+            <div>
+              <div>Something happens</div>
+              <div>
+                sessionKey:
+                {state.context.serverFinishLoginData.sessionKey}
+              </div>
+              <div>Sending back …</div>
+            </div>
+          )}
         </div>
       </div>
 
@@ -251,6 +375,16 @@ export const InteractiveForm = () => {
         }}
       >
         Go to step 3
+      </button>
+
+      <button
+        type="button"
+        disabled={!state.matches("clientFinishRegistration")}
+        onClick={() => {
+          send({ type: "START_LOGIN" });
+        }}
+      >
+        Start Login
       </button>
 
       <div>Current step: {state.value.toString()}</div>
