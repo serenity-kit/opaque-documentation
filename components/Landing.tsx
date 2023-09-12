@@ -6,10 +6,14 @@ import { Comparison } from "./blocks/Comparison";
 import { Partners } from "./composites/Partners";
 import { CTAArea } from "./composites/CTAArea";
 import { BlockWrapper } from "./blocks/BlockWrapper";
+import { Icon } from "./icon/Icon";
+import { ArrowRightLine } from "./icon/icons/ArrowRightLine";
 
 export const Landing = () => {
   return (
     <>
+      <Icon color="primary-200" name="arrow-right-line" />
+      <Icon name="compasses-2-line" color="gray-700" />
       <Hero
         header="some header"
         text="Secure password based client-server authentication without the server ever obtaining knowledge of the password."
@@ -20,6 +24,7 @@ export const Landing = () => {
         secondaryButton={{
           text: "github",
           onClick: () => window.alert("clicked the secondary"),
+          iconName: "github-fill",
         }}
         image={{ src: "", alt: "" }}
       />
@@ -36,17 +41,17 @@ export const Landing = () => {
           {
             header: "Headline",
             text: "No need for users to rely on an external authority for key storage. Usually Apple, Google or Microsoft.",
-            iconName: "gear",
+            iconName: "compasses-2-line",
           },
           {
             header: "Headline",
             text: "No need for users to rely on an external authority for key storage. Usually Apple, Google or Microsoft.",
-            iconName: "gear",
+            iconName: "compasses-2-line",
           },
           {
             header: "Headline",
             text: "No need for users to rely on an external authority for key storage. Usually Apple, Google or Microsoft.",
-            iconName: "gear",
+            iconName: "compasses-2-line",
           },
         ]}
       />
@@ -75,7 +80,7 @@ export const Landing = () => {
       />
 
       <BlockWrapper>
-        <Partners
+        {/* <Partners
           header="Powering world class products"
           images={[
             { src: "/netidee.svg", alt: "fancy logo 1" },
@@ -83,7 +88,7 @@ export const Landing = () => {
             { src: "/netidee.svg", alt: "fancy logo 2" },
             { src: "/netidee.svg", alt: "fancy logo 2" },
           ]}
-        />
+        /> */}
         <CTAArea
           header="Main CTA"
           text="Use it now - Be more specific in the copy what to expect when clicking and/or why"

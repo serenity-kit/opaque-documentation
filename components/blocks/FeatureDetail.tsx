@@ -42,7 +42,7 @@ export const FeatureDetail: React.FC<FeatureDetailProps> = ({
               {link.text}
               {link.external ? (
                 <div className="ml-1.5 h-3">
-                  {/* todo extract icons */}
+                  {/* TODO extract icons */}
                   <svg
                     width="100%"
                     height="100%"

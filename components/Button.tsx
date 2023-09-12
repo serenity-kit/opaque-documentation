@@ -1,9 +1,10 @@
 import { ComponentProps } from "react";
 import cn from "clsx";
+import { Icon, IconName } from "./icon/Icon";
 
 export type ButtonProps = ComponentProps<"button"> & {
   variant: "primary" | "secondary";
-  iconName?: string;
+  iconName?: IconName;
 };
 
 export const Button = ({
@@ -33,8 +34,7 @@ export const Button = ({
       )}
       {...props}
     >
-      {/* TODO actually use iconName and svg */}
-      {iconName ? <>icon</> : null}
+      {iconName ? <Icon name={iconName} /> : null}
       {children}
     </button>
   );
