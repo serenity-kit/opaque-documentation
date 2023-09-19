@@ -1,0 +1,6 @@
+{
+  "export-key": "ExportKey",
+  "server-static-public-key": "ServerStaticPublicKey",
+  "identifiers": "Identifiers",
+  "p256-support": "P256 Support"
+}

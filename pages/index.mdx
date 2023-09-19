@@ -10,6 +10,21 @@ A JavaScript implementation of the [OPAQUE protocol](https://datatracker.ietf.or
 - Security against pre-computation attacks upon server compromise
 - Foundation for encrypted backups and end-to-end encryption apps
 
+### Details
+
+OPAQUE provides robust security measures that effectively neutralize various types of attacks. Unlike traditional methods, it eliminates the need to send passwords to the server, thereby thwarting sniffing and replay attacks. Moreover, the protocol prevents pre-computation attacks by attackers.
+
+Through the use of an Oblivious Pseudo-Random Function (OPRF), OPAQUE safeguards the password and basically some form of "salt", making it impervious to direct password leaks. This protocol has also undergone rigorous testing and offers mathematical proofs of security within a robust model.
+
+Another advantage is its ability to offload the memory-hard key-stretching function to the client side. This not only enhances security but also minimizes the server's vulnerability to computational denial-of-service (DoS) attacks.
+
+Furthermore, OPAQUE can function securely over an unencrypted communication channel, removing the necessity for additional layers like TLS. It even includes a countermeasure against user enumeration attacks: the server can return a decoy record, making it impossible for an attacker to determine whether a particular user exists or not.
+
+## Downsides
+
+- The protocol requires JavaScript to run on the client
+- Registration and login require one extra request roundtrip to complete each flow
+
 ## Who is using Opaque?
 
 - [Serenity](https://github.com/serenity-kit/serenity) as authentication mechanism for the account

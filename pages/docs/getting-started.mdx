@@ -54,6 +54,8 @@ First the client need to generate a registration request using the password. The
 
 ```ts
 // client
+const password = "sup-krah.42-UOI"; // user password
+
 const { clientRegistrationState, registrationRequest } =
   opaque.client.startRegistration({ password });
 ```
@@ -64,6 +66,8 @@ The `registrationResponse` is sent back to the client.
 
 ```ts
 // server
+const userIdentifier = "20e14cd8-ab09-4f4b-87a8-06d2e2e9ff68"; // userId/email/username
+
 const { registrationResponse } = opaque.server.createRegistrationResponse({
   serverSetup,
   userIdentifier,
@@ -90,6 +94,8 @@ In order to authenticate the user, the client needs to generate a login request 
 
 ```ts
 // client
+const password = "sup-krah.42-UOI"; // user password
+
 const { clientLoginState, startLoginRequest } = opaque.client.startLogin({
   password,
 });
@@ -101,6 +107,8 @@ The generated `loginResponse` is sent back to the client, but the server must al
 
 ```ts
 // server
+const userIdentifier = "20e14cd8-ab09-4f4b-87a8-06d2e2e9ff68"; // userId/email/username
+
 const { serverLoginState, loginResponse } = opaque.server.startLogin({
   serverSetup,
   userIdentifier,
