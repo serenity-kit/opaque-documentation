@@ -3,8 +3,8 @@
   "advanced_usage": "Advanced Usage",
   "guides": "Guides",
   "react-native": "React Native",
-  "faq": "FAQ",
   "bundler-configuration": "Bundler configuration",
+  "faq": "FAQ",
   "architecture-decisions": "Architecture Decisions",
   "specification": "Specification",
   "resources": "Resources"

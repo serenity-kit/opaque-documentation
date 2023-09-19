@@ -1,0 +1,52 @@
+# Server Static Public key
+
+The result of `opaque.client.finishRegistration` and `opaque.client.finishLogin` also contains a property `serverStaticPublicKey`. It can be used to verify the authenticity of the server.
+
+It's recommended to verify the server static public key in the application layer e.g. hard-code it into the application code and verify it's correctness.
+
+## Example usage
+
+### Server
+
+The `serverStaticPublicKey` can be extracted using the following CLI command:
+
+```sh
+npx
+
+npx @serenity-kit/opaque get-server-public-key "<server setup string>"
+```
+
+Alternatively the functionality is exposed via
+
+```ts
+const serverSetupString = opaque.server.createSetup();
+opaque.server.getPublicKey(serverSetupString);
+```
+
+### Client
+
+#### Registration
+
+```ts
+// client
+const { serverStaticPublicKey } = opaque.client.finishRegistration({
+  clientRegistrationState,
+  registrationResponse,
+  password,
+});
+```
+
+#### Login
+
+```ts
+// client
+const loginResult = opaque.client.finishLogin({
+  clientLoginState,
+  loginResponse,
+  password,
+});
+if (!loginResult) {
+  throw new Error("Login failed");
+}
+const { serverStaticPublicKey } = loginResult;
+```

@@ -1,39 +1,3 @@
-# Advanced Usage
-
-## Server Static Public key
-
-The result of `opaque.client.finishRegistration` and `opaque.client.finishLogin` also contains a property `serverStaticPublicKey`. It can be used to verify the authenticity of the server.
-
-It's recommended to verify the server static public key in the application layer e.g. hard-code it into the application code and verify it's correctness.
-
-### Example
-
-#### Registration
-
-```ts
-// client
-const { serverStaticPublicKey } = opaque.client.finishRegistration({
-  clientRegistrationState,
-  registrationResponse,
-  password,
-});
-```
-
-#### Login
-
-```ts
-// client
-const loginResult = opaque.client.finishLogin({
-  clientLoginState,
-  loginResponse,
-  password,
-});
-if (!loginResult) {
-  throw new Error("Login failed");
-}
-const { serverStaticPublicKey } = loginResult;
-```
-
 ## Identifiers
 
 By default the server-side sets a `userIdentifier` during the registration and login process. This `userIdentifier` does not even need to be exposed to be exposed to a client.
@@ -102,9 +66,3 @@ if (!loginResult) {
 }
 const { finishLoginRequest, sessionKey } = loginResult;
 ```
-
-## P256 Support
-
-The default implementation uses [ristretto255](https://ristretto.group/) for the OPRF and the group mode.
-
-If you would like to use the [P-256](https://docs.rs/p256/latest/p256/) curve instead, you can use the [@serenity-kit/opaque-p256](https://www.npmjs.com/package/@serenity-kit/opaque) package. The API is identical.

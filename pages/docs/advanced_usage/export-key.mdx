@@ -1,0 +1,46 @@
+# ExportKey
+
+After the initial registration flow as well as ever login flow, the client has access to a private key only available to the client. This is the `exportKey`. The key is not available to the server and it is stable. Meaning if you log in multiple times your `exportKey` will stay the same.
+
+## Example usage
+
+### Registration
+
+```ts
+// client
+const { exportKey, registrationRecord } = opaque.client.finishRegistration({
+  clientRegistrationState,
+  registrationResponse,
+  password,
+});
+```
+
+### Login
+
+```ts
+// client
+const loginResult = opaque.client.finishLogin({
+  clientLoginState,
+  loginResponse,
+  password,
+});
+if (!loginResult) {
+  throw new Error("Login failed");
+}
+const { exportKey, finishLoginRequest, sessionKey } = loginResult;
+```
+
+## End-to-end encryption for applications
+
+The stable `exportKey` makes it possible to build end-to-end encrypted applications and makes Opaque a great building block for building end-to-end encrypted applications. The `exportKey` can be used to encrypt data that can only be decrypted by the client. The server can not decrypt the data.
+
+Here are a couple of examples how the `export_key` can be used:
+
+- Digital locker to store encrypted data that can only be decrypted after a successful login.
+- Seed for a private/public key pair to sign and/or encrypt data with other users.
+
+## Why is it called Export Key?
+
+The term "export key" is meant to indicate the fact that the security advantages gained from the authenticated key exchange can be "exported" to protect other sensitive payloads. In this context, the focus is on data that the client wishes to keep confidential from the server.
+
+In additon in the OPAQUE protocol description, a variable named "client_private_key" already exists. To avoid naming conflicts, especially given that multiple variables with the "client\*\*\*\*\_key/keyshare" format are already defined, the protocol creators opted for a distinct name for this particular key.
