@@ -1,10 +1,11 @@
 {
   "getting-started": "Getting started",
+  "advanced_usage": "Advanced Usage",
   "guides": "Guides",
   "react-native": "React Native",
-  "bundler-configuration": "Bundler configuration",
-  "advanced_usage": "Advanced Usage",
   "faq": "FAQ",
+  "bundler-configuration": "Bundler configuration",
   "architecture-decisions": "Architecture Decisions",
+  "specification": "Specification",
   "resources": "Resources"
 }
