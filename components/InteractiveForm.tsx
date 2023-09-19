@@ -1,11 +1,11 @@
 import * as opaque from "@serenity-kit/opaque";
 import { useActor } from "@xstate/react";
 import { useState } from "react";
-import { assign, createMachine } from "xstate";
+import { assign, createMachine, fromPromise } from "xstate";
 
 const formMachine = createMachine(
   {
-    /** @xstate-layout N4IgpgJg5mDOIC5QDMD2AnAtgYgOIHkB9AFSIGViBRABUIGEAZASUoDljCKBBAJQ58q4mFHl2JN8rANoAGALqJQAB1SwAlgBc1qAHaKQAD0QAWAEwAaEAE9Ep4wHYAdKdMBOUwEYPMgBzGZHj6u9gC+IZZoWHhEpJxUtGSUPABqSfQCYpSEAkIiYhKs2ZRk1JKJsgpIICrqWrr6RghmljYIbk4yAKzGAGw+9qZ+MgDMPh5hERg4BCTk8fTMbBwAYkyswgASRbnEouKSFfo1mtp6VY3N1ojDvY4+PgE9N0OdAxMgkZiOajonAIYAG2w3D4hGoPHwdGKZEOVWOdTOoEanUGzhkxlG-VGHhunRaiG8xkcnR6rh6PWM3lcnRGJPen0cMB0YHQfw0YB4YCgalgGlZCIAImy-thYcpVCd6udENSnMNOmN0fYzGSZPZ8QhvD1HGqRl5XIFXEbXD56VNHABjAFqMA6DRkDR-dAaTnc3n807YAy8tlgRx-ZDs9AACm8MhkAEpsAyrTa7Q6nS6uTy+WzTmLqhKEQ0CaZ7DJHMNhkbOsWKeSPD0NV5hoXAj0PKYSfmSYMzVhHLAWQA3Fl0dBgX2ulMe3Sc2AqHRdr0+9n+wMs0PhyPR81d9C99D9wfs4futNjuCTrsZ+GnHOa0muRzUhUycml+zdYbV0wFkl9G7DewGkYUsLhCAOioBAcD6J8RxZue0oIAAtFWVxwdqy4oah4ahIBDI-P8AKQbU0FItcpLOJ0BrPD0viuPexgamMhYuK4NxqmGFbtl8TIskOyb7oKwp4ZKiKGIg9iVs4VE3MEfQDO4tEePRbhMSJ4asZh5qxra9qOs6e6ptmcJQVKhGal0cn2D0ryNpSwweDJiFeHJJqkTZlbKjijFsZ2PZ9gOXFurppzjseYD8XpRluXJMjUveox9Ix6p2TZzg3IEIzBL0rydB56l2ss2GwAAFjpo6CWehlCZqPhvo4IneMqpjDOGDgWHZpjasYlXGJSPR5p0HhPhhYRAA */
+    /** @xstate-layout N4IgpgJg5mDOIC5QDMD2AnAtgYgOIHkB9AFSIGViBRABUIGEAZASUoDljCKBBAJQ58q4mFHl2JN8rANoAGALqJQAB1SwAlgBc1qAHaKQAD0QAWAEwAaEAE9EpgJx2AdKYDMp4wHZjARjvGXMt4AHABsAL5hlmhYeESknFS0ZJQ8AGop9AJilIQCQiJiEqy5lGTUksmyCkggKupauvpGCGaWNggudh6O3qYeIQCsMh69QUEeMi4RURg4BCTkifTMbBwAYkyswgASJfnEouKSVfp1mtp6Nc2t1iZ2A44ypvbeLh4DvjIDpuGRINE4ATJfiCYQHQrHeSnVTnRpXEwWW4IUyBRwuN6mbxYgbfIIuQbTf6zRwAdwAhucdFA1hh8EoyQBHACuYGwEF0YEcah0ADdUABrTkA0kUrRUmnoOmMlkIbl8gDGZIaOiqJxqZ2VTUQAzMjnGH3x3hChrebUQ3hkIT1IU8AxcxhCISxgUJwu55zJABtsNw+HswYcimrlDDNfCEOMZI9vB47GNQoNTAMzQgumiPB4gq9hvaXHaBq7iTAdGB0EqwDwwFA1LANGXlQARJVk7DB2qhi5ahCvD6ODw-CYhWNGuzDFO9UxowadBxjEKTV6FrCOeWetRgHQaMgaMnoDSV6u1+sXbAGWvlxxk5AaUsACgtMhkAEpsMLV+vN9vd-uqzW60qLjbDVO3DI0PBcHofAdd4QiCR8fHHew9W8HFfHGIdMyCYwl0wRxYFLHlSzodAwHLA8-2PXRK1gFQdHw09zxvS9rzvB9n1fYl8PQQj0GI0ib3Io8AKouBaPwoCOzhUBmkxbxjGtS0+lguTkyRV5uh+AZBk8TobWMcYcJXNcNw0NZ3VgAALQT-2VH1iF4DgGHwIRpChdVJMuaTbE8KMQjsNjPHeZ5x18PtTCCFEfnGXNFz+N9jM-Hc9wYVBqx0BidyYq8b3Qe9H3Y+KPy3JKNBStKJPqECvORCKgmjfzAlCaLxnHYx5JGAZMzseckwtPxDK4niv2S1LuQyi9stY-KX2FQbS2G0rRpVNyQ0qqTDEQFxXgg+ctLGI1YLsRF2jk9qUK6nqPhkfq4uJd8TLMnQawssqxrPTLOUm3K2Jmu6EtM8yXqWirYU8jaOn8Jwjs8VwYzMONWrOzqgm6p4rpuv4dFQCA4H0AFoTWsHmgAWhCFNScM8lKWpWl6WZMACdBrs8yjV4LTzbFBm6lMszRZ5RxjY1ghRwz3S0L1GbDarBz7R8ttcfo3gQpFur1VwhiGJMHTtIJDOLUsyN-ITG2bSWqvB50IImVxjCGTp9OMFNVYilnNZ1adddu5d7sS79rMosHgPW5pTrqrasKxPEnXcR21PCxwzG+GR9KNAY7ACDwBoIoiSMNw8bIuaixIZ9zCa7GNVdHBwHDzY1wvHPM9SCvx3h1rNDJ9gGnss-3hMDjyu2eFw6pCcKui6cDjDsVqILcHV7CdCKdVimZvf+hbXv7svw00ycJljVxAn8RWZ75+fuuCLWV6JZc5vQDelrN4PbHubw+3GW3dOGTMXFPuf4cXlfKYXtcKd0es9TeT8iabSTN0JWmIHA4kxHaP+WsF6X2XsA1euE77gMspA0uTNwy1x2unLW3UfiYg8Kg8+gDMERAiEAA */
     id: "form",
 
     context: {
@@ -52,6 +52,14 @@ const formMachine = createMachine(
     },
 
     states: {
+      waitingForOpaque: {
+        invoke: {
+          src: fromPromise(() => opaque.ready),
+          onDone: {
+            target: "initial",
+          },
+        },
+      },
       initial: {
         entry: assign(() => {
           return {
@@ -206,7 +214,7 @@ const formMachine = createMachine(
       serverFinishLogin: {},
     },
 
-    initial: "initial",
+    initial: "waitingForOpaque",
   },
   {
     guards: {
