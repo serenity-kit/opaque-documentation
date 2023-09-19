@@ -1,0 +1,7 @@
+# Specification
+
+## Message & Key Encoding
+
+All values send between client and server e.g. `registrationResponse`, `startLoginRequest` are Base64 encoded strings. The encoding is done using the [base64 crate](https://docs.rs/base64/latest/base64/) using the URL and filename safe alphabet as described [here in RFC3548](https://datatracker.ietf.org/doc/html/rfc3548#section-4).
+
+Same goes for all keys e.g. `exportKey` or `sessionKey`.
