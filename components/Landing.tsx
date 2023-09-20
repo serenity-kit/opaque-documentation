@@ -6,14 +6,10 @@ import { Comparison } from "./blocks/Comparison";
 import { Partners } from "./composites/Partners";
 import { CTAArea } from "./composites/CTAArea";
 import { BlockWrapper } from "./blocks/BlockWrapper";
-import { Icon } from "./icon/Icon";
-import { ArrowRightLine } from "./icon/icons/ArrowRightLine";
 
 export const Landing = () => {
   return (
     <>
-      <Icon color="primary-200" name="arrow-right-line" />
-      <Icon name="compasses-2-line" color="gray-700" />
       <Hero
         header="some header"
         text="Secure password based client-server authentication without the server ever obtaining knowledge of the password."
