@@ -1,5 +1,4 @@
 import React from "react";
-import type { ComponentProps } from "react";
 
 import { ArrowRightLine } from "./icons/ArrowRightLine";
 import { Compasses2Line } from "./icons/Compasses2";
@@ -17,14 +16,13 @@ const getHexByColor = (color: Color): string => {
 
 export type IconName = "arrow-right-line" | "compasses-2-line" | "github-fill";
 
-export type IconProps = ComponentProps<"div"> & {
+export type IconProps = {
   name: IconName;
   color?: Color;
   size?: number | "full";
 };
 
-export const Icon = (props: IconProps) => {
-  const { name, size = 4 } = props;
+export const Icon: React.FC<IconProps> = ({ name, size = 4, ...props }) => {
   const color = getHexByColor(props.color ?? "current") as string;
 
   let icon: React.ReactNode = null;
