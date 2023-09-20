@@ -57,6 +57,11 @@
   --text-tertiary: theme("colors.gray.600");
 
 
+  /* --- focus --- */
+  --op-ring-offset-color: theme("colors.primary.300");
+  --op-ring-color: theme("colors.primary.400");
+
+
   /* --- code --- */
   --shiki-color-text: var(--gray-800);
   --shiki-color-background: transparent;
@@ -75,8 +80,8 @@
 }
 
 .dark {
-  --primary-400: theme("colors.primary.dark.400");
-  --primary-500: theme("colors.primary.dark.500");
+  --primary-400: theme("colors.dark.primary.400");
+  --primary-500: theme("colors.dark.primary.500");
 
 
   /* --- theme --- */
@@ -91,6 +96,11 @@
   --text-primary: theme("colors.gray.200");
   --text-secondary: theme("colors.gray.200");
   --text-tertiary: theme("colors.gray.500");
+
+
+  /* --- focus --- */
+  --op-ring-offset-color: theme("colors.dark.primary.500");
+  --op-ring-color: theme("colors.dark.primary.400");
 
 
   /* --- code --- */
@@ -181,35 +191,11 @@
 }
 
 
-/* ---------------- general ---------------- */
+/* ---------------- blocks & elements ---------------- */
 
-/* footer */
-.footer-wrapper {
-  display: grid;
-  grid-template-columns: 2.5fr 2fr auto;
-
-  width: 100%;
-  max-width: 48rem;
-
-  margin: 0 auto;
-  color: var(--text-tertiary);
-}
-
-.footer-links {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-}
-
-.footer-links a {
-  color: var(--text-primary);
-  text-decoration: underline;
-  text-underline-offset: 0.2rem;
-}
-
-#netidee_svg__netidee_logo {
-  width: 6rem;
-  height: auto;
+/* cta-area */
+.cta-gradient {
+  background: linear-gradient(96deg, #AECBE3 2.84%, #B8C0D7 46.22%, #D1A3B0 62.41%, #F09057 80.98%, #FD8933 99.76%);
 }
 
 
@@ -244,34 +230,34 @@
   color: var(--gray-900);
 }
 
+button:focus-visible {
+  box-shadow: none;
+}
+
+a:focus-visible {
+  --tw-ring-color: var(--op-ring-color);
+  --tw-ring-offset-color: var(--op-ring-offset-color);
+}
+
 
 /* ---------------- content ---------------- */
 .nextra-content {
   color: var(--gray-800);
 }
 
-.nextra-content h1 {
+.nextra-content h1:not(.op-custom) {
   @apply text-h1 mt-8 max-w-3xl;
   color: var(--text-title);
 }
 
-.nextra-content h2 {
+.nextra-content h2:not(.op-custom) {
   @apply text-h2 pb-3 max-w-3xl;
   color: var(--text-title);
 }
 
-.nextra-content h3 {
+.nextra-content h3:not(.op-custom) {
   @apply text-h3 max-w-3xl;
   color: var(--text-title);
-}
-
-/* table */
-.op-table th:first-child {
-  @apply rounded-l-lg;
-}
-
-.op-table th:last-child {
-  @apply rounded-r-lg;
 }
 
 
@@ -388,6 +374,12 @@ div:has(> .nextra-sidebar-container) {
 /* general */
 :is(html[class~=dark] .nx-text-primary-600) {
   color: var(--primary-400);
+}
+
+/* focus */
+:is(html[class~=dark] a:focus-visible) {
+  --tw-ring-color: var(--op-ring-color);
+  --tw-ring-offset-color: var(--op-ring-offset-color);
 }
 
 /* sidebar */

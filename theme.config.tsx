@@ -1,6 +1,7 @@
 import { DocsThemeConfig } from "nextra-theme-docs";
 import { Code } from "./components/Code";
 import { Logo } from "./components/Logo";
+import { P } from "./components/P";
 import { Pre } from "./components/Pre";
 import { Table } from "./components/Table";
 import { Th } from "./components/Th";
@@ -36,9 +37,7 @@ const config: DocsThemeConfig = {
     // https://mdxjs.com/table-of-components/
     pre: Pre,
     code: Code,
-    p: (props) => (
-      <p className="max-w-3xl nx-mt-5 first:nx-mt-0 leading-6" {...props} />
-    ),
+    p: (props) => <P className="max-w-3xl nx-mt-5 first:nx-mt-0" {...props} />,
     table: Table,
     th: Th,
     tr: Tr,
