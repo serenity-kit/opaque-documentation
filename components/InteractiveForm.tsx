@@ -236,10 +236,8 @@ export const InteractiveForm = () => {
   const [username, setUsername] = useState("jane@example.com");
   const [password, setPassword] = useState("123456");
 
-  console.log("autoplay:", state.context.autoplay);
-
   return (
-    <div>
+    <div className="mx-auto max-w-[67.5rem]">
       <form
         onSubmit={(event) => {
           event.preventDefault();
@@ -281,23 +279,45 @@ export const InteractiveForm = () => {
         Reset
       </button>
 
-      <div>
-        <h2>Terminal</h2>
-        <div className="border border-gray-400 w-96 h-64">
-          {state.matches("initial") && <div>Submit the registration</div>}
+      {/* --- component --- */}
+      <div className="w-full my-10 h-[33rem] bg-palette-honey/30 rounded-3xl overflow-hidden">
+        {/* --- cli --- */}
+        <div className="w-2/6 min-w-[22rem] h-full bg-black font-mono text-md">
+          {/* tabs => client / server */}
+          <div className="flex items-center gap-4 h-12 mr-9 px-8 border-b border-gray-800/50">
+            <div className="flex items-center px-3 rounded-full bg-palette-honey text-black">
+              Client
+            </div>
+            <div className="flex items-center px-3 rounded-full text-gray-200">
+              Server
+            </div>
+          </div>
+          {/* content */}
+          <div className="py-4 px-6 h-full overflow-y-scroll text-gray-200 typewriter">
+            {state.matches("initial") && <div>Submit the registration </div>}
           {state.matches("clientStartRegistration") && (
             <div>
-              <div>Something happens</div>
+                <div>
+                  Something happens and something else and something else and
+                  wow ...
+                </div>
               <div>
                 Created registration request:{" "}
-                {state.context.clientStartRegistrationData.registrationRequest}
+                  {
+                    state.context.clientStartRegistrationData
+                      .registrationRequest
+                  }
               </div>
               <div>Sending …</div>
             </div>
           )}
           {state.matches("serverCreateRegistrationResponse") && (
             <div>
-              <div>Something happens</div>
+                <div>Reg Step 2 - Response</div>
+                <div>
+                  Something happens and something else and something else and
+                  wow ...
+                </div>
               <div>
                 Created registration response:{" "}
                 {
@@ -310,7 +330,11 @@ export const InteractiveForm = () => {
           )}
           {state.matches("clientFinishRegistration") && (
             <div>
-              <div>Something happens</div>
+                <div>Reg Step 3 - Record</div>
+                <div>
+                  Something happens and something else and something else and
+                  wow ...
+                </div>
               <div>
                 export_key:
                 {state.context.clientFinishRegistrationData.exportKey}
@@ -322,7 +346,11 @@ export const InteractiveForm = () => {
           {/* login */}
           {state.matches("clientStartLogin") && (
             <div>
-              <div>Something happens</div>
+                <div>Log Step 1 - client Start</div>
+                <div>
+                  Something happens and something else and something else and
+                  wow ...
+                </div>
               <div>
                 startLoginRequest:
                 {state.context.clientStartLoginData.startLoginRequest}
@@ -332,7 +360,11 @@ export const InteractiveForm = () => {
           )}
           {state.matches("serverStartLogin") && (
             <div>
-              <div>Something happens</div>
+                <div>Log Step 2 - server Start</div>
+                <div>
+                  Something happens and something else and something else and
+                  wow ...
+                </div>{" "}
               <div>
                 loginResponse:
                 {state.context.serverStartLoginData.loginResponse}
@@ -342,7 +374,11 @@ export const InteractiveForm = () => {
           )}
           {state.matches("clientFinishLogin") && (
             <div>
-              <div>Something happens</div>
+                <div>Log Step 3 - client Finish</div>
+                <div>
+                  Something happens and something else and something else and
+                  wow ...
+                </div>{" "}
               <div>
                 finishLoginRequest:
                 {state.context.clientFinishLoginData.finishLoginRequest}
@@ -356,7 +392,11 @@ export const InteractiveForm = () => {
           )}
           {state.matches("serverFinishLogin") && (
             <div>
-              <div>Something happens</div>
+                <div>Log Step 4 - server Finish</div>
+                <div>
+                  Something happens and something else and something else and
+                  wow ...
+                </div>{" "}
               <div>
                 sessionKey:
                 {state.context.serverFinishLoginData.sessionKey}
@@ -365,6 +405,9 @@ export const InteractiveForm = () => {
             </div>
           )}
         </div>
+        </div>
+        {/* --- animation area --- */}
+        <div></div>
       </div>
 
       <button
