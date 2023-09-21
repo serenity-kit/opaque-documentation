@@ -2,6 +2,7 @@ import * as opaque from "@serenity-kit/opaque";
 import { useActor } from "@xstate/react";
 import { useState } from "react";
 import { assign, createMachine, fromPromise } from "xstate";
+import { Button } from "./Button";
 
 const formMachine = createMachine(
   {
@@ -238,49 +239,58 @@ export const InteractiveForm = () => {
 
   return (
     <div className="mx-auto max-w-[67.5rem]">
-      <form
-        onSubmit={(event) => {
-          event.preventDefault();
-          send({ type: "START_REGISTRATION", username, password });
-        }}
-      >
-        <input
-          type="text"
-          placeholder=""
-          value={username}
-          onChange={(event) => {
-            setUsername(event.target.value);
+      <div className="flex gap-4 mt-10">
+        <form
+          onSubmit={(event) => {
+            event.preventDefault();
+            send({ type: "START_REGISTRATION", username, password });
           }}
-          disabled={!state.matches("initial")}
-        />
-        <input
-          type="password"
-          placeholder="******"
-          value={password}
-          onChange={(event) => {
-            setPassword(event.target.value);
-          }}
-          disabled={!state.matches("initial")}
-        />
-        <button type="submit" disabled={!state.matches("initial")}>
-          Register
-        </button>
-      </form>
+          className="flex gap-4"
+        >
+          <input
+            type="text"
+            placeholder=""
+            value={username}
+            onChange={(event) => {
+              setUsername(event.target.value);
+            }}
+            disabled={!state.matches("initial")}
+            className="h-12 min-w-[5rem] px-4 border border-gray-300 rounded"
+          />
+          <input
+            type="password"
+            placeholder="******"
+            value={password}
+            onChange={(event) => {
+              setPassword(event.target.value);
+            }}
+            disabled={!state.matches("initial")}
+            className="h-12 min-w-[5rem] px-4 border border-gray-300 rounded"
+          />
+          <Button
+            type="submit"
+            disabled={!state.matches("initial")}
+            variant="primary"
+          >
+            Register
+          </Button>
+        </form>
 
-      <button
-        type="button"
-        disabled={state.matches("initial")}
-        onClick={() => {
-          setUsername("");
-          setPassword("");
-          send({ type: "RESET_REGISTRATION" });
-        }}
-      >
-        Reset
-      </button>
+        <Button
+          disabled={state.matches("initial")}
+          onClick={() => {
+            setUsername("");
+            setPassword("");
+            send({ type: "RESET_REGISTRATION" });
+          }}
+          variant="secondary"
+        >
+          Reset
+        </Button>
+      </div>
 
       {/* --- component --- */}
-      <div className="w-full my-10 h-[33rem] bg-palette-honey/30 rounded-3xl overflow-hidden">
+      <div className="w-full my-6 h-[33rem] bg-palette-honey/30 rounded-3xl overflow-hidden">
         {/* --- cli --- */}
         <div className="w-2/6 min-w-[22rem] h-full bg-black font-mono text-md">
           {/* tabs => client / server */}
@@ -295,160 +305,162 @@ export const InteractiveForm = () => {
           {/* content */}
           <div className="py-4 px-6 h-full overflow-y-scroll text-gray-200 typewriter">
             {state.matches("initial") && <div>Submit the registration </div>}
-          {state.matches("clientStartRegistration") && (
-            <div>
+            {state.matches("clientStartRegistration") && (
+              <div>
+                <div>Reg Step 1 - Request</div>
                 <div>
                   Something happens and something else and something else and
                   wow ...
                 </div>
-              <div>
-                Created registration request:{" "}
+                <div>
+                  Created registration request:{" "}
                   {
                     state.context.clientStartRegistrationData
                       .registrationRequest
                   }
+                </div>
+                <div>Sending …</div>
               </div>
-              <div>Sending …</div>
-            </div>
-          )}
-          {state.matches("serverCreateRegistrationResponse") && (
-            <div>
+            )}
+            {state.matches("serverCreateRegistrationResponse") && (
+              <div>
                 <div>Reg Step 2 - Response</div>
                 <div>
                   Something happens and something else and something else and
                   wow ...
                 </div>
-              <div>
-                Created registration response:{" "}
-                {
-                  state.context.serverCreateRegistrationResponseData
-                    .registrationResponse
-                }
+                <div>
+                  Created registration response:{" "}
+                  {
+                    state.context.serverCreateRegistrationResponseData
+                      .registrationResponse
+                  }
+                </div>
+                <div>Sending back …</div>
               </div>
-              <div>Sending back …</div>
-            </div>
-          )}
-          {state.matches("clientFinishRegistration") && (
-            <div>
+            )}
+            {state.matches("clientFinishRegistration") && (
+              <div>
                 <div>Reg Step 3 - Record</div>
                 <div>
                   Something happens and something else and something else and
                   wow ...
                 </div>
-              <div>
-                export_key:
-                {state.context.clientFinishRegistrationData.exportKey}
+                <div>
+                  export_key:
+                  {state.context.clientFinishRegistrationData.exportKey}
+                </div>
+                <div>Sending back …</div>
               </div>
-              <div>Sending back …</div>
-            </div>
-          )}
+            )}
 
-          {/* login */}
-          {state.matches("clientStartLogin") && (
-            <div>
+            {/* login */}
+            {state.matches("clientStartLogin") && (
+              <div>
                 <div>Log Step 1 - client Start</div>
                 <div>
                   Something happens and something else and something else and
                   wow ...
                 </div>
-              <div>
-                startLoginRequest:
-                {state.context.clientStartLoginData.startLoginRequest}
+                <div>
+                  startLoginRequest:
+                  {state.context.clientStartLoginData.startLoginRequest}
+                </div>
+                <div>Sending back …</div>
               </div>
-              <div>Sending back …</div>
-            </div>
-          )}
-          {state.matches("serverStartLogin") && (
-            <div>
+            )}
+            {state.matches("serverStartLogin") && (
+              <div>
                 <div>Log Step 2 - server Start</div>
                 <div>
                   Something happens and something else and something else and
                   wow ...
                 </div>{" "}
-              <div>
-                loginResponse:
-                {state.context.serverStartLoginData.loginResponse}
+                <div>
+                  loginResponse:
+                  {state.context.serverStartLoginData.loginResponse}
+                </div>
+                <div>Sending back …</div>
               </div>
-              <div>Sending back …</div>
-            </div>
-          )}
-          {state.matches("clientFinishLogin") && (
-            <div>
+            )}
+            {state.matches("clientFinishLogin") && (
+              <div>
                 <div>Log Step 3 - client Finish</div>
                 <div>
                   Something happens and something else and something else and
                   wow ...
                 </div>{" "}
-              <div>
-                finishLoginRequest:
-                {state.context.clientFinishLoginData.finishLoginRequest}
+                <div>
+                  finishLoginRequest:
+                  {state.context.clientFinishLoginData.finishLoginRequest}
+                </div>
+                <div>
+                  sessionKey:
+                  {state.context.clientFinishLoginData.sessionKey}
+                </div>
+                <div>Sending back …</div>
               </div>
+            )}
+            {state.matches("serverFinishLogin") && (
               <div>
-                sessionKey:
-                {state.context.clientFinishLoginData.sessionKey}
-              </div>
-              <div>Sending back …</div>
-            </div>
-          )}
-          {state.matches("serverFinishLogin") && (
-            <div>
                 <div>Log Step 4 - server Finish</div>
                 <div>
                   Something happens and something else and something else and
                   wow ...
                 </div>{" "}
-              <div>
-                sessionKey:
-                {state.context.serverFinishLoginData.sessionKey}
+                <div>
+                  sessionKey:
+                  {state.context.serverFinishLoginData.sessionKey}
+                </div>
+                <div>Sending back …</div>
               </div>
-              <div>Sending back …</div>
-            </div>
-          )}
-        </div>
+            )}
+          </div>
         </div>
         {/* --- animation area --- */}
         <div></div>
       </div>
 
-      <button
-        type="button"
-        disabled={state.matches("initial")}
-        onClick={() => {
-          send({ type: "GO_TO_STEP_CLIENT_START_REGISTRATION" });
-        }}
-      >
-        Go to step 1
-      </button>
-      <button
-        type="button"
-        disabled={state.matches("initial")}
-        onClick={() => {
-          send({ type: "GO_TO_STEP_SERVER_CREATE_REGISTRATION_RESPONSE" });
-        }}
-      >
-        Go to step 2
-      </button>
-      <button
-        type="button"
-        disabled={state.matches("initial")}
-        onClick={() => {
-          send({ type: "GO_TO_STEP_CLIENT_FINISH_REGISTRATION" });
-        }}
-      >
-        Go to step 3
-      </button>
+      <div className="flex gap-4">
+        <Button
+          disabled={state.matches("initial")}
+          onClick={() => {
+            send({ type: "GO_TO_STEP_CLIENT_START_REGISTRATION" });
+          }}
+          variant="primary"
+        >
+          Step 1
+        </Button>
+        <Button
+          disabled={state.matches("initial")}
+          onClick={() => {
+            send({ type: "GO_TO_STEP_SERVER_CREATE_REGISTRATION_RESPONSE" });
+          }}
+          variant="primary"
+        >
+          Step 2
+        </Button>
+        <Button
+          disabled={state.matches("initial")}
+          onClick={() => {
+            send({ type: "GO_TO_STEP_CLIENT_FINISH_REGISTRATION" });
+          }}
+          variant="primary"
+        >
+          Step 3
+        </Button>
 
-      <button
-        type="button"
-        disabled={!state.matches("clientFinishRegistration")}
-        onClick={() => {
-          send({ type: "START_LOGIN" });
-        }}
-      >
-        Start Login
-      </button>
-
-      <div>Current step: {state.value.toString()}</div>
+        <Button
+          disabled={!state.matches("clientFinishRegistration")}
+          onClick={() => {
+            send({ type: "START_LOGIN" });
+          }}
+          variant="secondary"
+        >
+          Start Login
+        </Button>
+      </div>
+      <div className="my-4">Current step: {state.value.toString()}</div>
     </div>
   );
 };
