@@ -190,18 +190,40 @@ const formMachine = createMachine(
         },
       },
       serverCreateRegistrationResponse: {
+        entry: assign(({ context, event }) => {
+          return event.type ===
+            "xstate.after(animationStepDelay)#form.serverCreateRegistrationResponse"
+            ? { animationStep: context.animationStep + 1 }
+            : { animationStepDelays: [2000, 2000], animationStep: 0 };
+        }),
         after: {
-          2000: {
+          animationStepDelay: {
+            target: "serverCreateRegistrationResponse",
+            guard: "hasNextAnimationStep",
+          },
+          4000: {
             target: "clientFinishRegistration",
             guard: "autoplayIsActive",
           },
         },
       },
       clientFinishRegistration: {
+        entry: assign(({ context, event }) => {
+          return event.type ===
+            "xstate.after(animationStepDelay)#form.clientFinishRegistration"
+            ? { animationStep: context.animationStep + 1 }
+            : { animationStepDelays: [2000, 2000], animationStep: 0 };
+        }),
         on: {
           START_LOGIN: {
             actions: ["activateAutoplay"],
             target: "clientStartLogin",
+          },
+        },
+        after: {
+          animationStepDelay: {
+            target: "clientFinishRegistration",
+            guard: "hasNextAnimationStep",
           },
         },
       },
@@ -338,15 +360,14 @@ export const InteractiveForm = () => {
                   wow ...
                 </div>
                 {state.context.animationStep >= 1 && (
-                <div>
-                  Created registration request:{" "}
-                  {
-                    state.context.clientStartRegistrationData
-                      .registrationRequest
-                  }
-                </div>
+                  <div>
+                    Created registration request:{" "}
+                    {
+                      state.context.clientStartRegistrationData
+                        .registrationRequest
+                    }
+                  </div>
                 )}
-
                 {state.context.animationStep >= 2 && <div>Sending …</div>}
               </div>
             )}
@@ -357,14 +378,16 @@ export const InteractiveForm = () => {
                   Something happens and something else and something else and
                   wow ...
                 </div>
-                <div>
-                  Created registration response:{" "}
-                  {
-                    state.context.serverCreateRegistrationResponseData
-                      .registrationResponse
-                  }
-                </div>
-                <div>Sending back …</div>
+                {state.context.animationStep >= 1 && (
+                  <div>
+                    Created registration response:{" "}
+                    {
+                      state.context.serverCreateRegistrationResponseData
+                        .registrationResponse
+                    }
+                  </div>
+                )}
+                {state.context.animationStep >= 2 && <div>Sending back …</div>}
               </div>
             )}
             {state.matches("clientFinishRegistration") && (
@@ -374,11 +397,13 @@ export const InteractiveForm = () => {
                   Something happens and something else and something else and
                   wow ...
                 </div>
-                <div>
-                  export_key:
-                  {state.context.clientFinishRegistrationData.exportKey}
-                </div>
-                <div>Sending back …</div>
+                {state.context.animationStep >= 1 && (
+                  <div>
+                    export_key:
+                    {state.context.clientFinishRegistrationData.exportKey}
+                  </div>
+                )}
+                {state.context.animationStep >= 2 && <div>Sending back …</div>}
               </div>
             )}
 
