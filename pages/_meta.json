@@ -35,5 +35,13 @@
     "theme": {
       "layout": "full"
     }
+  },
+  "form": {
+    "type": "page",
+    "theme": {
+      "typesetting": "article",
+      "layout": "full"
+    },
+    "display": "hidden"
   }
 }
