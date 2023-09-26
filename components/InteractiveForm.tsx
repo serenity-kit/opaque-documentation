@@ -3,6 +3,7 @@ import { useActor } from "@xstate/react";
 import { useState } from "react";
 import { assign, createMachine, fromPromise } from "xstate";
 import { Button } from "./Button";
+import { TypeAnimation } from "react-type-animation";
 
 const formMachine = createMachine(
   {
@@ -284,6 +285,13 @@ export const InteractiveForm = () => {
   const [username, setUsername] = useState("jane@example.com");
   const [password, setPassword] = useState("123456");
 
+  const clientIsActive =
+    state.matches("clientStartRegistration") ||
+    state.matches("clientFinishRegistration");
+  const serverIsActive = state.matches("serverCreateRegistrationResponse");
+
+  const typeSpeed = 80;
+
   return (
     <div className="mx-auto max-w-[67.5rem]">
       <div className="flex gap-4 mt-10">
@@ -350,15 +358,17 @@ export const InteractiveForm = () => {
             </div>
           </div>
           {/* content */}
-          <div className="py-4 px-6 h-full overflow-y-scroll text-gray-200 typewriter">
+          <div className="py-4 px-6 h-full overflow-y-scroll text-gray-200">
             {state.matches("initial") && <div>Submit the registration </div>}
             {state.matches("clientStartRegistration") && (
               <div>
-                <div>Reg Step 1 - Request</div>
-                <div>
-                  Something happens and something else and something else and
-                  wow ...
-                </div>
+                <TypeAnimation
+                  sequence={[
+                    "Reg Step 1 - Request Reg Step 1 - Request Reg Step 1 - Request",
+                  ]}
+                  speed={typeSpeed}
+                  cursor={false}
+                />
                 {state.context.animationStep >= 1 && (
                   <div>
                     Created registration request:{" "}
@@ -368,16 +378,24 @@ export const InteractiveForm = () => {
                     }
                   </div>
                 )}
-                {state.context.animationStep >= 2 && <div>Sending …</div>}
+                {state.context.animationStep >= 2 && (
+                  <TypeAnimation
+                    sequence={["Sending …"]}
+                    speed={typeSpeed}
+                    cursor={false}
+                  />
+                )}
               </div>
             )}
             {state.matches("serverCreateRegistrationResponse") && (
               <div>
-                <div>Reg Step 2 - Response</div>
-                <div>
-                  Something happens and something else and something else and
-                  wow ...
-                </div>
+                <TypeAnimation
+                  sequence={[
+                    "Step 2 - Something happens and something else and something else and wow ...",
+                  ]}
+                  speed={typeSpeed}
+                  cursor={false}
+                />
                 {state.context.animationStep >= 1 && (
                   <div>
                     Created registration response:{" "}
@@ -387,23 +405,37 @@ export const InteractiveForm = () => {
                     }
                   </div>
                 )}
-                {state.context.animationStep >= 2 && <div>Sending back …</div>}
+                {state.context.animationStep >= 2 && (
+                  <TypeAnimation
+                    sequence={["Sending …"]}
+                    speed={typeSpeed}
+                    cursor={false}
+                  />
+                )}
               </div>
             )}
             {state.matches("clientFinishRegistration") && (
               <div>
-                <div>Reg Step 3 - Record</div>
-                <div>
-                  Something happens and something else and something else and
-                  wow ...
-                </div>
+                <TypeAnimation
+                  sequence={[
+                    "Step 3 - Something happens and something else and something else and wow ...",
+                  ]}
+                  speed={typeSpeed}
+                  cursor={false}
+                />
                 {state.context.animationStep >= 1 && (
                   <div>
                     export_key:
                     {state.context.clientFinishRegistrationData.exportKey}
                   </div>
                 )}
-                {state.context.animationStep >= 2 && <div>Sending back …</div>}
+                {state.context.animationStep >= 2 && (
+                  <TypeAnimation
+                    sequence={["Sending back …"]}
+                    speed={typeSpeed}
+                    cursor={false}
+                  />
+                )}
               </div>
             )}
 
@@ -471,7 +503,7 @@ export const InteractiveForm = () => {
           </div>
         </div>
         {/* --- animation area --- */}
-        <div></div>
+        <div className="svg-register flex items-center justify-center grow"></div>
       </div>
 
       <div className="flex gap-4">
