@@ -4,6 +4,8 @@ import { useState } from "react";
 import { assign, createMachine, fromPromise } from "xstate";
 import { Button } from "./Button";
 import { TypeAnimation } from "react-type-animation";
+import { ClientServer } from "./ClientServer";
+import cn from "clsx";
 
 const formMachine = createMachine(
   {
@@ -345,20 +347,30 @@ export const InteractiveForm = () => {
       </div>
 
       {/* --- component --- */}
-      <div className="flex w-full my-6 h-[33rem] bg-palette-honey/30 rounded-3xl overflow-hidden">
+      <div className="flex w-full my-6 h-[33rem] bg-gray-150 rounded-3xl overflow-hidden">
         {/* --- cli --- */}
         <div className="w-2/6 min-w-[22rem] h-full bg-black font-mono text-md">
           {/* tabs => client / server */}
           <div className="flex items-center gap-4 h-12 mr-9 px-8 border-b border-gray-800/50">
-            <div className="flex items-center px-3 rounded-full bg-palette-honey text-black">
+            <div
+              className={cn(
+                "flex items-center px-3 rounded-full transition-all duration-500",
+                clientIsActive ? "bg-palette-honey text-black" : "text-gray-200"
+              )}
+            >
               Client
             </div>
-            <div className="flex items-center px-3 rounded-full text-gray-200">
+            <div
+              className={cn(
+                "flex items-center px-3 rounded-full transition-all duration-500",
+                serverIsActive ? "bg-primary-300 text-black" : "text-gray-200"
+              )}
+            >
               Server
             </div>
           </div>
           {/* content */}
-          <div className="py-4 px-6 h-full overflow-y-scroll text-gray-200">
+          <div className="py-4 px-6 h-full overflow-y-auto text-gray-200">
             {state.matches("initial") && <div>Submit the registration </div>}
             {state.matches("clientStartRegistration") && (
               <div>
@@ -370,7 +382,7 @@ export const InteractiveForm = () => {
                   cursor={false}
                 />
                 {state.context.animationStep >= 1 && (
-                  <div>
+                  <div className="py-4">
                     Created registration request:{" "}
                     {
                       state.context.clientStartRegistrationData
@@ -397,7 +409,7 @@ export const InteractiveForm = () => {
                   cursor={false}
                 />
                 {state.context.animationStep >= 1 && (
-                  <div>
+                  <div className="py-4">
                     Created registration response:{" "}
                     {
                       state.context.serverCreateRegistrationResponseData
@@ -424,7 +436,7 @@ export const InteractiveForm = () => {
                   cursor={false}
                 />
                 {state.context.animationStep >= 1 && (
-                  <div>
+                  <div className="py-4">
                     export_key:
                     {state.context.clientFinishRegistrationData.exportKey}
                   </div>
@@ -503,7 +515,22 @@ export const InteractiveForm = () => {
           </div>
         </div>
         {/* --- animation area --- */}
-        <div className="svg-register flex items-center justify-center grow"></div>
+        <div className="px-10 svg-register flex items-center justify-center grow">
+          <ClientServer
+            serverActive={serverIsActive}
+            clientActive={clientIsActive}
+            className={cn(
+              state.context.animationStep === 2 &&
+                clientIsActive &&
+                "send-to-client",
+              state.context.animationStep === 2 &&
+                serverIsActive &&
+                "send-to-server",
+              serverIsActive && "server-active",
+              clientIsActive && "client-active"
+            )}
+          />
+        </div>
       </div>
 
       <div className="flex gap-4">
