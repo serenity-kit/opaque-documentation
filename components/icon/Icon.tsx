@@ -6,6 +6,7 @@ import { GithubFill } from "./icons/GithubFill";
 
 import { Color } from "../../types/types";
 import cn from "clsx";
+import { BardFillTriple } from "./icons/BardFillTriple";
 
 const getHexByColor = (color: Color): string => {
   const tailwindConfig = require(`../../tailwind.config`);
@@ -14,7 +15,11 @@ const getHexByColor = (color: Color): string => {
   }, tailwindConfig.theme.colors);
 };
 
-export type IconName = "arrow-right-line" | "compasses-2-line" | "github-fill";
+export type IconName =
+  | "arrow-right-line"
+  | "bard-fill-triple"
+  | "compasses-2-line"
+  | "github-fill";
 
 export type IconProps = {
   name: IconName;
@@ -29,6 +34,10 @@ export const Icon: React.FC<IconProps> = ({ name, size = 4, ...props }) => {
 
   if (name === "arrow-right-line") {
     icon = <ArrowRightLine />;
+  }
+
+  if (name === "bard-fill-triple") {
+    icon = <BardFillTriple />;
   }
 
   if (name === "compasses-2-line") {
@@ -49,6 +58,7 @@ export const Icon: React.FC<IconProps> = ({ name, size = 4, ...props }) => {
         width: `${size * 0.25}rem`,
         color: color,
       }}
+      {...props}
     >
       {icon}
     </div>
