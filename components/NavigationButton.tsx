@@ -18,7 +18,7 @@ export const NavigationButton = ({
 }: NavigationButtonProps) => {
   const styles = {
     button:
-      "flex items-center justify-center gap-2 h-9 min-w-[4rem] max-w-fit text-xs px-4 border-[1.5px] rounded cursor-pointer" +
+      "flex items-center justify-center gap-2 h-9 max-w-fit text-xs px-4 border-[1.5px] rounded cursor-pointer whitespace-nowrap" +
       " dark:disabled:opacity-60 disabled:cursor-default" +
       " transition-all duration-500",
     outlined:
