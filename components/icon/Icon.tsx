@@ -69,7 +69,7 @@ export const Icon: React.FC<IconProps> = ({
 
   return (
     <div
-      className={cn(props.className)}
+      className={cn("transition-all duration-500", className)}
       style={{
         height: `${size * 0.25}rem`,
         width: `${size * 0.25}rem`,
