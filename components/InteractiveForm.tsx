@@ -8,6 +8,7 @@ import { ClientServer } from "./ClientServer";
 import cn from "clsx";
 import { Icon } from "./icon/Icon";
 import { Input } from "./Input";
+import { NavigationButton } from "./NavigationButton";
 
 const formMachine = createMachine(
   {
@@ -535,55 +536,72 @@ export const InteractiveForm = () => {
         </div>
       </div>
 
-      <div className="flex gap-4">
-        <Button
+      <div className="flex gap-1.5 items-center">
+        <NavigationButton
           disabled={state.matches("initial")}
           onClick={() => {
             send({ type: "GO_TO_STEP_CLIENT_START_REGISTRATION" });
           }}
-          variant="primary"
+          active={state.matches("clientStartRegistration")}
         >
           Step 1
-        </Button>
-        <Button
+        </NavigationButton>
+        <Icon
+          name="arrow-right-s"
+          className={cn(state.matches("initial") && "opacity-50")}
+        />
+        <NavigationButton
           disabled={state.matches("initial")}
           onClick={() => {
             send({ type: "GO_TO_STEP_SERVER_CREATE_REGISTRATION_RESPONSE" });
           }}
-          variant="primary"
+          active={state.matches("serverCreateRegistrationResponse")}
         >
           Step 2
-        </Button>
-        <Button
+        </NavigationButton>
+        <Icon
+          name="arrow-right-s"
+          className={cn(state.matches("initial") && "opacity-50")}
+        />
+        <NavigationButton
           disabled={state.matches("initial")}
           onClick={() => {
             send({ type: "GO_TO_STEP_CLIENT_FINISH_REGISTRATION" });
           }}
-          variant="primary"
+          active={state.matches("clientFinishRegistration")}
         >
           Step 3
-        </Button>
-
-        <Button
+        </NavigationButton>
+        <Icon
+          name="arrow-right-s"
+          className={cn(state.matches("initial") && "opacity-50")}
+        />
+        <NavigationButton
           disabled={!state.matches("clientFinishRegistration")}
           onClick={() => {
             send({ type: "START_LOGIN" });
           }}
-          variant="secondary"
+          variant="primary"
+          active={
+            !state.matches("initial") &&
+            !state.matches("clientStartRegistration") &&
+            !state.matches("serverCreateRegistrationResponse")
+          }
         >
           Start Login
-        </Button>
-        <Button
+        </NavigationButton>
+        <NavigationButton
           disabled={state.matches("initial")}
           onClick={() => {
             setUsername("");
             setPassword("");
             send({ type: "RESET_REGISTRATION" });
           }}
-          variant="secondary"
+          className="ml-auto"
+          iconName="reset"
         >
           Reset
-        </Button>
+        </NavigationButton>
       </div>
       <div className="my-4">Current step: {state.value.toString()}</div>
     </div>
