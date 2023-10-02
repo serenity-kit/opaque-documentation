@@ -305,7 +305,7 @@ export const InteractiveForm = () => {
             event.preventDefault();
             send({ type: "START_REGISTRATION", username, password });
           }}
-          className="flex gap-2"
+          className="w-full sm:w-8/12 md:w-fit flex gap-2 flex-col md:flex-row"
         >
           <Input
             type="text"
@@ -342,9 +342,9 @@ export const InteractiveForm = () => {
       </div>
 
       {/* --- component --- */}
-      <div className="flex w-full my-6 h-[33rem] bg-gray-150 rounded-2xl overflow-hidden">
+      <div className="flex flex-col md:flex-row w-full my-6 h-full md:h-[33rem] bg-gray-150 rounded-2xl overflow-hidden">
         {/* --- cli --- */}
-        <div className="w-2/6 min-w-[22rem] h-full bg-black font-mono text-sm">
+        <div className="w-full md:w-2/6 min-w-[15rem] h-[20rem] md:h-full bg-black font-mono text-sm">
           {/* tabs => client / server */}
           <div className="flex items-center gap-4 h-12 px-5 border-b border-gray-800/50">
             <div
@@ -365,7 +365,7 @@ export const InteractiveForm = () => {
             </div>
           </div>
           {/* content */}
-          <div className="py-6 px-4 h-full overflow-y-auto text-gray-200">
+          <div className="py-6 px-4 overflow-y-auto text-gray-200">
             {state.matches("initial") && <div>Submit the registration </div>}
             {state.matches("clientStartRegistration") && (
               <div>
@@ -510,7 +510,7 @@ export const InteractiveForm = () => {
           </div>
         </div>
         {/* --- animation area --- */}
-        <div className="px-10 svg-register flex items-center justify-center grow">
+        <div className="h-[25rem] md:h-full px-10 svg-register flex items-end md:items-center justify-center grow">
           <ClientServer
             serverActive={serverIsActive}
             clientActive={clientIsActive}
@@ -536,7 +536,7 @@ export const InteractiveForm = () => {
         </div>
       </div>
 
-      <div className="flex gap-1.5 items-center">
+      <div className="flex gap-1.5 items-center overflow-x-auto">
         <NavigationButton
           disabled={state.matches("initial")}
           onClick={() => {
