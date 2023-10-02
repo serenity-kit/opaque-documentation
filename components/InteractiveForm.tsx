@@ -6,6 +6,7 @@ import { Button } from "./Button";
 import { TypeAnimation } from "react-type-animation";
 import { ClientServer } from "./ClientServer";
 import cn from "clsx";
+import { Icon } from "./icon/Icon";
 
 const formMachine = createMachine(
   {
@@ -296,13 +297,13 @@ export const InteractiveForm = () => {
 
   return (
     <div className="mx-auto max-w-[67.5rem]">
-      <div className="flex gap-4 mt-10">
+      <div className="mt-10 flex flex-col items-center gap-3">
         <form
           onSubmit={(event) => {
             event.preventDefault();
             send({ type: "START_REGISTRATION", username, password });
           }}
-          className="flex gap-4"
+          className="flex gap-2"
         >
           <input
             type="text"
@@ -332,29 +333,23 @@ export const InteractiveForm = () => {
             Register
           </Button>
         </form>
-
-        <Button
-          disabled={state.matches("initial")}
-          onClick={() => {
-            setUsername("");
-            setPassword("");
-            send({ type: "RESET_REGISTRATION" });
-          }}
-          variant="secondary"
-        >
-          Reset
-        </Button>
+        <div className="flex gap-1 items-center text-text-tertiary dark:text-dark-text-tertiary">
+          <Icon name="bard-fill-triple" className="opacity-60" />
+          <p className="text-xs">
+            Type in some credentials and see how the magic works.
+          </p>
+        </div>
       </div>
 
       {/* --- component --- */}
-      <div className="flex w-full my-6 h-[33rem] bg-gray-150 rounded-3xl overflow-hidden">
+      <div className="flex w-full my-6 h-[33rem] bg-gray-150 rounded-2xl overflow-hidden">
         {/* --- cli --- */}
-        <div className="w-2/6 min-w-[22rem] h-full bg-black font-mono text-md">
+        <div className="w-2/6 min-w-[22rem] h-full bg-black font-mono text-sm">
           {/* tabs => client / server */}
-          <div className="flex items-center gap-4 h-12 mr-9 px-8 border-b border-gray-800/50">
+          <div className="flex items-center gap-4 h-12 px-5 border-b border-gray-800/50">
             <div
               className={cn(
-                "flex items-center px-3 rounded-full transition-all duration-500",
+                "flex items-center py-1 px-3 rounded-full transition-all duration-500",
                 clientIsActive ? "bg-palette-honey text-black" : "text-gray-200"
               )}
             >
@@ -362,7 +357,7 @@ export const InteractiveForm = () => {
             </div>
             <div
               className={cn(
-                "flex items-center px-3 rounded-full transition-all duration-500",
+                "flex items-center py-1 px-3 rounded-full transition-all duration-500",
                 serverIsActive ? "bg-primary-300 text-black" : "text-gray-200"
               )}
             >
@@ -370,7 +365,7 @@ export const InteractiveForm = () => {
             </div>
           </div>
           {/* content */}
-          <div className="py-4 px-6 h-full overflow-y-auto text-gray-200">
+          <div className="py-6 px-4 h-full overflow-y-auto text-gray-200">
             {state.matches("initial") && <div>Submit the registration </div>}
             {state.matches("clientStartRegistration") && (
               <div>
@@ -578,6 +573,17 @@ export const InteractiveForm = () => {
           variant="secondary"
         >
           Start Login
+        </Button>
+        <Button
+          disabled={state.matches("initial")}
+          onClick={() => {
+            setUsername("");
+            setPassword("");
+            send({ type: "RESET_REGISTRATION" });
+          }}
+          variant="secondary"
+        >
+          Reset
         </Button>
       </div>
       <div className="my-4">Current step: {state.value.toString()}</div>
