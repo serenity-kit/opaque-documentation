@@ -1,12 +1,14 @@
 import React from "react";
 
 import { ArrowRightLine } from "./icons/ArrowRightLine";
+import { ArrowRightS } from "./icons/ArrowRightS";
+import { BardFillTriple } from "./icons/BardFillTriple";
 import { Compasses2Line } from "./icons/Compasses2";
 import { GithubFill } from "./icons/GithubFill";
+import { Reset } from "./icons/Reset";
 
 import { Color } from "../../types/types";
 import cn from "clsx";
-import { BardFillTriple } from "./icons/BardFillTriple";
 
 const getHexByColor = (color: Color): string => {
   const tailwindConfig = require(`../../tailwind.config`);
@@ -17,9 +19,11 @@ const getHexByColor = (color: Color): string => {
 
 export type IconName =
   | "arrow-right-line"
+  | "arrow-right-s"
   | "bard-fill-triple"
   | "compasses-2-line"
-  | "github-fill";
+  | "github-fill"
+  | "reset";
 
 export type IconProps = {
   name: IconName;
@@ -27,13 +31,22 @@ export type IconProps = {
   size?: number | "full";
 };
 
-export const Icon: React.FC<IconProps> = ({ name, size = 4, ...props }) => {
+export const Icon: React.FC<IconProps> = ({
+  name,
+  size = 4,
+  className,
+  ...props
+}) => {
   const color = getHexByColor(props.color ?? "current") as string;
 
   let icon: React.ReactNode = null;
 
   if (name === "arrow-right-line") {
     icon = <ArrowRightLine />;
+  }
+
+  if (name === "arrow-right-s") {
+    icon = <ArrowRightS />;
   }
 
   if (name === "bard-fill-triple") {
@@ -46,6 +59,10 @@ export const Icon: React.FC<IconProps> = ({ name, size = 4, ...props }) => {
 
   if (name === "github-fill") {
     icon = <GithubFill />;
+  }
+
+  if (name === "reset") {
+    icon = <Reset />;
   }
 
   if (!icon) return null;
