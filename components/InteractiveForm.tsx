@@ -9,6 +9,7 @@ import cn from "clsx";
 import { Icon } from "./icon/Icon";
 import { Input } from "./Input";
 import { NavigationButton } from "./NavigationButton";
+import FadeIn from "./FadeInChildren";
 
 const formMachine = createMachine(
   {
@@ -46,6 +47,22 @@ const formMachine = createMachine(
       GO_TO_STEP_CLIENT_FINISH_REGISTRATION: {
         actions: ["deactivateAutoplay"],
         target: ".clientFinishRegistration",
+      },
+      GO_TO_STEP_CLIENT_START_LOGIN: {
+        actions: ["deactivateAutoplay"],
+        target: ".clientStartLogin",
+      },
+      GO_TO_STEP_SERVER_START_LOGIN: {
+        actions: ["deactivateAutoplay"],
+        target: ".serverStartLogin",
+      },
+      GO_TO_STEP_CLIENT_FINISH_LOGIN: {
+        actions: ["deactivateAutoplay"],
+        target: ".clientFinishLogin",
+      },
+      GO_TO_STEP_SERVER_FINISH_LOGIN: {
+        actions: ["deactivateAutoplay"],
+        target: ".serverFinishLogin",
       },
       RESET_REGISTRATION: {
         target: ".initial",
@@ -289,11 +306,22 @@ export const InteractiveForm = () => {
   const [state, send] = useActor(formMachine);
   const [username, setUsername] = useState("jane@example.com");
   const [password, setPassword] = useState("123456");
+  const [showLoginStates, setShowLoginStates] = useState(false);
 
+  const notStarted =
+    state.matches("waitingForOpaque") ||
+    state.matches("initial") ||
+    state.matches("generateRegistrationData");
   const clientIsActive =
     state.matches("clientStartRegistration") ||
     state.matches("clientFinishRegistration");
   const serverIsActive = state.matches("serverCreateRegistrationResponse");
+  const loginIsReady =
+    state.matches("clientFinishRegistration") ||
+    state.matches("clientStartLogin") ||
+    state.matches("serverStartLogin") ||
+    state.matches("clientFinishLogin") ||
+    state.matches("serverFinishLogin");
 
   const typeSpeed = 80;
 
@@ -366,7 +394,7 @@ export const InteractiveForm = () => {
           </div>
           {/* content */}
           <div className="py-6 px-4 overflow-y-auto text-gray-200">
-            {state.matches("initial") && <div>Submit the registration </div>}
+            {notStarted && <div>Submit the registration </div>}
             {state.matches("clientStartRegistration") && (
               <div>
                 <TypeAnimation
@@ -538,7 +566,7 @@ export const InteractiveForm = () => {
 
       <div className="flex gap-1.5 items-center overflow-x-auto">
         <NavigationButton
-          disabled={state.matches("initial")}
+          disabled={notStarted}
           onClick={() => {
             send({ type: "GO_TO_STEP_CLIENT_START_REGISTRATION" });
           }}
@@ -546,12 +574,9 @@ export const InteractiveForm = () => {
         >
           Step 1
         </NavigationButton>
-        <Icon
-          name="arrow-right-s"
-          className={cn(state.matches("initial") && "opacity-50")}
-        />
+        <Icon name="arrow-right-s" className={cn(notStarted && "opacity-50")} />
         <NavigationButton
-          disabled={state.matches("initial")}
+          disabled={notStarted}
           onClick={() => {
             send({ type: "GO_TO_STEP_SERVER_CREATE_REGISTRATION_RESPONSE" });
           }}
@@ -559,12 +584,9 @@ export const InteractiveForm = () => {
         >
           Step 2
         </NavigationButton>
-        <Icon
-          name="arrow-right-s"
-          className={cn(state.matches("initial") && "opacity-50")}
-        />
+        <Icon name="arrow-right-s" className={cn(notStarted && "opacity-50")} />
         <NavigationButton
-          disabled={state.matches("initial")}
+          disabled={notStarted}
           onClick={() => {
             send({ type: "GO_TO_STEP_CLIENT_FINISH_REGISTRATION" });
           }}
@@ -572,29 +594,68 @@ export const InteractiveForm = () => {
         >
           Step 3
         </NavigationButton>
-        <Icon
-          name="arrow-right-s"
-          className={cn(state.matches("initial") && "opacity-50")}
-        />
+        <Icon name="arrow-right-s" className={cn(notStarted && "opacity-50")} />
         <NavigationButton
-          disabled={!state.matches("clientFinishRegistration")}
+          disabled={!loginIsReady}
           onClick={() => {
             send({ type: "START_LOGIN" });
+            setShowLoginStates(true);
           }}
           variant="primary"
-          active={
-            !state.matches("initial") &&
-            !state.matches("clientStartRegistration") &&
-            !state.matches("serverCreateRegistrationResponse")
-          }
+          active={loginIsReady}
         >
           Start Login
         </NavigationButton>
+        <FadeIn
+          visible={showLoginStates}
+          className="flex items-center gap-1.5"
+          delay={80}
+          transitionDuration={550}
+          row
+        >
+          <Icon name="arrow-right-s" />
+          <NavigationButton
+            onClick={() => {
+              send({ type: "GO_TO_STEP_CLIENT_START_LOGIN" });
+            }}
+            active={state.matches("clientStartLogin")}
+          >
+            Step 1
+          </NavigationButton>
+          <Icon name="arrow-right-s" />
+          <NavigationButton
+            onClick={() => {
+              send({ type: "GO_TO_STEP_SERVER_START_LOGIN" });
+            }}
+            active={state.matches("serverStartLogin")}
+          >
+            Step 2
+          </NavigationButton>
+          <Icon name="arrow-right-s" />
+          <NavigationButton
+            onClick={() => {
+              send({ type: "GO_TO_STEP_CLIENT_FINISH_LOGIN" });
+            }}
+            active={state.matches("clientFinishLogin")}
+          >
+            Step 3
+          </NavigationButton>
+          <Icon name="arrow-right-s" />
+          <NavigationButton
+            onClick={() => {
+              send({ type: "GO_TO_STEP_SERVER_FINISH_LOGIN" });
+            }}
+            active={state.matches("serverFinishLogin")}
+          >
+            Step 4
+          </NavigationButton>
+        </FadeIn>
         <NavigationButton
-          disabled={state.matches("initial")}
+          disabled={notStarted}
           onClick={() => {
             setUsername("");
             setPassword("");
+            setShowLoginStates(false);
             send({ type: "RESET_REGISTRATION" });
           }}
           className="ml-auto"
