@@ -179,7 +179,7 @@ const formMachine = createMachine(
           return event.type ===
             "xstate.after(animationStepDelay)#form.clientStartRegistration"
             ? { animationStep: context.animationStep + 1 }
-            : { animationStepDelays: [2000, 2000], animationStep: 0 };
+            : { animationStepDelays: [2000, 2000, 2000], animationStep: 0 };
         }),
         after: {
           animationStepDelay: {
@@ -520,8 +520,16 @@ export const InteractiveForm = () => {
             serverActive={serverIsActive}
             clientActive={clientIsActive}
             className={cn(
-              state.context.animationStep === 2 &&
-                clientIsActive &&
+              ((state.matches("clientStartRegistration") &&
+                state.context.animationStep >= 2) ||
+                state.matches("serverCreateRegistrationResponse") ||
+                state.matches("clientFinishRegistration")) &&
+                "connect",
+              ((state.matches("clientStartRegistration") &&
+                state.context.animationStep === 3) ||
+                (!state.matches("clientStartRegistration") &&
+                  state.context.animationStep === 2 &&
+                  clientIsActive)) &&
                 "send-to-client",
               state.context.animationStep === 2 &&
                 serverIsActive &&

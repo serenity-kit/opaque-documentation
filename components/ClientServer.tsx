@@ -1,15 +1,16 @@
 import { ComponentProps } from "react";
 
-export type Props = ComponentProps<"svg"> & {
-  clientActive: boolean;
-  serverActive: boolean;
+export type ClientServerProps = {
+  clientActive?: boolean;
+  serverActive?: boolean;
+  className?: string;
 };
 
-export const ClientServer = ({
+export const ClientServer: React.FC<ClientServerProps> = ({
   clientActive = false,
   serverActive = false,
   ...props
-}: Props) => {
+}) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -576,10 +577,12 @@ export const ClientServer = ({
                       d="m377.84,157.5l-26.88,15.52c-5.33,3.08-5.33,10.78,0,13.86l10.46,6.04c5.33,3.08,5.33,10.78,0,13.86l-28.24,16.31c-4.95,2.86-11.05,2.86-16,0l-106.68-61.6"
                     />
                     <path
+                      id="dotServer"
                       className="cls-15 dot"
                       d="m376.21,154.97c1.44-.83,3.28-.34,4.11,1.1.83,1.44.34,3.28-1.1,4.11-1.44.83-3.28.34-4.11-1.1-.83-1.44-.34-3.28,1.1-4.11Z"
                     />
                     <path
+                      id="dotClient"
                       className="cls-15 dot"
                       d="m212.14,158.95c-1.44-.83-3.28-.34-4.11,1.1-.83,1.44-.34,3.28,1.1,4.11,1.44.83,3.28.34,4.11-1.1s.34-3.28-1.1-4.11Z"
                     />
