@@ -7,6 +7,7 @@ import { TypeAnimation } from "react-type-animation";
 import { ClientServer } from "./ClientServer";
 import cn from "clsx";
 import { Icon } from "./icon/Icon";
+import { Input } from "./Input";
 
 const formMachine = createMachine(
   {
@@ -305,25 +306,23 @@ export const InteractiveForm = () => {
           }}
           className="flex gap-2"
         >
-          <input
+          <Input
             type="text"
-            placeholder=""
+            placeholder="Choose a name"
             value={username}
             onChange={(event) => {
               setUsername(event.target.value);
             }}
             disabled={!state.matches("initial")}
-            className="h-12 min-w-[5rem] px-4 border border-gray-300 rounded"
           />
-          <input
+          <Input
             type="password"
-            placeholder="******"
+            placeholder="Type in a password"
             value={password}
             onChange={(event) => {
               setPassword(event.target.value);
             }}
             disabled={!state.matches("initial")}
-            className="h-12 min-w-[5rem] px-4 border border-gray-300 rounded"
           />
           <Button
             type="submit"
