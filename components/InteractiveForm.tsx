@@ -258,7 +258,9 @@ const formMachine = createMachine(
               }
             : {
                 // comment -> prompt -> comment -> comment -> comment -> prompt -> request -> sending
-                animationStepDelays: [1000, 2500, 2000, 2000, 1500, 1500, 1500],
+                animationStepDelays: [
+                  1000, 2500, 1500, 1500, 1500, 1500, 1500, 2500,
+                ],
                 animationStep: 0,
                 sendData: false,
               };
@@ -355,15 +357,13 @@ export const InteractiveForm = () => {
 
   const isLastStepOfRegistration =
     state.matches("clientFinishRegistration") &&
-    state.context.animationStep === 7;
+    state.context.animationStep === 8;
   const inLogin =
     state.matches("clientStartLogin") ||
     state.matches("serverStartLogin") ||
     state.matches("clientFinishLogin") ||
     state.matches("serverFinishLogin");
   const loginIsReady = state.matches("clientFinishRegistration") || inLogin;
-
-  const typeSpeed = 80;
 
   return (
     <div className="mx-auto max-w-[67.5rem]">
@@ -421,7 +421,7 @@ export const InteractiveForm = () => {
         {/* --- cli --- */}
         <div
           id="CliWrapper"
-          className="w-full md:w-2/6 min-w-[15rem] bg-black font-mono text-sm"
+          className="w-full md:w-[37%] min-w-[15rem] bg-black font-mono text-sm"
         >
           {/* tabs => client / server */}
           <div className="flex items-center gap-4 h-12 px-5 border-b border-gray-800/50">
@@ -587,13 +587,13 @@ export const InteractiveForm = () => {
                   </div>
                 )}
                 {state.context.animationStep >= 7 && (
-                  <div className="flex flex-col gap-6">
-                    <CliTypeWriter sequence={["Sending ..."]} prompt />
-                    <CliTypeWriter
-                      sequence={[2000, "Press 'Login' to continue"]}
-                      comment
-                    />
-                  </div>
+                  <CliTypeWriter sequence={["Sending ..."]} prompt />
+                )}
+                {state.context.animationStep >= 8 && (
+                  <CliTypeWriter
+                    sequence={["Press 'Login' to continue"]}
+                    comment
+                  />
                 )}
               </div>
             )}
