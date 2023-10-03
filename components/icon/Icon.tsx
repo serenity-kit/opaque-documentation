@@ -5,6 +5,7 @@ import { ArrowRightS } from "./icons/ArrowRightS";
 import { BardFillTriple } from "./icons/BardFillTriple";
 import { Compasses2Line } from "./icons/Compasses2";
 import { GithubFill } from "./icons/GithubFill";
+import { OpaqueKey } from "./icons/OpaqueKey";
 import { Reset } from "./icons/Reset";
 
 import { Color } from "../../types/types";
@@ -23,6 +24,7 @@ export type IconName =
   | "bard-fill-triple"
   | "compasses-2-line"
   | "github-fill"
+  | "opaque-key"
   | "reset";
 
 export type IconProps = {
@@ -59,6 +61,10 @@ export const Icon: React.FC<IconProps> = ({
 
   if (name === "github-fill") {
     icon = <GithubFill />;
+  }
+
+  if (name === "opaque-key") {
+    icon = <OpaqueKey />;
   }
 
   if (name === "reset") {
