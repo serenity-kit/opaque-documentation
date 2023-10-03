@@ -600,7 +600,8 @@ export const InteractiveForm = () => {
         </div>
       </div>
 
-      <div className="flex gap-1.5 items-center py-4 overflow-x-auto">
+      {/* padding needed so pulse effect of Button is visible */}
+      <div className="flex gap-1.5 items-center -my-4 py-4 overflow-x-auto">
         <NavigationButton
           disabled={notStarted}
           onClick={() => {
