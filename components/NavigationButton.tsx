@@ -6,6 +6,7 @@ export type NavigationButtonProps = ComponentProps<"button"> & {
   variant?: "primary" | "secondary";
   active?: boolean;
   iconName?: IconName;
+  pukse?: boolean;
 };
 
 export const NavigationButton = ({
@@ -13,6 +14,7 @@ export const NavigationButton = ({
   iconName,
   variant = "secondary",
   active = false,
+  pulse = false,
   className,
   ...props
 }: NavigationButtonProps) => {
@@ -36,6 +38,12 @@ export const NavigationButton = ({
         ? "text-white"
         : "text-gray-800 disabled:text-gray-500 dark:text-gray-200"
     ),
+    pulse: cn(
+      "pulse",
+      variant === "primary"
+        ? "pulse-primary dark:pulse-primary-dark"
+        : "pulse-secodnary dark:pulse-secondary-dark"
+    ),
   };
 
   return (
@@ -44,8 +52,9 @@ export const NavigationButton = ({
       className={cn(
         styles.button,
         !active && !props.disabled && styles.outlined,
-        active && (variant == "primary" ? styles.primary : styles.secondary),
-        active && variant == "secondary" && "enabled:dark:text-gray-900",
+        active && (variant === "primary" ? styles.primary : styles.secondary),
+        active && variant === "secondary" && "enabled:dark:text-gray-900",
+        active && !props.disabled && pulse && styles.pulse,
         styles.text,
         className
       )}
