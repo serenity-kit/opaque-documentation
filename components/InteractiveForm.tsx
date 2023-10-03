@@ -441,13 +441,19 @@ export const InteractiveForm = () => {
           </div>
           {/* content */}
           <div className="py-6 px-4 overflow-y-auto text-gray-200">
-            {notStarted && <div>Submit the registration </div>}
+            {notStarted && (
+              <CliTypeWriter
+                sequence={["Please submit the registration."]}
+                comment
+              />
+            )}
             {state.matches("clientStartRegistration") && (
               <div className="flex flex-col gap-4">
                 <CliTypeWriter
                   sequence={[
                     "The client types in their credentials and starts the registration process.",
                   ]}
+                  comment
                 />
                 <CliTypeWriter
                   sequence={[2000, "Generating registration-request ..."]}
@@ -458,6 +464,7 @@ export const InteractiveForm = () => {
                     4000,
                     "Using the OPRF a blind and a blinded-message are generated.",
                   ]}
+                  comment
                 />
                 <CliTypeWriter
                   sequence={[
@@ -465,9 +472,14 @@ export const InteractiveForm = () => {
                     "The password, rather than sent directly, is transformed into a numeric value," +
                       " which is then used to move a randomly generated point on the elliptical curve, finally generating the registration-request.",
                   ]}
+                  comment
+                />
+                <CliTypeWriter
+                  sequence={[8000, "Request generated: "]}
+                  prompt
                 />
                 {state.context.animationStep >= 1 && (
-                  <div>
+                  <div className="pl-6 text-color-actor">
                     {
                       state.context.clientStartRegistrationData
                         .registrationRequest
