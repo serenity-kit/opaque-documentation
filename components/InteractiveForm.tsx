@@ -316,10 +316,16 @@ export const InteractiveForm = () => {
     state.matches("waitingForOpaque") ||
     state.matches("initial") ||
     state.matches("generateRegistrationData");
+
   const clientIsActive =
     state.matches("clientStartRegistration") ||
-    state.matches("clientFinishRegistration");
-  const serverIsActive = state.matches("serverCreateRegistrationResponse");
+    state.matches("clientFinishRegistration") ||
+    state.matches("clientStartLogin") ||
+    state.matches("clientFinishLogin");
+  const serverIsActive =
+    state.matches("serverCreateRegistrationResponse") ||
+    state.matches("serverStartLogin") ||
+    state.matches("serverFinishLogin");
 
   const isLastStepOfRegistration =
     state.matches("clientFinishRegistration") &&
@@ -560,19 +566,21 @@ export const InteractiveForm = () => {
             serverActive={serverIsActive}
             clientActive={clientIsActive}
             className={cn(
-              ((state.matches("clientStartRegistration") &&
-                state.context.animationStep >= 2) ||
-                state.matches("serverCreateRegistrationResponse") ||
-                state.matches("clientFinishRegistration")) &&
-                "connect",
+              !(
+                (state.matches("clientStartRegistration") &&
+                  state.context.animationStep < 2) ||
+                notStarted
+              ) && "connect",
               ((state.matches("clientStartRegistration") &&
                 state.context.animationStep === 3) ||
-                (!state.matches("clientStartRegistration") &&
-                  state.context.animationStep === 2 &&
-                  clientIsActive)) &&
+                (clientIsActive &&
+                  ((!state.matches("clientStartRegistration") &&
+                    state.context.animationStep === 2) ||
+                    inLogin))) &&
                 "send-to-client",
-              state.context.animationStep === 2 &&
-                serverIsActive &&
+
+              serverIsActive &&
+                (state.context.animationStep === 2 || inLogin) &&
                 "send-to-server",
               serverIsActive && "server-active",
               clientIsActive && "client-active"
