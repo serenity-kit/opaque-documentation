@@ -24,7 +24,7 @@ export const NavigationButton = ({
       " dark:disabled:opacity-60 disabled:cursor-default" +
       " transition-all duration-500",
     outlined:
-      "bg-transparent hover:bg-gray-150 active:bg-gray-200 border-gray-800 focus-visible:border-[2.5px]" +
+      "bg-transparent hover:bg-gray-200 active:bg-gray-300 border-gray-800 focus-visible:border-[2.5px]" +
       " dark:hover:bg-gray-800 dark:active:bg-gray-700 dark:border-gray-200",
     primary:
       "bg-primary-500 border-3 hover:bg-primary-600 active:bg-primary-700 border-primary-500 hover:border-primary-600 active:border-primary-700 focus-visible:border-primary-700" +
