@@ -228,10 +228,11 @@ const formMachine = createMachine(
             "xstate.after(animationStepDelay)#form.serverCreateRegistrationResponse"
             ? {
                 animationStep: context.animationStep + 1,
-                sendData: context.animationStep === 1,
+                sendData: context.animationStep === 5,
               }
             : {
-                animationStepDelays: [2000, 2000],
+                // comment -> prompt -> comment -> comment long -> prompt -> request -> sending
+                animationStepDelays: [2000, 2500, 3500, 4500, 1500, 1500],
                 animationStep: 0,
                 sendData: false,
               };
@@ -241,7 +242,7 @@ const formMachine = createMachine(
             target: "serverCreateRegistrationResponse",
             guard: "hasNextAnimationStep",
           },
-          4000: {
+          4501: {
             target: "clientFinishRegistration",
             guard: "autoplayIsActive",
           },
@@ -253,10 +254,11 @@ const formMachine = createMachine(
             "xstate.after(animationStepDelay)#form.clientFinishRegistration"
             ? {
                 animationStep: context.animationStep + 1,
-                sendData: context.animationStep === 1,
+                sendData: context.animationStep === 6,
               }
             : {
-                animationStepDelays: [2000, 2000, 2000],
+                // comment -> prompt -> comment -> comment -> comment -> prompt -> request -> sending
+                animationStepDelays: [1000, 2500, 2000, 2000, 1500, 1500, 1500],
                 animationStep: 0,
                 sendData: false,
               };
@@ -272,7 +274,7 @@ const formMachine = createMachine(
             target: "clientFinishRegistration",
             guard: "hasNextAnimationStep",
           },
-          6000: {
+          4000: {
             target: "clientStartLogin",
             guard: "autoplayIsActive",
           },
@@ -353,7 +355,7 @@ export const InteractiveForm = () => {
 
   const isLastStepOfRegistration =
     state.matches("clientFinishRegistration") &&
-    state.context.animationStep === 3;
+    state.context.animationStep === 7;
   const inLogin =
     state.matches("clientStartLogin") ||
     state.matches("serverStartLogin") ||
@@ -419,7 +421,7 @@ export const InteractiveForm = () => {
         {/* --- cli --- */}
         <div
           id="CliWrapper"
-          className="w-full md:w-2/6 min-w-[15rem] h-[20rem] md:h-full bg-black font-mono text-sm"
+          className="w-full md:w-2/6 min-w-[15rem] bg-black font-mono text-sm"
         >
           {/* tabs => client / server */}
           <div className="flex items-center gap-4 h-12 px-5 border-b border-gray-800/50">
@@ -441,7 +443,7 @@ export const InteractiveForm = () => {
             </div>
           </div>
           {/* content */}
-          <div className="py-6 px-4 overflow-y-auto text-gray-200">
+          <div className="h-[20rem] md:h-[30rem] py-5 px-4 overflow-y-auto text-gray-200">
             {notStarted && (
               <CliTypeWriter
                 sequence={["Please submit the registration."]}
@@ -497,59 +499,99 @@ export const InteractiveForm = () => {
             )}
             {state.matches("serverCreateRegistrationResponse") && (
               <div className="flex flex-col gap-4">
-                <TypeAnimation
+                <CliTypeWriter
                   sequence={[
-                    "Step 2 - Something happens and something else and something else and wow ...",
+                    "The server processes the request beginning to generate it's response.",
                   ]}
-                  speed={typeSpeed}
-                  cursor={false}
+                  comment
                 />
                 {state.context.animationStep >= 1 && (
-                  <div>
-                    Created registration response:{" "}
+                  <CliTypeWriter
+                    sequence={["Generating registration-response ..."]}
+                    prompt
+                  />
+                )}
+                {state.context.animationStep >= 2 && (
+                  <CliTypeWriter
+                    sequence={[
+                      "Using the OPRF the server calculates the response using\nthe request,\nhis public-key,\nan oprf-seed\nand the credential-identifier.",
+                    ]}
+                    comment
+                  />
+                )}
+                {state.context.animationStep >= 3 && (
+                  <CliTypeWriter
+                    sequence={[
+                      "The server uses the seed to generate the oprf-key, which is then used " +
+                        " to move the point generated in the request even further on the elliptical curve, finally generating the registration-response.",
+                    ]}
+                    comment
+                  />
+                )}
+                {state.context.animationStep >= 4 && (
+                  <CliTypeWriter sequence={["Response generated: "]} prompt />
+                )}
+                {state.context.animationStep >= 5 && (
+                  <div className="pl-6 text-color-actor">
                     {
                       state.context.serverCreateRegistrationResponseData
                         .registrationResponse
                     }
                   </div>
                 )}
-                {state.context.animationStep >= 2 && (
-                  <TypeAnimation
-                    sequence={["Sending …"]}
-                    speed={typeSpeed}
-                    cursor={false}
-                  />
+                {state.context.animationStep >= 6 && (
+                  <CliTypeWriter sequence={["Sending ..."]} prompt />
                 )}
               </div>
             )}
             {state.matches("clientFinishRegistration") && (
-              <div className="flex flex-col gap-4">
-                <TypeAnimation
-                  sequence={[
-                    "Step 3 - Something happens and something else and something else and wow ...",
-                  ]}
-                  speed={typeSpeed}
-                  cursor={false}
-                />
+              <div className="flex flex-col gap-4 overflow-y-auto">
+                <CliTypeWriter sequence={["The response ..."]} comment />
                 {state.context.animationStep >= 1 && (
-                  <div>
-                    export_key:
-                    {state.context.clientFinishRegistrationData.exportKey}
-                  </div>
+                  <CliTypeWriter
+                    sequence={["Generating registration-record ..."]}
+                    prompt
+                  />
                 )}
                 {state.context.animationStep >= 2 && (
-                  <TypeAnimation
-                    sequence={["Sending back …"]}
-                    speed={typeSpeed}
-                    cursor={false}
+                  <CliTypeWriter
+                    sequence={["Explain the paper generation (animate 'text')"]}
+                    comment
                   />
                 )}
                 {state.context.animationStep >= 3 && (
-                  <div className="pt-10">
-                    <TypeAnimation
-                      sequence={["Press 'Login' to continue"]}
-                      speed={typeSpeed}
-                      cursor={false}
+                  <CliTypeWriter
+                    sequence={[
+                      "Explain the signature generation (animate signature and seal)",
+                    ]}
+                    comment
+                  />
+                )}
+                {state.context.animationStep >= 4 && (
+                  <CliTypeWriter
+                    sequence={[
+                      "Explain further (animate paper into envelope and close envelope)",
+                    ]}
+                    comment
+                  />
+                )}
+                {state.context.animationStep >= 5 && (
+                  <CliTypeWriter sequence={["Record generated: "]} prompt />
+                )}
+                {state.context.animationStep >= 6 && (
+                  <div className="pl-6 text-color-actor">
+                    {
+                      state.context.clientFinishRegistrationData
+                        .registrationRecord
+                    }
+                  </div>
+                )}
+                {state.context.animationStep >= 7 && (
+                  <div className="flex flex-col gap-6">
+                    <CliTypeWriter sequence={["Sending ..."]} prompt />
+                    <CliTypeWriter
+                      sequence={[2000, "Press 'Login' to continue"]}
+                      comment
                     />
                   </div>
                 )}
