@@ -235,7 +235,7 @@ const formMachine = createMachine(
           return event.type ===
             "xstate.after(animationStepDelay)#form.clientFinishRegistration"
             ? { animationStep: context.animationStep + 1 }
-            : { animationStepDelays: [2000, 2000], animationStep: 0 };
+            : { animationStepDelays: [2000, 2000, 2000], animationStep: 0 };
         }),
         on: {
           START_LOGIN: {
@@ -247,6 +247,10 @@ const formMachine = createMachine(
           animationStepDelay: {
             target: "clientFinishRegistration",
             guard: "hasNextAnimationStep",
+          },
+          6000: {
+            target: "clientStartLogin",
+            guard: "autoplayIsActive",
           },
         },
       },
@@ -306,7 +310,7 @@ export const InteractiveForm = () => {
   const [state, send] = useActor(formMachine);
   const [username, setUsername] = useState("jane@example.com");
   const [password, setPassword] = useState("123456");
-  const [showLoginStates, setShowLoginStates] = useState(false);
+  const [showLoginSteps, setShowLoginSteps] = useState(false);
 
   const notStarted =
     state.matches("waitingForOpaque") ||
@@ -316,12 +320,16 @@ export const InteractiveForm = () => {
     state.matches("clientStartRegistration") ||
     state.matches("clientFinishRegistration");
   const serverIsActive = state.matches("serverCreateRegistrationResponse");
-  const loginIsReady =
-    state.matches("clientFinishRegistration") ||
+
+  const isLastStepOfRegistration =
+    state.matches("clientFinishRegistration") &&
+    state.context.animationStep === 3;
+  const inLogin =
     state.matches("clientStartLogin") ||
     state.matches("serverStartLogin") ||
     state.matches("clientFinishLogin") ||
     state.matches("serverFinishLogin");
+  const loginIsReady = state.matches("clientFinishRegistration") || inLogin;
 
   const typeSpeed = 80;
 
@@ -450,7 +458,7 @@ export const InteractiveForm = () => {
               </div>
             )}
             {state.matches("clientFinishRegistration") && (
-              <div>
+              <div className="flex flex-col gap-4">
                 <TypeAnimation
                   sequence={[
                     "Step 3 - Something happens and something else and something else and wow ...",
@@ -459,7 +467,7 @@ export const InteractiveForm = () => {
                   cursor={false}
                 />
                 {state.context.animationStep >= 1 && (
-                  <div className="py-4">
+                  <div>
                     export_key:
                     {state.context.clientFinishRegistrationData.exportKey}
                   </div>
@@ -470,6 +478,15 @@ export const InteractiveForm = () => {
                     speed={typeSpeed}
                     cursor={false}
                   />
+                )}
+                {state.context.animationStep >= 3 && (
+                  <div className="pt-10">
+                    <TypeAnimation
+                      sequence={["Press 'Login' to continue"]}
+                      speed={typeSpeed}
+                      cursor={false}
+                    />
+                  </div>
                 )}
               </div>
             )}
@@ -564,7 +581,7 @@ export const InteractiveForm = () => {
         </div>
       </div>
 
-      <div className="flex gap-1.5 items-center overflow-x-auto">
+      <div className="flex gap-1.5 items-center py-4 overflow-x-auto">
         <NavigationButton
           disabled={notStarted}
           onClick={() => {
@@ -599,15 +616,16 @@ export const InteractiveForm = () => {
           disabled={!loginIsReady}
           onClick={() => {
             send({ type: "START_LOGIN" });
-            setShowLoginStates(true);
+            setShowLoginSteps(true);
           }}
           variant="primary"
-          active={loginIsReady}
+          active={isLastStepOfRegistration}
+          pulse={isLastStepOfRegistration}
         >
-          Start Login
+          Login
         </NavigationButton>
         <FadeIn
-          visible={showLoginStates}
+          visible={showLoginSteps || inLogin}
           className="flex items-center gap-1.5"
           delay={80}
           transitionDuration={550}
@@ -655,7 +673,7 @@ export const InteractiveForm = () => {
           onClick={() => {
             setUsername("");
             setPassword("");
-            setShowLoginStates(false);
+            setShowLoginSteps(false);
             send({ type: "RESET_REGISTRATION" });
           }}
           className="ml-auto"
