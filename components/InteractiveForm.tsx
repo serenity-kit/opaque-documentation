@@ -407,9 +407,19 @@ export const InteractiveForm = () => {
       </div>
 
       {/* --- component --- */}
-      <div className="flex flex-col md:flex-row w-full my-6 h-full md:h-[33rem] bg-gray-150 rounded-2xl overflow-hidden">
+      <div
+        id="OpaqueAnimation"
+        className={cn(
+          "flex flex-col md:flex-row w-full my-6 h-full md:h-[33rem] bg-gray-150 rounded-2xl overflow-hidden",
+          serverIsActive && "server-active",
+          clientIsActive && "client-active"
+        )}
+      >
         {/* --- cli --- */}
-        <div className="w-full md:w-2/6 min-w-[15rem] h-[20rem] md:h-full bg-black font-mono text-sm">
+        <div
+          id="CliWrapper"
+          className="w-full md:w-2/6 min-w-[15rem] h-[20rem] md:h-full bg-black font-mono text-sm"
+        >
           {/* tabs => client / server */}
           <div className="flex items-center gap-4 h-12 px-5 border-b border-gray-800/50">
             <div
@@ -605,9 +615,7 @@ export const InteractiveForm = () => {
                 notStarted
               ) && "connect",
               clientIsActive && state.context.sendData && "send-to-client",
-              serverIsActive && state.context.sendData && "send-to-server",
-              serverIsActive && "server-active",
-              clientIsActive && "client-active"
+              serverIsActive && state.context.sendData && "send-to-server"
             )}
           />
         </div>

@@ -1,4 +1,4 @@
-import { ComponentProps } from "react";
+import cn from "clsx";
 
 export type ClientServerProps = {
   clientActive?: boolean;
@@ -9,6 +9,7 @@ export type ClientServerProps = {
 export const ClientServer: React.FC<ClientServerProps> = ({
   clientActive = false,
   serverActive = false,
+  className,
   ...props
 }) => {
   return (
@@ -17,6 +18,11 @@ export const ClientServer: React.FC<ClientServerProps> = ({
       xmlnsXlink="http://www.w3.org/1999/xlink"
       viewBox="0 0 541.4 246.19"
       id="ClientServer"
+      className={cn(
+        clientActive && "client-active",
+        serverActive && "server-active",
+        className
+      )}
       {...props}
     >
       <defs>
