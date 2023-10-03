@@ -202,10 +202,11 @@ const formMachine = createMachine(
             "xstate.after(animationStepDelay)#form.clientStartRegistration"
             ? {
                 animationStep: context.animationStep + 1,
-                sendData: context.animationStep === 2,
+                sendData: context.animationStep === 5,
               }
             : {
-                animationStepDelays: [2000, 2000, 2000],
+                // comment -> prompt -> comment -> comment long -> prompt -> request -> sending
+                animationStepDelays: [2000, 3000, 2000, 4800, 1500, 3000],
                 animationStep: 0,
                 sendData: false,
               };
@@ -215,7 +216,7 @@ const formMachine = createMachine(
             target: "clientStartRegistration",
             guard: "hasNextAnimationStep",
           },
-          4000: {
+          5001: {
             target: "serverCreateRegistrationResponse",
             guard: "autoplayIsActive",
           },
@@ -455,30 +456,33 @@ export const InteractiveForm = () => {
                   ]}
                   comment
                 />
-                <CliTypeWriter
-                  sequence={[2000, "Generating registration-request ..."]}
-                  prompt
-                />
-                <CliTypeWriter
-                  sequence={[
-                    4000,
-                    "Using the OPRF a blind and a blinded-message are generated.",
-                  ]}
-                  comment
-                />
-                <CliTypeWriter
-                  sequence={[
-                    6000,
-                    "The password, rather than sent directly, is transformed into a numeric value," +
-                      " which is then used to move a randomly generated point on the elliptical curve, finally generating the registration-request.",
-                  ]}
-                  comment
-                />
-                <CliTypeWriter
-                  sequence={[8000, "Request generated: "]}
-                  prompt
-                />
                 {state.context.animationStep >= 1 && (
+                  <CliTypeWriter
+                    sequence={["Generating registration-request ..."]}
+                    prompt
+                  />
+                )}
+                {state.context.animationStep >= 2 && (
+                  <CliTypeWriter
+                    sequence={[
+                      "Using the OPRF a blind and a blinded-message are generated.",
+                    ]}
+                    comment
+                  />
+                )}
+                {state.context.animationStep >= 3 && (
+                  <CliTypeWriter
+                    sequence={[
+                      "The password, rather than sent directly, is transformed into a numeric value," +
+                        " which is then used to move a randomly generated point on the elliptical curve, finally generating the registration-request.",
+                    ]}
+                    comment
+                  />
+                )}
+                {state.context.animationStep >= 4 && (
+                  <CliTypeWriter sequence={["Request generated: "]} prompt />
+                )}
+                {state.context.animationStep >= 5 && (
                   <div className="pl-6 text-color-actor">
                     {
                       state.context.clientStartRegistrationData
@@ -486,7 +490,7 @@ export const InteractiveForm = () => {
                     }
                   </div>
                 )}
-                {state.context.animationStep >= 2 && (
+                {state.context.animationStep >= 6 && (
                   <CliTypeWriter sequence={["Sending ..."]} prompt />
                 )}
               </div>
@@ -623,7 +627,7 @@ export const InteractiveForm = () => {
             className={cn(
               !(
                 (state.matches("clientStartRegistration") &&
-                  state.context.animationStep < 2) ||
+                  state.context.animationStep < 5) ||
                 notStarted
               ) && "connect",
               clientIsActive && state.context.sendData && "send-to-client",
