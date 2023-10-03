@@ -25,6 +25,7 @@ const formMachine = createMachine(
       // animation
       animationStep: 0,
       animationStepDelays: [],
+      sendData: false,
       // registrationSteps
       clientStartRegistrationData: null,
       serverCreateRegistrationResponseData: null,
@@ -199,8 +200,15 @@ const formMachine = createMachine(
           // example: steps 0 - 4 => 5 steps => animationStepDelays.length == 4
           return event.type ===
             "xstate.after(animationStepDelay)#form.clientStartRegistration"
-            ? { animationStep: context.animationStep + 1 }
-            : { animationStepDelays: [2000, 2000, 2000], animationStep: 0 };
+            ? {
+                animationStep: context.animationStep + 1,
+                sendData: context.animationStep === 2,
+              }
+            : {
+                animationStepDelays: [2000, 2000, 2000],
+                animationStep: 0,
+                sendData: false,
+              };
         }),
         after: {
           animationStepDelay: {
@@ -217,8 +225,15 @@ const formMachine = createMachine(
         entry: assign(({ context, event }) => {
           return event.type ===
             "xstate.after(animationStepDelay)#form.serverCreateRegistrationResponse"
-            ? { animationStep: context.animationStep + 1 }
-            : { animationStepDelays: [2000, 2000], animationStep: 0 };
+            ? {
+                animationStep: context.animationStep + 1,
+                sendData: context.animationStep === 1,
+              }
+            : {
+                animationStepDelays: [2000, 2000],
+                animationStep: 0,
+                sendData: false,
+              };
         }),
         after: {
           animationStepDelay: {
@@ -235,8 +250,15 @@ const formMachine = createMachine(
         entry: assign(({ context, event }) => {
           return event.type ===
             "xstate.after(animationStepDelay)#form.clientFinishRegistration"
-            ? { animationStep: context.animationStep + 1 }
-            : { animationStepDelays: [2000, 2000, 2000], animationStep: 0 };
+            ? {
+                animationStep: context.animationStep + 1,
+                sendData: context.animationStep === 1,
+              }
+            : {
+                animationStepDelays: [2000, 2000, 2000],
+                animationStep: 0,
+                sendData: false,
+              };
         }),
         on: {
           START_LOGIN: {
@@ -582,17 +604,8 @@ export const InteractiveForm = () => {
                   state.context.animationStep < 2) ||
                 notStarted
               ) && "connect",
-              ((state.matches("clientStartRegistration") &&
-                state.context.animationStep === 3) ||
-                (clientIsActive &&
-                  ((!state.matches("clientStartRegistration") &&
-                    state.context.animationStep === 2) ||
-                    inLogin))) &&
-                "send-to-client",
-
-              serverIsActive &&
-                (state.context.animationStep === 2 || inLogin) &&
-                "send-to-server",
+              clientIsActive && state.context.sendData && "send-to-client",
+              serverIsActive && state.context.sendData && "send-to-server",
               serverIsActive && "server-active",
               clientIsActive && "client-active"
             )}
