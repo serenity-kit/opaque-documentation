@@ -10,6 +10,7 @@ import { Icon } from "./icon/Icon";
 import { Input } from "./Input";
 import { NavigationButton } from "./NavigationButton";
 import FadeIn from "./FadeInChildren";
+import { CliTypeWriter } from "./CliTypeWriter";
 
 const formMachine = createMachine(
   {
@@ -410,17 +411,31 @@ export const InteractiveForm = () => {
           <div className="py-6 px-4 overflow-y-auto text-gray-200">
             {notStarted && <div>Submit the registration </div>}
             {state.matches("clientStartRegistration") && (
-              <div>
-                <TypeAnimation
+              <div className="flex flex-col gap-4">
+                <CliTypeWriter
                   sequence={[
-                    "Reg Step 1 - Request Reg Step 1 - Request Reg Step 1 - Request",
+                    "The client types in their credentials and starts the registration process.",
                   ]}
-                  speed={typeSpeed}
-                  cursor={false}
+                />
+                <CliTypeWriter
+                  sequence={[2000, "Generating registration-request ..."]}
+                  prompt
+                />
+                <CliTypeWriter
+                  sequence={[
+                    4000,
+                    "Using the OPRF a blind and a blinded-message are generated.",
+                  ]}
+                />
+                <CliTypeWriter
+                  sequence={[
+                    6000,
+                    "The password, rather than sent directly, is transformed into a numeric value," +
+                      " which is then used to move a randomly generated point on the elliptical curve, finally generating the registration-request.",
+                  ]}
                 />
                 {state.context.animationStep >= 1 && (
-                  <div className="py-4">
-                    Created registration request:{" "}
+                  <div>
                     {
                       state.context.clientStartRegistrationData
                         .registrationRequest
@@ -428,16 +443,12 @@ export const InteractiveForm = () => {
                   </div>
                 )}
                 {state.context.animationStep >= 2 && (
-                  <TypeAnimation
-                    sequence={["Sending …"]}
-                    speed={typeSpeed}
-                    cursor={false}
-                  />
+                  <CliTypeWriter sequence={["Sending ..."]} prompt />
                 )}
               </div>
             )}
             {state.matches("serverCreateRegistrationResponse") && (
-              <div>
+              <div className="flex flex-col gap-4">
                 <TypeAnimation
                   sequence={[
                     "Step 2 - Something happens and something else and something else and wow ...",
@@ -446,7 +457,7 @@ export const InteractiveForm = () => {
                   cursor={false}
                 />
                 {state.context.animationStep >= 1 && (
-                  <div className="py-4">
+                  <div>
                     Created registration response:{" "}
                     {
                       state.context.serverCreateRegistrationResponseData
