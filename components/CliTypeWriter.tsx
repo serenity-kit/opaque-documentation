@@ -23,7 +23,7 @@ export const CliTypeWriter = ({
     comment: "italic",
   };
 
-  const typeSpeed = prompt || slow ? 40 : 80;
+  const typeSpeed = prompt || slow ? 62 : 82;
 
   return (
     <div
