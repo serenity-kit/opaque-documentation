@@ -27,8 +27,7 @@
 
 #ClientServer {
   --active-color: theme("colors.gray.600");
-  --transition-duration: 0.4s;
-  --transition: all var(--transition-duration) cubic-bezier(0.4, 0, 0.2, 1);
+  --transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   --dot-radius: 3.5;
 }
 
@@ -115,16 +114,32 @@ either
 
 /* client */
 
+#client {
+  --form-transition-time: 0.2s;
+}
+
 #keyColor1,
 #keyColor2 {
   fill: #666771;
   transition: var(--transition);
 }
 
-#screen,
-.asterisk > * {
-  fill: #1f1f21;
+.asterisk {
+  opacity: 0;
   transition: var(--transition);
+}
+
+.asterisk:nth-child(2) {
+  transition-delay: var(--form-transition-time);
+}
+.asterisk:nth-child(3) {
+  transition-delay: calc(var(--form-transition-time) * 2);
+}
+.asterisk:nth-child(4) {
+  transition-delay: calc(var(--form-transition-time) * 3);
+}
+.asterisk:nth-child(5) {
+  transition-delay: calc(var(--form-transition-time) * 4);
 }
 
 #password {
@@ -178,6 +193,23 @@ either
 .server-active #button,
 .server-active #password {
   opacity: 0.8;
+}
+
+.first-step .asterisk {
+  opacity: 1;
+}
+
+.connect .asterisk {
+  opacity: 1;
+  transition-delay: 0s;
+}
+
+.first-step #button {
+  animation-name: click;
+  animation-delay: calc(var(--form-transition-time) * 6);
+  animation-duration: 700ms;
+  animation-timing-function: linear;
+  animation-fill-mode: forwards;
 }
 
 /* -------- server -------- */
@@ -361,6 +393,18 @@ either
   }
   to {
       r: 0;
+  }
+}
+
+@keyframes click {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 1;
   }
 }
 
