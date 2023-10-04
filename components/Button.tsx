@@ -17,7 +17,7 @@ export const Button = ({
   const styles = {
     button:
       "flex items-center justify-center gap-2 h-12 w-full md:max-w-fit px-6 border-3 rounded cursor-pointer whitespace-nowrap" +
-      " disabled:pointer-events-none cursor-default",
+      " disabled:pointer-events-none disabled:cursor-default",
     primary:
       "bg-primary-500 hover:bg-primary-600 active:bg-primary-700 border-primary-500 hover:border-primary-600 active:border-primary-700 focus-visible:border-primary-700" +
       " dark:bg-dark-primary-500 dark:hover:bg-primary-500 dark:active:bg-primary-600 dark:border-dark-primary-500 dark:hover:border-primary-500 dark:active:border-primary-600 dark:focus-visible:border-primary-600" +
