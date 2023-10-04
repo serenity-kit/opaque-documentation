@@ -3,14 +3,14 @@ import cn from "clsx";
 export type ClientServerProps = {
   clientActive: boolean;
   serverActive: boolean;
-  firstConnect: boolean;
+  isFirstStep: boolean;
   className?: string;
 };
 
 export const ClientServer: React.FC<ClientServerProps> = ({
   clientActive = false,
   serverActive = false,
-  firstConnect = false,
+  isFirstStep = false,
   className,
   ...props
 }) => {
@@ -24,7 +24,7 @@ export const ClientServer: React.FC<ClientServerProps> = ({
         "mt-[7rem]",
         clientActive && "client-active",
         serverActive && "server-active",
-        firstConnect && "first-connect",
+        isFirstStep && "first-step",
         className
       )}
       {...props}

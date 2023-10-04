@@ -665,7 +665,7 @@ export const InteractiveForm = () => {
           <ClientServer
             serverActive={serverIsActive}
             clientActive={clientIsActive}
-            firstConnect={state.matches("clientStartRegistration")}
+            isFirstStep={state.matches("clientStartRegistration")}
             className={cn(
               !(
                 (state.matches("clientStartRegistration") &&
