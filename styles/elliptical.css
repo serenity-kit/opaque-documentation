@@ -1,0 +1,352 @@
+
+
+/* TODO
+
+[ ] add ellipticals as extra svgs (same size as ClientServer)
+[ ] add html wrapper for flipping and masking
+
+=> or edit in figma
+
+*/
+
+
+
+
+
+/* =========================== */
+/* ========== GRAPH ========== */
+/* =========================== */
+
+/* ========== default state ========== */
+
+.bg-elliptical {
+  opacity: 0;
+  transition: all 1s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.elliptical {
+  --pointRadius: 3.5;
+  --multiplier: 0.7;
+
+  opacity: 0;
+  animation-duration: 0.5s;
+  animation-delay: 0s, calc(7s * var(--multiplier));
+  animation-fill-mode: forwards;
+  animation-direction: normal, reverse;
+
+  transition: all 1s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+#ellipticalSolidClient {
+  --multiplier: 0.7;
+}
+
+#ellipticalSolidServer {
+  --multiplier: 0.6;
+}
+
+#bgEllipticalClient,
+#ellipticalSolidClient {
+  transform: translateY(-30%);
+}
+
+#bgEllipticalServer,
+#ellipticalSolidServer {
+  transform: translate(-3%, -20%);
+
+}
+
+.client-active.fade-in-graph #bgEllipticalClient,
+.client-active.fade-in-graph #ellipticalSolidClient {
+  opacity: 1;
+  transform: translateY(-50%);
+}
+
+.server-active.fade-in-graph #bgEllipticalServer,
+.server-active.fade-in-graph #ellipticalSolidServer {
+  opacity: 1;
+  transform: translate(-3%, -43%);
+}
+
+
+
+/* ========== animations ========== */
+
+/* .fade-up {
+ animation-name: fadeUp, fadeUp;
+}
+
+.fade-down {
+  animation-name: fadeDown, fadeDown;
+} */
+
+/*
+  dashes
+
+  2  down
+  3  up
+  4  up
+  5  down
+  6  up
+  7  down
+*/ 
+
+/* 
+  P2 wrong
+  P3 wrong
+  P4 wrong
+  P5 right
+  P6 wrong
+  P7 wrong
+*/
+
+/* TODO 
+  [ ] P + line => dash + P2
+      => remove only line + dash
+      => line => dash => P3
+      => remove line, dash and P2
+      ...
+*/
+
+.animate .p {
+  animation-duration: calc(0.5s * var(--multiplier)), calc(0.3s * var(--multiplier));
+  animation-delay: calc(0.2s * var(--multiplier)), calc(2s * var(--multiplier));
+  animation-timing-function: ease-in-out;
+  animation-fill-mode: forwards;
+}
+
+.animate .line {
+  animation-duration: calc(1s * var(--multiplier)), calc(1s * var(--multiplier));
+  animation-delay: calc(0.2s * var(--multiplier)), calc(0.8s * var(--multiplier));
+  animation-timing-function: ease-in-out;
+  animation-fill-mode: forwards;
+}
+
+.animate .dash {
+  animation-duration: calc(1s * var(--multiplier)), calc(1s * var(--multiplier));
+  animation-delay: calc(0.4s * var(--multiplier)), calc(1s * var(--multiplier));
+  animation-fill-mode: forwards;
+  animation-timing-function: ease-in-out;
+}
+
+
+/* step1 */
+
+/* tbd  graph appears */
+
+/* step2 */
+.animate #P,
+.animate #P-2 {
+  animation-name: plopElliptical, shrinkElliptical;
+  animation-delay: 0s, calc(6s * var(--multiplier));
+}
+
+.animate #lineP2,
+.animate #lineP2-2 {
+  animation-duration: calc(0.6s * var(--multiplier));
+  animation-name: drawLine, removeLine;
+}
+
+.animate #dashP2,
+.animate #dashP2-2 {
+  animation-name: drawDown, removeLine;
+}
+
+.animate #P2,
+.animate #P2-2 {
+  animation-name: plopElliptical, shrinkElliptical;
+  animation-delay: calc(0.5s * var(--multiplier)), calc(2.2s * var(--multiplier));
+}
+
+
+/* step3 */
+.animate #lineP3,
+.animate #lineP3-2 {
+  animation-name: drawLine, removeLine;
+  animation-duration: calc(0.4s * var(--multiplier));
+  animation-delay: calc(1s * var(--multiplier)), calc(2s * var(--multiplier));
+}
+
+.animate #dashP3,
+.animate #dashP3-2 {
+  animation-name: drawUp, removeUp;
+  animation-duration: calc(0.7s * var(--multiplier));
+  animation-delay: calc(1.2s * var(--multiplier)), calc(2s * var(--multiplier));
+}
+
+.animate #P3,
+.animate #P3-2 {
+  animation-name: plopElliptical, shrinkElliptical;
+  animation-delay: calc(1.5s * var(--multiplier)), calc(2.75s * var(--multiplier));
+}
+
+
+/* step4 */
+.animate #lineP4,
+.animate #lineP4-2 {
+  animation-name: drawLine, removeLine;
+  animation-duration: calc(0.7s * var(--multiplier));
+  animation-delay: calc(2s * var(--multiplier)), calc(3s * var(--multiplier));
+}
+
+.animate #dashP4,
+.animate #dashP4-2 {
+  animation-name: drawUp, removeUp;
+  animation-delay: calc(1.5s * var(--multiplier)), calc(2.5s * var(--multiplier));
+}
+
+.animate #P4,
+.animate #P4-2 {
+  animation-name: plopElliptical, shrinkElliptical;
+  animation-delay: calc(2.5s * var(--multiplier)), calc(4s * var(--multiplier));
+}
+
+/* step5 */
+.animate #lineP5,
+.animate #lineP5-2 {
+  animation-name: drawUp, removeUp;
+  animation-delay: calc(2.5s * var(--multiplier)), calc(3.5s * var(--multiplier));
+}
+
+.animate #dashP5,
+.animate #dashP5-2 {
+  animation-name: drawDown, removeLine;
+  animation-delay: calc(3s * var(--multiplier)), calc(3.5s * var(--multiplier));
+}
+
+.animate #P5,
+.animate #P5-2 {
+  animation-name: plopElliptical, shrinkElliptical;
+  animation-delay: calc(3.5s * var(--multiplier)), calc(5s * var(--multiplier));
+}
+
+
+/* step6 */
+.animate #lineP6,
+.animate #lineP6-2 {
+  animation-name: drawLine, removeLine;
+  animation-delay: calc(3.5s * var(--multiplier)), calc(4.5s * var(--multiplier));
+}
+
+.animate #dashP6,
+.animate #dashP6-2 {
+  animation-name: drawUp, removeUp;
+  animation-delay: calc(3.5s * var(--multiplier)), calc(4.5s * var(--multiplier));
+}
+
+.animate #P6,
+.animate #P6-2 {
+  animation-name: plopElliptical, shrinkElliptical;
+  animation-delay: calc(4.5s * var(--multiplier)), calc(5.5s * var(--multiplier));
+}
+
+/* step7 */
+.animate #lineP7,
+.animate #lineP7-2 {
+  animation-name: drawLine, removeLine;
+  animation-delay: calc(4.5s * var(--multiplier)), calc(5.5s * var(--multiplier));
+}
+
+.animate #dashP7,
+.animate #dashP7-2 {
+  animation-name: drawDown, removeLine;
+  animation-delay: calc(5s * var(--multiplier)), calc(6s * var(--multiplier));
+}
+
+.animate #P7,
+.animate #P7-2 {
+  animation-name: plopElliptical, shrinkElliptical;
+  animation-delay: calc(5s * var(--multiplier)), calc(6.3s * var(--multiplier));
+}
+
+
+
+/* ========== elements ========== */
+
+.p {
+  r: 0;
+}
+
+.line {   
+  stroke-dasharray: 600;
+  stroke-dashoffset: 600;
+}
+
+.dash {
+  stroke-dasharray: 600;
+  stroke-dashoffset: 600;
+}
+
+
+
+/* ========== keyframes ========== */
+
+/* --- fade in --- */
+/* @keyframes fadeUp {
+  from {
+      opacity: 0;
+      transform: translateY(100%);
+  }
+  to {
+      opacity: 1;
+      transform: translateY(0);
+  }
+}
+
+@keyframes fadeDown {
+  from {
+      opacity: 0;
+      transform: translateY(-100%);
+  }
+  to {
+      opacity: 1;
+      transform: translateY(0%);
+  }
+} */
+
+/* --- points --- */
+@keyframes plopElliptical {
+  to {
+      r: var(--pointRadius)
+  }
+}
+
+@keyframes shrinkElliptical {
+  to {
+      r: 0
+  }
+}
+
+
+/* --- dash --- */
+@keyframes drawDown {
+  to {
+      stroke-dashoffset: 0;
+  }
+}
+
+@keyframes drawUp {
+  to {
+      stroke-dashoffset: 1200;
+  }
+}
+
+@keyframes removeUp {
+  to {
+      stroke-dashoffset: 1800;
+  }
+}
+
+
+/* --- line --- */
+@keyframes drawLine {
+  to {
+      stroke-dashoffset: 0;
+  }
+}
+
+@keyframes removeLine {
+  to {
+      stroke-dashoffset: -600;
+  }
+}

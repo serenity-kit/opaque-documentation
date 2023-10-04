@@ -170,16 +170,6 @@
   transition: var(--transition);
 }
 
-#ellipticalSolidClient {
-  opacity: 0;
-  transition: var(--transition);
-}
-
-#ellipticalSolidServer {
-  opacity: 0;
-  transition: var(--transition);
-}
-
 
 /* ========== actors ========== */
 
@@ -345,12 +335,12 @@
 }
 
 .connect #dotClient {
-  animation-name: plop;
+  animation-name: plopConnection;
   animation-delay: 0s;
 }
 
 .connect #dotServer {
-  animation-name: plop;
+  animation-name: plopConnection;
   animation-delay: 1.2s;
 }
 
@@ -451,7 +441,7 @@
   }
 }
 
-@keyframes plop {
+@keyframes plopConnection {
   from {
       r: 0;
   }
@@ -460,7 +450,7 @@
   }
 }
 
-@keyframes shrink {
+@keyframes shrinkConnection {
   from {
       r: var(--dot-radius);
   }
