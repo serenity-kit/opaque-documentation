@@ -96,6 +96,30 @@ export const ClientServer: React.FC<ClientServerProps> = ({
           y2="88.6"
           xlinkHref="#Unbenannter_Verlauf_47"
         />
+        <radialGradient
+          id="paint7_radial_954_285"
+          cx="0"
+          cy="0"
+          r="1"
+          gradientUnits="userSpaceOnUse"
+          gradientTransform="translate(161 110.5) rotate(90) scale(139.5 87)"
+        >
+          <stop stopColor="#FFB921" stopOpacity="0.2" />
+          <stop offset="0.224138" stopColor="#FFB921" stopOpacity="0.146207" />
+          <stop offset="0.833333" stopColor="#FFB921" stopOpacity="0" />
+        </radialGradient>
+        <radialGradient
+          id="paint9_radial_954_285"
+          cx="0"
+          cy="0"
+          r="1"
+          gradientUnits="userSpaceOnUse"
+          gradientTransform="translate(405 110.5) rotate(90) scale(139.5 87)"
+        >
+          <stop stopColor="#7083FA" stopOpacity="0.40" />
+          <stop offset="0.224138" stopColor="#7083FA" stopOpacity="0.252" />
+          <stop offset="0.833333" stopColor="#7083FA" stopOpacity="0" />
+        </radialGradient>
         <filter id="drop-shadow-1" filterUnits="userSpaceOnUse">
           <feOffset dx="8" dy="16" />
           <feGaussianBlur result="blur" stdDeviation="1" />
@@ -511,16 +535,28 @@ export const ClientServer: React.FC<ClientServerProps> = ({
             fill="#b4b4bd"
           />
         </g>
-        <g id="ellipticalSolidClient">
+        <ellipse
+          id="bgEllipticalClient"
+          cx="161"
+          cy="110.5"
+          rx="87"
+          ry="139.5"
+          fill="url(#paint7_radial_954_285)"
+          fillOpacity="0.8"
+          className="bg-elliptical"
+        />
+        <g id="ellipticalSolidClient" className="elliptical">
           <path
             id="yAxis"
             d="m132.4,27.3c-.2-.3-.4-.4-.6-.3l-2.5,1.4c-.2,0-.2.4,0,.6.2.3.4.4.6.3l2.2-1.3,2.2,3.8c.2.3.4.4.6.3.2,0,.2-.4,0-.6l-2.5-4.3Zm-.7,0v1.5l.8.4v-1.5l-.8-.4Zm0,4.6v3l.8.5v-3l-.8-.4Zm0,6.1v3l.8.5v-3l-.8-.5Zm0,6.1v3l.8.5v-3l-.8-.4Zm0,6.1v3l.8.5v-3l-.8-.5Zm0,6.1v3l.8.4v-3l-.8-.5Zm0,6.1v3l.8.5v-3l-.8-.5Zm0,6.1v3l.8.4v-3l-.8-.5Zm0,6.1v3l.8.5v-3l-.8-.5Zm0,6.1v3l.8.5v-3l-.8-.5Zm0,6.1v3l.8.4v-3l-.8-.5Zm0,6.1v3l.8.4v-3l-.8-.4Zm0,6.1v3l.8.5v-3l-.8-.4Zm0,6.1v3l.8.5v-3l-.8-.5Zm0,6.1v3l.8.4v-3l-.8-.4Zm0,6.1v3l.8.4v-3l-.8-.5Zm0,6.1v1.5l.8.4v-1.5l-.8-.5Z"
             fill="#b4b4bd"
+            className="axis"
           />
           <path
             id="xAxis"
             d="m187.4,107.7c.2,0,.2-.4,0-.6l-2.5-4.3c-.2-.3-.4-.4-.6-.3-.2,0-.2.4,0,.6l2.2,3.8-2.2,1.3c-.2,0-.2.4,0,.6.2.3.4.4.6.3l2.5-1.4Zm-.3-.9l-1.3-.8v.9l1.3.8v-.9Zm-3.9-2.3l-2.6-1.5v.9l2.6,1.5v-.9Zm-5.2-3l-2.6-1.5v.9l2.6,1.5v-.9Zm-5.2-3l-2.6-1.5v.9l2.6,1.5v-.9Zm-5.2-3l-2.6-1.5v.9l2.6,1.5v-.9Zm-5.2-3l-2.6-1.5v.9l2.6,1.5v-.9Zm-5.2-3l-2.6-1.5v.9l2.6,1.5v-.9Zm-5.2-3l-2.6-1.5v.9l2.6,1.5v-.9Zm-5.2-3l-2.6-1.5v.9l2.6,1.5v-.9Zm-5.2-3l-2.6-1.5v.9l2.6,1.5v-.9Zm-5.2-3l-2.6-1.5v.9l2.6,1.5v-.9Zm-5.2-3l-2.6-1.5v.9l2.6,1.5v-.9Zm-5.2-3l-2.6-1.5v.9l2.6,1.5v-.9Zm-5.2-3l-1.3-.8v.9l1.3.8v-.9Z"
             fill="#b4b4bd"
+            className="axis"
           />
           <path
             id="curve"
@@ -538,12 +574,14 @@ export const ClientServer: React.FC<ClientServerProps> = ({
               y2="96.2"
               fill="none"
               stroke="#ffe0a9"
+              className="dash"
             />
             <path
               id="lineP2"
               d="m129.6,59.5l79.1,63.2"
               fill="none"
               stroke="#ffc85a"
+              className="line"
             />
           </g>
           <g id="stepP3">
@@ -552,6 +590,7 @@ export const ClientServer: React.FC<ClientServerProps> = ({
               d="m129.9,36.1l78.3,185.7"
               fill="none"
               stroke="#ffc85a"
+              className="line"
             />
           </g>
           <g id="stepP4">
@@ -560,6 +599,7 @@ export const ClientServer: React.FC<ClientServerProps> = ({
               d="m208.2,18.3l-78.5,65.7"
               fill="none"
               stroke="#ffc85a"
+              className="line"
             />
             <line
               id="dashP4"
@@ -569,6 +609,7 @@ export const ClientServer: React.FC<ClientServerProps> = ({
               y2="79.3"
               fill="none"
               stroke="#ffe0a9"
+              className="dash"
             />
           </g>
           <g id="stepP5">
@@ -577,6 +618,7 @@ export const ClientServer: React.FC<ClientServerProps> = ({
               d="m208,75.5l-87.1-5.4"
               fill="none"
               stroke="#ffc85a"
+              className="line"
             />
             <line
               id="dashP5"
@@ -586,6 +628,7 @@ export const ClientServer: React.FC<ClientServerProps> = ({
               y2="122"
               fill="none"
               stroke="#ffe0a9"
+              className="dash"
             />
           </g>
           <g id="stepP6">
@@ -594,6 +637,7 @@ export const ClientServer: React.FC<ClientServerProps> = ({
               d="m207.9,193.3L129.7,42.5"
               fill="none"
               stroke="#ffc85a"
+              className="line"
             />
             <line
               id="dashP6"
@@ -603,6 +647,7 @@ export const ClientServer: React.FC<ClientServerProps> = ({
               y2="105.8"
               fill="none"
               stroke="#ffe0a9"
+              className="dash"
             />
           </g>
           <g id="stepP7">
@@ -611,6 +656,7 @@ export const ClientServer: React.FC<ClientServerProps> = ({
               d="m208.6,102.3l-82.1-39.5"
               fill="none"
               stroke="#ffc85a"
+              className="line"
             />
             <line
               id="dashP7"
@@ -620,239 +666,68 @@ export const ClientServer: React.FC<ClientServerProps> = ({
               y2="87.4"
               fill="none"
               stroke="#ffe0a9"
+              className="dash"
             />
           </g>
-          <ellipse
+          <circle
             id="P"
             cx="144.6"
             cy="71"
-            rx="1.9"
-            ry="3.4"
+            r="3.4"
             transform="translate(-16.1 81.8) rotate(-30)"
             fill="none"
             stroke="#e29c10"
+            className="p"
           />
-          <ellipse
+          <circle
             id="P2"
             cx="156.6"
             cy="99.2"
-            rx="1.9"
-            ry="3.4"
+            r="3.4"
             transform="translate(-28.6 91.6) rotate(-30)"
             fill="none"
             stroke="#e29c10"
+            className="p"
           />
-          <ellipse
+          <circle
             id="P4"
             cx="132.6"
             cy="71.2"
-            rx="1.9"
-            ry="3.4"
+            r="3.4"
             transform="translate(-17.8 75.8) rotate(-30)"
             fill="none"
             stroke="#e29c10"
+            className="p"
           />
-          <ellipse
+          <circle
             id="P5"
             cx="172.3"
             cy="124.8"
-            rx="1.9"
-            ry="3.4"
+            r="3.4"
             transform="translate(-39.3 102.9) rotate(-30)"
             fill="none"
             stroke="#e29c10"
+            className="p"
           />
-          <ellipse
+          <circle
             id="P6"
             cx="163.3"
             cy="80.1"
-            rx="1.9"
-            ry="3.4"
+            r="3.4"
             transform="translate(-18.2 92.4) rotate(-30)"
             fill="none"
             stroke="#e29c10"
+            className="p"
           />
-          <ellipse
+          <circle
             id="P7"
             cx="137.9"
             cy="90.1"
-            rx="1.9"
-            ry="3.4"
+            r="3.4"
             transform="translate(-26.6 81) rotate(-30)"
             fill="none"
             stroke="#e29c10"
-          />
-        </g>
-        <g id="ellipticalSolidServer">
-          <path
-            id="yAxis-2"
-            d="m368.7,17.4c-.2-.3-.4-.4-.6-.3l-2.5,1.4c-.2,0-.2.4,0,.6.2.3.4.4.6.3l2.2-1.3,2.2,3.8c.2.3.4.4.6.3.2,0,.2-.4,0-.6l-2.5-4.3Zm-.7,0v1.5l.8.4v-1.5l-.8-.4Zm0,4.6v3l.8.5v-3l-.8-.4Zm0,6.1v3l.8.5v-3l-.8-.5Zm0,6.1v3l.8.5v-3l-.8-.4Zm0,6.1v3l.8.5v-3l-.8-.5Zm0,6.1v3l.8.4v-3l-.8-.5Zm0,6.1v3l.8.5v-3l-.8-.5Zm0,6.1v3l.8.4v-3l-.8-.5Zm0,6.1v3l.8.5v-3l-.8-.5Zm0,6.1v3l.8.5v-3l-.8-.5Zm0,6.1v3l.8.4v-3l-.8-.5Zm0,6.1v3l.8.4v-3l-.8-.4Zm0,6.1v3l.8.5v-3l-.8-.4Zm0,6.1v3l.8.5v-3l-.8-.5Zm0,6.1v3l.8.4v-3l-.8-.4Zm0,6.1v3l.8.4v-3l-.8-.5Zm0,6.1v1.5l.8.4v-1.5l-.8-.5Z"
-            fill="#b4b4bd"
-          />
-          <path
-            id="xAxis-2"
-            d="m423.7,97.8c.2,0,.2-.4,0-.6l-2.5-4.3c-.2-.3-.4-.4-.6-.3-.2,0-.2.4,0,.6l2.2,3.8-2.2,1.3c-.2,0-.2.4,0,.6.2.3.4.4.6.3l2.5-1.4Zm-.3-.9l-1.3-.8v.9l1.3.8v-.9Zm-3.9-2.3l-2.6-1.5v.9l2.6,1.5v-.9Zm-5.2-3l-2.6-1.5v.9l2.6,1.5v-.9Zm-5.2-3l-2.6-1.5v.9l2.6,1.5v-.9Zm-5.2-3l-2.6-1.5v.9l2.6,1.5v-.9Zm-5.2-3l-2.6-1.5v.9l2.6,1.5v-.9Zm-5.2-3l-2.6-1.5v.9l2.6,1.5v-.9Zm-5.2-3l-2.6-1.5v.9l2.6,1.5v-.9Zm-5.2-3l-2.6-1.5v.9l2.6,1.5v-.9Zm-5.2-3l-2.6-1.5v.9l2.6,1.5v-.9Zm-5.2-3l-2.6-1.5v.9l2.6,1.5v-.9Zm-5.2-3l-2.6-1.5v.9l2.6,1.5v-.9Zm-5.2-3l-2.6-1.5v.9l2.6,1.5v-.9Zm-5.2-3l-1.3-.8v.9l1.3.8v-.9Z"
-            fill="#b4b4bd"
-          />
-          <path
-            id="curve-2"
-            d="m423.2,151.4c-12-32.2-22.8-55.8-28.3-60.8-4.7-5-9.7-3.9-17.4-7.7-5-3.2-9.1-9.6-9.1-17.3s5.4-9,9.1-6.8c7.2,4.4,10.9,11,17.4,12.3,6.3.9,16.7-9.5,28.3-27.5"
-            fill="none"
-            stroke="url(#Unbenannter_Verlauf_5)"
-            strokeWidth="2"
-          />
-          <g id="stepP2-2">
-            <line
-              id="dashP2-2"
-              x1="392.9"
-              y1="71.1"
-              x2="392.9"
-              y2="86.2"
-              fill="none"
-              stroke="#cdd3fc"
-            />
-            <path
-              id="lineP2-2"
-              d="m365.8,49.5l79.1,63.2"
-              fill="none"
-              stroke="#7083fa"
-            />
-          </g>
-          <g id="stepP3-2">
-            <path
-              id="lineP3-2"
-              d="m366.1,26.1l78.3,185.7"
-              fill="none"
-              stroke="#7083fa"
-            />
-          </g>
-          <g id="stepP4-2">
-            <path
-              id="lineP4-2"
-              d="m444.4,8.3l-78.5,65.7"
-              fill="none"
-              stroke="#7083fa"
-            />
-            <line
-              id="dashP4-2"
-              x1="369.5"
-              y1="64.3"
-              x2="369.5"
-              y2="69.3"
-              fill="none"
-              stroke="#cdd3fc"
-            />
-          </g>
-          <g id="stepP5-2">
-            <path
-              id="lineP5-2"
-              d="m444.3,65.5l-87.1-5.4"
-              fill="none"
-              stroke="#7083fa"
-            />
-            <line
-              id="dashP5-2"
-              x1="408.9"
-              y1="64.1"
-              x2="408.9"
-              y2="112.1"
-              fill="none"
-              stroke="#cdd3fc"
-            />
-          </g>
-          <g id="stepP6-2">
-            <path
-              id="lineP6-2"
-              d="m444.1,183.3l-78.2-150.8"
-              fill="none"
-              stroke="#7083fa"
-            />
-            <line
-              id="dashP6-2"
-              x1="399.8"
-              y1="72.8"
-              x2="399.8"
-              y2="95.8"
-              fill="none"
-              stroke="#cdd3fc"
-            />
-          </g>
-          <g id="stepP7-2">
-            <path
-              id="lineP7-2"
-              d="m444.9,92.3l-82.1-39.5"
-              fill="none"
-              stroke="#7083fa"
-            />
-            <line
-              id="dashP7-2"
-              x1="374.3"
-              y1="58.7"
-              x2="374.3"
-              y2="77.4"
-              fill="none"
-              stroke="#cdd3fc"
-            />
-          </g>
-          <ellipse
-            id="P-2"
-            cx="380.8"
-            cy="61"
-            rx="1.9"
-            ry="3.4"
-            transform="translate(20.5 198.6) rotate(-30)"
-            fill="none"
-            stroke="#2b44e4"
-          />
-          <ellipse
-            id="P2-2"
-            cx="392.8"
-            cy="89.2"
-            rx="1.9"
-            ry="3.4"
-            transform="translate(8 208.4) rotate(-30)"
-            fill="none"
-            stroke="#2b44e4"
-          />
-          <ellipse
-            id="P4-2"
-            cx="368.9"
-            cy="61.2"
-            rx="1.9"
-            ry="3.4"
-            transform="translate(18.8 192.6) rotate(-30)"
-            fill="none"
-            stroke="#2b44e4"
-          />
-          <ellipse
-            id="P5-2"
-            cx="408.6"
-            cy="114.9"
-            rx="1.9"
-            ry="3.4"
-            transform="translate(-2.7 219.7) rotate(-30)"
-            fill="none"
-            stroke="#2b44e4"
-          />
-          <ellipse
-            id="P6-2"
-            cx="399.5"
-            cy="70.2"
-            rx="1.9"
-            ry="3.4"
-            transform="translate(18.5 209.2) rotate(-30)"
-            fill="none"
-            stroke="#2b44e4"
-          />
-          <ellipse
-            id="P7-2"
-            cx="374.1"
-            cy="80.1"
-            rx="1.9"
-            ry="3.4"
-            transform="translate(10.1 197.8) rotate(-30)"
-            fill="none"
-            stroke="#2b44e4"
+            className="p"
           />
         </g>
         <g id="serverStack">
@@ -1369,6 +1244,201 @@ export const ClientServer: React.FC<ClientServerProps> = ({
               <circle cx="362.6" cy="49.3" r="1.5" fill="#1f1f21" />
             </g>
           </g>
+        </g>
+        <ellipse
+          id="bgEllipticalServer"
+          cx="405"
+          cy="110.5"
+          rx="87"
+          ry="139.5"
+          fill="url(#paint9_radial_954_285)"
+          fillOpacity="0.8"
+          className="bg-elliptical"
+        />
+        <g id="ellipticalSolidServer" className="elliptical">
+          <path
+            id="yAxis-2"
+            d="m368.7,17.4c-.2-.3-.4-.4-.6-.3l-2.5,1.4c-.2,0-.2.4,0,.6.2.3.4.4.6.3l2.2-1.3,2.2,3.8c.2.3.4.4.6.3.2,0,.2-.4,0-.6l-2.5-4.3Zm-.7,0v1.5l.8.4v-1.5l-.8-.4Zm0,4.6v3l.8.5v-3l-.8-.4Zm0,6.1v3l.8.5v-3l-.8-.5Zm0,6.1v3l.8.5v-3l-.8-.4Zm0,6.1v3l.8.5v-3l-.8-.5Zm0,6.1v3l.8.4v-3l-.8-.5Zm0,6.1v3l.8.5v-3l-.8-.5Zm0,6.1v3l.8.4v-3l-.8-.5Zm0,6.1v3l.8.5v-3l-.8-.5Zm0,6.1v3l.8.5v-3l-.8-.5Zm0,6.1v3l.8.4v-3l-.8-.5Zm0,6.1v3l.8.4v-3l-.8-.4Zm0,6.1v3l.8.5v-3l-.8-.4Zm0,6.1v3l.8.5v-3l-.8-.5Zm0,6.1v3l.8.4v-3l-.8-.4Zm0,6.1v3l.8.4v-3l-.8-.5Zm0,6.1v1.5l.8.4v-1.5l-.8-.5Z"
+            fill="#b4b4bd"
+            className="axis"
+          />
+          <path
+            id="xAxis-2"
+            d="m423.7,97.8c.2,0,.2-.4,0-.6l-2.5-4.3c-.2-.3-.4-.4-.6-.3-.2,0-.2.4,0,.6l2.2,3.8-2.2,1.3c-.2,0-.2.4,0,.6.2.3.4.4.6.3l2.5-1.4Zm-.3-.9l-1.3-.8v.9l1.3.8v-.9Zm-3.9-2.3l-2.6-1.5v.9l2.6,1.5v-.9Zm-5.2-3l-2.6-1.5v.9l2.6,1.5v-.9Zm-5.2-3l-2.6-1.5v.9l2.6,1.5v-.9Zm-5.2-3l-2.6-1.5v.9l2.6,1.5v-.9Zm-5.2-3l-2.6-1.5v.9l2.6,1.5v-.9Zm-5.2-3l-2.6-1.5v.9l2.6,1.5v-.9Zm-5.2-3l-2.6-1.5v.9l2.6,1.5v-.9Zm-5.2-3l-2.6-1.5v.9l2.6,1.5v-.9Zm-5.2-3l-2.6-1.5v.9l2.6,1.5v-.9Zm-5.2-3l-2.6-1.5v.9l2.6,1.5v-.9Zm-5.2-3l-2.6-1.5v.9l2.6,1.5v-.9Zm-5.2-3l-2.6-1.5v.9l2.6,1.5v-.9Zm-5.2-3l-1.3-.8v.9l1.3.8v-.9Z"
+            fill="#b4b4bd"
+            className="axis"
+          />
+          <path
+            id="curve-2"
+            d="m423.2,151.4c-12-32.2-22.8-55.8-28.3-60.8-4.7-5-9.7-3.9-17.4-7.7-5-3.2-9.1-9.6-9.1-17.3s5.4-9,9.1-6.8c7.2,4.4,10.9,11,17.4,12.3,6.3.9,16.7-9.5,28.3-27.5"
+            fill="none"
+            stroke="url(#Unbenannter_Verlauf_5)"
+            strokeWidth="2"
+          />
+          <g id="stepP2-2">
+            <line
+              id="dashP2-2"
+              x1="392.9"
+              y1="71.1"
+              x2="392.9"
+              y2="86.2"
+              fill="none"
+              stroke="#cdd3fc"
+              className="dash"
+            />
+            <path
+              id="lineP2-2"
+              d="m365.8,49.5l79.1,63.2"
+              fill="none"
+              stroke="#7083fa"
+              className="line"
+            />
+          </g>
+          <g id="stepP3-2">
+            <path
+              id="lineP3-2"
+              d="m366.1,26.1l78.3,185.7"
+              fill="none"
+              stroke="#7083fa"
+              className="line"
+            />
+          </g>
+          <g id="stepP4-2">
+            <path
+              id="lineP4-2"
+              d="m444.4,8.3l-78.5,65.7"
+              fill="none"
+              stroke="#7083fa"
+              className="line"
+            />
+            <line
+              id="dashP4-2"
+              x1="369.5"
+              y1="64.3"
+              x2="369.5"
+              y2="69.3"
+              fill="none"
+              stroke="#cdd3fc"
+              className="dash"
+            />
+          </g>
+          <g id="stepP5-2">
+            <path
+              id="lineP5-2"
+              d="m444.3,65.5l-87.1-5.4"
+              fill="none"
+              stroke="#7083fa"
+              className="line"
+            />
+            <line
+              id="dashP5-2"
+              x1="408.9"
+              y1="64.1"
+              x2="408.9"
+              y2="112.1"
+              fill="none"
+              stroke="#cdd3fc"
+              className="dash"
+            />
+          </g>
+          <g id="stepP6-2">
+            <path
+              id="lineP6-2"
+              d="m444.1,183.3l-78.2-150.8"
+              fill="none"
+              stroke="#7083fa"
+              className="line"
+            />
+            <line
+              id="dashP6-2"
+              x1="399.8"
+              y1="72.8"
+              x2="399.8"
+              y2="95.8"
+              fill="none"
+              stroke="#cdd3fc"
+              className="dash"
+            />
+          </g>
+          <g id="stepP7-2">
+            <path
+              id="lineP7-2"
+              d="m444.9,92.3l-82.1-39.5"
+              fill="none"
+              stroke="#7083fa"
+              className="line"
+            />
+            <line
+              id="dashP7-2"
+              x1="374.3"
+              y1="58.7"
+              x2="374.3"
+              y2="77.4"
+              fill="none"
+              stroke="#cdd3fc"
+              className="dash"
+            />
+          </g>
+          <circle
+            id="P-2"
+            cx="380.8"
+            cy="61"
+            r="3.4"
+            transform="translate(20.5 198.6) rotate(-30)"
+            fill="none"
+            stroke="#2b44e4"
+            className="p"
+          />
+          <circle
+            id="P2-2"
+            cx="392.8"
+            cy="89.2"
+            r="3.4"
+            transform="translate(8 208.4) rotate(-30)"
+            fill="none"
+            stroke="#2b44e4"
+            className="p"
+          />
+          <circle
+            id="P4-2"
+            cx="368.9"
+            cy="61.2"
+            r="3.4"
+            transform="translate(18.8 192.6) rotate(-30)"
+            fill="none"
+            stroke="#2b44e4"
+            className="p"
+          />
+          <circle
+            id="P5-2"
+            cx="408.6"
+            cy="114.9"
+            r="3.4"
+            transform="translate(-2.7 219.7) rotate(-30)"
+            fill="none"
+            stroke="#2b44e4"
+            className="p"
+          />
+          <circle
+            id="P6-2"
+            cx="399.5"
+            cy="70.2"
+            r="3.4"
+            transform="translate(18.5 209.2) rotate(-30)"
+            fill="none"
+            stroke="#2b44e4"
+            className="p"
+          />
+          <circle
+            id="P7-2"
+            cx="374.1"
+            cy="80.1"
+            r="3.4"
+            transform="translate(10.1 197.8) rotate(-30)"
+            fill="none"
+            stroke="#2b44e4"
+            className="p"
+          />
         </g>
         <g id="client">
           <path
