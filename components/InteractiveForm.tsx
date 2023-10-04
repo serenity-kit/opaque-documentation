@@ -665,6 +665,20 @@ export const InteractiveForm = () => {
           <ClientServer
             serverActive={serverIsActive}
             clientActive={clientIsActive}
+            animateElliptical={
+              (state.matches("clientStartRegistration") &&
+                state.context.animationStep === 3) ||
+              (state.matches("serverCreateRegistrationResponse") &&
+                state.context.animationStep === 3)
+            }
+            fadeInGraph={
+              (state.matches("clientStartRegistration") &&
+                state.context.animationStep >= 2 &&
+                state.context.animationStep < 4) ||
+              (state.matches("serverCreateRegistrationResponse") &&
+                state.context.animationStep >= 2 &&
+                state.context.animationStep < 4)
+            }
             isFirstStep={state.matches("clientStartRegistration")}
             className={cn(
               !(

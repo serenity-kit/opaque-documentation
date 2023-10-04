@@ -4,6 +4,8 @@ export type ClientServerProps = {
   clientActive: boolean;
   serverActive: boolean;
   isFirstStep: boolean;
+  animateElliptical: boolean;
+  fadeInGraph: boolean;
   className?: string;
 };
 
@@ -11,6 +13,8 @@ export const ClientServer: React.FC<ClientServerProps> = ({
   clientActive = false,
   serverActive = false,
   isFirstStep = false,
+  animateElliptical = false,
+  fadeInGraph = false,
   className,
   ...props
 }) => {
@@ -34,6 +38,8 @@ export const ClientServer: React.FC<ClientServerProps> = ({
         clientActive && "client-active",
         serverActive && "server-active",
         isFirstStep && "first-step",
+        animateElliptical && "animate",
+        fadeInGraph && "fade-in-graph",
         className
       )}
       {...props}
