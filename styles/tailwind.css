@@ -1,0 +1,36 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer utilities {
+  .pulse {
+    --pulse-opacity: 0.7;
+    box-shadow: 0 0 0 0 rgb(var(--pulse-color) / var(--pulse-opacity));
+    animation: pulsing 1.25s infinite cubic-bezier(0.66, 0, 0, 1);
+    transition: all 300ms ease-in-out;
+  }
+  
+  .pulse-primary {
+    --pulse-color: 67 91 248; /* rgb primary-500 */
+  }
+  
+  .pulse-primary-dark {
+    --pulse-opacity: 1;
+    --pulse-color: 157 170 253; /* rgb primary-400 */
+  }
+
+  .pulse-secondary {
+    --pulse-color: 31 31 33; /* rgb gray-900 */
+  }
+  
+  .pulse-secondary-dark {
+    --pulse-opacity: 0.9;
+    --pulse-color: 237 237 240; /* rgb gray-200 */
+  }
+  
+  @keyframes pulsing {
+    to {
+      box-shadow: 0 0 0 0.75rem rgb(var(--pulse-color) / 0);
+    }
+  }
+}
