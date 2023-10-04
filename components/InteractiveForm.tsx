@@ -394,7 +394,7 @@ export const InteractiveForm = () => {
           />
           <Button
             type="submit"
-            disabled={!state.matches("initial")}
+            disabled={!state.matches("initial") || !password || !username}
             variant="primary"
           >
             Register
