@@ -3,7 +3,6 @@ import { useActor } from "@xstate/react";
 import { useState } from "react";
 import { assign, createMachine, fromPromise } from "xstate";
 import { Button } from "./Button";
-import { TypeAnimation } from "react-type-animation";
 import { ClientServer } from "./ClientServer";
 import cn from "clsx";
 import { Icon } from "./icon/Icon";

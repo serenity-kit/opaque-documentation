@@ -19,6 +19,7 @@ export const ClientServer: React.FC<ClientServerProps> = ({
       viewBox="0 0 541.4 246.19"
       id="ClientServer"
       className={cn(
+        "-ml-[2.9rem] mt-[7rem]",
         clientActive && "client-active",
         serverActive && "server-active",
         className
