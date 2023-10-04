@@ -9,7 +9,7 @@ import { Input } from "./Input";
 import { NavigationButton } from "./NavigationButton";
 import FadeIn from "./FadeInChildren";
 import { CliTypeWriter } from "./CliTypeWriter";
-import { ClientServer2 } from "./ClientServer2";
+import { ClientServer } from "./ClientServer";
 
 const formMachine = createMachine(
   {
@@ -662,7 +662,7 @@ export const InteractiveForm = () => {
         </div>
         {/* --- animation area --- */}
         <div className="h-[25rem] md:h-full px-10 svg-register flex items-end md:items-center justify-center grow">
-          <ClientServer2
+          <ClientServer
             serverActive={serverIsActive}
             clientActive={clientIsActive}
             className={cn(

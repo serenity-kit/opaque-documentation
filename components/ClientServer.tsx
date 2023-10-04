@@ -1,12 +1,12 @@
 import cn from "clsx";
 
-export type ClientServer2Props = {
+export type ClientServerProps = {
   clientActive?: boolean;
   serverActive?: boolean;
   className?: string;
 };
 
-export const ClientServer2: React.FC<ClientServer2Props> = ({
+export const ClientServer: React.FC<ClientServerProps> = ({
   clientActive = false,
   serverActive = false,
   className,
