@@ -39,20 +39,20 @@
 /* --- 'root' settings --- */
 
 #ClientServer2 {
-    --active-color: theme("colors.gray.600");
-    --transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    --dot-radius: 3.5;
+  --active-color: theme("colors.gray.600");
+  --transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  --dot-radius: 3.5;
 }
 
 /* --- base --- */
 
 #ClientServer2.server-active {
-    --active-color: var(--server-color);
-    --active-stroke-color: var(--server-stroke-color);
+  --active-color: var(--server-color);
+  --active-stroke-color: var(--server-stroke-color);
 }
 #ClientServer2.client-active {
-    --active-color: var(--client-color);
-    --active-stroke-color: var(--client-stroke-color);
+  --active-color: var(--client-color);
+  --active-stroke-color: var(--client-stroke-color);
 }
 
 /* --- coloring --- */
@@ -149,7 +149,7 @@ either
 /* -------- boards -------- */
 
 .board {
-    transition: var(--transition);
+  transition: var(--transition);
 }
 
 /* -------- connection -------- */
@@ -157,12 +157,12 @@ either
 #connection-line,
 #connection .dot,
 #connection .data {
-    transition: var(--transition);
+  transition: var(--transition);
 }
 
 #connection-line,
 #connection .data {
-    stroke: var(--active-stroke-color);
+  stroke: var(--active-stroke-color);
 }
 
 #connection-line {
@@ -175,15 +175,15 @@ either
 }
 
 .connect #connection-line {
-    animation-name: establishConnection;
+  animation-name: establishConnection;
 }
 
 .dot {
-    r: 0;
-    fill: var(--active-stroke-color);
-    animation-duration: 0.2s;
-    animation-fill-mode: forwards;
-    animation-timing-function: ease-in-out;
+  r: 0;
+  fill: var(--active-stroke-color);
+  animation-duration: 0.2s;
+  animation-fill-mode: forwards;
+  animation-timing-function: ease-in-out;
 }
 
 .connect #dotClient {
@@ -200,37 +200,39 @@ either
 /* --- data --- */
 
 .send-to-server .data {
-    animation-name: clientToServer;
+  animation-name: clientToServer;
 }
 
 .send-to-client .data {
-    animation-name: serverToClient;
+  animation-name: serverToClient;
 }
 
 .data {
-    stroke-width: 0.45rem;
-    /* make the dot by rounding the edges of the stroke */
-    stroke-linecap: round;
-    stroke-linejoin: round;
+  stroke-width: 0.45rem;
+  /* make the dot by rounding the edges of the stroke */
+  stroke-linecap: round;
+  stroke-linejoin: round;
 
-    /* set the length of the dash to 0 so it only shows the rounded edges => circle
-       the second parameter defines the space between, needs to be at least as long as the path itself
-    */
-    stroke-dasharray: 0 300;
-    animation-duration: 1000ms;
-    animation-iteration-count: 1;
-    animation-timing-function: linear;
-    animation-fill-mode: forwards;
-    /* needs to be more that 0 to make initial state invisible */
-    stroke-dashoffset: 10;
+  /* set the length of the dash to 0 so it only shows the rounded edges => circle
+      the second parameter defines the space between, needs to be at least as long as the path itself
+  */
+  stroke-dasharray: 0 300;
+  animation-duration: 1000ms;
+  animation-iteration-count: 1;
+  animation-timing-function: linear;
+  animation-fill-mode: forwards;
+  /* needs to be more that 0 to make initial state invisible */
+  stroke-dashoffset: 10;
 
-    filter: url(#drop-shadow-3);
+  filter: url(#drop-shadow-3);
 }
 
 
 
 
-/* =========== ANIMATION =========== */
+/* =========================== */
+/* ======== ANIMATION ======== */
+/* =========================== */
 
 /* parameters are set out of bounds of the line so the data-dot
    vanishes when reaching it's destination (otherwise it lingers there)
