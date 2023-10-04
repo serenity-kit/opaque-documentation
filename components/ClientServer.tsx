@@ -1,14 +1,16 @@
 import cn from "clsx";
 
 export type ClientServerProps = {
-  clientActive?: boolean;
-  serverActive?: boolean;
+  clientActive: boolean;
+  serverActive: boolean;
+  firstConnect: boolean;
   className?: string;
 };
 
 export const ClientServer: React.FC<ClientServerProps> = ({
   clientActive = false,
   serverActive = false,
+  firstConnect = false,
   className,
   ...props
 }) => {
@@ -17,11 +19,12 @@ export const ClientServer: React.FC<ClientServerProps> = ({
       xmlns="http://www.w3.org/2000/svg"
       xmlnsXlink="http://www.w3.org/1999/xlink"
       viewBox="0 0 497 245.8"
-      id="ClientServer2"
+      id="ClientServer"
       className={cn(
         "mt-[7rem]",
         clientActive && "client-active",
         serverActive && "server-active",
+        firstConnect && "first-connect",
         className
       )}
       {...props}
@@ -943,6 +946,7 @@ export const ClientServer: React.FC<ClientServerProps> = ({
             <polygon
               points="369 148.8 369 158.8 370.5 159.7 370.5 149.6 369 148.8"
               fill="#dcdde5"
+              className="slit"
             />
             <polygon
               points="363.8 145.8 363.8 155.8 365.2 156.7 365.2 146.6 363.8 145.8"
@@ -951,6 +955,7 @@ export const ClientServer: React.FC<ClientServerProps> = ({
             <polygon
               points="362.4 144.9 362.4 154.9 363.8 155.9 363.8 145.8 362.4 144.9"
               fill="#ededf0"
+              className="slit"
             />
             <polygon
               points="356.8 141.7 356.8 151.7 358.2 152.7 358.2 142.5 356.8 141.7"
@@ -959,6 +964,7 @@ export const ClientServer: React.FC<ClientServerProps> = ({
             <polygon
               points="355.4 140.9 355.4 150.9 356.8 151.8 356.8 141.7 355.4 140.9"
               fill="#ededf0"
+              className="slit"
             />
             <polygon
               id="shadow"
@@ -1095,6 +1101,7 @@ export const ClientServer: React.FC<ClientServerProps> = ({
             <polygon
               points="369 116.9 369 126.9 370.5 127.8 370.5 117.7 369 116.9"
               fill="#dcdde5"
+              className="slit"
             />
             <polygon
               points="363.8 113.9 363.8 123.9 365.2 124.8 365.2 114.7 363.8 113.9"
@@ -1103,6 +1110,7 @@ export const ClientServer: React.FC<ClientServerProps> = ({
             <polygon
               points="362.4 113 362.4 123 363.8 124 363.8 113.9 362.4 113"
               fill="#dcdde5"
+              className="slit"
             />
             <polygon
               points="356.8 109.8 356.8 119.8 358.2 120.7 358.2 110.6 356.8 109.8"
@@ -1111,6 +1119,7 @@ export const ClientServer: React.FC<ClientServerProps> = ({
             <polygon
               points="355.4 108.9 355.4 119 356.8 119.9 356.8 109.8 355.4 108.9"
               fill="#dcdde5"
+              className="slit"
             />
             <polygon points="380 107 366 107.2 310.8 75.4 320.2 70 380 107" />
           </g>
@@ -1216,6 +1225,7 @@ export const ClientServer: React.FC<ClientServerProps> = ({
             <polygon
               points="369 84.9 369 94.9 370.5 95.8 370.5 85.7 369 84.9"
               fill="#dcdde5"
+              className="slit"
             />
             <polygon
               points="363.8 81.9 363.8 91.9 365.2 92.8 365.2 82.7 363.8 81.9"
@@ -1224,6 +1234,7 @@ export const ClientServer: React.FC<ClientServerProps> = ({
             <polygon
               points="362.4 81 362.4 91 363.8 92 363.8 81.9 362.4 81"
               fill="#dcdde5"
+              className="slit"
             />
             <polygon
               points="356.8 77.8 356.8 87.8 358.2 88.8 358.2 78.7 356.8 77.8"
@@ -1232,6 +1243,7 @@ export const ClientServer: React.FC<ClientServerProps> = ({
             <polygon
               points="355.4 77 355.4 87 356.8 87.9 356.8 77.8 355.4 77"
               fill="#dcdde5"
+              className="slit"
             />
             <g id="ventilation">
               <circle cx="379.3" cy="28.6" r="1.5" fill="#1f1f21" />

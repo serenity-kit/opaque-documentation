@@ -23,37 +23,18 @@
 /* =========== SVG =========== */
 /* =========================== */
 
-
-/* --- remove unused elements --- */
-
-#banana,
-.static-dot {
-  display: none;
-}
-
-#connectionYellow,
-#connectionGray {
-  display: none;
-}
-
 /* --- 'root' settings --- */
 
-#ClientServer2 {
+#ClientServer {
   --active-color: theme("colors.gray.600");
   --transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   --dot-radius: 3.5;
 }
 
-/* --- base --- */
+/* #Illustration * {
+  transition: var(--transition);
+} */
 
-#ClientServer2.server-active {
-  --active-color: var(--server-color);
-  --active-stroke-color: var(--server-stroke-color);
-}
-#ClientServer2.client-active {
-  --active-color: var(--client-color);
-  --active-stroke-color: var(--client-stroke-color);
-}
 
 /* --- coloring --- */
 
@@ -65,6 +46,15 @@ either
 - add coloring in css (either with class in svg or with nth-type)
 - give all to be animated elements the color they will have and override in the default state
 */
+
+#ClientServer.server-active {
+  --active-color: var(--server-color);
+  --active-stroke-color: var(--server-stroke-color);
+}
+#ClientServer.client-active {
+  --active-color: var(--client-color);
+  --active-stroke-color: var(--client-stroke-color);
+}
 
 /* lights */
 
@@ -103,26 +93,45 @@ either
   in a neutral color scheme
 */
 
+/* --- remove unused elements --- */
+
+#banana,
+.static-dot {
+  display: none;
+}
+
+#connectionYellow,
+#connectionGray {
+  display: none;
+}
+
+/* --- hide elements which will be animated later --- */
+
 .board {
   opacity: 0;
+  transition: var(--transition);
 }
 
 /* server */
 
 #particles {
   opacity: 0;
+  transition: var(--transition);
 }
 
 #envelope {
   opacity: 0;
+  transition: var(--transition);
 }
 
 #ellipticalSolidClient {
   opacity: 0;
+  transition: var(--transition);
 }
 
 #ellipticalSolidServer {
   opacity: 0;
+  transition: var(--transition);
 }
 
 /* client */
@@ -130,29 +139,72 @@ either
 #keyColor1,
 #keyColor2 {
   fill: #666771;
-}
-
-.asterisk {
-  opacity: 0;
-}
-
-#passwordOutline {
-  opacity: 0.3;
-}
-
-#button {
-  opacity: 0.4;
-}
-
-
-
-/* -------- boards -------- */
-
-.board {
   transition: var(--transition);
 }
 
-/* -------- connection -------- */
+#screen,
+.asterisk > * {
+  fill: #1f1f21;
+  transition: var(--transition);
+}
+
+#password {
+  opacity: 0.4;
+  transition: var(--transition);
+}
+
+#button {
+  opacity: 0.5;
+  transition: var(--transition);
+}
+
+/* server */
+
+.slit {
+  opacity: 0.5;
+  transition: var(--transition);
+}
+
+
+/* ========== actors ========== */
+
+/* -------- client -------- */
+
+.client-active #button,
+.client-active #password {
+  opacity: 1;
+}
+
+.server-active #button,
+.server-active #password {
+  opacity: 0.8;
+}
+
+/* -------- server -------- */
+
+.connect .slit {
+  opacity: 1;
+}
+
+.client-active .slit {
+  opacity: 0.75;
+}
+
+.first-connect .slit {
+  transition-delay: 1.2s;
+  opacity: 0.5;
+}
+
+.first-connect.connect .slit {
+  opacity: 1;
+}
+
+
+
+
+/* ========== connection ========== */
+
+/* -------- line -------- */
 
 #connection-line,
 #connection .dot,
@@ -231,7 +283,7 @@ either
 
 
 /* =========================== */
-/* ======== ANIMATION ======== */
+/* ======== KEYFRAMES ======== */
 /* =========================== */
 
 /* parameters are set out of bounds of the line so the data-dot
