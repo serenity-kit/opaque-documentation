@@ -1,0 +1,306 @@
+
+
+#OpaqueAnimation {
+  --server-color: theme("colors.primary.300");
+  --client-color: theme("colors.palette.honey");
+}
+
+
+/* =========================== */
+/* =========== CLI =========== */
+/* =========================== */
+
+.client-active .text-color-actor {
+  color: var(--client-color);
+}
+
+.server-active .text-color-actor {
+  color: var(--server-color);
+}
+
+
+/* =========================== */
+/* =========== SVG =========== */
+/* =========================== */
+
+
+/* --- remove unused elements --- */
+
+#banana,
+.static-dot,
+#connectionGray {
+  display: none;
+}
+
+/* --- 'root' settings --- */
+
+#ClientServer2 {
+    --active-color: theme("colors.gray.300");
+    --transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    --dot-radius: 4.5;
+}
+
+/* --- base --- */
+
+.server-active {
+    --active-color: var(--server-color);
+}
+.client-active {
+    --active-color: var(--client-color);
+}
+
+/* --- coloring --- */
+
+/* TODO
+
+either
+- add elements with color after certain lights and opacity 0 -> 1
+- add parent classes conditionally animating certain lights (class inside of svg)
+- add coloring in css (either with class in svg or with nth-type)
+- give all to be animated elements the color they will have and override in the default state
+*/
+
+/* fill */
+
+.fill-honey {
+  fill:theme("colors.palette.honey");
+}
+
+.fill-primary {
+  fill: theme("colors.primary.500");
+}
+
+.fill-rose {
+  fill:theme("colors.palette.rose");
+}
+
+
+/* lights */
+
+.light-honey {
+  fill: theme("colors.palette.honey");
+  filter: url(#outer-glow-9);
+}
+
+.light-primary {
+  fill: theme("colors.primary.500");
+  filter: url(#outer-glow-8);
+}
+
+.light-rose {
+  fill: theme("colors.palette.rose");
+  filter: url(#outer-glow-7);
+}
+
+
+/* ========== default state ========== */
+/* 
+  defines the default styling for the svg, 
+  hiding all elements ready for animating
+  in a neutral color scheme
+*/
+
+#boardActiveClient,
+#boardActiveServer {
+  opacity: 0;
+}
+
+/* server */
+
+#particles {
+  opacity: 0;
+}
+
+#envelope {
+  opacity: 0;
+}
+
+#ellipticalSolidClient {
+  opacity: 0;
+}
+
+#ellipticalSolidServer {
+  opacity: 0;
+}
+
+/* client */
+
+#keyColor1,
+#keyColor2 {
+  fill: #666771;
+}
+
+.asterisk {
+  opacity: 0;
+}
+
+#passwordOutline {
+  opacity: 0.3;
+}
+
+#button {
+  opacity: 0.4;
+}
+
+
+
+/* -------- boards -------- */
+
+#boardServer {
+    --stroke-color: theme("colors.primary.300");
+}
+
+#boardClient {
+    --stroke-color: #E9AC27;
+}
+
+.board {
+    fill: theme("colors.gray.500");
+    stroke: theme("colors.gray.300");
+    transition: var(--transition);
+}
+
+.board.active {
+    fill: var(--active-color);
+    stroke: var(--stroke-color);
+}
+
+/* -------- connection -------- */
+
+#connection-line,
+#connection .dot,
+#connection .data {
+    transition: var(--transition);
+}
+
+#connection-line,
+#connection .data {
+    stroke: var(--active-color);
+}
+
+#connection-line {
+  animation-delay: 0.1s;
+  animation-duration: 1.3s;
+  animation-timing-function: ease-in-out;
+  animation-fill-mode: forwards;
+  stroke-dasharray: 320;
+  stroke-dashoffset: 320;
+}
+
+#connection .dot {
+    fill: var(--active-color);
+    opacity: 0;
+    animation-duration: 0.2s;
+    animation-fill-mode: forwards;
+    animation-timing-function: ease-in-out;
+}
+
+.connect #connection-line {
+    animation-name: establishConnection;
+}
+
+.connect #dotClient {
+  animation-delay: 0;
+  animation-name: fadeIn;
+}
+
+.connect #dotServer {
+  animation-delay: 1.3s;
+  animation-name: fadeIn;
+}
+
+
+/* --- data --- */
+.send-to-server .data {
+    animation-name: clientToServer;
+}
+
+.send-to-client .data {
+    animation-name: serverToClient;
+}
+
+.data {
+    stroke-width: 0.45rem;
+    /* make the dot by rounding the edges of the stroke */
+    stroke-linecap: round;
+    stroke-linejoin: round;
+
+    /* set the length of the dash to 0 so it only shows the rounded edges => circle
+       the second parameter defines the space between, needs to be at least as long as the path itself
+    */
+    stroke-dasharray: 0 300;
+    animation-duration: 1000ms;
+    animation-iteration-count: 1;
+    animation-timing-function: linear;
+    animation-fill-mode: forwards;
+    /* needs to be more that 0 to make initial state invisible */
+    stroke-dashoffset: 10;
+
+    filter: url(#drop-shadow-3);
+}
+
+
+
+
+/* =========== ANIMATION =========== */
+
+/* parameters are set out of bounds of the line so the data-dot
+   vanishes when reaching it's destination (otherwise it lingers there)
+*/
+@keyframes serverToClient {
+  from {
+      stroke-dashoffset: 10;
+  }
+  to {
+      stroke-dashoffset: 320;
+  }
+}
+  
+@keyframes clientToServer {
+  from {
+      stroke-dashoffset: 320;
+  }
+  to {
+      stroke-dashoffset: 10;
+  }
+}
+
+@keyframes establishConnection {
+  from {
+      stroke-dashoffset: -320;
+  }
+
+  to {
+      stroke-dashoffset: 0;
+  }
+}
+
+@keyframes endConnection {
+  from {
+      stroke-dashoffset: 0;
+  }
+
+  to {
+      stroke-dashoffset: -320;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+      opacity: 0;
+  }
+  to {
+      opacity: 1;
+  }
+}
+
+@keyframes fadeOut {
+  from {
+      opacity: 1;
+  }
+  to {
+      opacity: 0;
+  }
+}
+
+
