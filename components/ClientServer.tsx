@@ -1312,6 +1312,12 @@ export const ClientServer: React.FC<ClientServerProps> = ({
                 fill="#4f5057"
               />
               <polygon
+                id="keyColor3"
+                points="127.5 102.9 122.6 105.7 127.5 108.5 132.3 105.7 127.5 102.9"
+                fill="#7083FA"
+                className="key-colored"
+              />
+              <polygon
                 points="133.9 106.5 129 109.4 133.9 112.1 138.7 109.3 133.9 106.5"
                 fill="#4f5057"
               />
@@ -1354,9 +1360,14 @@ export const ClientServer: React.FC<ClientServerProps> = ({
                 fill="#4f5057"
               />
               <polygon
+                points="139.6 117.8 134.7 120.6 139.6 123.4 144.4 120.6 139.6 117.8"
+                fill="#666771"
+              />
+              <polygon
                 id="keyColor2"
                 points="139.6 117.8 134.7 120.6 139.6 123.4 144.4 120.6 139.6 117.8"
                 fill="#ffb921"
+                className="key-colored"
               />
               <polygon
                 points="146.1 121.5 141.2 124.4 146.1 127.1 150.9 124.3 146.1 121.5"
@@ -1365,6 +1376,12 @@ export const ClientServer: React.FC<ClientServerProps> = ({
               <polygon
                 points="107.8 99.3 102.9 102.2 107.8 104.9 112.6 102.1 107.8 99.3"
                 fill="#666771"
+              />
+              <polygon
+                id="keyColor5"
+                points="107.8 99.3 102.9 102.2 107.8 104.9 112.6 102.1 107.8 99.3"
+                fill="#ffb921"
+                className="key-colored"
               />
             </g>
             <g id="keyRow3">
@@ -1381,12 +1398,24 @@ export const ClientServer: React.FC<ClientServerProps> = ({
                 fill="#4f5057"
               />
               <polygon
+                id="keyColor1"
+                points="107.3 107.4 102.4 110.2 107.3 113 112.1 110.2 107.3 107.4"
+                fill="#ff91c9"
+                className="key-colored"
+              />
+              <polygon
                 points="113.7 111.3 108.9 114.2 113.7 116.9 118.6 114.1 113.7 111.3"
                 fill="#4f5057"
               />
               <polygon
                 points="120.1 115 115.3 117.8 120.1 120.6 125 117.8 120.1 115"
                 fill="#4f5057"
+              />
+              <polygon
+                id="keyColor4"
+                points="120.1 115 115.3 117.8 120.1 120.6 125 117.8 120.1 115"
+                fill="#ff91c9"
+                className="key-colored"
               />
               <polygon
                 points="126.5 118.5 121.7 121.3 126.5 124.1 131.4 121.3 126.5 118.5"
@@ -1423,9 +1452,8 @@ export const ClientServer: React.FC<ClientServerProps> = ({
                 fill="#666771"
               />
               <polygon
-                id="keyColor1"
                 points="93.9 107.9 89 110.8 93.9 113.5 98.7 110.7 93.9 107.9"
-                fill="#ff91c9"
+                fill="#4f5057"
               />
             </g>
           </g>

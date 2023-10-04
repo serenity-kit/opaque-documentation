@@ -115,12 +115,11 @@ either
 /* client */
 
 #client {
-  --form-transition-time: 0.2s;
+  --form-transition-time: 0.25s;
 }
 
-#keyColor1,
-#keyColor2 {
-  fill: #666771;
+.key-colored {
+  opacity: 0;  
   transition: var(--transition);
 }
 
@@ -195,6 +194,7 @@ either
   opacity: 0.8;
 }
 
+/* form */
 .first-step .asterisk {
   opacity: 1;
 }
@@ -206,10 +206,36 @@ either
 
 .first-step #button {
   animation-name: click;
-  animation-delay: calc(var(--form-transition-time) * 6);
+  animation-delay: calc(var(--form-transition-time) * 7);
   animation-duration: 700ms;
   animation-timing-function: linear;
   animation-fill-mode: forwards;
+}
+
+/* keyboard */
+
+.first-step #keyColor1 {
+  animation: clickThrough var(--form-transition-time) forwards linear;
+}
+
+.first-step #keyColor2 {
+  animation: clickThrough var(--form-transition-time) forwards linear;
+  animation-delay: var(--form-transition-time);
+}
+
+.first-step #keyColor3 {
+  animation: clickThrough var(--form-transition-time) forwards linear;
+  animation-delay: calc(var(--form-transition-time) * 2);
+}
+
+.first-step #keyColor4 {
+  animation: clickThrough var(--form-transition-time) forwards linear;
+  animation-delay: calc(var(--form-transition-time) * 3);
+}
+
+.first-step #keyColor5 {
+  animation: clickThrough var(--form-transition-time) forwards linear;
+  animation-delay: calc(var(--form-transition-time) * 4);
 }
 
 /* -------- server -------- */
@@ -405,6 +431,18 @@ either
   }
   100% {
     opacity: 1;
+  }
+}
+
+@keyframes clickThrough {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
   }
 }
 
