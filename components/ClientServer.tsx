@@ -14,6 +14,15 @@ export const ClientServer: React.FC<ClientServerProps> = ({
   className,
   ...props
 }) => {
+  const honey = "#FFB921";
+  const primary300 = "#9DAAFD";
+  const primary400 = "#7083FA";
+  const rose = "#FF91C9";
+
+  const glowUrlHoney = "url(#outer-glow-3)";
+  const glowUrlPrimary400 = "url(#outer-glow-5)";
+  const glowUrlRose = "url(#outer-glow-7)";
+
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -886,6 +895,15 @@ export const ClientServer: React.FC<ClientServerProps> = ({
                     fill="#1f1f21"
                   />
                   <ellipse
+                    id="lightBottomTop4"
+                    cx="436.8"
+                    cy="123.3"
+                    rx="1"
+                    ry="1.1"
+                    fill={primary300}
+                    className="light-colored drop-shadow-primary-300"
+                  />
+                  <ellipse
                     cx="433.4"
                     cy="125.2"
                     rx="1"
@@ -930,11 +948,29 @@ export const ClientServer: React.FC<ClientServerProps> = ({
                     fill="#1f1f21"
                   />
                   <ellipse
+                    id="lightBottomBottom3"
+                    cx="433.4"
+                    cy="131.2"
+                    rx="1"
+                    ry="1.1"
+                    fill={rose}
+                    className="light-colored drop-shadow-rose"
+                  />
+                  <ellipse
                     cx="426.2"
                     cy="135.4"
                     rx="1"
                     ry="1.1"
                     fill="#1f1f21"
+                  />
+                  <ellipse
+                    id="lightBottomBottom1"
+                    cx="426.2"
+                    cy="135.4"
+                    rx="1"
+                    ry="1.1"
+                    fill={honey}
+                    className="light-colored drop-shadow-honey"
                   />
                 </g>
               </g>
@@ -1033,6 +1069,16 @@ export const ClientServer: React.FC<ClientServerProps> = ({
                     ry="1.1"
                     fill="#1f1f21"
                   />
+                  {/* <ellipse
+                    id="lightMiddleTop2"
+                    cx="429.8"
+                    cy="95.4"
+                    rx="1"
+                    ry="1.1"
+                    fill={honey}
+                    filter={glowUrlHoney}
+                    className="light-colored drop-shadow-honey"
+                  /> */}
                   <ellipse
                     cx="436.8"
                     cy="91.4"
@@ -1054,6 +1100,16 @@ export const ClientServer: React.FC<ClientServerProps> = ({
                     ry="1.1"
                     fill="#1f1f21"
                   />
+                  <ellipse
+                    id="lightMiddleTop1"
+                    cx="426.2"
+                    cy="97.5"
+                    rx="1"
+                    ry="1.1"
+                    fill={primary300}
+                    filter={glowUrlPrimary400}
+                    className="light-colored drop-shadow-primary-300"
+                  />
                 </g>
                 <g id="Lights-6">
                   <ellipse
@@ -1062,6 +1118,16 @@ export const ClientServer: React.FC<ClientServerProps> = ({
                     rx="1"
                     ry="1.1"
                     fill="#1f1f21"
+                  />
+                  <ellipse
+                    id="lightMiddleBottom5"
+                    cx="440.4"
+                    cy="95.3"
+                    rx="1"
+                    ry="1.1"
+                    fill={honey}
+                    filter={glowUrlHoney}
+                    className="light-colored drop-shadow-honey"
                   />
                   <ellipse
                     cx="429.8"
@@ -1151,6 +1217,16 @@ export const ClientServer: React.FC<ClientServerProps> = ({
                     fill="#1f1f21"
                   />
                   <ellipse
+                    id="lightTopTop5"
+                    cx="440.4"
+                    cy="57.3"
+                    rx="1"
+                    ry="1.1"
+                    fill={primary400}
+                    filter={glowUrlPrimary400}
+                    className="light-colored drop-shadow-primary-400"
+                  />
+                  <ellipse
                     cx="429.8"
                     cy="63.4"
                     rx="1"
@@ -1163,6 +1239,16 @@ export const ClientServer: React.FC<ClientServerProps> = ({
                     rx="1"
                     ry="1.1"
                     fill="#1f1f21"
+                  />
+                  <ellipse
+                    id="lightTopTop4"
+                    cx="436.8"
+                    cy="59.4"
+                    rx="1"
+                    ry="1.1"
+                    fill={honey}
+                    filter={glowUrlHoney}
+                    className="light-colored drop-shadow-honey"
                   />
                   <ellipse
                     cx="433.4"
@@ -1193,6 +1279,16 @@ export const ClientServer: React.FC<ClientServerProps> = ({
                     rx="1"
                     ry="1.1"
                     fill="#1f1f21"
+                  />
+                  <ellipse
+                    id="lightTopBottom2"
+                    cx="429.8"
+                    cy="69.4"
+                    rx="1"
+                    ry="1.1"
+                    fill={rose}
+                    filter={glowUrlRose}
+                    className="light-colored drop-shadow-rose"
                   />
                   <ellipse
                     cx="436.8"
