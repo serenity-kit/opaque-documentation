@@ -40,17 +40,17 @@
 
 
   /* --- theme --- */
-  --surface-primary: theme("colors.white");
-  --surface-secondary: theme("colors.gray.100");
-  --surface-tertiary: theme("colors.gray.200");
+  --surface-primary: theme("colors.surface.primary");
+  --surface-secondary: theme("colors.surface.secondary");
+  --surface-tertiary: theme("colors.surface.tertiary");
 
-  --surface-border: theme("colors.gray.200");
+  --surface-border: theme("colors.surface.border");
   --surface-border-button: theme("colors.gray.300");
 
-  --text-title: theme("colors.black");
-  --text-primary: theme("colors.gray.900");
-  --text-secondary: theme("colors.gray.800");
-  --text-tertiary: theme("colors.gray.600");
+  --text-title: theme("colors.text.title");
+  --text-primary: theme("colors.text.primary");
+  --text-secondary: theme("colors.text.secondary");
+  --text-tertiary: theme("colors.text.tertiary");
 
 
   /* --- focus --- */
@@ -81,17 +81,17 @@
 
 
   /* --- theme --- */
-  --surface-primary: theme("colors.surface.primary");
-  --surface-secondary: theme("colors.surface.secondary");
-  --surface-tertiary: theme("colors.surface.tertiary");
+  --surface-primary: theme("colors.dark.surface.primary");
+  --surface-secondary: theme("colors.dark.surface.secondary");
+  --surface-tertiary: theme("colors.dark.surface.tertiary");
 
-  --surface-border: theme("colors.surface.border");
+  --surface-border: theme("colors.dark.surface.border");
   --surface-border-button: theme("colors.gray.700");
 
-  --text-title: theme("colors.white");
-  --text-primary: theme("colors.gray.200");
-  --text-secondary: theme("colors.gray.200");
-  --text-tertiary: theme("colors.gray.500");
+  --text-title: theme("colors.dark.text.title");
+  --text-primary: theme("colors.dark.text.primary");
+  --text-secondary: theme("colors.dark.text.secondary");
+  --text-tertiary: theme("colors.dark.text.tertiary");;
 
 
   /* --- focus --- */
