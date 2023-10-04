@@ -43,15 +43,6 @@
 
 /* --- coloring --- */
 
-/* TODO
-
-either
-- add elements with color after certain lights and opacity 0 -> 1
-- add parent classes conditionally animating certain lights (class inside of svg)
-- add coloring in css (either with class in svg or with nth-type)
-- give all to be animated elements the color they will have and override in the default state
-*/
-
 #ClientServer.server-active {
   --active-color: var(--server-color);
   --active-stroke-color: var(--server-stroke-color);
@@ -145,20 +136,6 @@ either
 
 .asterisk {
   opacity: 0;
-  transition: var(--transition);
-}
-
-.asterisk:nth-child(2) {
-  transition-delay: var(--form-transition-time);
-}
-.asterisk:nth-child(3) {
-  transition-delay: calc(var(--form-transition-time) * 2);
-}
-.asterisk:nth-child(4) {
-  transition-delay: calc(var(--form-transition-time) * 3);
-}
-.asterisk:nth-child(5) {
-  transition-delay: calc(var(--form-transition-time) * 4);
 }
 
 #password {
@@ -220,13 +197,26 @@ either
 }
 
 /* form */
+
 .first-step .asterisk {
-  opacity: 1;
+  animation: fadeIn var(--form-transition-time) forwards linear;
 }
 
 .connect .asterisk {
   opacity: 1;
-  transition-delay: 0s;
+}
+
+.first-step .asterisk:nth-child(2) {
+  animation-delay: var(--form-transition-time);
+}
+.first-step .asterisk:nth-child(3) {
+  animation-delay: calc(var(--form-transition-time) * 2);
+}
+.first-step .asterisk:nth-child(4) {
+  animation-delay: calc(var(--form-transition-time) * 3);
+}
+.first-step .asterisk:nth-child(5) {
+  animation-delay: calc(var(--form-transition-time) * 4);
 }
 
 .first-step #button {
@@ -239,27 +229,23 @@ either
 
 /* keyboard */
 
-.first-step #keyColor1 {
+.first-step .key-colored {
   animation: fadeInOut var(--form-transition-time) forwards linear;
 }
 
 .first-step #keyColor2 {
-  animation: fadeInOut var(--form-transition-time) forwards linear;
   animation-delay: var(--form-transition-time);
 }
 
 .first-step #keyColor3 {
-  animation: fadeInOut var(--form-transition-time) forwards linear;
   animation-delay: calc(var(--form-transition-time) * 2);
 }
 
 .first-step #keyColor4 {
-  animation: fadeInOut var(--form-transition-time) forwards linear;
   animation-delay: calc(var(--form-transition-time) * 3);
 }
 
 .first-step #keyColor5 {
-  animation: fadeInOut var(--form-transition-time) forwards linear;
   animation-delay: calc(var(--form-transition-time) * 4);
 }
 
