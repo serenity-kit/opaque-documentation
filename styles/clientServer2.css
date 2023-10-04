@@ -3,6 +3,8 @@
 #OpaqueAnimation {
   --server-color: theme("colors.primary.300");
   --client-color: theme("colors.palette.honey");
+  --server-stroke-color: theme("colors.primary.500");
+  --client-stroke-color: #f1a816;
 }
 
 
@@ -27,7 +29,11 @@
 /* --- remove unused elements --- */
 
 #banana,
-.static-dot,
+.static-dot {
+  display: none;
+}
+
+#connectionYellow,
 #connectionGray {
   display: none;
 }
@@ -35,18 +41,20 @@
 /* --- 'root' settings --- */
 
 #ClientServer2 {
-    --active-color: theme("colors.gray.300");
+    --active-color: theme("colors.gray.600");
     --transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    --dot-radius: 4.5;
+    --dot-radius: 3.5;
 }
 
 /* --- base --- */
 
-.server-active {
+#ClientServer2.server-active {
     --active-color: var(--server-color);
+    --active-stroke-color: var(--server-stroke-color);
 }
-.client-active {
+#ClientServer2.client-active {
     --active-color: var(--client-color);
+    --active-stroke-color: var(--client-stroke-color);
 }
 
 /* --- coloring --- */
@@ -59,21 +67,6 @@ either
 - add coloring in css (either with class in svg or with nth-type)
 - give all to be animated elements the color they will have and override in the default state
 */
-
-/* fill */
-
-.fill-honey {
-  fill:theme("colors.palette.honey");
-}
-
-.fill-primary {
-  fill: theme("colors.primary.500");
-}
-
-.fill-rose {
-  fill:theme("colors.palette.rose");
-}
-
 
 /* lights */
 
@@ -93,6 +86,18 @@ either
 }
 
 
+
+/* --- effects --- */
+
+/* for some reason the drop-shadow of the svg is not working
+   so we add it manually here
+*/
+.filter-connection {
+  -webkit-filter: drop-shadow(0.5rem 1rem 1px rgba(0, 0, 0, .05));
+  filter: drop-shadow(0.5rem 1rem 1px rgba(0, 0, 0, .05));
+}
+
+
 /* ========== default state ========== */
 /* 
   defines the default styling for the svg, 
@@ -100,8 +105,7 @@ either
   in a neutral color scheme
 */
 
-#boardActiveClient,
-#boardActiveServer {
+.board {
   opacity: 0;
 }
 
@@ -146,23 +150,8 @@ either
 
 /* -------- boards -------- */
 
-#boardServer {
-    --stroke-color: theme("colors.primary.300");
-}
-
-#boardClient {
-    --stroke-color: #E9AC27;
-}
-
 .board {
-    fill: theme("colors.gray.500");
-    stroke: theme("colors.gray.300");
     transition: var(--transition);
-}
-
-.board.active {
-    fill: var(--active-color);
-    stroke: var(--stroke-color);
 }
 
 /* -------- connection -------- */
@@ -175,11 +164,11 @@ either
 
 #connection-line,
 #connection .data {
-    stroke: var(--active-color);
+    stroke: var(--active-stroke-color);
 }
 
 #connection-line {
-  animation-delay: 0.1s;
+  animation-delay: 0.05s;
   animation-duration: 1.3s;
   animation-timing-function: ease-in-out;
   animation-fill-mode: forwards;
@@ -187,30 +176,31 @@ either
   stroke-dashoffset: 320;
 }
 
-#connection .dot {
-    fill: var(--active-color);
-    opacity: 0;
+.connect #connection-line {
+    animation-name: establishConnection;
+}
+
+.dot {
+    r: 0;
+    fill: var(--active-stroke-color);
     animation-duration: 0.2s;
     animation-fill-mode: forwards;
     animation-timing-function: ease-in-out;
 }
 
-.connect #connection-line {
-    animation-name: establishConnection;
-}
-
 .connect #dotClient {
-  animation-delay: 0;
-  animation-name: fadeIn;
+  animation-name: plop;
+  animation-delay: 0s;
 }
 
 .connect #dotServer {
-  animation-delay: 1.3s;
-  animation-name: fadeIn;
+  animation-name: plop;
+  animation-delay: 1.2s;
 }
 
 
 /* --- data --- */
+
 .send-to-server .data {
     animation-name: clientToServer;
 }
@@ -300,6 +290,24 @@ either
   }
   to {
       opacity: 0;
+  }
+}
+
+@keyframes plop {
+  from {
+      r: 0;
+  }
+  to {
+      r: var(--dot-radius);
+  }
+}
+
+@keyframes shrink {
+  from {
+      r: var(--dot-radius);
+  }
+  to {
+      r: 0;
   }
 }
 
