@@ -3,13 +3,13 @@ import { useActor } from "@xstate/react";
 import { useState } from "react";
 import { assign, createMachine, fromPromise } from "xstate";
 import { Button } from "./Button";
-import { ClientServer } from "./ClientServer";
 import cn from "clsx";
 import { Icon } from "./icon/Icon";
 import { Input } from "./Input";
 import { NavigationButton } from "./NavigationButton";
 import FadeIn from "./FadeInChildren";
 import { CliTypeWriter } from "./CliTypeWriter";
+import { ClientServer2 } from "./ClientServer2";
 
 const formMachine = createMachine(
   {
@@ -662,7 +662,7 @@ export const InteractiveForm = () => {
         </div>
         {/* --- animation area --- */}
         <div className="h-[25rem] md:h-full px-10 svg-register flex items-end md:items-center justify-center grow">
-          <ClientServer
+          <ClientServer2
             serverActive={serverIsActive}
             clientActive={clientIsActive}
             className={cn(
