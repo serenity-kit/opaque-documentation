@@ -34,6 +34,8 @@
   --active-color: theme("colors.gray.600");
   --transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   --dot-radius: 3.5;
+
+  overflow: visible;
 }
 
 /* #Illustration * {
@@ -268,8 +270,8 @@
 }
 
 /* glimmer */
-.server-active #lightTopTop5,
-.server-active #lightBottomTop4 {
+.server-active.fade-in-graph #lightTopTop5,
+.server-active.fade-in-graph #lightBottomTop4 {
   animation: glimmer 5s linear infinite;
 }
 
@@ -282,9 +284,9 @@
 }
 
 /* random */
-.server-active #lightTopBottom2,
-.server-active #lightMiddleBottom5,
-.server-active #lightBottomBottom1 {
+.server-active.fade-in-graph #lightTopBottom2,
+.server-active.fade-in-graph #lightMiddleBottom5,
+.server-active.fade-in-graph #lightBottomBottom1 {
   animation: fadeInOut40 8s linear infinite;
 }
 
