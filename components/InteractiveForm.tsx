@@ -283,30 +283,105 @@ const formMachine = createMachine(
       },
       // login states
       clientStartLogin: {
+        entry: assign(({ context, event }) => {
+          return event.type ===
+            "xstate.after(animationStepDelay)#form.clientStartLogin"
+            ? {
+                animationStep: context.animationStep + 1,
+                sendData: context.animationStep === 2,
+              }
+            : {
+                // comment -> prompt -> request -> prompt
+                animationStepDelays: [1200, 2000, 1500],
+                animationStep: 0,
+                sendData: false,
+              };
+        }),
         after: {
-          2000: {
+          animationStepDelay: {
+            target: "clientStartLogin",
+            guard: "hasNextAnimationStep",
+          },
+          2001: {
             target: "serverStartLogin",
             guard: "autoplayIsActive",
           },
         },
       },
       serverStartLogin: {
+        entry: assign(({ context, event }) => {
+          return event.type ===
+            "xstate.after(animationStepDelay)#form.serverStartLogin"
+            ? {
+                animationStep: context.animationStep + 1,
+                sendData: context.animationStep === 2,
+              }
+            : {
+                // comment -> prompt -> response -> prompt
+                animationStepDelays: [1000, 2000, 1500],
+                animationStep: 0,
+                sendData: false,
+              };
+        }),
         after: {
-          2000: {
+          animationStepDelay: {
+            target: "serverStartLogin",
+            guard: "hasNextAnimationStep",
+          },
+          2001: {
             target: "clientFinishLogin",
             guard: "autoplayIsActive",
           },
         },
       },
       clientFinishLogin: {
+        entry: assign(({ context, event }) => {
+          return event.type ===
+            "xstate.after(animationStepDelay)#form.clientFinishLogin"
+            ? {
+                animationStep: context.animationStep + 1,
+                sendData: context.animationStep === 4,
+              }
+            : {
+                // comment -> prompt -> request -> prompt -> session-key -> prompt
+                animationStepDelays: [1000, 2000, 1500, 2000, 1500],
+                animationStep: 0,
+                sendData: false,
+              };
+        }),
         after: {
-          2000: {
+          animationStepDelay: {
+            target: "clientFinishLogin",
+            guard: "hasNextAnimationStep",
+          },
+          2001: {
             target: "serverFinishLogin",
             guard: "autoplayIsActive",
           },
         },
       },
-      serverFinishLogin: {},
+      serverFinishLogin: {
+        entry: assign(({ context, event }) => {
+          return event.type ===
+            "xstate.after(animationStepDelay)#form.serverFinishLogin"
+            ? {
+                animationStep: context.animationStep + 1,
+                sendData: context.animationStep === 2,
+              }
+            : {
+                // comment -> prompt -> session-key
+                animationStepDelays: [1000, 2000],
+                animationStep: 0,
+                sendData: false,
+              };
+        }),
+        after: {
+          animationStepDelay: {
+            target: "serverFinishLogin",
+            guard: "hasNextAnimationStep",
+          },
+        },
+      },
     },
 
     initial: "waitingForOpaque",
@@ -607,63 +682,84 @@ export const InteractiveForm = () => {
 
             {/* login */}
             {state.matches("clientStartLogin") && (
-              <div>
-                <div>Log Step 1 - client Start</div>
-                <div>
-                  Something happens and something else and something else and
-                  wow ...
-                </div>
-                <div>
-                  startLoginRequest:
+              <div className="flex flex-col gap-4 overflow-y-auto">
+                <CliTypeWriter
+                  sequence={["Starting the Login sequence"]}
+                  comment
+                />
+                {state.context.animationStep >= 1 && (
+                  <CliTypeWriter
+                    sequence={["Generating start-login-request ..."]}
+                    prompt
+                  />
+                )}
+                {state.context.animationStep >= 2 && (
+                  <div className="w-10/12 pl-6 text-color-actor break-all">
                   {state.context.clientStartLoginData.startLoginRequest}
                 </div>
-                <div>Sending back …</div>
+                )}
+                {state.context.animationStep >= 3 && (
+                  <CliTypeWriter sequence={["Sending ..."]} prompt />
+                )}
               </div>
             )}
             {state.matches("serverStartLogin") && (
-              <div>
-                <div>Log Step 2 - server Start</div>
-                <div>
-                  Something happens and something else and something else and
-                  wow ...
-                </div>{" "}
-                <div>
-                  loginResponse:
+              <div className="flex flex-col gap-4 overflow-y-auto">
+                <CliTypeWriter sequence={["Server starting"]} comment />
+                {state.context.animationStep >= 1 && (
+                  <CliTypeWriter
+                    sequence={["Generating login-response ..."]}
+                    prompt
+                  />
+                )}
+                {state.context.animationStep >= 2 && (
+                  <div className="w-10/12 pl-6 text-color-actor break-all">
                   {state.context.serverStartLoginData.loginResponse}
                 </div>
-                <div>Sending back …</div>
+                )}
+                {state.context.animationStep >= 3 && (
+                  <CliTypeWriter sequence={["Sending ..."]} prompt />
+                )}
               </div>
             )}
             {state.matches("clientFinishLogin") && (
-              <div>
-                <div>Log Step 3 - client Finish</div>
-                <div>
-                  Something happens and something else and something else and
-                  wow ...
-                </div>{" "}
-                <div>
-                  finishLoginRequest:
+              <div className="flex flex-col gap-4 overflow-y-auto">
+                <CliTypeWriter sequence={["Client finish"]} comment />
+                {state.context.animationStep >= 1 && (
+                  <CliTypeWriter
+                    sequence={["Generating finish-login-request ..."]}
+                    prompt
+                  />
+                )}
+                {state.context.animationStep >= 2 && (
+                  <div className="w-10/12 pl-6 text-color-actor break-all">
                   {state.context.clientFinishLoginData.finishLoginRequest}
                 </div>
-                <div>
-                  sessionKey:
+                )}
+                {state.context.animationStep >= 3 && (
+                  <CliTypeWriter sequence={["Session key - "]} prompt />
+                )}
+                {state.context.animationStep >= 4 && (
+                  <div className="w-10/12 pl-6 text-color-actor break-all">
                   {state.context.clientFinishLoginData.sessionKey}
                 </div>
-                <div>Sending back …</div>
+                )}
+                {state.context.animationStep >= 5 && (
+                  <CliTypeWriter sequence={["Sending ..."]} prompt />
+                )}
               </div>
             )}
             {state.matches("serverFinishLogin") && (
-              <div>
-                <div>Log Step 4 - server Finish</div>
-                <div>
-                  Something happens and something else and something else and
-                  wow ...
-                </div>{" "}
-                <div>
-                  sessionKey:
+              <div className="flex flex-col gap-4 overflow-y-auto">
+                <CliTypeWriter sequence={["Server finish"]} comment />
+                {state.context.animationStep >= 1 && (
+                  <CliTypeWriter sequence={["Session Key - "]} prompt />
+                )}
+                {state.context.animationStep >= 2 && (
+                  <div className="w-10/12 pl-6 text-color-actor break-all">
                   {state.context.serverFinishLoginData.sessionKey}
                 </div>
-                <div>Sending back …</div>
+                )}
               </div>
             )}
           </div>
