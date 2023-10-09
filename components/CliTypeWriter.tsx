@@ -23,7 +23,7 @@ export const CliTypeWriter = ({
     comment: "italic",
   };
 
-  const typeSpeed = prompt || slow ? 62 : 82;
+  const typeSpeed = prompt || slow ? 50 : 22;
 
   return (
     <div
@@ -41,7 +41,11 @@ export const CliTypeWriter = ({
         </div>
       ) : null}
       <div>
-        <TypeAnimation sequence={sequence} speed={typeSpeed} cursor={false} />
+        <TypeAnimation
+          sequence={sequence}
+          speed={{ type: "keyStrokeDelayInMs", value: typeSpeed }}
+          cursor={false}
+        />
       </div>
     </div>
   );
