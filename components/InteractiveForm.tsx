@@ -354,6 +354,14 @@ export const InteractiveForm = () => {
     state.matches("serverStartLogin") ||
     state.matches("serverFinishLogin");
 
+  const fadeInGraph =
+    (state.matches("clientStartRegistration") &&
+      state.context.animationStep >= 2 &&
+      state.context.animationStep < 4) ||
+    (state.matches("serverCreateRegistrationResponse") &&
+      state.context.animationStep >= 2 &&
+      state.context.animationStep < 4);
+
   const isLastStepOfRegistration =
     state.matches("clientFinishRegistration") &&
     state.context.animationStep === 8;
@@ -665,20 +673,19 @@ export const InteractiveForm = () => {
           <ClientServer
             serverActive={serverIsActive}
             clientActive={clientIsActive}
+            animateServer={
+              (serverIsActive && fadeInGraph) ||
+              (state.matches("serverStartLogin") &&
+                state.context.animationStep >= 1 &&
+                state.context.animationStep <= 2)
+            }
             animateElliptical={
               (state.matches("clientStartRegistration") &&
                 state.context.animationStep === 3) ||
               (state.matches("serverCreateRegistrationResponse") &&
                 state.context.animationStep === 3)
             }
-            fadeInGraph={
-              (state.matches("clientStartRegistration") &&
-                state.context.animationStep >= 2 &&
-                state.context.animationStep < 4) ||
-              (state.matches("serverCreateRegistrationResponse") &&
-                state.context.animationStep >= 2 &&
-                state.context.animationStep < 4)
-            }
+            fadeInGraph={fadeInGraph}
             isFirstStep={state.matches("clientStartRegistration")}
             className={cn(
               !(

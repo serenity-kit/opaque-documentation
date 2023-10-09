@@ -270,8 +270,8 @@
 }
 
 /* glimmer */
-.server-active.fade-in-graph #lightTopTop5,
-.server-active.fade-in-graph #lightBottomTop4 {
+.server-active.animate-server #lightTopTop5,
+.server-active.animate-server #lightBottomTop4 {
   animation: glimmer 5s linear infinite;
 }
 
@@ -284,9 +284,9 @@
 }
 
 /* random */
-.server-active.fade-in-graph #lightTopBottom2,
-.server-active.fade-in-graph #lightMiddleBottom5,
-.server-active.fade-in-graph #lightBottomBottom1 {
+.server-active.animate-server #lightTopBottom2,
+.server-active.animate-server #lightMiddleBottom5,
+.server-active.animate-server #lightBottomBottom1 {
   animation: fadeInOut40 8s linear infinite;
 }
 
