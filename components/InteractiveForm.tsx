@@ -205,7 +205,7 @@ const formMachine = createMachine(
               }
             : {
                 // comment -> prompt -> comment -> comment long -> prompt -> request -> sending
-                animationStepDelays: [2000, 3000, 2000, 4800, 1500, 3000],
+                animationStepDelays: [2000, 3000, 2000, 5000, 1500, 3000],
                 animationStep: 0,
                 sendData: false,
               };
@@ -231,7 +231,7 @@ const formMachine = createMachine(
               }
             : {
                 // comment -> prompt -> comment -> comment long -> prompt -> request -> sending
-                animationStepDelays: [2000, 2500, 3500, 4500, 1500, 1500],
+                animationStepDelays: [2000, 2500, 3500, 4900, 1500, 1500],
                 animationStep: 0,
                 sendData: false,
               };
@@ -241,7 +241,7 @@ const formMachine = createMachine(
             target: "serverCreateRegistrationResponse",
             guard: "hasNextAnimationStep",
           },
-          4501: {
+          4901: {
             target: "clientFinishRegistration",
             guard: "autoplayIsActive",
           },
