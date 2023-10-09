@@ -737,7 +737,7 @@ export const InteractiveForm = () => {
                 </div>
                 )}
                 {state.context.animationStep >= 3 && (
-                  <CliTypeWriter sequence={["Session key - "]} prompt />
+                  <CliTypeWriter sequence={["Session key: "]} prompt />
                 )}
                 {state.context.animationStep >= 4 && (
                   <div className="w-10/12 pl-6 text-color-actor break-all">
@@ -753,7 +753,7 @@ export const InteractiveForm = () => {
               <div className="flex flex-col gap-4 overflow-y-auto">
                 <CliTypeWriter sequence={["Server finish"]} comment />
                 {state.context.animationStep >= 1 && (
-                  <CliTypeWriter sequence={["Session Key - "]} prompt />
+                  <CliTypeWriter sequence={["Session Key: "]} prompt />
                 )}
                 {state.context.animationStep >= 2 && (
                   <div className="w-10/12 pl-6 text-color-actor break-all">
