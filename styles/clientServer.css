@@ -38,6 +38,10 @@
   overflow: visible;
 }
 
+.op-transition {
+  transition: var(--transition);
+}
+
 /* #Illustration * {
   transition: var(--transition);
 } */

@@ -265,7 +265,8 @@ export const ClientServer: React.FC<ClientServerProps> = ({
         <g id="boardInactiveClient">
           <path
             d="m1.7,127.3v9.5c0,4,2.1,7.6,5.5,9.6l96.1,55.5c9.6,5.6,21.5,5.6,31.1,0l96.7-55.9c3-1.7,4.9-5,4.9-8.5v-10.3,1.2c-.4,4-2.5,7.7-5.9,10l-.9.6c-.1,0-.2.1-.3.2l-94.5,54.6c-9.6,5.6-21.5,5.6-31.1,0L8.6,139.3l-1.3-.9c-3.3-2.1-5.3-5.6-5.5-9.5v-1.6Z"
-            opacity="0"
+            opacity={clientActive ? "0" : "0.05"}
+            className="op-transition"
           />
           <g opacity="0.2">
             <path
@@ -301,7 +302,8 @@ export const ClientServer: React.FC<ClientServerProps> = ({
         <g id="boardInactiveServer">
           <path
             d="m262.7,127.3v9.5c0,4,2.1,7.6,5.5,9.6l96.1,55.5c9.6,5.6,21.5,5.6,31.1,0l96.7-55.9c3-1.7,4.9-5,4.9-8.5v-10.3,1.2c-.4,4-2.5,7.7-5.9,10l-.9.6c-.1,0-.2.1-.3.2l-94.5,54.6c-9.6,5.6-21.5,5.6-31.1,0l-94.7-54.7-1.3-.9c-3.3-2.1-5.3-5.6-5.5-9.5v-1.6Z"
-            opacity="0"
+            opacity={serverActive ? "0" : "0.05"}
+            className="op-transition"
           />
           <g opacity="0.2">
             <path
