@@ -567,7 +567,7 @@ export const InteractiveForm = () => {
                   <CliTypeWriter sequence={["Request generated: "]} prompt />
                 )}
                 {state.context.animationStep >= 5 && (
-                  <div className="w-10/12 pl-6 text-color-actor">
+                  <div className="w-10/12 pl-6 text-color-actor break-all">
                     {
                       state.context.clientStartRegistrationData
                         .registrationRequest
@@ -614,7 +614,7 @@ export const InteractiveForm = () => {
                   <CliTypeWriter sequence={["Response generated: "]} prompt />
                 )}
                 {state.context.animationStep >= 5 && (
-                  <div className="w-10/12 pl-6 text-color-actor">
+                  <div className="w-10/12 pl-6 text-color-actor break-all">
                     {
                       state.context.serverCreateRegistrationResponseData
                         .registrationResponse
@@ -661,7 +661,7 @@ export const InteractiveForm = () => {
                   <CliTypeWriter sequence={["Record generated: "]} prompt />
                 )}
                 {state.context.animationStep >= 6 && (
-                  <div className="w-10/12 pl-6 text-color-actor">
+                  <div className="w-10/12 pl-6 text-color-actor break-all">
                     {
                       state.context.clientFinishRegistrationData
                         .registrationRecord
