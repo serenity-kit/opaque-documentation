@@ -27,6 +27,14 @@
     --pulse-opacity: 0.9;
     --pulse-color: 237 237 240; /* rgb gray-200 */
   }
+
+  .iteration-3 {
+    animation-iteration-count: 3;
+  }
+
+  .iteration-infinite {
+    animation-iteration-count: infinite;
+  }
   
   @keyframes pulsing {
     to {

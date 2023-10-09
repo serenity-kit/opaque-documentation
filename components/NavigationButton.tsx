@@ -6,7 +6,8 @@ export type NavigationButtonProps = ComponentProps<"button"> & {
   variant?: "primary" | "secondary";
   active?: boolean;
   iconName?: IconName;
-  pukse?: boolean;
+  pulse?: boolean;
+  pulseCount?: 3 | "infinite";
 };
 
 export const NavigationButton = ({
@@ -15,6 +16,7 @@ export const NavigationButton = ({
   variant = "secondary",
   active = false,
   pulse = false,
+  pulseCount = 3,
   className,
   ...props
 }: NavigationButtonProps) => {
@@ -40,6 +42,7 @@ export const NavigationButton = ({
     ),
     pulse: cn(
       "pulse",
+      pulseCount === "infinite" ? "iteration-infinite" : "iteration-3",
       variant === "primary"
         ? "pulse-primary dark:pulse-primary-dark"
         : "pulse-secodnary dark:pulse-secondary-dark"
