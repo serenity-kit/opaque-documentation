@@ -129,6 +129,7 @@
 
 #client {
   --form-transition-time: 0.25s;
+  --form-animation-delay: 0.3s;
 }
 
 .key-colored {
@@ -192,6 +193,7 @@
 
 .first-step .asterisk {
   animation: fadeIn var(--form-transition-time) forwards linear;
+  animation-delay: var(--form-animation-delay);
 }
 
 .connect .asterisk {
@@ -199,21 +201,21 @@
 }
 
 .first-step .asterisk:nth-child(2) {
-  animation-delay: var(--form-transition-time);
+  animation-delay: calc(var(--form-animation-delay) + var(--form-transition-time));
 }
 .first-step .asterisk:nth-child(3) {
-  animation-delay: calc(var(--form-transition-time) * 2);
+  animation-delay: calc(var(--form-animation-delay) + var(--form-transition-time) * 2);
 }
 .first-step .asterisk:nth-child(4) {
-  animation-delay: calc(var(--form-transition-time) * 3);
+  animation-delay: calc(var(--form-animation-delay) + var(--form-transition-time) * 3);
 }
 .first-step .asterisk:nth-child(5) {
-  animation-delay: calc(var(--form-transition-time) * 4);
+  animation-delay: calc(var(--form-animation-delay) + var(--form-transition-time) * 4);
 }
 
 .first-step #button {
   animation-name: click;
-  animation-delay: calc(var(--form-transition-time) * 7);
+  animation-delay: calc(var(--form-animation-delay) + var(--form-transition-time) * 7);
   animation-duration: 700ms;
   animation-timing-function: linear;
   animation-fill-mode: forwards;
@@ -223,22 +225,23 @@
 
 .first-step .key-colored {
   animation: fadeInOut var(--form-transition-time) forwards linear;
+  animation-delay: var(--form-animation-delay);
 }
 
 .first-step #keyColor2 {
-  animation-delay: var(--form-transition-time);
+  animation-delay: calc(var(--form-animation-delay) + var(--form-transition-time));
 }
 
 .first-step #keyColor3 {
-  animation-delay: calc(var(--form-transition-time) * 2);
+  animation-delay: calc(var(--form-animation-delay) + var(--form-transition-time) * 2);
 }
 
 .first-step #keyColor4 {
-  animation-delay: calc(var(--form-transition-time) * 3);
+  animation-delay: calc(var(--form-animation-delay) + var(--form-transition-time) * 3);
 }
 
 .first-step #keyColor5 {
-  animation-delay: calc(var(--form-transition-time) * 4);
+  animation-delay: calc(var(--form-animation-delay) + var(--form-transition-time) * 4);
 }
 
 /* -------- server -------- */

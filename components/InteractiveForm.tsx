@@ -206,7 +206,7 @@ const formMachine = createMachine(
               }
             : {
                 // comment -> prompt -> comment -> comment long -> prompt -> request -> sending => NEXT
-                animationStepDelays: [2000, 3000, 2000, 5000, 1500, 2500, 3000],
+                animationStepDelays: [2500, 3000, 2000, 5000, 1500, 2500, 3000],
                 animationStep: 0,
                 sendData: false,
               };
@@ -499,6 +499,7 @@ export const InteractiveForm = () => {
         id="OpaqueAnimation"
         className={cn(
           "flex flex-col md:flex-row w-full my-6 h-full md:h-[33rem] bg-gray-150 rounded-2xl overflow-hidden",
+          notStarted && "dark:bg-gray-150/90",
           serverIsActive && "server-active",
           clientIsActive && "client-active"
         )}
