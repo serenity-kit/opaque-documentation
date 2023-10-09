@@ -1,5 +1,6 @@
 import * as opaque from "@serenity-kit/opaque";
 import { useActor } from "@xstate/react";
+import { and, or, not } from "xstate/guards";
 import { useState } from "react";
 import { assign, createMachine, fromPromise } from "xstate";
 import { Button } from "./Button";
@@ -204,8 +205,8 @@ const formMachine = createMachine(
                 sendData: context.animationStep === 5,
               }
             : {
-                // comment -> prompt -> comment -> comment long -> prompt -> request -> sending
-                animationStepDelays: [2000, 3000, 2000, 5000, 1500, 3000],
+                // comment -> prompt -> comment -> comment long -> prompt -> request -> sending => NEXT
+                animationStepDelays: [2000, 3000, 2000, 5000, 1500, 2500, 3000],
                 animationStep: 0,
                 sendData: false,
               };
@@ -215,9 +216,9 @@ const formMachine = createMachine(
             target: "clientStartRegistration",
             guard: "hasNextAnimationStep",
           },
-          5001: {
+          always: {
             target: "serverCreateRegistrationResponse",
-            guard: "autoplayIsActive",
+            guard: and(["autoplayIsActive", "hasAnimationFinished"]),
           },
         },
       },
@@ -230,8 +231,8 @@ const formMachine = createMachine(
                 sendData: context.animationStep === 5,
               }
             : {
-                // comment -> prompt -> comment -> comment long -> prompt -> request -> sending
-                animationStepDelays: [2000, 2500, 3500, 4900, 1500, 1500],
+                // comment -> prompt -> comment -> comment long -> prompt -> request -> sending => NEXT
+                animationStepDelays: [2000, 2500, 3500, 4900, 1500, 1500, 3000],
                 animationStep: 0,
                 sendData: false,
               };
@@ -241,9 +242,9 @@ const formMachine = createMachine(
             target: "serverCreateRegistrationResponse",
             guard: "hasNextAnimationStep",
           },
-          4901: {
+          always: {
             target: "clientFinishRegistration",
-            guard: "autoplayIsActive",
+            guard: and(["autoplayIsActive", "hasAnimationFinished"]),
           },
         },
       },
@@ -256,9 +257,9 @@ const formMachine = createMachine(
                 sendData: context.animationStep === 6,
               }
             : {
-                // comment -> prompt -> comment -> comment -> comment -> prompt -> request -> sending
+                // comment -> prompt -> comment -> comment -> comment -> prompt -> request -> sending => NEXT
                 animationStepDelays: [
-                  1000, 2500, 1500, 1500, 1500, 1500, 1500, 2500,
+                  1000, 2500, 1500, 1500, 1500, 1500, 1500, 2500, 5000,
                 ],
                 animationStep: 0,
                 sendData: false,
@@ -275,9 +276,9 @@ const formMachine = createMachine(
             target: "clientFinishRegistration",
             guard: "hasNextAnimationStep",
           },
-          4000: {
+          always: {
             target: "clientStartLogin",
-            guard: "autoplayIsActive",
+            guard: and(["autoplayIsActive", "hasAnimationFinished"]),
           },
         },
       },
@@ -291,8 +292,8 @@ const formMachine = createMachine(
                 sendData: context.animationStep === 2,
               }
             : {
-                // comment -> prompt -> request -> prompt
-                animationStepDelays: [1200, 2000, 1500],
+                // comment -> prompt -> request -> prompt => NEXT
+                animationStepDelays: [1200, 2000, 1500, 3000],
                 animationStep: 0,
                 sendData: false,
               };
@@ -302,9 +303,9 @@ const formMachine = createMachine(
             target: "clientStartLogin",
             guard: "hasNextAnimationStep",
           },
-          2001: {
+          always: {
             target: "serverStartLogin",
-            guard: "autoplayIsActive",
+            guard: and(["autoplayIsActive", "hasAnimationFinished"]),
           },
         },
       },
@@ -317,8 +318,8 @@ const formMachine = createMachine(
                 sendData: context.animationStep === 2,
               }
             : {
-                // comment -> prompt -> response -> prompt
-                animationStepDelays: [1000, 2000, 1500],
+                // comment -> prompt -> response -> prompt => NEXT
+                animationStepDelays: [1000, 2000, 1500, 3000],
                 animationStep: 0,
                 sendData: false,
               };
@@ -328,9 +329,9 @@ const formMachine = createMachine(
             target: "serverStartLogin",
             guard: "hasNextAnimationStep",
           },
-          2001: {
+          always: {
             target: "clientFinishLogin",
-            guard: "autoplayIsActive",
+            guard: and(["autoplayIsActive", "hasAnimationFinished"]),
           },
         },
       },
@@ -343,8 +344,8 @@ const formMachine = createMachine(
                 sendData: context.animationStep === 4,
               }
             : {
-                // comment -> prompt -> request -> prompt -> session-key -> prompt
-                animationStepDelays: [1000, 2000, 1500, 2000, 1500],
+                // comment -> prompt -> request -> prompt -> session-key -> prompt => NEXT
+                animationStepDelays: [1000, 2000, 1500, 2000, 1500, 3000],
                 animationStep: 0,
                 sendData: false,
               };
@@ -354,9 +355,9 @@ const formMachine = createMachine(
             target: "clientFinishLogin",
             guard: "hasNextAnimationStep",
           },
-          2001: {
+          always: {
             target: "serverFinishLogin",
-            guard: "autoplayIsActive",
+            guard: and(["autoPlayIsActive", "hasAnimationFinished"]),
           },
         },
       },
@@ -391,6 +392,8 @@ const formMachine = createMachine(
       autoplayIsActive: ({ context }) => context.autoplay,
       hasNextAnimationStep: ({ context }) =>
         context.animationStep < context.animationStepDelays.length,
+      hasAnimationFinished: ({ context }) =>
+        context.animationStep === context.animationStepDelays.length,
     },
     actions: {
       deactivateAutoplay: assign(() => {
@@ -695,8 +698,8 @@ export const InteractiveForm = () => {
                 )}
                 {state.context.animationStep >= 2 && (
                   <div className="w-10/12 pl-6 text-color-actor break-all">
-                  {state.context.clientStartLoginData.startLoginRequest}
-                </div>
+                    {state.context.clientStartLoginData.startLoginRequest}
+                  </div>
                 )}
                 {state.context.animationStep >= 3 && (
                   <CliTypeWriter sequence={["Sending ..."]} prompt />
@@ -714,8 +717,8 @@ export const InteractiveForm = () => {
                 )}
                 {state.context.animationStep >= 2 && (
                   <div className="w-10/12 pl-6 text-color-actor break-all">
-                  {state.context.serverStartLoginData.loginResponse}
-                </div>
+                    {state.context.serverStartLoginData.loginResponse}
+                  </div>
                 )}
                 {state.context.animationStep >= 3 && (
                   <CliTypeWriter sequence={["Sending ..."]} prompt />
@@ -733,16 +736,16 @@ export const InteractiveForm = () => {
                 )}
                 {state.context.animationStep >= 2 && (
                   <div className="w-10/12 pl-6 text-color-actor break-all">
-                  {state.context.clientFinishLoginData.finishLoginRequest}
-                </div>
+                    {state.context.clientFinishLoginData.finishLoginRequest}
+                  </div>
                 )}
                 {state.context.animationStep >= 3 && (
                   <CliTypeWriter sequence={["Session key: "]} prompt />
                 )}
                 {state.context.animationStep >= 4 && (
                   <div className="w-10/12 pl-6 text-color-actor break-all">
-                  {state.context.clientFinishLoginData.sessionKey}
-                </div>
+                    {state.context.clientFinishLoginData.sessionKey}
+                  </div>
                 )}
                 {state.context.animationStep >= 5 && (
                   <CliTypeWriter sequence={["Sending ..."]} prompt />
@@ -757,8 +760,8 @@ export const InteractiveForm = () => {
                 )}
                 {state.context.animationStep >= 2 && (
                   <div className="w-10/12 pl-6 text-color-actor break-all">
-                  {state.context.serverFinishLoginData.sessionKey}
-                </div>
+                    {state.context.serverFinishLoginData.sessionKey}
+                  </div>
                 )}
               </div>
             )}
