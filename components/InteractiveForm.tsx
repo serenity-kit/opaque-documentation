@@ -357,7 +357,7 @@ const formMachine = createMachine(
           },
           always: {
             target: "serverFinishLogin",
-            guard: and(["autoPlayIsActive", "hasAnimationFinished"]),
+            guard: and(["autoplayIsActive", "hasAnimationFinished"]),
           },
         },
       },
