@@ -590,7 +590,7 @@ export const ClientServer: React.FC<ClientServerProps> = ({
           <g id="stepP3">
             <path
               id="lineP3"
-              d="m129.9,36.1l78.3,185.7"
+              d="M130 36.0005L192 183"
               fill="none"
               stroke="#ffc85a"
               className="line"
@@ -599,7 +599,7 @@ export const ClientServer: React.FC<ClientServerProps> = ({
           <g id="stepP4">
             <path
               id="lineP4"
-              d="m208.2,18.3l-78.5,65.7"
+              d="M195 29L130 84"
               fill="none"
               stroke="#ffc85a"
               className="line"
@@ -637,7 +637,7 @@ export const ClientServer: React.FC<ClientServerProps> = ({
           <g id="stepP6">
             <path
               id="lineP6"
-              d="m207.9,193.3L129.7,42.5"
+              d="M190 159L130 43"
               fill="none"
               stroke="#ffc85a"
               className="line"
@@ -1300,7 +1300,7 @@ export const ClientServer: React.FC<ClientServerProps> = ({
           <g id="stepP3-2">
             <path
               id="lineP3-2"
-              d="m366.1,26.1l78.3,185.7"
+              d="M366 26.0005L426 169"
               fill="none"
               stroke="#7083fa"
               className="line"
@@ -1309,7 +1309,7 @@ export const ClientServer: React.FC<ClientServerProps> = ({
           <g id="stepP4-2">
             <path
               id="lineP4-2"
-              d="m444.4,8.3l-78.5,65.7"
+              d="M433 18L366 74"
               fill="none"
               stroke="#7083fa"
               className="line"
@@ -1347,7 +1347,7 @@ export const ClientServer: React.FC<ClientServerProps> = ({
           <g id="stepP6-2">
             <path
               id="lineP6-2"
-              d="m444.1,183.3l-78.2-150.8"
+              d="M433 163L366 32"
               fill="none"
               stroke="#7083fa"
               className="line"

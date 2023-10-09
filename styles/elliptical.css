@@ -164,7 +164,7 @@
 .animate #lineP3-2 {
   animation-name: drawLine, removeLine;
   animation-duration: calc(0.4s * var(--multiplier));
-  animation-delay: calc(1s * var(--multiplier)), calc(2s * var(--multiplier));
+  animation-delay: calc(1s * var(--multiplier)), calc(1.75s * var(--multiplier));
 }
 
 .animate #dashP3,
@@ -198,14 +198,14 @@
 .animate #P4,
 .animate #P4-2 {
   animation-name: plopElliptical, shrinkElliptical;
-  animation-delay: calc(2.5s * var(--multiplier)), calc(4s * var(--multiplier));
+  animation-delay: calc(2.5s * var(--multiplier)), calc(3.5s * var(--multiplier));
 }
 
 /* step5 */
 .animate #lineP5,
 .animate #lineP5-2 {
   animation-name: drawUp, removeUp;
-  animation-delay: calc(2.5s * var(--multiplier)), calc(3.5s * var(--multiplier));
+  animation-delay: calc(2s * var(--multiplier)), calc(2.75s * var(--multiplier));
 }
 
 .animate #dashP5,
@@ -217,7 +217,7 @@
 .animate #P5,
 .animate #P5-2 {
   animation-name: plopElliptical, shrinkElliptical;
-  animation-delay: calc(3.5s * var(--multiplier)), calc(5s * var(--multiplier));
+  animation-delay: calc(3.5s * var(--multiplier)), calc(4.5s * var(--multiplier));
 }
 
 
@@ -256,7 +256,7 @@
 .animate #P7,
 .animate #P7-2 {
   animation-name: plopElliptical, shrinkElliptical;
-  animation-delay: calc(5s * var(--multiplier)), calc(6.3s * var(--multiplier));
+  animation-delay: calc(5s * var(--multiplier)), calc(6s * var(--multiplier));
 }
 
 
