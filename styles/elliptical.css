@@ -138,7 +138,7 @@
 .animate #P,
 .animate #P-2 {
   animation-name: plopElliptical, shrinkElliptical;
-  animation-delay: 0s, calc(6s * var(--multiplier));
+  animation-delay: 0s, calc(6.4s * var(--multiplier));
 }
 
 .animate #lineP2,
