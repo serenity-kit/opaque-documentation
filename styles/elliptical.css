@@ -62,7 +62,10 @@
   transform: translateY(-50%);
 }
 
-.server-active.fade-in-graph #bgEllipticalServer,
+.server-active.fade-in-graph #bgEllipticalServer {
+  opacity: 0.65;
+  transform: translate(-5%, -49%);
+}
 .server-active.fade-in-graph #ellipticalSolidServer {
   opacity: 1;
   transform: translate(-3%, -43%);
