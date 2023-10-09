@@ -132,7 +132,7 @@
 /* client */
 
 #client {
-  --form-transition-time: 0.25s;
+  --form-transition-time: 0.3s;
   --form-animation-delay: 0.3s;
 }
 
@@ -195,29 +195,30 @@
 
 /* form */
 
-.first-step .asterisk {
+.animate-form .asterisk {
   animation: fadeIn var(--form-transition-time) forwards linear;
   animation-delay: var(--form-animation-delay);
 }
 
+.first-step:not(.animate-form) .asterisk,
 .connect .asterisk {
   opacity: 1;
 }
 
-.first-step .asterisk:nth-child(2) {
+.animate-form .asterisk:nth-child(2) {
   animation-delay: calc(var(--form-animation-delay) + var(--form-transition-time));
 }
-.first-step .asterisk:nth-child(3) {
+.animate-form .asterisk:nth-child(3) {
   animation-delay: calc(var(--form-animation-delay) + var(--form-transition-time) * 2);
 }
-.first-step .asterisk:nth-child(4) {
+.animate-form .asterisk:nth-child(4) {
   animation-delay: calc(var(--form-animation-delay) + var(--form-transition-time) * 3);
 }
-.first-step .asterisk:nth-child(5) {
+.animate-form .asterisk:nth-child(5) {
   animation-delay: calc(var(--form-animation-delay) + var(--form-transition-time) * 4);
 }
 
-.first-step #button {
+.animate-form #button {
   animation-name: click;
   animation-delay: calc(var(--form-animation-delay) + var(--form-transition-time) * 7);
   animation-duration: 700ms;
@@ -227,24 +228,24 @@
 
 /* keyboard */
 
-.first-step .key-colored {
+.animate-form .key-colored {
   animation: fadeInOut var(--form-transition-time) forwards linear;
   animation-delay: var(--form-animation-delay);
 }
 
-.first-step #keyColor2 {
+.animate-form #keyColor2 {
   animation-delay: calc(var(--form-animation-delay) + var(--form-transition-time));
 }
 
-.first-step #keyColor3 {
+.animate-form #keyColor3 {
   animation-delay: calc(var(--form-animation-delay) + var(--form-transition-time) * 2);
 }
 
-.first-step #keyColor4 {
+.animate-form #keyColor4 {
   animation-delay: calc(var(--form-animation-delay) + var(--form-transition-time) * 3);
 }
 
-.first-step #keyColor5 {
+.animate-form #keyColor5 {
   animation-delay: calc(var(--form-animation-delay) + var(--form-transition-time) * 4);
 }
 

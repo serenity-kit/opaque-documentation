@@ -773,6 +773,10 @@ export const InteractiveForm = () => {
           <ClientServer
             serverActive={serverIsActive}
             clientActive={clientIsActive}
+            animateForm={
+              state.matches("clientStartRegistration") &&
+              state.context.animationStep === 0
+            }
             animateServer={
               (serverIsActive && fadeInGraph) ||
               (state.matches("serverStartLogin") &&
