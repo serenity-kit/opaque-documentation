@@ -832,7 +832,7 @@ export const InteractiveForm = () => {
         </NavigationButton>
         <Icon name="arrow-right-s" className={cn(notStarted && "opacity-50")} />
         <NavigationButton
-          disabled={!loginIsReady}
+          disabled={!loginIsReady || inLogin}
           onClick={() => {
             send({ type: "START_LOGIN" });
             setShowLoginSteps(true);
@@ -852,6 +852,7 @@ export const InteractiveForm = () => {
         >
           <Icon name="arrow-right-s" />
           <NavigationButton
+            disabled={!showLoginSteps && !inLogin}
             onClick={() => {
               send({ type: "GO_TO_STEP_CLIENT_START_LOGIN" });
             }}
@@ -861,6 +862,7 @@ export const InteractiveForm = () => {
           </NavigationButton>
           <Icon name="arrow-right-s" />
           <NavigationButton
+            disabled={!showLoginSteps && !inLogin}
             onClick={() => {
               send({ type: "GO_TO_STEP_SERVER_START_LOGIN" });
             }}
@@ -870,6 +872,7 @@ export const InteractiveForm = () => {
           </NavigationButton>
           <Icon name="arrow-right-s" />
           <NavigationButton
+            disabled={!showLoginSteps && !inLogin}
             onClick={() => {
               send({ type: "GO_TO_STEP_CLIENT_FINISH_LOGIN" });
             }}
@@ -879,6 +882,7 @@ export const InteractiveForm = () => {
           </NavigationButton>
           <Icon name="arrow-right-s" />
           <NavigationButton
+            disabled={!showLoginSteps && !inLogin}
             onClick={() => {
               send({ type: "GO_TO_STEP_SERVER_FINISH_LOGIN" });
             }}
