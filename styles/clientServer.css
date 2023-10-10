@@ -36,6 +36,7 @@
   --dot-radius: 3.5;
 
   overflow: visible;
+  width: 100%;
 }
 
 .op-transition {
