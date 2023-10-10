@@ -68,7 +68,7 @@
 
 /* ========== steps ========== */
 
-/* draw line */
+/* draw-line */
 
 .draw-line-paper .text-line {
   animation: drawLine 1s 1s ease-in-out forwards;
@@ -79,7 +79,7 @@
 }
 
 
-/* seal */
+/* seal-paper */
 
 .seal-paper .signature-dot {
   opacity: 1;
@@ -114,12 +114,20 @@
   transition-delay: 1.2s;
 }
 
-.enclose #topFront {
-  animation: fadeIn 0.1s 2.5s linear forwards;
+
+/* send-envelope */
+
+.send-envelope .envelope-wrapper {
+  animation-name: upEnvelope, downEnvelope;
+  animation-duration: 0.4s, 0.4s;
+  animation-delay: 0s, 0.4s;
+  animation-timing-function: ease-in-out, ease-in;
+  animation-fill-mode: forwards;
 }
 
-.enclose #topBack {
-  animation: fadeOut 0.1s 2.8s linear forwards;
+.send-envelope #topBack,
+.send-envelope .letter {
+  animation: fadeOut 0.4s ease-in-out forwards;
 }
 
 
@@ -135,6 +143,18 @@
     transform: translateY(-20%);
   }
   100% {
+    transform: translateY(0%);
+  }
+}
+
+@keyframes upEnvelope {
+  to {
+    transform: translateY(-42%);
+  }
+}
+
+@keyframes downEnvelope {
+  to {
     transform: translateY(0%);
   }
 }
