@@ -1,0 +1,534 @@
+#OpaqueAnimation {
+  --server-color: theme("colors.primary.300");
+  --client-color: theme("colors.palette.honey");
+  --server-stroke-color: theme("colors.primary.500");
+  --client-stroke-color: #f1a816;
+
+  --honey-rgb: 255, 185, 33;
+  --primary-400-rgb: 112, 131, 250;
+  --primary-300-rgb: 157, 170, 253;
+  --rose-rgb: 255, 145, 201;
+}
+
+
+/* =========================== */
+/* =========== CLI =========== */
+/* =========================== */
+
+.client-active .text-color-actor {
+  color: var(--client-color);
+}
+
+.server-active .text-color-actor {
+  color: var(--server-color);
+}
+
+
+/* =========================== */
+/* =========== SVG =========== */
+/* =========================== */
+
+/* --- 'root' settings --- */
+
+#ClientServer {
+  --active-color: theme("colors.gray.600");
+  --transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  --dot-radius: 3.5;
+
+  overflow: visible;
+  width: 100%;
+}
+
+.op-transition {
+  transition: var(--transition);
+}
+
+/* #Illustration * {
+  transition: var(--transition);
+} */
+
+
+/* --- coloring --- */
+
+#ClientServer.server-active {
+  --active-color: var(--server-color);
+  --active-stroke-color: var(--server-stroke-color);
+}
+#ClientServer.client-active {
+  --active-color: var(--client-color);
+  --active-stroke-color: var(--client-stroke-color);
+}
+
+/* lights */
+
+.light-honey {
+  fill: theme("colors.palette.honey");
+  filter: url(#outer-glow-9);
+}
+
+.light-primary {
+  fill: theme("colors.primary.500");
+  filter: url(#outer-glow-8);
+}
+
+.light-rose {
+  fill: theme("colors.palette.rose");
+  filter: url(#outer-glow-7);
+}
+
+
+
+/* --- effects --- */
+
+/* for some reason the drop-shadow of the svg is not working
+   so we add it manually here
+*/
+.filter-connection {
+  -webkit-filter: drop-shadow(0.5rem 1rem 1px rgba(0, 0, 0, .05));
+  filter: drop-shadow(0.5rem 1rem 1px rgba(0, 0, 0, .05));
+}
+
+.drop-shadow-honey {
+  filter: drop-shadow(0rem 0rem 1px rgba(var(--honey-rgb), 0.7));
+}
+
+.drop-shadow-primary-300 {
+  filter: drop-shadow(0rem 0rem 1px rgba(var(--primary-300-rgb), 0.8));
+}
+
+.drop-shadow-primary-400 {
+  filter: drop-shadow(0rem 0rem 1px rgba(var(--primary-400-rgb), 0.8));
+}
+
+.drop-shadow-rose {
+  filter: drop-shadow(0rem 0rem 1px rgba(var(--rose-rgb), 0.7));
+}
+
+/* ========== default state ========== */
+/* 
+  defines the default styling for the svg, 
+  hiding all elements ready for animating
+  in a neutral color scheme
+*/
+
+/* --- remove unused elements --- */
+
+#banana,
+.static-dot {
+  display: none;
+}
+
+#connectionYellow,
+#connectionGray {
+  display: none;
+}
+
+/* --- hide elements which will be animated later --- */
+
+.board {
+  opacity: 0;
+  transition: var(--transition);
+}
+
+/* client */
+
+#client {
+  --form-transition-time: 0.3s;
+  --form-animation-delay: 0.3s;
+}
+
+.key-colored {
+  opacity: 0;  
+  transition: var(--transition);
+}
+
+.asterisk {
+  opacity: 0;
+}
+
+#password {
+  opacity: 0.4;
+  transition: var(--transition);
+}
+
+#button {
+  opacity: 0.5;
+  transition: var(--transition);
+}
+
+/* server */
+
+.slit {
+  opacity: 0.5;
+  transition: var(--transition);
+}
+
+.light-colored {
+  opacity: 0;
+  transition: var(--transition);
+}
+
+#particles {
+  opacity: 0;
+  transition: var(--transition);
+}
+
+
+/* ========== actors ========== */
+
+/* -------- client -------- */
+/* don't change the order of those classes */
+
+.client-active #button,
+.client-active #password {
+  opacity: 1;
+}
+
+.server-active #button,
+.server-active #password {
+  opacity: 0.8;
+}
+
+/* form */
+
+.animate-form .asterisk {
+  animation: fadeIn var(--form-transition-time) forwards linear;
+  animation-delay: var(--form-animation-delay);
+}
+
+.first-step:not(.animate-form) .asterisk,
+.connect .asterisk {
+  opacity: 1;
+}
+
+.animate-form .asterisk:nth-child(2) {
+  animation-delay: calc(var(--form-animation-delay) + var(--form-transition-time));
+}
+.animate-form .asterisk:nth-child(3) {
+  animation-delay: calc(var(--form-animation-delay) + var(--form-transition-time) * 2);
+}
+.animate-form .asterisk:nth-child(4) {
+  animation-delay: calc(var(--form-animation-delay) + var(--form-transition-time) * 3);
+}
+.animate-form .asterisk:nth-child(5) {
+  animation-delay: calc(var(--form-animation-delay) + var(--form-transition-time) * 4);
+}
+
+.animate-form #button {
+  animation-name: click;
+  animation-delay: calc(var(--form-animation-delay) + var(--form-transition-time) * 7);
+  animation-duration: 700ms;
+  animation-timing-function: linear;
+  animation-fill-mode: forwards;
+}
+
+/* keyboard */
+
+.animate-form .key-colored {
+  animation: fadeInOut var(--form-transition-time) forwards linear;
+  animation-delay: var(--form-animation-delay);
+}
+
+.animate-form #keyColor2 {
+  animation-delay: calc(var(--form-animation-delay) + var(--form-transition-time));
+}
+
+.animate-form #keyColor3 {
+  animation-delay: calc(var(--form-animation-delay) + var(--form-transition-time) * 2);
+}
+
+.animate-form #keyColor4 {
+  animation-delay: calc(var(--form-animation-delay) + var(--form-transition-time) * 3);
+}
+
+.animate-form #keyColor5 {
+  animation-delay: calc(var(--form-animation-delay) + var(--form-transition-time) * 4);
+}
+
+/* -------- server -------- */
+/* don't change the order of those classes */
+
+.connect .slit {
+  opacity: 1;
+}
+
+.client-active .slit {
+  opacity: 0.75;
+}
+
+.first-step .slit {
+  transition-delay: 1.2s;
+  opacity: 0.5;
+}
+
+.first-step.connect .slit {
+  opacity: 1;
+}
+
+
+/* lights on */
+.server-active #lightTopTop4,
+.server-active #lightMiddleTop1,
+.server-active #lightBottomBottom3 {
+  opacity: 1;
+}
+
+/* glimmer */
+.server-active.animate-server #lightTopTop5,
+.server-active.animate-server #lightBottomTop4 {
+  animation: glimmer 5s linear infinite;
+}
+
+.server-active #lightTopTop5 {
+  animation-delay: 1s;
+}
+
+.server-active #lightBottomTop4 {
+  animation-delay: 3s;
+}
+
+/* random */
+.server-active.animate-server #lightTopBottom2,
+.server-active.animate-server #lightMiddleBottom5,
+.server-active.animate-server #lightBottomBottom1 {
+  animation: fadeInOut40 8s linear infinite;
+}
+
+.server-active #lightTopBottom2 {
+  animation-delay: 2s;
+}
+
+.server-active #lightBottomBottom1 {
+  animation-delay: 4s;
+}
+
+
+
+/* ========== connection ========== */
+
+/* -------- line -------- */
+
+#connection-line,
+#connection .dot,
+#connection .data {
+  transition: var(--transition);
+}
+
+#connection-line,
+#connection .data {
+  stroke: var(--active-stroke-color);
+}
+
+#connection-line {
+  animation-delay: 0.05s;
+  animation-duration: 1.3s;
+  animation-timing-function: ease-in-out;
+  animation-fill-mode: forwards;
+  stroke-dasharray: 320;
+  stroke-dashoffset: 320;
+}
+
+.connect #connection-line {
+  animation-name: establishConnection;
+}
+
+.dot {
+  r: 0;
+  fill: var(--active-stroke-color);
+  animation-duration: 0.2s;
+  animation-fill-mode: forwards;
+  animation-timing-function: ease-in-out;
+}
+
+.connect #dotClient {
+  animation-name: plopConnection;
+  animation-delay: 0s;
+}
+
+.connect #dotServer {
+  animation-name: plopConnection;
+  animation-delay: 1.2s;
+}
+
+
+/* --- data --- */
+
+.send-to-server .data {
+  animation-name: clientToServer;
+}
+
+.send-to-client .data {
+  animation-name: serverToClient;
+}
+
+.data {
+  stroke-width: 0.45rem;
+  /* make the dot by rounding the edges of the stroke */
+  stroke-linecap: round;
+  stroke-linejoin: round;
+
+  /* set the length of the dash to 0 so it only shows the rounded edges => circle
+      the second parameter defines the space between, needs to be at least as long as the path itself
+  */
+  stroke-dasharray: 0 300;
+  animation-duration: 1000ms;
+  animation-iteration-count: 1;
+  animation-timing-function: linear;
+  animation-fill-mode: forwards;
+  /* needs to be more that 0 to make initial state invisible */
+  stroke-dashoffset: 10;
+
+  filter: url(#drop-shadow-3);
+}
+
+
+
+
+/* =========================== */
+/* ======== KEYFRAMES ======== */
+/* =========================== */
+
+/* parameters are set out of bounds of the line so the data-dot
+   vanishes when reaching it's destination (otherwise it lingers there)
+*/
+@keyframes serverToClient {
+  from {
+      stroke-dashoffset: 10;
+  }
+  to {
+      stroke-dashoffset: 320;
+  }
+}
+  
+@keyframes clientToServer {
+  from {
+      stroke-dashoffset: 320;
+  }
+  to {
+      stroke-dashoffset: 10;
+  }
+}
+
+@keyframes establishConnection {
+  from {
+      stroke-dashoffset: -320;
+  }
+
+  to {
+      stroke-dashoffset: 0;
+  }
+}
+
+@keyframes endConnection {
+  from {
+      stroke-dashoffset: 0;
+  }
+
+  to {
+      stroke-dashoffset: -320;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+      opacity: 0;
+  }
+  to {
+      opacity: 1;
+  }
+}
+
+@keyframes fadeOut {
+  from {
+      opacity: 1;
+  }
+  to {
+      opacity: 0;
+  }
+}
+
+@keyframes plopConnection {
+  from {
+      r: 0;
+  }
+  to {
+      r: var(--dot-radius);
+  }
+}
+
+@keyframes shrinkConnection {
+  from {
+      r: var(--dot-radius);
+  }
+  to {
+      r: 0;
+  }
+}
+
+@keyframes click {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes glimmer {
+  0% {
+    opacity: 1;
+  }
+  30% {
+    opacity: 1;
+  }
+  40% {
+    opacity: 0.5;
+  }
+  60% {
+    opacity: 0.5;
+  }
+  70% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeInOut {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes fadeInOut40 {
+  0% {
+    opacity: 0;
+  }
+  30% {
+    opacity: 0;
+  }
+  40% {
+    opacity: 1;
+  }
+  60% {
+    opacity: 1;
+  }
+  70% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+

@@ -1,0 +1,244 @@
+/* 
+  ------------------------- OVERRIDES -------------------------
+  ---------------- to customize the theme more ----------------
+*/
+
+
+/* ---------------- general ---------------- */
+::selection {
+  @apply bg-primary-150/60;
+}
+
+.nx-text-gray-500 {
+  color: #777880; /* custom color according to design */
+}
+
+.nx-text-gray-600 {
+  color: var(--gray-800);
+}
+
+.nx-text-gray-700 {
+  color: var(--gray-700);
+}
+
+.nx-text-primary-600 {
+  color: var(--primary-500);
+}
+
+.nx-text-slate-900 {
+  color: var(--gray-900);
+}
+
+button:focus-visible {
+  box-shadow: none;
+}
+
+a:focus-visible {
+  --tw-ring-color: var(--op-ring-color);
+  --tw-ring-offset-color: var(--op-ring-offset-color);
+}
+
+
+/* ---------------- content ---------------- */
+.nextra-content {
+  color: var(--gray-800);
+}
+
+.nextra-content h1:not(.op-custom) {
+  @apply text-h1 mt-8 max-w-3xl;
+  color: var(--text-title);
+}
+
+.nextra-content h2:not(.op-custom) {
+  @apply text-h2 pb-3 max-w-3xl;
+  color: var(--text-title);
+}
+
+.nextra-content h3:not(.op-custom) {
+  @apply text-h3 max-w-3xl;
+  color: var(--text-title);
+}
+
+
+/* ---------------- ui ---------------- */
+
+/* nav */
+/* remove unfitting nextra-hover from logo */
+nav > a:first-child:hover {
+  opacity: 1;
+}
+
+
+/* sidebar */
+.nextra-sidebar-container li.active a {
+  color: var(--primary-500);
+  background-color: var(--primary-100);
+}
+
+/* page-navigation (link under article) */
+.nextra-content main > :last-child a {
+  color: var(--gray-600);
+}
+
+.nextra-content main > :last-child a:hover {
+  color: var(--gray-900);
+}
+
+
+/* layout */
+
+/* let header and content-wrapper be 100% so they stay flush with the window-sides */
+.nextra-nav-container nav {
+  max-width: 100%;
+}
+div:has(> .nextra-sidebar-container) {
+  max-width: 100%;
+}
+
+.nextra-content main {
+  max-width: 52rem;
+  box-sizing: content-box; /* so max-width is actual content-width without including a set padding */
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  .nextra-content main {
+    padding-right: 2rem;
+    padding-left: 2rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .nextra-content main {
+    padding-right: 3rem;
+    padding-left: 3rem;
+  }
+}
+
+
+/* toc */
+.nextra-toc ul li {
+  margin: 0; /* override nextra */
+  padding: 0.375rem 0 0.375rem 0.75rem;
+  border-left: 1px solid var(--surface-border);
+}
+
+.nextra-toc ul li:has(a.nx-text-primary-600) {
+  border-color: var(--primary-400);
+}
+
+/* theme selector  */
+[role="listbox"] li {
+  color: var(--gray-700);
+}
+
+[role="listbox"] li:has(> span) {
+  color: var(--gray-900);
+}
+
+[role="listbox"] li:hover {
+  color: var(--gray-900);
+  background-color: #66677110; /* gray-700 */
+}
+
+
+/* ============== */
+/* ---- dark ---- */
+/* ============== */
+
+:is(html[class~=dark] *::selection)  {
+  @apply bg-primary-400/30;
+}
+
+:is(html[class~=dark] body) {
+  background-color: var(--gray-900);
+}
+
+:is(html[class~=dark] .dark\:nx-bg-dark) {
+  background-color: var(--gray-900);
+}
+
+/* nav-bar */
+@supports (-webkit-backdrop-filter:blur(1px)) or ((-webkit-backdrop-filter: blur(1px)) or (backdrop-filter: blur(1px))) {
+  :is(html[class~=dark] .nextra-nav-container-blur) {
+    /* important needed as nextra uses it -.- */
+    background-color: #1F1F2180 !important; /* gray-900 */
+  }
+}
+
+/* shadow which blends out scrolling elements */
+:is(html[class~=dark] .nextra-scrollbar [class*=nx-shadow]) {
+  --tw-shadow: 0 -12px 16px var(--gray-900);
+}
+
+/* general */
+:is(html[class~=dark] .nx-text-primary-600) {
+  color: var(--primary-400);
+}
+
+/* focus */
+:is(html[class~=dark] a:focus-visible) {
+  --tw-ring-color: var(--op-ring-color);
+  --tw-ring-offset-color: var(--op-ring-offset-color);
+}
+
+/* sidebar */
+:is(html[class~=dark] .nextra-sidebar-container li.active a) {
+  color: var(--primary-400);
+  background-color: hsl(var(--nextra-primary-hue)100% 75%/0.20); /* primary dark 400 */
+}
+
+/* page-navigation (link under article) */
+:is(html[class~=dark] .nextra-content main > :last-child a) {
+  color: var(--gray-600);
+}
+
+:is(html[class~=dark] .nextra-content main > :last-child a:hover) {
+  color: var(--gray-100);
+}
+
+/* theme selector */
+:is(html[class~=dark] [role="listbox"] li) {
+  color: var(--gray-500);
+}
+
+:is(html[class~=dark] [role="listbox"] li:has(> span)) {
+  color: var(--gray-100);
+}
+
+:is(html[class~=dark] [role="listbox"] li:hover) {
+  color: var(--gray-100);
+  background-color: #8A8B9620; /* gray-600 */
+}
+
+/* to override shadow color which is composed here */
+:is(html[class~=dark] .dark\:nx-shadow-\[0_-12px_16px_\#111\]) {
+  --tw-shadow: 0 -12px 16px var(--gray-900);
+}
+
+
+/* --- borders --- */
+
+/* sidebar */
+:is(html[class~=dark] .dark\:before\:nx-bg-neutral-800):before {
+    background-color: var(--surface-border);
+}
+
+/* under h2 */
+:is(html[class~=dark] .dark\:nx-border-primary-100\/10) {
+  border-color: var(--surface-border);
+}
+
+/* theme selector, toc */
+:is(html[class~=dark] .dark\:nx-border-neutral-800) {
+  border-color: var(--surface-border);
+}
+
+
+/* --- footer --- */
+:is(html[class~=dark] #netidee_svg__netidee_logo .netidee_svg__st15) {
+  fill: var(--gray-300);
+}
+
+:is(html[class~=dark] #netidee_svg__netidee_logo .netidee_svg__st16) {
+  fill: var(--gray-200);
+}
