@@ -259,7 +259,7 @@ const formMachine = createMachine(
             : {
                 // comment -> prompt -> comment -> comment -> comment -> prompt -> request -> sending => NEXT
                 animationStepDelays: [
-                  1000, 2500, 2500, 2500, 3500, 1500, 1500, 2500, 5000,
+                  1000, 2500, 2500, 2500, 3500, 1500, 1500, 2500, 6000,
                 ],
                 animationStep: 0,
                 sendData: false,
