@@ -792,7 +792,7 @@ export const InteractiveForm = () => {
             animateEnvelope={
               state.matches("clientFinishRegistration") &&
               state.context.animationStep >= 2 &&
-              state.context.animationStep <= 4
+              state.context.animationStep <= 5
             }
             fadeInGraph={fadeInGraph}
             isFirstStep={state.matches("clientStartRegistration")}
@@ -812,7 +812,10 @@ export const InteractiveForm = () => {
                 "seal-paper",
               state.matches("clientFinishRegistration") &&
                 state.context.animationStep >= 4 &&
-                "enclose"
+                "enclose",
+              state.matches("clientFinishRegistration") &&
+                state.context.animationStep === 5 &&
+                "send-envelope"
             )}
           />
         </div>
