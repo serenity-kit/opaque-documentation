@@ -1,0 +1,135 @@
+/* =========================== */
+/* ======== ENVELOPE ========= */
+/* =========================== */
+
+/* ========== default state ========== */
+
+.envelope-wrapper {
+  opacity: 0;
+  transition: var(--transition);
+  transition-duration: 1s;
+}
+
+.envelope-wrapper * {
+  transition: var(--transition);
+}
+
+.envelope {
+  opacity: 0;
+  transform: translateY(10%);
+}
+
+.envelope#topFront {
+  opacity: 0;
+}
+
+
+/* =========================== */
+/* ========== LETTER ========= */
+/* =========================== */
+
+/* ========== default state ========== */
+
+.text-line {
+  stroke: #4f5057;
+  stroke-dasharray: 100;
+  stroke-dashoffset: 100;
+
+}
+
+.signature,
+.sigil {
+  opacity: 0;
+}
+
+.signature-line {
+  stroke-dasharray: 100;
+  stroke-dashoffset: -100;
+}
+
+
+
+/* =========================== */
+/* ======== ANIMATION ======== */
+/* =========================== */
+
+
+/* ========== wrapper ========== */
+
+.animate-envelope .envelope-wrapper {
+  opacity: 1;
+  transform: translateY(-36%);
+}
+
+/* ========== steps ========== */
+
+/* draw line */
+
+.draw-line-paper .text-line {
+  animation: drawLine 1s 1s ease-in-out forwards;
+}
+
+.draw-line-paper .text-line-2 {
+  animation-delay: 1.5s;
+}
+
+
+/* seal */
+
+.seal-paper .signature-dot {
+  opacity: 1;
+  transition-delay: 0.2s;
+}
+
+.seal-paper .signature-line {
+  animation: drawLine 1s ease-in-out forwards;
+}
+
+.seal-paper .sigil {
+  transition-delay: 1.7s;
+  opacity: 1;
+} 
+
+.seal-paper .text-line {
+  transition-delay: 1.7s;
+  opacity: 0.6;
+}
+
+
+/* enclose */
+
+.enclose .letter {
+  animation: upAndDown 2.5s ease-in-out forwards;
+}
+
+.enclose .envelope {
+  opacity: 1;
+  transform: translateY(0%);
+  transition-duration: 1s;
+  transition-delay: 1.2s;
+}
+
+.enclose #topFront {
+  animation: fadeIn 0.1s 2.5s linear forwards;
+}
+
+.enclose #topBack {
+  animation: fadeOut 0.1s 2.8s linear forwards;
+}
+
+
+/* =========================== */
+/* ======== KEYFRAMES ======== */
+/* =========================== */
+
+@keyframes upAndDown {
+  0% {
+    transform: translateY(0%);
+  }
+  50% {
+    transform: translateY(-20%);
+  }
+  100% {
+    transform: translateY(0%);
+  }
+}

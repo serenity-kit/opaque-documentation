@@ -172,11 +172,6 @@
   transition: var(--transition);
 }
 
-#envelope {
-  opacity: 0;
-  transition: var(--transition);
-}
-
 
 /* ========== actors ========== */
 

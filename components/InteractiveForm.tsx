@@ -259,7 +259,7 @@ const formMachine = createMachine(
             : {
                 // comment -> prompt -> comment -> comment -> comment -> prompt -> request -> sending => NEXT
                 animationStepDelays: [
-                  1000, 2500, 1500, 1500, 1500, 1500, 1500, 2500, 5000,
+                  1000, 2500, 2500, 2500, 3500, 1500, 1500, 2500, 5000,
                 ],
                 animationStep: 0,
                 sendData: false,
@@ -789,6 +789,11 @@ export const InteractiveForm = () => {
               (state.matches("serverCreateRegistrationResponse") &&
                 state.context.animationStep === 3)
             }
+            animateEnvelope={
+              state.matches("clientFinishRegistration") &&
+              state.context.animationStep >= 2 &&
+              state.context.animationStep <= 4
+            }
             fadeInGraph={fadeInGraph}
             isFirstStep={state.matches("clientStartRegistration")}
             className={cn(
@@ -798,7 +803,16 @@ export const InteractiveForm = () => {
                 notStarted
               ) && "connect",
               clientIsActive && state.context.sendData && "send-to-client",
-              serverIsActive && state.context.sendData && "send-to-server"
+              serverIsActive && state.context.sendData && "send-to-server",
+              state.matches("clientFinishRegistration") &&
+                state.context.animationStep >= 2 &&
+                "draw-line-paper",
+              state.matches("clientFinishRegistration") &&
+                state.context.animationStep >= 3 &&
+                "seal-paper",
+              state.matches("clientFinishRegistration") &&
+                state.context.animationStep >= 4 &&
+                "enclose"
             )}
           />
         </div>

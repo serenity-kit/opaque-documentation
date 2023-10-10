@@ -7,6 +7,7 @@ export type ClientServerProps = {
   animateForm: boolean;
   animateServer: boolean;
   animateElliptical: boolean;
+  animateEnvelope: boolean;
   fadeInGraph: boolean;
   className?: string;
 };
@@ -18,6 +19,7 @@ export const ClientServer: React.FC<ClientServerProps> = ({
   animateForm = false,
   animateServer = false,
   animateElliptical = false,
+  animateEnvelope = false,
   fadeInGraph = false,
   className,
   ...props
@@ -45,6 +47,7 @@ export const ClientServer: React.FC<ClientServerProps> = ({
         animateForm && "animate-form",
         animateServer && "animate-server",
         animateElliptical && "animate",
+        animateEnvelope && "animate-envelope",
         fadeInGraph && "fade-in-graph",
         className
       )}
@@ -444,27 +447,24 @@ export const ClientServer: React.FC<ClientServerProps> = ({
             className="dot filter-connection"
           />
         </g>
-        <g id="envelope">
-          <g id="back">
+        <g id="envelopeWrapper" className="envelope-wrapper">
+          <g id="back" className="envelope">
             <polygon
               points="137.5 48.1 137.5 80 172 99.9 172 68 137.5 48.1"
               fill="#8a8b96"
             />
           </g>
-          <g id="letterSealed">
+          <polygon
+            id="topBack"
+            points="172 68 154.8 32.8 137.5 48.1 172 68"
+            fill="#b4b4bd"
+            className="envelope"
+          />
+          <g id="letterSealed" className="letter">
             <polygon
               points="137.5 48.1 137.6 79.8 172.1 99.7 172.1 67.9 137.5 48.1"
               fill="#fff"
-            />
-            <line
-              x1="144.3"
-              y1="68"
-              x2="165"
-              y2="79.9"
-              fill="#fdfdfd"
-              stroke="#8a8b96"
-              strokeMiterlimit="10"
-              strokeWidth="2"
+              className="paper"
             />
             <line
               x1="144.3"
@@ -475,6 +475,18 @@ export const ClientServer: React.FC<ClientServerProps> = ({
               stroke="#8a8b96"
               strokeMiterlimit="10"
               strokeWidth="2"
+              className="text-line"
+            />
+            <line
+              x1="144.3"
+              y1="67.5"
+              x2="165"
+              y2="79.4"
+              fill="#fdfdfd"
+              stroke="#8a8b96"
+              strokeMiterlimit="10"
+              strokeWidth="2"
+              className="text-line text-line-2"
             />
             <path
               d="m153.6,82.4s-1.1.9-1.6.6c-.8-.4-.5-1.9-1.8-2.5-1.8-.8-2,1.8-3.6,1-2.5-1.2,1.3-7.3,3-6.5s-3.7,6.8-6.2,4.3.7-2.8.7-2.8"
@@ -482,6 +494,7 @@ export const ClientServer: React.FC<ClientServerProps> = ({
               stroke="#4f5057"
               strokeMiterlimit="10"
               strokeWidth="1.5"
+              className="siganture signature-line"
             />
             <line
               x1="145.4"
@@ -492,10 +505,12 @@ export const ClientServer: React.FC<ClientServerProps> = ({
               stroke="#4f5057"
               strokeMiterlimit="10"
               strokeWidth="1.5"
+              className="signature signature-dot"
             />
             <path
               d="m162.5,82.4l.7.2c.7.2,1.3.8,1.3,1.4v.7c0,0,.1.2.2.3l.5.6c.5.6.4,1.3,0,1.7l-.5.4c0,0-.1.1-.1.2v.7c-.1.6-.7,1-1.4,1h-.7c-.1,0-.2,0-.3,0l-.6.3c-.5.3-1.3.2-1.9-.3l-.6-.5c0,0-.2-.1-.3-.2l-.7-.2c-.7-.2-1.3-.8-1.3-1.4v-.7c0,0-.1-.2-.2-.3l-.5-.6c-.5-.6-.4-1.3,0-1.7l.5-.4c0,0,.1-.1.1-.2v-.7c.1-.6.7-1,1.4-1h.7c.1,0,.2,0,.3,0l.6-.3c.5-.3,1.3-.2,1.9.3l.6.5c0,0,.2.1.3.2Z"
               fill="#eca20f"
+              className="sigil sigil-outer"
             />
             <ellipse
               cx="160.7"
@@ -504,9 +519,10 @@ export const ClientServer: React.FC<ClientServerProps> = ({
               ry="2.5"
               transform="translate(1.3 173.8) rotate(-57)"
               fill="#ffcc5c"
+              className="sigil sigil-inner"
             />
           </g>
-          <g id="letter">
+          {/* <g id="letter">
             <polygon
               points="137.4 48.2 137.5 80 172 99.9 172 68 137.4 48.2"
               fill="#fff"
@@ -531,16 +547,18 @@ export const ClientServer: React.FC<ClientServerProps> = ({
               strokeMiterlimit="10"
               strokeWidth="2"
             />
-          </g>
+          </g> */}
           <polygon
             id="frontOpen"
             points="172 68 151.3 80 137.5 48.1 137.5 80 172 99.9 172 68"
             fill="#666771"
+            className="envelope"
           />
           <polygon
             id="topFront"
             points="172 68 154.8 32.8 137.5 48.1 172 68"
             fill="#b4b4bd"
+            className="envelope"
           />
         </g>
         <ellipse
