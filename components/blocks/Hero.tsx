@@ -6,10 +6,11 @@ import { BlockWrapper } from "./BlockWrapper";
 
 export type HeroProps = {
   header: string;
-  text: string;
+  text?: string;
   image: ImageData;
   cta?: ButtonData;
   secondaryButton?: ButtonData;
+  children?: React.ReactNode;
 };
 
 export const Hero: React.FC<HeroProps> = ({
@@ -18,6 +19,7 @@ export const Hero: React.FC<HeroProps> = ({
   cta,
   secondaryButton,
   image,
+  children,
   ...props
 }) => {
   return (
@@ -25,7 +27,8 @@ export const Hero: React.FC<HeroProps> = ({
       <div className="flex justify-between flex-col sm:flex-row sm:items-center gap-12">
         <div className="flex flex-col gap-6 sm:max-lg:max-w-[50%] lg:max-w-[33rem]">
           <DisplayHeading tag="h1">{header}</DisplayHeading>
-          <P>{text}</P>
+          {text ? <P>{text}</P> : null}
+          {children}
           <div className="flex gap-2">
             {cta ? (
               <Button
