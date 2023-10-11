@@ -11,7 +11,7 @@ export const BlockWrapper: React.FC<BlockWrapperProps> = ({
   return (
     <div
       className={cn(
-        "h-[50rem] max-w-[67.5rem] mx-auto flex items-center",
+        "min-h-[50rem] max-w-[67.5rem] mx-auto flex items-center",
         className
       )}
       {...props}

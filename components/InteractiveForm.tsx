@@ -529,7 +529,7 @@ export const InteractiveForm = () => {
             </div>
           </div>
           {/* content */}
-          <div className="h-[20rem] md:h-[30rem] py-5 px-4 overflow-y-auto text-gray-200">
+          <div className="h-[55vw] md:h-[30rem] py-5 px-4 overflow-y-auto text-gray-200">
             {notStarted && (
               <CliTypeWriter
                 sequence={["Please submit the registration."]}
@@ -769,7 +769,7 @@ export const InteractiveForm = () => {
           </div>
         </div>
         {/* --- animation area --- */}
-        <div className="h-[25rem] md:h-full px-10 svg-register flex items-end md:items-center justify-center grow">
+        <div className="h-[55vw] md:h-full px-10 svg-register flex items-end md:items-center justify-center grow">
           <ClientServer
             serverActive={serverIsActive}
             clientActive={clientIsActive}

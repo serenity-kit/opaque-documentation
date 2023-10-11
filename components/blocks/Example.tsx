@@ -1,3 +1,4 @@
+import cn from "clsx";
 import { ImageData } from "../../types/types";
 import { DisplayHeading } from "../DisplayHeading";
 import { P } from "../P";
@@ -8,6 +9,7 @@ export type ExampleProps = {
   text: string;
   image?: ImageData;
   children?: React.ReactNode;
+  className?: string;
 };
 
 export const Example: React.FC<ExampleProps> = ({
@@ -15,10 +17,11 @@ export const Example: React.FC<ExampleProps> = ({
   text,
   image,
   children,
+  className,
   ...props
 }) => {
   return (
-    <BlockWrapper className="text-center" {...props}>
+    <BlockWrapper className={cn("text-center", className)} {...props}>
       <DisplayHeading tag="h3" className="mb-4">
         {header}
       </DisplayHeading>
