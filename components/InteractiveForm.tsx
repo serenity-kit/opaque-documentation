@@ -1,16 +1,16 @@
 import * as opaque from "@serenity-kit/opaque";
 import { useActor } from "@xstate/react";
-import { and, or, not } from "xstate/guards";
+import cn from "clsx";
 import { useState } from "react";
 import { assign, createMachine, fromPromise } from "xstate";
+import { and } from "xstate/guards";
 import { Button } from "./Button";
-import cn from "clsx";
-import { Icon } from "./icon/Icon";
-import { Input } from "./Input";
-import { NavigationButton } from "./NavigationButton";
-import FadeIn from "./FadeInChildren";
 import { CliTypeWriter } from "./CliTypeWriter";
 import { ClientServer } from "./ClientServer";
+import FadeIn from "./FadeInChildren";
+import { Input } from "./Input";
+import { NavigationButton } from "./NavigationButton";
+import { Icon } from "./icon/Icon";
 
 const formMachine = createMachine(
   {
