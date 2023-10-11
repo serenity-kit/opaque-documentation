@@ -1,5 +1,5 @@
-import { ComponentProps } from "react";
 import cn from "clsx";
+import { ComponentProps } from "react";
 
 export type BlockWrapperProps = ComponentProps<"div">;
 
