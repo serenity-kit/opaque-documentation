@@ -1,14 +1,14 @@
-import { BlockWrapper } from "./BlockWrapper";
-import { DisplayHeading } from "../DisplayHeading";
-import { Button } from "../Button";
-import { P } from "../P";
 import { ButtonData, ImageData } from "../../types/types";
+import { Button } from "../Button";
+import { DisplayHeading } from "../DisplayHeading";
+import { P } from "../P";
+import { BlockWrapper } from "./BlockWrapper";
 
 export type HeroProps = {
   header: string;
   text: string;
   image: ImageData;
-  cta: ButtonData;
+  cta?: ButtonData;
   secondaryButton?: ButtonData;
 };
 
@@ -27,13 +27,15 @@ export const Hero: React.FC<HeroProps> = ({
           <DisplayHeading tag="h1">{header}</DisplayHeading>
           <P>{text}</P>
           <div className="flex gap-2">
-            <Button
-              onClick={cta.onClick}
-              variant="primary"
-              iconName={cta.iconName || null}
-            >
-              {cta.text}
-            </Button>
+            {cta ? (
+              <Button
+                onClick={cta.onClick}
+                variant="primary"
+                iconName={cta.iconName || null}
+              >
+                {cta.text}
+              </Button>
+            ) : null}
             {secondaryButton ? (
               <Button
                 onClick={secondaryButton.onClick}
@@ -46,9 +48,11 @@ export const Hero: React.FC<HeroProps> = ({
           </div>
         </div>
         {/* TODO remove height */}
-        <div className="w-full sm:w-[25rem] h-[34.5rem] bg-gray-300 lg:shrink-0">
-          <img src={image.src} alt={image.alt} />
-        </div>
+        {image ? (
+          <div className="w-full sm:w-[25rem] h-[34.5rem] bg-gray-300 lg:shrink-0">
+            <img src={image.src} alt={image.alt} />
+          </div>
+        ) : null}
       </div>
     </BlockWrapper>
   );

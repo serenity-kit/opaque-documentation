@@ -1,18 +1,20 @@
-import { BlockWrapper } from "./BlockWrapper";
+import { ImageData } from "../../types/types";
 import { DisplayHeading } from "../DisplayHeading";
 import { P } from "../P";
-import { ImageData } from "../../types/types";
+import { BlockWrapper } from "./BlockWrapper";
 
 export type ExampleProps = {
   header: string;
   text: string;
-  image: ImageData;
+  image?: ImageData;
+  children?: React.ReactNode;
 };
 
 export const Example: React.FC<ExampleProps> = ({
   header,
   text,
   image,
+  children,
   ...props
 }) => {
   return (
@@ -23,9 +25,12 @@ export const Example: React.FC<ExampleProps> = ({
       <P className="mb-10" variant="tertiary">
         {text}
       </P>
-      <div className="w-full h-[25rem] md:h-[31.5rem] bg-gray-300">
-        <img src={image.src} alt={image.alt} />
-      </div>
+      {image && (
+        <div className="w-full h-[25rem] md:h-[31.5rem] bg-gray-300">
+          <img src={image.src} alt={image.alt} />
+        </div>
+      )}
+      {children}
     </BlockWrapper>
   );
 };
