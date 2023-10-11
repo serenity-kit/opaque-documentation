@@ -1,12 +1,12 @@
-import { Hero } from "./blocks/Hero";
-import { Example } from "./blocks/Example";
-import { FeatureList } from "./blocks/FeatureList";
-import { FeatureDetail } from "./blocks/FeatureDetail";
-import { Comparison } from "./blocks/Comparison";
-import { Partners } from "./composites/Partners";
-import { CTAArea } from "./composites/CTAArea";
 import { BlockWrapper } from "./blocks/BlockWrapper";
+import { Comparison } from "./blocks/Comparison";
+import { Example } from "./blocks/Example";
+import { FeatureDetail } from "./blocks/FeatureDetail";
+import { FeatureList } from "./blocks/FeatureList";
+import { Hero } from "./blocks/Hero";
+import { CTAArea } from "./composites/CTAArea";
 
+// examples of the blocks
 export const Landing = () => {
   return (
     <>
