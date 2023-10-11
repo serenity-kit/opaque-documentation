@@ -451,7 +451,7 @@ export const InteractiveForm = () => {
   const loginIsReady = state.matches("clientFinishRegistration") || inLogin;
 
   return (
-    <div className="mx-auto max-w-[67.5rem]">
+    <div className="mx-auto max-w-[67.5rem] text-left">
       <div className="mt-10 flex flex-col items-center gap-3">
         <form
           onSubmit={(event) => {
