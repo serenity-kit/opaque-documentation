@@ -2,7 +2,7 @@ import * as opaque from "@serenity-kit/opaque";
 import { useActor } from "@xstate/react";
 import cn from "clsx";
 import { useState } from "react";
-import { assign, createMachine, fromPromise } from "xstate";
+import { assign, fromPromise, setup } from "xstate";
 import { and } from "xstate/guards";
 import { Button } from "./Button";
 import { CliTypeWriter } from "./CliTypeWriter";
@@ -12,407 +12,418 @@ import { Input } from "./Input";
 import { NavigationButton } from "./NavigationButton";
 import { Icon } from "./icon/Icon";
 
-const formMachine = createMachine(
-  {
-    /** @xstate-layout N4IgpgJg5mDOIC5QDMD2AnAtgYgOIHkB9AFSIGViBRABUIGEAZASUoDljCKBBAJQ58q4mFHl2JN8rANoAGALqJQAB1SwAlgBc1qAHaKQAD0QB2AEwAaEAE8TARlsA6AMxPTATgAcANicfbMjzcAXyDLNCw8IlJOKloySh4ANQT6ATFKQgEhETEJVkzKMmpJeNkFJBAVdS1dfSMELwtrRA8AVi8HABY3N2MvQOMAn2DQkHCcAhJyWPpmNg4AMSZWYQAJAuziUXFJMv0qzW09CvrWppsEW1N7LrPjN07TL09XJxCwjBwBeP5BYS3crt5PtVIdaidEI9LBdTDIZA5jMYnLYPJ1WjI3AEnI93mNPg4AO4AQ0OOigCww+CURIAjgBXMDYCC6MAONQ6ABuqAA1qzxoSSVoyRT0FTaQyEOyuQBjIk1HRlPYVA7yuqIUzuLqox5eYyPJytYy2JzQxD+VoOHqefz3K5uJxeWy4-nsw5EgA22G4fA2-22eSVylBqohCFanQ8CKerU8T2xpjapsubQc-U8j3cTnuMk6b1G-JgOjA6DlYB4YCgalgGhL8oAInKidhA5Vg0c1QgPOdEF4fA4PK42u5jbZBq1nfjpe61GAdBoyBoiegNOXK9Xa0dsAZq6WHETkBpiwAKTpwmQASmw-KnM7nC6XK4rVZrcqOLZV7dD-lzt2RaITVxIq0SZGo4vSNAa9y9jIvgTlgDg3rO86Lsuq7Phuuh7kSTbbouh57gex7oheV6TtOSH3qhT7rq+mHYUS75tuCoCnHqziYl4MZmNixjhiByJRo0nGosYXatOO+ZkbeyEPmhNHyg4ABGylbju+H7oe6BHsRl7XuRd4oY+a4vgpymKYx1SfixJj2pa1yYqY6KmFmaL8Y4ZiOo6zmNJiIwfPBsDFhyxZ0OgYClnJJlHOWsAqDogWqXhrIacesJwrp+KBegwXoKF4WHpFGE6DFcWBRZYLHNZDTdpcth9m4ZweIMMimN0A5wZgCH6RoCyurAAAWhW0ToXrELwHAMPgQjSMCypMZVhg9v0DgyIi4HGgE9peEmVw5g4sJPA8Mi2A1IkdV10mURoDCoJWI24buKVaWlJF6Zdhk3Xd5UhlV-h1Q4hoeHCjSPIaZw7Rqka6m4CatXDJ0eOdWU5Vdn3solj2Ec9Z4ZQFQXFqjt3st9VmLQgzlOP2mJIjmeoRiazSXK0J2WjIhr+IEaJuJx52IXOvU6FW-Vo-danJVjR4vbjnV8z1fXC0TCqzUGlnMWTrTYginEPN+rUGgzFy2Mzbis+zm1czzuI6KgEBwPo4wgqrC31AAtNtjNuytZ7ez7MPncSpLkpS1L0mAjsVR2UKM34XQ9G0AT3C51zna6WgeuHP1k74JuIgaMFwrmAE7SmvY+L2o7dEanTGOdhbFhF1FRboDaLhnpP1IiHRIrmXbObmRo1SiFqlw6jp6r0tjV7z3VXUNmcfmr9SdI8VMyF41dnGvpi8cYSbr5TGqNG07SuC1En+TLM+GXPRxYUSbeL5CmKr+vvGwo0O-8fCHmteanT2JPae71ZKNyKkpZSD9nZ2HhI8FEDkehnF7F-QSv82b-3sJ0IBFFr6gOGghaU0pIEdhhibBqyIXCrVRI5d2FwaaCWNOvUGfREaSTxtlEKYUG7GSKiVXQgUiFfjqsYfa-h7TXHuKeA2LQzD0N6J0R0Z8a6sMvtJAWQsb5qwXlAhAy9TBdD6OJAcqIToxghtvVM9xHJ9CcGzNmXgsEGQfCLARVVUQWh6GlLMyJmYDjMcI6GVifC2PaEjfG6BCZ3RcerXejMjYolNv0BRAQux5gvhdJCaiBrOLmk7DskEHB1VPI6A0Y8NbAViT4hJ3h-DJOcqE9h6BMkK0iTkiOoZhIrScDDI0MN-5FwqfEzE7Rqlwg8CkkIIQgA */
-    id: "form",
-
-    context: {
-      autoplay: true,
-      opaqueServerSetup: null,
-      username: null,
-      password: null,
-      // animation
-      animationStep: 0,
-      animationStepDelays: [],
-      sendData: false,
-      // registrationSteps
-      clientStartRegistrationData: null,
-      serverCreateRegistrationResponseData: null,
-      clientFinishRegistrationData: null,
-      // loginSteps
-      clientStartLoginData: null,
-      serverStartLoginData: null,
-      clientFinishLoginData: null,
-      serverFinishLoginData: null,
+const formMachine = setup({
+  actions: {
+    deactivateAutoplay: assign(() => {
+      return { autoplay: false };
+    }),
+    activateAutoplay: assign(() => {
+      return { autoplay: true };
+    }),
+  },
+  guards: {
+    autoplayIsActive: ({ context }) => context.autoplay,
+    hasNextAnimationStep: ({ context }) => {
+      return context.animationStep < context.animationStepDelays.length;
     },
-
-    on: {
-      GO_TO_STEP_CLIENT_START_REGISTRATION: {
-        actions: ["deactivateAutoplay"],
-        target: ".clientStartRegistration",
-      },
-      GO_TO_STEP_SERVER_CREATE_REGISTRATION_RESPONSE: {
-        actions: ["deactivateAutoplay"],
-        target: ".serverCreateRegistrationResponse",
-      },
-      GO_TO_STEP_CLIENT_FINISH_REGISTRATION: {
-        actions: ["deactivateAutoplay"],
-        target: ".clientFinishRegistration",
-      },
-      GO_TO_STEP_CLIENT_START_LOGIN: {
-        actions: ["deactivateAutoplay"],
-        target: ".clientStartLogin",
-      },
-      GO_TO_STEP_SERVER_START_LOGIN: {
-        actions: ["deactivateAutoplay"],
-        target: ".serverStartLogin",
-      },
-      GO_TO_STEP_CLIENT_FINISH_LOGIN: {
-        actions: ["deactivateAutoplay"],
-        target: ".clientFinishLogin",
-      },
-      GO_TO_STEP_SERVER_FINISH_LOGIN: {
-        actions: ["deactivateAutoplay"],
-        target: ".serverFinishLogin",
-      },
-      RESET_REGISTRATION: {
-        target: ".initial",
-        actions: assign(() => {
-          return {
-            clientStartRegistrationData: null,
-            serverCreateRegistrationResponseData: null,
-            clientFinishRegistrationData: null,
-            username: null,
-            password: null,
-          };
-        }),
-      },
+    hasAnimationFinished: ({ context }) =>
+      context.animationStep === context.animationStepDelays.length,
+  },
+  delays: {
+    animationStepDelay: ({ context }) => {
+      return context.animationStepDelays[context.animationStep];
     },
+  },
+}).createMachine({
+  /** @xstate-layout N4IgpgJg5mDOIC5QDMD2AnAtgYgOIHkB9AFSIGViBRABUIGEAZASUoDljCKBBAJQ58q4mFHl2JN8rANoAGALqJQAB1SwAlgBc1qAHaKQAD0QAWAEwAaEAE9EpgBwBmAHQBOFw4DsMgKwBGb3Z+3i4AviGWaFh4RKScVLRklDwAakn0AmKUhAJCImISrNmUZNSSibIKSCAq6lq6+kYIZpY2CL7tTjJ2Lh7epsbeMg4AbHbDpmERGDgEJOTx9MxsHABiTKzCABJFucSi4pIV+jWa2npVjc3WiMODTmYPPgGmAcOTIJEzMfM0iyzscV4HAY+CE0nkx1Up3qFxMFmuCA8Aycwxc3WGDjsHg8vjspje4Q+02icziv0SKTS3D4hBBYKOVROdXOoEu8NadmMMlcHhGWN8LmGvhkt3enxJsQov0Y-1W6y2tNB6wZyihzIacJaiHcwyc-U5wqCQx8YuJs0lCwpqR4hDWGzI2zpyohjLVZw1TXZiGFDl8Tj6vocmKDLm8A1NUQEiX4gmEe3yhxdqtq7thnq1TV8phRMlzDmC+p6HgjmCcAHcAIanHRQFYYfBKCsARwArmBsBBdGAnGodAA3VAAa27n3LVa0Nbr6AbzbbCF7A4AxhXmRUVdU3TDWYg+nY9TJjA5QzjjMMz8MM94r05ebyegFD8E7CWezpThWADbYakx3b7ArrkyqbbggnK6ne3ieGi3geLcdgZmYHgopBpgyL4DhdF0YwvjAOhgOgK5gDwYBQGosAaARzIACIrhW2CAZuLKGN6vreE4WbGC4p6cWenEIX4ThYmBIqDFiaEvouH5qGAOgaGQGgVugGjEaR5GUWc2AGORhFOBWyAaPhAAUFZvpgK5nPJYBKFRYAfhWVgAJTYKOknSbJ8mKcpJFkRR5m6AxKZbsxbTGP4TiBr0phRWYYEZi8xh6qYOK+KFMhohhBJTFgTiuTJckKUpKk+epuiadpBm6fpRmfpWViwE5LlSXlHmFd5al+ToAXQkxjS+OMe7CsMOJuMGWbwQiQbch4aI4i8sFdJimVEtlsD4X2+F0OgYCEUV7XMsRsAqDoq1lQpFV6QZ6DGaZHWWdZtn2Q10xOKt6Dregm3bQZu2+ftcBHatXXqmmuLCv6YbjEeWK9JiGZ2H6DimL6Qpcn1jgjC+r3vZ9O1tb9ZwHQD7ZaWd3YXdVH61fVznPVjG1bbjqn47ohO6IDSYboFPW2CKe6cZhqJQ8MxgZv4SHdMYvRokNOqSxJTWySsvZkQAFj9JU6N+xBAoq9Ic0BQWNP0Lw5medhof4xiOCLCIpdmMimFxfVXrmjhIvLbkaErb6wGreMa6dOnk1dJlqGZzJ3TZdmOTT2W5Yryu++rHVA8BwVRWl4UHsMB4yLBIYOKLQyuA7LhpZLwuoqiHt5d7qvJ8ygfnVVIeU-Z1ONZ7ddJ-7Kf64xHrG2xOdmxbYbW3FnhZ6FQtl3nxaEp3zUFRoDCoKRmsk0HLfXWHt0Gfd0dPXHCv5Z5a8b6nhu2ME4tBtFZcwT0F626iN7C6FqK5nbV41+5K8X17E3MmO8art2PqWeOZ8lKAM6v3Lmg9zYJU5JxLkowHbeDiqecKIwDyDERj4TEC8sqljpugFqq915AK3s3S6u9w4WQPlHR6sdSFrXwhQ2BV9uYIEdr6cKoxPC9D6EMG2rQBTZgcMYMwUVcQeHxIKZ8i9absPIQAqhm9yogLoWAuqECXqqM4Ro7hHpAx7kxLmdwiNhZjEwQifEe4XBi1uN4HOzjjB-y9onFWsDgGVR0TdCOTCHoxyXgnH2PjjHwO6qY-ECUy75gwgKPEXhC72JSq4JGdhAj4KGElTx3dIkbz8cHYybc9GsJyqfQpXDonAxAlInErh-D9FvklJGcUnH3FDGGSaIoHa+ExqompGiSmgMCYwqyzDQkqLevhEZl86lp0aPmNE9xFp4hQYMIak8kL4PkXggIvgPBYjCISHQqAIBwH0J8SECC0wAFoX6tCeZ0XM7yPkfOIctUslZqy1nrI2VsYA7kxLTFIqaGFpGBB8KMPEl4MKuDnkMXoKUhreBfMrLQn5QX1OCqMJC00zAEN5N0LiCEkrsV9CKUYxyiyhGUdlXC+FGbFQ6jRBSuLlnejzglHw8jP7+Hhmk1oiEqXChcNFVxnJQyeIoQ3NOBseEpUzihQYDtOReHJRNEUnQ-C+ixIeAU-gHBDLmR9Bm31e5-UOmzEFrp7kgWOcEFESTpXCjSsLUWQZ2KSxGDnfMB4zAMpIVUru3iFVBSVYPVC3I0IPExO0YW2JRbXnkclVK6URRyvURvLl19eFCl1D4fE+IBSnlEXFUwfoAhjGrZBQNjSzXvSMXmh1YKQKO2wYeKR5t8STU5FghKaMzCjFQhibNjLIHVO8bA-NPDEbTRROheGp4xj8uebYM8N4rZpTQiMI8GMp0GPNQs3s87TFCjjdNDCTjLZnjit0cKSVJWiScScpRYQgA */
+  id: "form",
 
-    states: {
-      waitingForOpaque: {
-        invoke: {
-          src: fromPromise(() => opaque.ready),
-          onDone: {
-            target: "initial",
-          },
+  context: {
+    autoplay: true,
+    opaqueServerSetup: null,
+    username: null,
+    password: null,
+    // animation
+    animationStep: 0,
+    animationStepDelays: [],
+    sendData: false,
+    // registrationSteps
+    clientStartRegistrationData: null,
+    serverCreateRegistrationResponseData: null,
+    clientFinishRegistrationData: null,
+    // loginSteps
+    clientStartLoginData: null,
+    serverStartLoginData: null,
+    clientFinishLoginData: null,
+    serverFinishLoginData: null,
+  },
+
+  on: {
+    GO_TO_STEP_CLIENT_START_REGISTRATION: {
+      actions: ["deactivateAutoplay"],
+      target: ".clientStartRegistration",
+    },
+    GO_TO_STEP_SERVER_CREATE_REGISTRATION_RESPONSE: {
+      actions: ["deactivateAutoplay"],
+      target: ".serverCreateRegistrationResponse",
+    },
+    GO_TO_STEP_CLIENT_FINISH_REGISTRATION: {
+      actions: ["deactivateAutoplay"],
+      target: ".clientFinishRegistration",
+    },
+    GO_TO_STEP_CLIENT_START_LOGIN: {
+      actions: ["deactivateAutoplay"],
+      target: ".clientStartLogin",
+    },
+    GO_TO_STEP_SERVER_START_LOGIN: {
+      actions: ["deactivateAutoplay"],
+      target: ".serverStartLogin",
+    },
+    GO_TO_STEP_CLIENT_FINISH_LOGIN: {
+      actions: ["deactivateAutoplay"],
+      target: ".clientFinishLogin",
+    },
+    GO_TO_STEP_SERVER_FINISH_LOGIN: {
+      actions: ["deactivateAutoplay"],
+      target: ".serverFinishLogin",
+    },
+    RESET_REGISTRATION: {
+      target: ".initial",
+      actions: assign(() => {
+        return {
+          clientStartRegistrationData: null,
+          serverCreateRegistrationResponseData: null,
+          clientFinishRegistrationData: null,
+          username: null,
+          password: null,
+        };
+      }),
+    },
+  },
+
+  states: {
+    waitingForOpaque: {
+      invoke: {
+        src: fromPromise(() => opaque.ready),
+        onDone: {
+          target: "initial",
         },
       },
-      initial: {
-        entry: assign(() => {
-          return {
-            opaqueServerSetup: opaque.server.createSetup(), // TODO replace with static one
-          };
-        }),
+    },
+    initial: {
+      entry: assign(() => {
+        return {
+          opaqueServerSetup: opaque.server.createSetup(), // TODO replace with static one
+        };
+      }),
 
-        on: {
-          START_REGISTRATION: {
-            actions: ["activateAutoplay"],
-            target: "generateRegistrationData",
-          },
+      on: {
+        START_REGISTRATION: {
+          actions: ["activateAutoplay"],
+          target: "generateRegistrationData",
         },
       },
-      generateRegistrationData: {
-        entry: assign(({ context, event }) => {
-          const password =
-            event.password || context.clientStartRegistrationData.password; // in case you go back to step one
-          const username =
-            event.username || context.clientStartRegistrationData.username; // in case you go back to step one
+    },
+    generateRegistrationData: {
+      entry: assign(({ context, event }) => {
+        const password =
+          event.password || context.clientStartRegistrationData.password; // in case you go back to step one
+        const username =
+          event.username || context.clientStartRegistrationData.username; // in case you go back to step one
 
-          // registration
-          const { clientRegistrationState, registrationRequest } =
-            opaque.client.startRegistration({ password });
+        // registration
+        const { clientRegistrationState, registrationRequest } =
+          opaque.client.startRegistration({ password });
 
-          const { registrationResponse } =
-            opaque.server.createRegistrationResponse({
-              registrationRequest,
-              userIdentifier: username,
-              serverSetup: context.opaqueServerSetup,
-            });
-
-          const { exportKey, registrationRecord } =
-            opaque.client.finishRegistration({
-              clientRegistrationState,
-              password,
-              registrationResponse,
-            });
-
-          // login
-          const { clientLoginState, startLoginRequest } =
-            opaque.client.startLogin({ password });
-
-          const { loginResponse, serverLoginState } = opaque.server.startLogin({
-            registrationRecord,
-            startLoginRequest,
-            serverSetup: context.opaqueServerSetup,
+        const { registrationResponse } =
+          opaque.server.createRegistrationResponse({
+            registrationRequest,
             userIdentifier: username,
+            serverSetup: context.opaqueServerSetup,
           });
 
-          const {
+        const { exportKey, registrationRecord } =
+          opaque.client.finishRegistration({
+            clientRegistrationState,
+            password,
+            registrationResponse,
+          });
+
+        // login
+        const { clientLoginState, startLoginRequest } =
+          opaque.client.startLogin({ password });
+
+        const { loginResponse, serverLoginState } = opaque.server.startLogin({
+          registrationRecord,
+          startLoginRequest,
+          serverSetup: context.opaqueServerSetup,
+          userIdentifier: username,
+        });
+
+        const finishLoginResult = opaque.client.finishLogin({
+          clientLoginState,
+          loginResponse,
+          password,
+        });
+
+        if (!finishLoginResult) {
+          throw new Error("Login failed");
+        }
+
+        const {
+          finishLoginRequest,
+          serverStaticPublicKey,
+          sessionKey: sessionKeyClient,
+        } = finishLoginResult;
+
+        const { sessionKey: sessionKeyServer } = opaque.server.finishLogin({
+          finishLoginRequest,
+          serverLoginState,
+        });
+
+        return {
+          clientStartRegistrationData: {
+            clientRegistrationState,
+            registrationRequest,
+            username,
+            password,
+          },
+          serverCreateRegistrationResponseData: {
+            registrationResponse,
+          },
+          clientFinishRegistrationData: {
+            exportKey,
+            registrationRecord,
+          },
+          clientStartLoginData: {
+            clientLoginState,
+            startLoginRequest,
+          },
+          serverStartLoginData: {
+            loginResponse,
+            serverLoginState,
+          },
+          clientFinishLoginData: {
             finishLoginRequest,
             serverStaticPublicKey,
             sessionKey: sessionKeyClient,
-          } = opaque.client.finishLogin({
-            clientLoginState,
-            loginResponse,
-            password,
-          });
+          },
+          serverFinishLoginData: {
+            sessionKey: sessionKeyServer,
+          },
+        };
+      }),
+      always: {
+        target: "clientStartRegistration",
+      },
+    },
 
-          const { sessionKey: sessionKeyServer } = opaque.server.finishLogin({
-            finishLoginRequest,
-            serverLoginState,
-          });
-
-          return {
-            clientStartRegistrationData: {
-              clientRegistrationState,
-              registrationRequest,
-              username,
-              password,
-            },
-            serverCreateRegistrationResponseData: {
-              registrationResponse,
-            },
-            clientFinishRegistrationData: {
-              exportKey,
-              registrationRecord,
-            },
-            clientStartLoginData: {
-              clientLoginState,
-              startLoginRequest,
-            },
-            serverStartLoginData: {
-              loginResponse,
-              serverLoginState,
-            },
-            clientFinishLoginData: {
-              finishLoginRequest,
-              serverStaticPublicKey,
-              sessionKey: sessionKeyClient,
-            },
-            serverFinishLoginData: {
-              sessionKey: sessionKeyServer,
-            },
-          };
-        }),
-        always: {
+    // registration states
+    clientStartRegistration: {
+      entry: assign(({ context, event }) => {
+        // notice that animationStepDelays.length + 1 needs to match with
+        // the amount of animationSteps for each registration/login state
+        // otherwise some steps might never be reached
+        // example: steps 0 - 4 => 5 steps => animationStepDelays.length == 4
+        return event.type ===
+          "xstate.after.animationStepDelay.form.clientStartRegistration"
+          ? {
+              animationStep: context.animationStep + 1,
+              sendData: context.animationStep === 5,
+            }
+          : {
+              // comment -> prompt -> comment -> comment long -> prompt -> request -> sending => NEXT
+              animationStepDelays: [2500, 3000, 2000, 5000, 1500, 2500, 3000],
+              animationStep: 0,
+              sendData: false,
+            };
+      }),
+      after: {
+        animationStepDelay: {
           target: "clientStartRegistration",
+          reenter: true,
+          guard: "hasNextAnimationStep",
         },
       },
-
-      // registration states
-      clientStartRegistration: {
-        entry: assign(({ context, event }) => {
-          // notice that animationStepDelays.length + 1 needs to match with
-          // the amount of animationSteps for each registration/login state
-          // otherwise some steps might never be reached
-          // example: steps 0 - 4 => 5 steps => animationStepDelays.length == 4
-          return event.type ===
-            "xstate.after(animationStepDelay)#form.clientStartRegistration"
-            ? {
-                animationStep: context.animationStep + 1,
-                sendData: context.animationStep === 5,
-              }
-            : {
-                // comment -> prompt -> comment -> comment long -> prompt -> request -> sending => NEXT
-                animationStepDelays: [2500, 3000, 2000, 5000, 1500, 2500, 3000],
-                animationStep: 0,
-                sendData: false,
-              };
-        }),
-        after: {
-          animationStepDelay: {
-            target: "clientStartRegistration",
-            guard: "hasNextAnimationStep",
-          },
-          always: {
-            target: "serverCreateRegistrationResponse",
-            guard: and(["autoplayIsActive", "hasAnimationFinished"]),
-          },
+      always: {
+        target: "serverCreateRegistrationResponse",
+        guard: and(["autoplayIsActive", "hasAnimationFinished"]),
+      },
+    },
+    serverCreateRegistrationResponse: {
+      entry: assign(({ context, event }) => {
+        return event.type ===
+          "xstate.after.animationStepDelay.form.serverCreateRegistrationResponse"
+          ? {
+              animationStep: context.animationStep + 1,
+              sendData: context.animationStep === 5,
+            }
+          : {
+              // comment -> prompt -> comment -> comment long -> prompt -> request -> sending => NEXT
+              animationStepDelays: [2000, 2500, 3500, 4900, 1500, 1500, 3000],
+              animationStep: 0,
+              sendData: false,
+            };
+      }),
+      after: {
+        animationStepDelay: {
+          target: "serverCreateRegistrationResponse",
+          reenter: true,
+          guard: "hasNextAnimationStep",
         },
       },
-      serverCreateRegistrationResponse: {
-        entry: assign(({ context, event }) => {
-          return event.type ===
-            "xstate.after(animationStepDelay)#form.serverCreateRegistrationResponse"
-            ? {
-                animationStep: context.animationStep + 1,
-                sendData: context.animationStep === 5,
-              }
-            : {
-                // comment -> prompt -> comment -> comment long -> prompt -> request -> sending => NEXT
-                animationStepDelays: [2000, 2500, 3500, 4900, 1500, 1500, 3000],
-                animationStep: 0,
-                sendData: false,
-              };
-        }),
-        after: {
-          animationStepDelay: {
-            target: "serverCreateRegistrationResponse",
-            guard: "hasNextAnimationStep",
-          },
-          always: {
-            target: "clientFinishRegistration",
-            guard: and(["autoplayIsActive", "hasAnimationFinished"]),
-          },
+      always: {
+        target: "clientFinishRegistration",
+        guard: and(["autoplayIsActive", "hasAnimationFinished"]),
+      },
+    },
+    clientFinishRegistration: {
+      entry: assign(({ context, event }) => {
+        return event.type ===
+          "xstate.after.animationStepDelay.form.clientFinishRegistration"
+          ? {
+              animationStep: context.animationStep + 1,
+              sendData: context.animationStep === 6,
+            }
+          : {
+              // comment -> prompt -> comment -> comment -> comment -> prompt -> request -> sending => NEXT
+              animationStepDelays: [
+                1000, 2500, 2500, 2500, 3500, 1500, 1500, 2500, 6000,
+              ],
+              animationStep: 0,
+              sendData: false,
+            };
+      }),
+      on: {
+        START_LOGIN: {
+          actions: ["activateAutoplay"],
+          target: "clientStartLogin",
         },
       },
-      clientFinishRegistration: {
-        entry: assign(({ context, event }) => {
-          return event.type ===
-            "xstate.after(animationStepDelay)#form.clientFinishRegistration"
-            ? {
-                animationStep: context.animationStep + 1,
-                sendData: context.animationStep === 6,
-              }
-            : {
-                // comment -> prompt -> comment -> comment -> comment -> prompt -> request -> sending => NEXT
-                animationStepDelays: [
-                  1000, 2500, 2500, 2500, 3500, 1500, 1500, 2500, 6000,
-                ],
-                animationStep: 0,
-                sendData: false,
-              };
-        }),
-        on: {
-          START_LOGIN: {
-            actions: ["activateAutoplay"],
-            target: "clientStartLogin",
-          },
-        },
-        after: {
-          animationStepDelay: {
-            target: "clientFinishRegistration",
-            guard: "hasNextAnimationStep",
-          },
-          always: {
-            target: "clientStartLogin",
-            guard: and(["autoplayIsActive", "hasAnimationFinished"]),
-          },
+      after: {
+        animationStepDelay: {
+          target: "clientFinishRegistration",
+          reenter: true,
+          guard: "hasNextAnimationStep",
         },
       },
-      // login states
-      clientStartLogin: {
-        entry: assign(({ context, event }) => {
-          return event.type ===
-            "xstate.after(animationStepDelay)#form.clientStartLogin"
-            ? {
-                animationStep: context.animationStep + 1,
-                sendData: context.animationStep === 2,
-              }
-            : {
-                // comment -> prompt -> request -> prompt => NEXT
-                animationStepDelays: [1200, 2000, 1500, 3000],
-                animationStep: 0,
-                sendData: false,
-              };
-        }),
-        after: {
-          animationStepDelay: {
-            target: "clientStartLogin",
-            guard: "hasNextAnimationStep",
-          },
-          always: {
-            target: "serverStartLogin",
-            guard: and(["autoplayIsActive", "hasAnimationFinished"]),
-          },
+      always: {
+        target: "clientStartLogin",
+        guard: and(["autoplayIsActive", "hasAnimationFinished"]),
+      },
+    },
+    // login states
+    clientStartLogin: {
+      entry: assign(({ context, event }) => {
+        return event.type ===
+          "xstate.after.animationStepDelay.form.clientStartLogin"
+          ? {
+              animationStep: context.animationStep + 1,
+              sendData: context.animationStep === 2,
+            }
+          : {
+              // comment -> prompt -> request -> prompt => NEXT
+              animationStepDelays: [1200, 2000, 1500, 3000],
+              animationStep: 0,
+              sendData: false,
+            };
+      }),
+      after: {
+        animationStepDelay: {
+          target: "clientStartLogin",
+          reenter: true,
+          guard: "hasNextAnimationStep",
         },
       },
-      serverStartLogin: {
-        entry: assign(({ context, event }) => {
-          return event.type ===
-            "xstate.after(animationStepDelay)#form.serverStartLogin"
-            ? {
-                animationStep: context.animationStep + 1,
-                sendData: context.animationStep === 2,
-              }
-            : {
-                // comment -> prompt -> response -> prompt => NEXT
-                animationStepDelays: [1000, 2000, 1500, 3000],
-                animationStep: 0,
-                sendData: false,
-              };
-        }),
-        after: {
-          animationStepDelay: {
-            target: "serverStartLogin",
-            guard: "hasNextAnimationStep",
-          },
-          always: {
-            target: "clientFinishLogin",
-            guard: and(["autoplayIsActive", "hasAnimationFinished"]),
-          },
+      always: {
+        target: "serverStartLogin",
+        guard: and(["autoplayIsActive", "hasAnimationFinished"]),
+      },
+    },
+    serverStartLogin: {
+      entry: assign(({ context, event }) => {
+        return event.type ===
+          "xstate.after.animationStepDelay.form.serverStartLogin"
+          ? {
+              animationStep: context.animationStep + 1,
+              sendData: context.animationStep === 2,
+            }
+          : {
+              // comment -> prompt -> response -> prompt => NEXT
+              animationStepDelays: [1000, 2000, 1500, 3000],
+              animationStep: 0,
+              sendData: false,
+            };
+      }),
+      after: {
+        animationStepDelay: {
+          target: "serverStartLogin",
+          reenter: true,
+          guard: "hasNextAnimationStep",
         },
       },
-      clientFinishLogin: {
-        entry: assign(({ context, event }) => {
-          return event.type ===
-            "xstate.after(animationStepDelay)#form.clientFinishLogin"
-            ? {
-                animationStep: context.animationStep + 1,
-                sendData: context.animationStep === 4,
-              }
-            : {
-                // comment -> prompt -> request -> prompt -> session-key -> prompt => NEXT
-                animationStepDelays: [1000, 2000, 1500, 2000, 1500, 3000],
-                animationStep: 0,
-                sendData: false,
-              };
-        }),
-        after: {
-          animationStepDelay: {
-            target: "clientFinishLogin",
-            guard: "hasNextAnimationStep",
-          },
-          always: {
-            target: "serverFinishLogin",
-            guard: and(["autoplayIsActive", "hasAnimationFinished"]),
-          },
+      always: {
+        target: "clientFinishLogin",
+        guard: and(["autoplayIsActive", "hasAnimationFinished"]),
+      },
+    },
+    clientFinishLogin: {
+      entry: assign(({ context, event }) => {
+        return event.type ===
+          "xstate.after.animationStepDelay.form.clientFinishLogin"
+          ? {
+              animationStep: context.animationStep + 1,
+              sendData: context.animationStep === 4,
+            }
+          : {
+              // comment -> prompt -> request -> prompt -> session-key -> prompt => NEXT
+              animationStepDelays: [1000, 2000, 1500, 2000, 1500, 3000],
+              animationStep: 0,
+              sendData: false,
+            };
+      }),
+      after: {
+        animationStepDelay: {
+          target: "clientFinishLogin",
+          reenter: true,
+          guard: "hasNextAnimationStep",
         },
       },
-      serverFinishLogin: {
-        entry: assign(({ context, event }) => {
-          return event.type ===
-            "xstate.after(animationStepDelay)#form.serverFinishLogin"
-            ? {
-                animationStep: context.animationStep + 1,
-                sendData: context.animationStep === 2,
-              }
-            : {
-                // comment -> prompt -> session-key
-                animationStepDelays: [1000, 2000],
-                animationStep: 0,
-                sendData: false,
-              };
-        }),
-        after: {
-          animationStepDelay: {
-            target: "serverFinishLogin",
-            guard: "hasNextAnimationStep",
-          },
+      always: {
+        target: "serverFinishLogin",
+        guard: and(["autoplayIsActive", "hasAnimationFinished"]),
+      },
+    },
+    serverFinishLogin: {
+      entry: assign(({ context, event }) => {
+        return event.type ===
+          "xstate.after.animationStepDelay.form.serverFinishLogin"
+          ? {
+              animationStep: context.animationStep + 1,
+              sendData: context.animationStep === 2,
+            }
+          : {
+              // comment -> prompt -> session-key
+              animationStepDelays: [1000, 2000],
+              animationStep: 0,
+              sendData: false,
+            };
+      }),
+      after: {
+        animationStepDelay: {
+          target: "serverFinishLogin",
+          guard: "hasNextAnimationStep",
         },
       },
     },
-
-    initial: "waitingForOpaque",
   },
-  {
-    guards: {
-      autoplayIsActive: ({ context }) => context.autoplay,
-      hasNextAnimationStep: ({ context }) =>
-        context.animationStep < context.animationStepDelays.length,
-      hasAnimationFinished: ({ context }) =>
-        context.animationStep === context.animationStepDelays.length,
-    },
-    actions: {
-      deactivateAutoplay: assign(() => {
-        return { autoplay: false };
-      }),
-      activateAutoplay: assign(() => {
-        return { autoplay: true };
-      }),
-    },
-    delays: {
-      animationStepDelay: ({ context }) => {
-        return context.animationStepDelays[context.animationStep];
-      },
-    },
-  }
-);
+
+  initial: "waitingForOpaque",
+});
 
 export const InteractiveForm = () => {
   const [state, send] = useActor(formMachine);
+
   const [username, setUsername] = useState("jane@example.com");
   const [password, setPassword] = useState("123456");
   const [showLoginSteps, setShowLoginSteps] = useState(false);
