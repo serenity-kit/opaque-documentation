@@ -9,8 +9,8 @@ dependencies:
     specifier: ^0.7.0
     version: 0.7.0
   '@xstate/react':
-    specifier: 4.0.0-beta.8
-    version: 4.0.0-beta.8(react@18.2.0)(xstate@5.0.0-beta.27)
+    specifier: ^4.0.0
+    version: 4.0.0(react@18.2.0)(xstate@5.0.0)
   clsx:
     specifier: ^2.0.0
     version: 2.0.0
@@ -33,8 +33,8 @@ dependencies:
     specifier: ^3.1.0
     version: 3.1.0(prop-types@15.8.1)(react-dom@18.2.0)(react@18.2.0)
   xstate:
-    specifier: 5.0.0-beta.27
-    version: 5.0.0-beta.27
+    specifier: ^5.0.0
+    version: 5.0.0
 
 devDependencies:
   '@svgr/webpack':
@@ -1904,22 +1904,19 @@ packages:
     resolution: {integrity: sha512-MFETx3tbTjE7Uk6vvnWINA/1iJ7LuMdO4fcq8UfF0pRbj01aGLduVvQcRyswuACJdpnHgg8E3rQLhaRdNEJS0w==}
     dev: false
 
-  /@xstate/react@4.0.0-beta.8(react@18.2.0)(xstate@5.0.0-beta.27):
-    resolution: {integrity: sha512-27L6LJP/7hWyEY5vtvfD/N3wgVgVTyTrbL9n25iT1OV3Shg3lpfA2hA/mJppttLNhkR/7V3WoFC4fmKu1BwVSA==}
+  /@xstate/react@4.0.0(react@18.2.0)(xstate@5.0.0):
+    resolution: {integrity: sha512-+vINFFBX5JWed/xD2/kNZ0SYbWyeSHgwsJkdLBeHp+Rnbf7QSLWxs3zAXcWPBdPuAgF/suo4E0GaiGZzaxumMQ==}
     peerDependencies:
-      '@xstate/fsm': ^3.0.0-beta.3
       react: ^16.8.0 || ^17.0.0 || ^18.0.0
-      xstate: ^5.0.0-beta.18
+      xstate: ^5.0.0
     peerDependenciesMeta:
-      '@xstate/fsm':
-        optional: true
       xstate:
         optional: true
     dependencies:
       react: 18.2.0
       use-isomorphic-layout-effect: 1.1.2(react@18.2.0)
       use-sync-external-store: 1.2.0(react@18.2.0)
-      xstate: 5.0.0-beta.27
+      xstate: 5.0.0
     transitivePeerDependencies:
       - '@types/react'
     dev: false
@@ -5119,8 +5116,8 @@ packages:
     resolution: {integrity: sha512-l4Sp/DRseor9wL6EvV2+TuQn63dMkPjZ/sp9XkghTEbV9KlPS1xUsZ3u7/IQO4wxtcFB4bgpQPRcR3QCvezPcQ==}
     dev: true
 
-  /xstate@5.0.0-beta.27:
-    resolution: {integrity: sha512-oNuu2oPy/S/YP1ZcGg6WhezO7MUCHhziauVDmkwOEgTX9/XpvFdC7gv7Wmhm4DoUETk5DZ7aDNbUuq9QgKLFYA==}
+  /xstate@5.0.0:
+    resolution: {integrity: sha512-FIKtRv8eQB+3dRLdnzdxlQ/sRjcqiN31JaskeHbcyRBaEvcwcjbakYZ5PVV9v4K0szbe793SUN/04J6/g5GrEA==}
     dev: false
 
   /yallist@2.1.2:
