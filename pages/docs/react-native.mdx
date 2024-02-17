@@ -19,7 +19,61 @@ One difference is that the `ready` Promise is already resolved when the `react-n
 
 If you are using `react-native-web` you still need to wait for `ready` to resolve before you can use any function from `react-native-opaque`.
 
+## Usage with React Native Web
+
+Since on web the package uses Web Assembly under the hood, it needs to be loaded asynchronously. To offer the same API the module is loaded internally, but in addition the API offers a `ready` Promise that will resolve once the module is loaded and ready to be used.
+
+```ts
+import * as opaque from 'react-native-opaque';
+
+const password = 'sup-krah.42-UOI'; // user password
+
+opaque.ready.then(() => {
+  const { clientRegistrationState, registrationRequest } =
+    opaque.client.startRegistration({ password });
+  // ...
+});
+```
+
+The most convenient way to use this is to have loading page that waits for the `ready` Promise to resolve before rendering the actual app.
+
+For example:
+
+```tsx
+export default function LoadingApp() {
+  const [opaqueModuleStatus, setOpaqueModuleStatus] = React.useState<
+    'loading' | 'failed' | 'loaded'
+  >('loading');
+
+  React.useEffect(() => {
+    async function waitForOpaque() {
+      try {
+        await opaque.ready;
+        setOpaqueModuleStatus('loaded');
+      } catch (e) {
+        console.warn(e);
+        setOpaqueModuleStatus('failed');
+      }
+    }
+
+    waitForOpaque();
+  }, []);
+
+  if (opaqueModuleStatus === 'loading') return null;
+  if (opaqueModuleStatus === 'failed')
+    return <Text>Failed to load resources. Please reload the app.</Text>;
+
+  return <App />;
+}
+```
+
+Note: The `ready` Promise resolves right away on the native side.
+
 ## Expo support
+
+Since the package contains binaries it can't be used in combination with Expo Go. However, it can be used in combination with the Expo development client out of the box. No further configuration is needed.
+
+### Expo Example Instructions
 
 1. Setup an Expo project
 2. Setup EAS:
@@ -87,6 +141,10 @@ npx expo install react-native-opaque
 ```sh
 eas build --profile development-simulator --platform ios
 ```
+
+8. Add the your code
+
+You can get inspired by the example project [here](https://github.com/serenity-kit/react-native-opaque/tree/main/example).
 
 ## P256 Support
 
