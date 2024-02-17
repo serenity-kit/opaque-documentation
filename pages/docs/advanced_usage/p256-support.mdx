@@ -2,4 +2,13 @@
 
 The default implementation uses [ristretto255](https://ristretto.group/) for the OPRF and the group mode.
 
-If you would like to use the [P-256](https://docs.rs/p256/latest/p256/) curve instead, you can use the [@serenity-kit/opaque-p256](https://www.npmjs.com/package/@serenity-kit/opaque) package. The API is identical.
+If you would like to use the [P-256](https://docs.rs/p256/latest/p256/) curve instead, you can use the [@serenity-kit/opaque-p256](https://www.npmjs.com/package/@serenity-kit/opaque-p256) package. The API is identical.
+
+If you would like to use the `npx` cli commands you can run:
+
+```bash
+# create server setup
+npx @serenity-kit/opaque-p256@latest create-server-setup
+# get server public key
+npx @serenity-kit/opaque-p256@latest get-server-public-key "<server setup string>"
+```
