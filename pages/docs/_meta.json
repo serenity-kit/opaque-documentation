@@ -7,5 +7,6 @@
   "faq": "FAQ",
   "architecture-decisions": "Architecture Decisions",
   "specification": "Specification",
-  "resources": "Resources"
+  "resources": "Resources",
+  "how_it_works": "How it works"
 }
