@@ -48,9 +48,6 @@ export function Footer({ menu }: { menu?: boolean }): ReactElement {
             <a className={styles.link} href="/docs">
               Documentation
             </a>
-            <a className={styles.link} href="/blog">
-              Blog
-            </a>
             <a
               className={styles.link}
               href="https://github.com/serenity-kit/opaque"
@@ -63,7 +60,7 @@ export function Footer({ menu }: { menu?: boolean }): ReactElement {
             <h6>Company</h6>
             <a
               className={styles.link}
-              href="https://github.com/serenity-kit/"
+              href="https://www.serenity.page/"
               target="_blank"
             >
               Serenity
