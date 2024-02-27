@@ -1,12 +1,14 @@
 import { PageWrapper } from "../components/blocks/PageWrapper";
 import { BlockWrapper } from "../components/blocks/BlockWrapper";
 import { Hero } from "../components/blocks/Hero";
+import { HeroAnimation } from "../components/HeroAnimation";
 
 <Hero
+  className="pt-32 pb-14"
   header="Opaque"
   children={
     <div>
-      <div>
+      <div className="text-xl">
         Secure password based client-server authentication without the server
         ever obtaining knowledge of the password.
         <br />
@@ -19,18 +21,27 @@ import { Hero } from "../components/blocks/Hero";
         </a>
         .
       </div>
-      <div>
-      <h3>Benefits</h3>
-      <ul>
-        <li>Never accidentally log passwords</li>
-        <li>Security against pre-computation attacks upon server compromise</li>
-        <li>Foundation for encrypted backups and end-to-end encryption apps</li>
-        <li>0 npm dependencies</li>
-      </ul>
-      </div>
     </div>
+  }
+  eyeCatcherChildren={<HeroAnimation />}
+/>
 
-}
+import { Benefits } from "../components/blocks/Benefits";
+
+<Benefits
+  className="pb-40"
+  header="Benefits"
+  features={[
+    {
+      text: "Never accidentally log passwords",
+    },
+    {
+      text: "Security against pre-computation attacks upon server compromise",
+    },
+    {
+      text: "Foundation for encrypted backups and end-to-end encryption apps",
+    },
+  ]}
 />
 
 import { Example } from "../components/blocks/Example";
@@ -63,6 +74,7 @@ Furthermore, OPAQUE can function securely over an unencrypted communication chan
 
 - The protocol requires JavaScript to run on the client
 - Registration and login require one extra request roundtrip to complete each flow
+- No resistance against quantum computing attacks
 
 ## Who is using Opaque?
 

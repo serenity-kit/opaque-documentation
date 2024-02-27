@@ -10,10 +10,7 @@ export const BlockWrapper: React.FC<BlockWrapperProps> = ({
 }) => {
   return (
     <div
-      className={cn(
-        "min-h-[50rem] max-w-[67.5rem] mx-auto flex items-center",
-        className
-      )}
+      className={cn("max-w-[67.5rem] mx-auto flex items-center", className)}
       {...props}
     >
       <div className="w-full">{children}</div>

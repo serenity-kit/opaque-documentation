@@ -1,4 +1,4 @@
-import { ButtonData, ImageData } from "../../types/types";
+import { ButtonData } from "../../types/types";
 import { Button } from "../Button";
 import { DisplayHeading } from "../DisplayHeading";
 import { P } from "../P";
@@ -7,7 +7,7 @@ import { BlockWrapper } from "./BlockWrapper";
 export type HeroProps = {
   header: string;
   text?: string;
-  image: ImageData;
+  eyeCatcherChildren?: React.ReactNode;
   cta?: ButtonData;
   secondaryButton?: ButtonData;
   children?: React.ReactNode;
@@ -18,14 +18,14 @@ export const Hero: React.FC<HeroProps> = ({
   text,
   cta,
   secondaryButton,
-  image,
+  eyeCatcherChildren,
   children,
   ...props
 }) => {
   return (
     <BlockWrapper {...props}>
-      <div className="flex justify-between flex-col sm:flex-row sm:items-center gap-12">
-        <div className="flex flex-col gap-6 sm:max-lg:max-w-[50%] lg:max-w-[33rem]">
+      <div className="flex justify-between flex-col sm:flex-row sm:items-center gap-6">
+        <div className="flex flex-col gap-6 sm:max-lg:max-w-[50%] lg:max-w-[26rem]">
           <DisplayHeading tag="h1">{header}</DisplayHeading>
           {text ? <P>{text}</P> : null}
           {children}
@@ -51,9 +51,9 @@ export const Hero: React.FC<HeroProps> = ({
           </div>
         </div>
         {/* TODO remove height */}
-        {image ? (
-          <div className="w-full sm:w-[25rem] h-[34.5rem] bg-gray-300 lg:shrink-0">
-            <img src={image.src} alt={image.alt} />
+        {eyeCatcherChildren ? (
+          <div className="w-full sm:w-[35rem] lg:shrink-0">
+            {eyeCatcherChildren}
           </div>
         ) : null}
       </div>
