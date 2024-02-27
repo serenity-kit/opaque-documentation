@@ -21,7 +21,7 @@ export const Benefits: React.FC<FeatureListProps> = ({
   return (
     <BlockWrapper {...props}>
       <div className="flex justify-center">
-        <DisplayHeading tag="h3" className="max-w-md md:max-w-xl pb-8 pt-14">
+        <DisplayHeading tag="h2" className="max-w-md md:max-w-xl pb-8 pt-14">
           {header}
         </DisplayHeading>
       </div>

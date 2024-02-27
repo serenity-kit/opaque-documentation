@@ -54,10 +54,11 @@ import { InteractiveForm } from "../components/InteractiveForm";
   <InteractiveForm />
 </Example>
 
-<BlockWrapper>
+import { Content } from "../components/blocks/Content";
 
-### Details
-
+<Content header={"Details"}
+  className="pt-20 pb-10"
+>
 OPAQUE provides robust security measures that effectively neutralize various types of attacks. Unlike traditional methods, it eliminates the need to send passwords to the server, thereby thwarting sniffing and replay attacks. Moreover, the protocol prevents pre-computation attacks by attackers.
 
 Through the use of an Oblivious Pseudo-Random Function (OPRF), OPAQUE safeguards the password and basically some form of "salt", making it impervious to direct password leaks. This protocol has also undergone rigorous testing and offers mathematical proofs of security within a robust model.
@@ -66,56 +67,104 @@ Another advantage is its ability to offload the memory-hard key-stretching funct
 
 Furthermore, OPAQUE can function securely over an unencrypted communication channel, removing the necessity for additional layers like TLS. It even includes a countermeasure against user enumeration attacks: the server can return a decoy record, making it impossible for an attacker to determine whether a particular user exists or not.
 
-</BlockWrapper>
+There have been extensive security analysis and audits:
+- [Security Analysis of OPAQUE](https://eprint.iacr.org/2018/163.pdf)
+- [Security Audit of opaque-ke](https://research.nccgroup.com/2021/12/13/public-report-whatsapp-opaque-ke-cryptographic-implementation-review/)
+</Content>
 
-<PageWrapper>
-
-## Downsides
-
+<Content header={"Downsides"}
+  className="pb-20"
+>
 - The protocol requires JavaScript to run on the client
 - Registration and login require one extra request roundtrip to complete each flow
 - No resistance against quantum computing attacks
+</Content>
 
-## Who is using Opaque?
+import { FeatureList } from "../components/blocks/FeatureList";
 
-- [Serenity](https://github.com/serenity-kit/serenity) as authentication mechanism for the account
+<FeatureList
+  header="Who is using it?"
+  features={[
+    {
+      header: "Opaque",
+      text: <>
+      <ul><li><a href="https://github.com/serenity-kit/serenity" target="_blank" rel="noopener noreferrer">Serenity</a> as authentication mechanism for the account</li></ul>
+      </>,
+      iconName: "compasses-2-line",
+    },
+    {
+      header: "OPAQUE protocol",
+      text: <>
+      <ul><li><a href="https://iacr.org/submit/files/slides/2023/rwc/rwc2023/IT_2/slides.pdf" target="_blank" rel="noopener noreferrer">WhatsApp</a> for their end-to-end encrypted backups</li>
+        <li><a href="https://engineering.fb.com/wp-content/uploads/2023/12/TheLabyrinthEncryptedMessageStorageProtocol_12-6-2023.pdf" target="_blank" rel="noopener noreferrer">Messenger</a> for their encrypted message storage Labyrinth</li>
+      </ul>
+      </>,      iconName: "compasses-2-line",
+    },
+  ]}
+/>
 
-## Who is using the OPAQUE protocol?
+import { Comparison } from "../components/blocks/Comparison";
 
-- [WhatsApp](https://iacr.org/submit/files/slides/2023/rwc/rwc2023/IT_2/slides.pdf) for their end-to-end encrypted backups
+<div className="pb-32 pt-32">
+<Comparison
+  header="Comparison to Password Hashing"
+  text="Opaque comes with a few benefits and tradeoffs compared to password hashing"
+  comparisonData={[
+    { title: "Benefits", points: ["- The server never learns the password and therefor never can log it (accidentally)", "- Foundation for end-to-end encryption"] },
+    { title: "Tradeoffs", points: ["- Requires JavaScript to run in the browser", "- One extra roundtrip for registration and login"] },
+  ]}
+/>
+</div>
 
-## Security
+<div className="pb-20">
+<Comparison
+  header="Comparison to Passkeys"
+  text="Opaque comes with a few benefits and tradeoffs compared to Passkeys"
+  comparisonData={[
+    { title: "Benefits", points: [
+"- No need for users to rely on an external authority for key storage. Usually Apple, Google or Microsoft.",
+"- No device/browser/OS lock-in. On Linux for example there is no Passkey support.",
+<>- No support for a stable `export_key` on the client. This makes Passkeys unsuitable for encrypted backups or as a foundation for end-to-end encryption apps. Might be possible in the future with the <a href="https://w3c.github.io/webauthn/#prf-extension" target="_blank" rel="noopener noreferrer">PRF Extension</a>.</>
+    ] },
+    { title: "Tradeoffs", points: [
+"- You still need to remember and store a password. Passwordless authentication is preferable.",
+"- Passkeys have even stronger security guarantees against server compromise since only a public key is stored.",
+"Note: You can also deploy Passkeys and have Opaque as a fallback for users without Passkeys. Best of both worlds."
 
-- [Security Analysis of OPAQUE](https://eprint.iacr.org/2018/163.pdf)
-- [Security Audit of opaque-ke](https://research.nccgroup.com/2021/12/13/public-report-whatsapp-opaque-ke-cryptographic-implementation-review/)
+    ] },
+  ]}
+/>
+</div>
 
-## Benefits compared to password hashing
-
-- The server never learns the password and therefor never can log it (accidentally)
-
-## Tradeoffs compared to password hashing
-
-- Requires JavaScript to run on the client
-- One extra roundtrip for registration and login
-
-## Benefits compared to Passkeys
-
-- No need for users to rely on an external authority for key storage. Usually Apple, Google or Microsoft.
-- No device/browser/OS lock-in. On Linux for example there is no Passkey support.
-- No support for a stable `export_key` on the client. This makes Passkeys unsuitable for encrypted backups or as a foundation for end-to-end encryption apps. Might be possible in the future with the [PRF Extension](https://w3c.github.io/webauthn/#prf-extension)
-
-## Tradeoffs compared to Passkeys
-
-- You still need to remember and store a password. Passwordless authentication is preferable.
-- Passkeys have even stronger security guarantees against server compromise since only a public key is stored.
-
-Note: You can also deploy Passkeys and have Opaque as a fallback for users without Passkeys. Best of both worlds.
-
-## Relevant building blocks and inspirations
-
+<div className="pb-32">
+<Content header={"Relevant building blocks and inspirations"}>
+<div className="max-w-2xl">
 - 2018: The [OPAQUE](https://eprint.iacr.org/2018/163.pdf) paper was published.
 - 2018-2023 A group of IETF members worked on the [OPAQUE protocol RFC](https://datatracker.ietf.org/doc/draft-irtf-cfrg-opaque/).
 - 2020: Work on [opaque-ke](https://github.com/facebook/opaque-ke) started.
 - 2020: Work on [opaque-wasm](https://github.com/marucjmar/opaque-wasm) started. It allowed us to give explore the protocol in a beta and inspired us to build a full library. We made a comparison table between the two libraries [here](/docs/faq#how-does-it-compare-to-opaque-wasm).
+</div>
+</Content>
+</div>
 
-</PageWrapper>
+import { CTAArea } from "../components/composites/CTAArea";
+
+<BlockWrapper>
+  {/* <Partners
+    header="Powering world class products"
+    images={[
+      { src: "/netidee.svg", alt: "fancy logo 1" },
+      { src: "/netidee.svg", alt: "fancy logo 2" },
+      { src: "/netidee.svg", alt: "fancy logo 2" },
+      { src: "/netidee.svg", alt: "fancy logo 2" },
+    ]}
+  /> */}
+  <CTAArea
+    header="Interested?"
+    text=""
+    cta={{
+      text: "Go to Getting started",
+      onClick: () => window.location.href = "/docs/getting-started",
+    }}
+  />
+</BlockWrapper>

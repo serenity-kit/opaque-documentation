@@ -1,13 +1,12 @@
-import { BlockWrapper } from "./BlockWrapper";
-import { DisplayHeading } from "../DisplayHeading";
-import { P } from "../P";
 import cn from "clsx";
+import { DisplayHeading } from "../DisplayHeading";
 import { Icon, IconName } from "../icon/Icon";
+import { BlockWrapper } from "./BlockWrapper";
 
 export type Feature = {
   iconName: IconName;
   header: string;
-  text: string;
+  text: React.ReactNode;
 };
 
 export type FeatureListProps = {
@@ -25,13 +24,20 @@ export const FeatureList: React.FC<FeatureListProps> = ({
 }) => {
   return (
     <BlockWrapper {...props}>
-      <DisplayHeading tag="h3" className="max-w-md md:max-w-xl pb-14 md:pb-24">
-        {header}
-      </DisplayHeading>
+      <div className="flex justify-center">
+        <DisplayHeading tag="h2" className="max-w-md md:max-w-xl pb-14 pt-14">
+          {header}
+        </DisplayHeading>
+      </div>
+
       <div
         className={cn(
           "grid grid-cols-1 xs:grid-cols-2",
-          features.length < 4 ? "md:grid-cols-3" : "md:grid-cols-4",
+          features.length < 3
+            ? "md:grid-cols-2"
+            : features.length < 4
+            ? "md:grid-cols-3"
+            : "md:grid-cols-4",
           "gap-6"
         )}
       >
@@ -40,7 +46,7 @@ export const FeatureList: React.FC<FeatureListProps> = ({
             <div key={feature.header + `_${i}`} className="flex flex-col gap-2">
               <Icon name={feature.iconName} size={8} />
               <DisplayHeading tag="h4">{feature.header}</DisplayHeading>
-              <P variant="tertiary">{feature.text}</P>
+              <>{feature.text}</>
             </div>
           );
         })}
