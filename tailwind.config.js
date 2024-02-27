@@ -140,7 +140,8 @@ module.exports = {
         3: "3px",
       },
       gridTemplateColumns: {
-        footer: "2.5fr 2fr auto",
+        'footer-lg': "2.5fr 2fr auto",
+        'footer-sm': "2.5fr 2fr 1fr",
       },
     },
   },
