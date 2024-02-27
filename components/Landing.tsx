@@ -22,7 +22,6 @@ export const Landing = () => {
           onClick: () => window.alert("clicked the secondary"),
           iconName: "github-fill",
         }}
-        image={{ src: "", alt: "" }}
       />
 
       <Example
