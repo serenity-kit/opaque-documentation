@@ -30,7 +30,7 @@ export const Benefits: React.FC<FeatureListProps> = ({
         className={cn(
           "grid grid-cols-1 xs:grid-cols-2",
           features.length < 4 ? "md:grid-cols-3" : "md:grid-cols-4",
-          "gap-6"
+          "gap-5"
         )}
       >
         {features.map((feature, i) => {
