@@ -1,3 +1,7 @@
+---
+title: "Opaque - JavaScript implementation of the OPAQUE protocol"
+---
+
 import { PageWrapper } from "../components/blocks/PageWrapper";
 import { BlockWrapper } from "../components/blocks/BlockWrapper";
 import { Hero } from "../components/blocks/Hero";
@@ -42,7 +46,15 @@ import { Benefits } from "../components/blocks/Benefits";
       text: "Foundation for encrypted backups and end-to-end encryption apps",
     },
     {
-      text: <>Through OTF’s <a href="https://www.opentech.fund/labs/red-team-lab/">Red Team Lab</a>, 7ASecurity conducted a <a href="https://7asecurity.com/reports/pentest-report-opaque.pdf">penetration test and whitebox security review</a></>
+      text: (
+        <>
+          Through OTF’s{" "}
+          <a href="https://www.opentech.fund/labs/red-team-lab/">
+            Red Team Lab
+          </a>
+          , 7ASecurity conducted a <a href="https://7asecurity.com/reports/pentest-report-opaque.pdf">penetration test and whitebox security review</a>
+        </>
+      ),
     },
   ]}
 />
@@ -71,16 +83,16 @@ Another advantage is its ability to offload the memory-hard key-stretching funct
 Furthermore, OPAQUE can function securely over an unencrypted communication channel, removing the necessity for additional layers like TLS. It even includes a countermeasure against user enumeration attacks: the server can return a decoy record, making it impossible for an attacker to determine whether a particular user exists or not.
 
 There have been extensive security analysis and audits:
+
 - [Security Analysis of OPAQUE](https://eprint.iacr.org/2018/163.pdf)
 - [Security Audit of opaque-ke](https://research.nccgroup.com/2021/12/13/public-report-whatsapp-opaque-ke-cryptographic-implementation-review/)
+
 </Content>
 
-<Content header={"Downsides"}
-  className="pb-20"
->
-- The protocol requires JavaScript to run on the client
-- Registration and login require one extra request roundtrip to complete each flow
-- No resistance against quantum computing attacks
+<Content header={"Downsides"} className="pb-20">
+  - The protocol requires JavaScript to run on the client - Registration and
+  login require one extra request roundtrip to complete each flow - No
+  resistance against quantum computing attacks
 </Content>
 
 import { FeatureList } from "../components/blocks/FeatureList";
@@ -90,18 +102,53 @@ import { FeatureList } from "../components/blocks/FeatureList";
   features={[
     {
       header: "Opaque",
-      text: <>
-      <ul><li><a href="https://github.com/serenity-kit/serenity" target="_blank" rel="noopener noreferrer">Serenity</a> as authentication mechanism for the account</li></ul>
-      </>,
+      text: (
+        <>
+          <ul>
+            <li>
+              <a
+                href="https://github.com/serenity-kit/serenity"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Serenity
+              </a>{" "}
+              as authentication mechanism for the account
+            </li>
+          </ul>
+        </>
+      ),
       iconName: "compasses-2-line",
     },
     {
       header: "OPAQUE protocol",
-      text: <>
-      <ul><li><a href="https://iacr.org/submit/files/slides/2023/rwc/rwc2023/IT_2/slides.pdf" target="_blank" rel="noopener noreferrer">WhatsApp</a> for their end-to-end encrypted backups</li>
-        <li><a href="https://engineering.fb.com/wp-content/uploads/2023/12/TheLabyrinthEncryptedMessageStorageProtocol_12-6-2023.pdf" target="_blank" rel="noopener noreferrer">Messenger</a> for their encrypted message storage Labyrinth</li>
-      </ul>
-      </>,      iconName: "compasses-2-line",
+      text: (
+        <>
+          <ul>
+            <li>
+              <a
+                href="https://iacr.org/submit/files/slides/2023/rwc/rwc2023/IT_2/slides.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                WhatsApp
+              </a>{" "}
+              for their end-to-end encrypted backups
+            </li>
+            <li>
+              <a
+                href="https://engineering.fb.com/wp-content/uploads/2023/12/TheLabyrinthEncryptedMessageStorageProtocol_12-6-2023.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Messenger
+              </a>{" "}
+              for their encrypted message storage Labyrinth
+            </li>
+          </ul>
+        </>
+      ),
+      iconName: "compasses-2-line",
     },
   ]}
 />
@@ -109,14 +156,26 @@ import { FeatureList } from "../components/blocks/FeatureList";
 import { Comparison } from "../components/blocks/Comparison";
 
 <div className="pb-32 pt-32">
-<Comparison
-  header="Comparison to Password Hashing"
-  text="Opaque comes with a few benefits and tradeoffs compared to password hashing"
-  comparisonData={[
-    { title: "Benefits", points: ["- The server never learns the password and therefor never can log it (accidentally)", "- Foundation for end-to-end encryption"] },
-    { title: "Tradeoffs", points: ["- Requires JavaScript to run in the browser", "- One extra roundtrip for registration and login"] },
-  ]}
-/>
+  <Comparison
+    header="Comparison to Password Hashing"
+    text="Opaque comes with a few benefits and tradeoffs compared to password hashing"
+    comparisonData={[
+      {
+        title: "Benefits",
+        points: [
+          "- The server never learns the password and therefor never can log it (accidentally)",
+          "- Foundation for end-to-end encryption",
+        ],
+      },
+      {
+        title: "Tradeoffs",
+        points: [
+          "- Requires JavaScript to run in the browser",
+          "- One extra roundtrip for registration and login",
+        ],
+      },
+    ]}
+  />
 </div>
 
 <div className="pb-20">
@@ -135,19 +194,25 @@ import { Comparison } from "../components/blocks/Comparison";
 "Note: You can also deploy Passkeys and have Opaque as a fallback for users without Passkeys. Best of both worlds."
 
     ] },
-  ]}
+
+]}
 />
+
 </div>
 
 <div className="pb-32">
-<Content header={"Relevant building blocks and inspirations"}>
-<div className="max-w-2xl">
-- 2018: The [OPAQUE](https://eprint.iacr.org/2018/163.pdf) paper was published.
-- 2018-2028 A group of IETF members worked on the [OPAQUE protocol RFC](https://datatracker.ietf.org/doc/draft-irtf-cfrg-opaque/).
-- 2020: Work on [opaque-ke](https://github.com/facebook/opaque-ke) started.
-- 2020: Work on [opaque-wasm](https://github.com/marucjmar/opaque-wasm) started. It allowed us to give explore the protocol in a beta and inspired us to build a full library. We made a comparison table between the two libraries [here](/docs/faq#how-does-it-compare-to-opaque-wasm).
-</div>
-</Content>
+  <Content header={"Relevant building blocks and inspirations"}>
+    <div className="max-w-2xl">
+      - 2018: The [OPAQUE](https://eprint.iacr.org/2018/163.pdf) paper was
+      published. - 2018-2028 A group of IETF members worked on the [OPAQUE
+      protocol RFC](https://datatracker.ietf.org/doc/draft-irtf-cfrg-opaque/). -
+      2020: Work on [opaque-ke](https://github.com/facebook/opaque-ke) started.
+      - 2020: Work on [opaque-wasm](https://github.com/marucjmar/opaque-wasm)
+      started. It allowed us to give explore the protocol in a beta and inspired
+      us to build a full library. We made a comparison table between the two
+      libraries [here](/docs/faq#how-does-it-compare-to-opaque-wasm).
+    </div>
+  </Content>
 </div>
 
 import { CTAArea } from "../components/composites/CTAArea";
@@ -167,7 +232,7 @@ import { CTAArea } from "../components/composites/CTAArea";
     text=""
     cta={{
       text: "Go to Getting started",
-      onClick: () => window.location.href = "/docs/get-started/quickstart",
+      onClick: () => (window.location.href = "/docs/get-started/quickstart"),
     }}
   />
 </BlockWrapper>

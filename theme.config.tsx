@@ -1,13 +1,13 @@
 import { DocsThemeConfig } from "nextra-theme-docs";
 import { Code } from "./components/Code";
+import { Footer } from "./components/Footer";
 import { Logo } from "./components/Logo";
 import { P } from "./components/P";
 import { Pre } from "./components/Pre";
 import { Table } from "./components/Table";
+import { Td } from "./components/Td";
 import { Th } from "./components/Th";
 import { Tr } from "./components/Tr";
-import { Td } from "./components/Td";
-import { Footer } from "./components/Footer";
 
 const config: DocsThemeConfig = {
   head: (
@@ -42,6 +42,11 @@ const config: DocsThemeConfig = {
     th: Th,
     tr: Tr,
     td: Td,
+  },
+  useNextSeoProps() {
+    return {
+      titleTemplate: "%s – Opaque",
+    };
   },
 };
 
