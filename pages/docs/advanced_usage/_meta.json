@@ -2,5 +2,6 @@
   "export-key": "ExportKey",
   "server-static-public-key": "ServerStaticPublicKey",
   "identifiers": "Identifiers",
+  "key-stretching": "Key Stretching",
   "p256-support": "P256 Support"
 }
