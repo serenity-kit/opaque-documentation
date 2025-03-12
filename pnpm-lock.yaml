@@ -12,8 +12,8 @@ importers:
         specifier: ^0.7.0
         version: 0.7.0
       '@xstate/react':
-        specifier: ^4.1.3
-        version: 4.1.3(react@18.3.1)(xstate@5.19.2)
+        specifier: '=4.0.0'
+        version: 4.0.0(react@18.3.1)(xstate@5.0.0)
       clsx:
         specifier: ^2.1.1
         version: 2.1.1
@@ -36,8 +36,8 @@ importers:
         specifier: ^3.2.0
         version: 3.2.0(prop-types@15.8.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       xstate:
-        specifier: ^5.19.2
-        version: 5.19.2
+        specifier: '=5.0.0'
+        version: 5.0.0
     devDependencies:
       '@svgr/webpack':
         specifier: ^8.1.0
@@ -983,11 +983,11 @@ packages:
   '@ungap/structured-clone@1.3.0':
     resolution: {integrity: sha512-WmoN8qaIAo7WTYWbAZuG8PYEhn5fkz7dZrqTBZ7dtt//lL2Gwms1IcnQ5yHqjDfX8Ft5j4YzDM23f87zBfDe9g==}
 
-  '@xstate/react@4.1.3':
-    resolution: {integrity: sha512-zhE+ZfrcCR87bu71Rkh5Z5ruZBivR/7uD/dkelzJqjQdI45IZc9DqTI8lL4Cg5+VN2p5k86KxDsusqW1kW11Tg==}
+  '@xstate/react@4.0.0':
+    resolution: {integrity: sha512-+vINFFBX5JWed/xD2/kNZ0SYbWyeSHgwsJkdLBeHp+Rnbf7QSLWxs3zAXcWPBdPuAgF/suo4E0GaiGZzaxumMQ==}
     peerDependencies:
       react: ^16.8.0 || ^17.0.0 || ^18.0.0
-      xstate: ^5.18.2
+      xstate: ^5.0.0
     peerDependenciesMeta:
       xstate:
         optional: true
@@ -2739,8 +2739,8 @@ packages:
     resolution: {integrity: sha512-si7QWI6zUMq56bESFvagtmzMdGOtoxfR+Sez11Mobfc7tm+VkUckk9bW2UeffTGVUbOksxmSw0AA2gs8g71NCQ==}
     engines: {node: '>=12'}
 
-  xstate@5.19.2:
-    resolution: {integrity: sha512-B8fL2aP0ogn5aviAXFzI5oZseAMqN00fg/TeDa3ZtatyDcViYLIfuQl4y8qmHCiKZgGEzmnTyNtNQL9oeJE2gw==}
+  xstate@5.0.0:
+    resolution: {integrity: sha512-FIKtRv8eQB+3dRLdnzdxlQ/sRjcqiN31JaskeHbcyRBaEvcwcjbakYZ5PVV9v4K0szbe793SUN/04J6/g5GrEA==}
 
   yallist@2.1.2:
     resolution: {integrity: sha512-ncTzHV7NvsQZkYe1DW7cbDLm0YpzHmZF5r/iyP3ZnQtMiJ+pjzisCiMNI+Sj+xQF5pXhSHxSB3uDbsBTzY/c2A==}
@@ -3837,13 +3837,13 @@ snapshots:
 
   '@ungap/structured-clone@1.3.0': {}
 
-  '@xstate/react@4.1.3(react@18.3.1)(xstate@5.19.2)':
+  '@xstate/react@4.0.0(react@18.3.1)(xstate@5.0.0)':
     dependencies:
       react: 18.3.1
       use-isomorphic-layout-effect: 1.2.0(react@18.3.1)
       use-sync-external-store: 1.4.0(react@18.3.1)
     optionalDependencies:
-      xstate: 5.19.2
+      xstate: 5.0.0
     transitivePeerDependencies:
       - '@types/react'
 
@@ -6037,7 +6037,7 @@ snapshots:
       string-width: 5.1.2
       strip-ansi: 7.1.0
 
-  xstate@5.19.2: {}
+  xstate@5.0.0: {}
 
   yallist@2.1.2: {}
 
