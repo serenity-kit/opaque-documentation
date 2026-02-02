@@ -9,8 +9,8 @@ importers:
   .:
     dependencies:
       '@serenity-kit/opaque':
-        specifier: ^0.7.0
-        version: 0.7.0
+        specifier: ^1.1.0
+        version: 1.1.0
       '@xstate/react':
         specifier: '=4.0.0'
         version: 4.0.0(react@18.3.1)(xstate@5.0.0)
@@ -817,8 +817,8 @@ packages:
   '@popperjs/core@2.11.8':
     resolution: {integrity: sha512-P1st0aksCrn9sGZhp8GMYwBnQsbvAWsZAX44oXNNvLHGqAOcoVxmjZiohstwQ7SqKnbR47akdNi+uleWD8+g6A==}
 
-  '@serenity-kit/opaque@0.7.0':
-    resolution: {integrity: sha512-5CikruVTY7EAAhLvHHU139OOaWRIIq58HhDRjpPDZOS8gAaF9qSfZRyR4kuEqGZWOuNjUtilDwD2G3Nc3YlJzw==}
+  '@serenity-kit/opaque@1.1.0':
+    resolution: {integrity: sha512-Y6v/+hRMn0MdMEk5+/ArM0vPIiFfFEbdTZc7oAx+cWyvGODGezAQ/sMjXBVogf7NsS9z9EV0Ve5paZCVULuedw==}
     hasBin: true
 
   '@svgr/babel-plugin-add-jsx-attribute@8.0.0':
@@ -3657,7 +3657,7 @@ snapshots:
 
   '@popperjs/core@2.11.8': {}
 
-  '@serenity-kit/opaque@0.7.0': {}
+  '@serenity-kit/opaque@1.1.0': {}
 
   '@svgr/babel-plugin-add-jsx-attribute@8.0.0(@babel/core@7.26.10)':
     dependencies:

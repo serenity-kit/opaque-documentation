@@ -17,7 +17,7 @@
     "url": "https://github.com/serenity-kit/opaque-documentation/issues"
   },
   "dependencies": {
-    "@serenity-kit/opaque": "^0.7.0",
+    "@serenity-kit/opaque": "^1.1.0",
     "@xstate/react": "=4.0.0",
     "clsx": "^2.1.1",
     "next": "^13.5.8",
