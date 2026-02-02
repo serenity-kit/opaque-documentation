@@ -2,7 +2,7 @@
 
 By default the server-side sets a `userIdentifier` during the registration and login process. This `userIdentifier` does not even need to be exposed to be exposed to a client.
 
-`opaque.client.finishRegistration`, `opaque.server.startLogin` and `opaque.client.finishLogin` all accept an optional object `identifiers`. It accepts an optional string value for the property `client` and an optional string value for `server`.
+`opaque.client.finishRegistration`, `opaque.server.startLogin`, `opaque.client.finishLogin` and `opaque.server.finishLogin` all accept an optional object `identifiers`. It accepts an optional string value for the property `client` and an optional string value for `server`.
 
 ```ts
 type Identifiers = {
@@ -13,7 +13,7 @@ type Identifiers = {
 
 The identifiers will be public, but cryptographically bound to the registration record.
 
-Once provided in the `opaque.client.finishRegistration` function call, the identical identifiers must be provided in the `opaque.server.startLogin` and `opaque.client.finishLogin` function call. Otherwise the login will result in an error.
+Once provided in the `opaque.client.finishRegistration` function call, the identical identifiers must be provided in the `opaque.server.startLogin`, `opaque.client.finishLogin` and `opaque.server.finishLogin` function calls. Otherwise the login will result in an error.
 
 ### Example
 
@@ -65,4 +65,16 @@ if (!loginResult) {
   throw new Error("Login failed");
 }
 const { finishLoginRequest, sessionKey } = loginResult;
+```
+
+```ts
+// server
+const { sessionKey } = opaque.server.finishLogin({
+  finishLoginRequest,
+  serverLoginState,
+  identifiers: {
+    client: "jane@example.com",
+    server: "mastodon.example.com",
+  },
+});
 ```
